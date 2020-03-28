@@ -27,5 +27,5 @@ $ python manage.py runserver
 ```
 
 ##
-```
+
 Source: https://github.com/ro6ley/plaindjango
