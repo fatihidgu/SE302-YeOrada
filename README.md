@@ -1,17 +1,27 @@
-Running the Application
+### Running the Application
 
-Clone the repository
+1. Clone the repository
+```
 $ git clone https://github.com/ro6ley/plaindjango.git
+```
 
-Check into the cloned repository
+2. Check into the cloned repository
+```
 $ cd plaindjango
+```
 
-Setup the virtual environment and start it as follows:
+3. Setup the virtual environment and start it as follows:
+```
 $ virtualenv --python=python3 env --no-site-packages
 $ source env/bin/activate
+```
 
-Install the requirements
+4. Install the requirements
+```
 $ pip install -r requirements.txt
+```
 
-Start the Django API
+5. Start the Django API
+```
 $ python manage.py runserver
+```
