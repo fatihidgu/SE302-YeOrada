@@ -31,3 +31,7 @@ admin.site.register(RegisteredUser, CustomUserAdmin)
 admin.site.register(Customer)
 admin.site.register(Client)
 admin.site.register(Admin)
+admin.site.register(Comment)
+admin.site.register(CommentAnswer)
+admin.site.register(CommentLike)
+

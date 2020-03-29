@@ -55,3 +55,20 @@ class Admin(models.Model):
     userEmail = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE, primary_key=True)
 
 
+class Comment(models.Model):
+    customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    clientEmail = models.ForeignKey(Client, on_delete=models.CASCADE)
+    date = models.DateTimeField(default=timezone.now)
+    text = models.TextField()
+    rate = models.IntegerField()
+
+
+class CommentAnswer(models.Model):
+    customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    commentId = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    answer = models.TextField()
+
+
+class CommentLike(models.Model):
+    customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    commentId = models.ForeignKey(Comment, on_delete=models.CASCADE)
