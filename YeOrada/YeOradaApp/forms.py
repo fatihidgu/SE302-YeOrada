@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import RegisteredUser
+from .models import RegisteredUser, Comment
 
 
 class RegisteredUserCreationForm(UserCreationForm):
@@ -23,3 +23,9 @@ class RegisteredUserChangeForm(UserChangeForm):
             'password': forms.PasswordInput(),
         }
 
+
+class CommentForm(forms.Form):
+
+    class Meta:
+        model = Comment
+        fields = ('text', 'rate',)
