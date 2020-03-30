@@ -16,7 +16,15 @@
     <content url="file://$MODULE_DIR$">
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
+<<<<<<< HEAD
     <orderEntry type="jdk" jdkName="Python 3.8 (yeorada_venv)" jdkType="Python SDK" />
+=======
+<<<<<<< HEAD
+    <orderEntry type="jdk" jdkName="Python 3.8 (4)" jdkType="Python SDK" />
+=======
+    <orderEntry type="jdk" jdkName="Python 3.8 (yeorada_venv)" jdkType="Python SDK" />
+>>>>>>> c2cbce2314254efd1cfce0e753a520d86fabf7a3
+>>>>>>> 919a8c4f70430694b44f18865ed38df2b0335cf9
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">
