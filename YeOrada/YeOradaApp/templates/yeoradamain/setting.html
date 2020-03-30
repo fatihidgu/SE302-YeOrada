@@ -8,22 +8,22 @@
     <meta name="author" content="">
 	
 	<!-- Favicon -->
-	<link href="images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+	<link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 	
-    <title>Natto | Setting</title>
+    <title>YeOrada | Setting</title>
 
     <!-- Bootstrap core CSS-->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
-	<link href="css/responsive.css" rel="stylesheet">
-	<link href="css/mega.menu.css" rel="stylesheet">
-	<link href="css/bootstrap-select.css" rel="stylesheet">
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/style.css" rel="stylesheet">
+	<link href="/static/css/responsive.css" rel="stylesheet">
+	<link href="/static/css/mega.menu.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
     
 	<!-- Owl Carousel for this template-->
-	<link rel="stylesheet" href="assets/owlcarousel/assets/owl.carousel.min.css">   
+	<link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
     	
     <!-- Fontawesome styles for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 	
 </head>
 
@@ -74,7 +74,7 @@
 						<div class="col-md-2 col-sm-12 col-xs-12">
 							<div class="menu-left text-center text-md-left">
 								<div class="logo-box">
-									<a href="index.html"><img src="images/logo.svg" alt=""></a>
+									<a href="index.html"><img src="/static/images/logo.svg" alt=""></a>
 								</div>
 							</div>
 						</div>
@@ -178,7 +178,7 @@
 												<div class="notification-details">														
 													<div class="media">
 														<div class="media-left">
-															<a href="#"><img src="images/notification-img-2.png" alt=""></a>
+															<a href="#"><img src="/static/images/notification-img-2.png" alt=""></a>
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading">Jassica William</h4> 
@@ -188,7 +188,7 @@
 													</div>													
 													<div class="media">
 														<div class="media-left">
-															<a href="#"><img src="images/notification-img-3.png" alt=""></a>	
+															<a href="#"><img src="/static/images/notification-img-3.png" alt=""></a>
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading">Congratulations!</h4>
@@ -200,7 +200,7 @@
 													</div>																										
 													<div class="media">
 														<div class="media-left">
-															<a href="#"><img src="images/notification-img-4.png" alt=""></a>
+															<a href="#"><img src="/static/images/notification-img-4.png" alt=""></a>
 														</div>
 														<div class="media-body">
 															<h4 class="media-heading">Order Delivered!</h4>
@@ -249,13 +249,13 @@
 	<!--my-account start-->
 	<section class="my-account">			
 		<div class="profile-bg">
-			<img src="images/profile/bg-img.jpg" alt="Responsive image">
-			<div class="my-Profile-dt">
+
+			<div class="my-Profile-dt" style="margin-top:9%">
 				<div class="container">
 					<div class="row">
 						<div class="container">							
 							<div class="profile-dpt">
-								<img src="images/profile/dp-1.jpg" alt="">
+								<img src="/static/images/profile/dp-1.jpg" alt="">
 							</div>
 							<div class="profile-all-dt">
 								<div class="profile-name-dt">
@@ -277,10 +277,8 @@
 				<div class="col-lg-3 col-md-4 col-12">
 					<div class="left-tab-links">
 						<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
-							<a href="#edit-profile"  data-toggle="tab" class="item user-tab cursor-pointer active">Edit Profile</a>
-							<a href="#notification-setting" data-toggle="tab" class="item user-tab cursor-pointer">Notification Setting</a>
-							<a href="#change-password" data-toggle="tab" class="item user-tab cursor-pointer">Change Password</a>
-							<a href="#delete-account" data-toggle="tab" class="item user-tab cursor-pointer" id="bookmarks" data-tab="bookmarks">Deactivate Account</a>													
+							<a href="#edit-profile"  data-toggle="tab" class="item user-tab cursor-pointer active">Account Settings</a>
+							<a href="#notification-setting" data-toggle="tab" class="item user-tab cursor-pointer">Change Password</a>
 						</div>						
 					</div>				
 				</div>
@@ -297,7 +295,7 @@
 										<div class="setting-dt">
 											<h4>Avatar</h4>										
 											<div class="avtar">
-												<img src="images/profile/avatar.jpg" alt="">											
+												<img src="/static/images/profile/avatar.jpg" alt="">
 											</div>
 											<div class="upload-avatar">
 												<div class="input-heading">Upload a New Avatar*</div>	
@@ -311,24 +309,26 @@
 											</div>
 										</div>
 										<div class="setting-dt b-top padding-b">
-											<h4>Background Image</h4>										
-											<div class="background-img">
-												<img src="images/profile/bg.jpg" alt="">											
-											</div>
-											<div class="upload-avatar">
-												<div class="input-heading">Upload a New Background Image*</div>	
-												<div class="input-container">																					
-													<input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*">
-													<button class="browse-btn">
-													  Choose File
-													</button>
-													<span class="file-info">Upload a file</span>
-												</div>
-											</div>
 										</div>
 										<div class="form-group">
-											<label for="nameUser">Full Name*</label>
-											<input type="text" class="video-form" id="nameUser"  placeholder="John Doe">							
+											<label for="nameUser">Name*</label>
+											<input type="text" class="video-form" id="nameUser"  placeholder="John">
+										</div>
+                                        <div class="form-group">
+											<label for="nameUser">Lastname*</label>
+											<input type="text" class="video-form" id="lastnameUser"  placeholder="Doe">
+										</div>
+                                        <div class="form-group">
+											<label for="emailAddress">Email Address*</label>
+											<input type="text" class="video-form" id="emailAddress" placeholder="johndoe@gmail.com">
+										</div>
+                                        <div class="form-group">
+											<label for="username">Username*</label>
+											<input type="text" class="video-form" id="username" placeholder="johmdoe44">
+										</div>
+                                        <div class="form-group">
+											<label for="telPhone">Phone Number*</label>
+											<input type="text" class="video-form" id="telPhone" placeholder="+99 523 456 7890">
 										</div>
 										<div class="form-group">
 											<label for="locationUser">Where Are You Live?*</label>
@@ -338,21 +338,12 @@
 											</div>											
 										</div>
 										<div class="form-group">
-											<label for="textareaDescription">Description*</label>
-											<textarea class="text-area" id="textareaDescription" placeholder="Description"></textarea>							
+											<label for="textareaDescription">Address*</label>
+											<textarea class="text-area" id="adress" placeholder="Adress"></textarea>
 										</div>
-										<div class="form-group">
-											<label for="emailAddress">Email Address*</label>
-											<input type="text" class="video-form" id="emailAddress" placeholder="johndoe@gmail.com">							
-										</div>
-										<div class="form-group">
-											<label for="telPhone">Phone Number*</label>
-											<input type="text" class="video-form" id="telPhone" placeholder="+02 123 456 7890">							
-										</div>
-										<div class="form-group">
-											<label for="webSite">Website*</label>
-											<input type="text" class="video-form" id="webSite" placeholder="http://ww.yoursite.com">							
-										</div>
+
+
+
 										<button type="submit" class="change-btn btn-link">Save Changes</button>
 									</form>
 								</div>
@@ -481,10 +472,10 @@
 						</div>																													
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-12">
+				<div class="col-lg-3 col-md-4 col-12" hidden>
 					<div class="natto-profile-link">
 						<div class="link-title">
-							<h4>Natto Profile Link</h4>
+							<h4>YeOrada Profile Link</h4>
 						</div>
 						<div class="link-dt">
 							<p>You can now register a short url to</p>
@@ -492,7 +483,7 @@
 							<p>natto.com/username</p>
 							<div class="form-group">
 								<label for="usernameLink">You can set your profile URL only once.</label>
-								<input type="text" class="video-form" id="usernameLink" placeholder="Natto.com/username">							
+								<input type="text" class="video-form" id="usernameLink" placeholder="Natto.com/username">
 							</div>
 						</div>
 					</div>
@@ -545,7 +536,7 @@
 			<div class="row">
 				<div class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
 					<div class="img-title">
-						<a href="index.html"><img src="images/logo-2.svg" alt=""></a>
+						<a href="index.html"><img src="/static/images/logo-2.svg" alt=""></a>
 					</div>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam interdum leo at finibus ornare. 
 					Aliquam gravida condimentum neque, vel ultrices purus dignissim a. </p>
@@ -608,7 +599,7 @@
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
 						<div class="cards">
-							<img src="images/cards.png" alt="">
+							<img src="/static/images/cards.png" alt="">
 						</div>
 					</div>
 				</div>

@@ -88,7 +88,7 @@ DATABASES = {
         # user name.
         'USER': 'root',
         # password
-        'PASSWORD': 'Boardkastroyaka863*',
+        'PASSWORD': 'Yaren.0782',
         # connect options
         'OPTIONS': {'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",},
     }

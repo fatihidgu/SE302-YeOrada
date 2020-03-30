@@ -51,3 +51,7 @@ def signup(request):
 
 def clientprofile(request):
     return render(request, 'yeoradamain/restaurant_detail.html', {})
+
+def settings(request):
+    return render(request, 'yeoradamain/setting.html', {})
+
