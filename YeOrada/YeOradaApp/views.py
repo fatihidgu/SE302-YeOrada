@@ -69,3 +69,7 @@ def clientprofile(request):
         commentForm = CommentForm()
 
     return render(request, 'yeoradamain/restaurant_detail.html', {'commentForm': commentForm, 'commentList':commentList})
+
+
+def settings(request):
+    return render(request, 'yeoradamain/setting.html', {})
