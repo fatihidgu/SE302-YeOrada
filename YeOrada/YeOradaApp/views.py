@@ -4,7 +4,13 @@ from django.shortcuts import render, redirect
 
 
 # Create your views here.
-from YeOradaApp.forms import RegisteredUserCreationForm
+from YeOradaApp.forms import RegisteredUserCreationForm, CommentForm
+from YeOradaApp.models import Comment, Customer, Client
+
+from .views_ahmet import *
+from .views_ali import *
+from .views_fatih import *
+from .views_yaren import *
 
 
 def index(request):
@@ -47,15 +53,3 @@ def signup(request):
     else:
         form = RegisteredUserCreationForm()
     return render(request, 'yeoradamain/signup.html', {'form': form, 'error_message1': error_message1, 'error_message2': error_message2, })
-
-
-def clientprofile(request):
-
-    return render(request, 'yeoradamain/restaurant_detail.html', {})
-
-
-def settings(request):
-    return render(request, 'yeoradamain/setting.html', {})
-
-
-

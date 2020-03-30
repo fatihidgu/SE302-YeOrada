@@ -1590,6 +1590,7 @@
 							</div>
 							
 							<div class="tab-pane" id="reviews">
+                                <form method="POST">
 								<div class="comment-post">
 									<div class="post-items">
 										<a href="my_dashboard.html">
@@ -1607,13 +1608,11 @@
 												<li><i class="fas fa-star"></i></li>
 											</ul>
 										</div>
-										<form>
-											<textarea class="description-area" name="post" placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
-											<input type="text" class="rating-input" name="search" placeholder="@ Tags with friends">											
-										</form>
+											<textarea class="description-area" name="text" placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
+											<input type="text" class="rating-input" name="search" placeholder="@ Tags with friends">
 										<div class="add-image">
-											<input type="file" id="file">
-											<label for="file"><i class="far fa-image"></i> Add Photo</label>									
+                                                <input type="file" name="commentPhoto" id="file">
+											    <label for="file"><i class="far fa-image"></i> Add Photo</label>
 										</div>
 										<div class="images">
 											<div class="select-images">
@@ -1640,35 +1639,38 @@
 												
 											</div>
 										</div>
-										<div class="publish">																										
-											<form>
-												<input class="rating-btn btn-link" type="submit" value="Publish Review">
-											</form>
+										<div class="publish">
+                                                {% csrf_token %}
+												<input class="rating-btn btn-link" name="publishReview" type="submit" value="Publish Review">
 										</div>
 									</div>
 								</div>
+                                </form>
+                                {% for comment in commentList %}
 								<div class="main-comments">
+
 									<div class="rating-1">
 										<div class="user-detail-heading">
 											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-5.png" alt=""></a>
-											<h4> Joy Cutler</h4><br>
+											<h4> {{comment.customerEmail.userEmail}}</h4><br>
 											<div class="rate-star">
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
 												<i class="far fa-star"></i>								
-												<span>4.5</span> 
+												<span>{{comment.rate}}</span>
 											</div>
 										</div>
 										<div class="reply-time">											
-											<p><i class="far fa-clock"></i>12 hours ago</p>
+											<p><i class="far fa-clock"></i>{{comment.date}}</p>
 										</div>
 										<div class="comment-description">
-											<p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
+											<p>{{comment.text}}</p>
 										</div>
 										
 									</div>
+
 									<div class="review-tags">
 										<p><ins>Tags :</ins><a href="#">Johnson,</a> <a href="#"> Jasica,</a><a href="#"> Joy William,</a> <a href="#"> Johnson,</a><a href="#"> Jass Singh,</a>&nbsp; <span> and</span>&nbsp; <a href="#">8 others</a></p>
 									</div>
@@ -1742,6 +1744,8 @@
 										</div>
 									</div>
 								</div>
+                                {% endfor %}
+                                <!--
 								<div class="main-comments">
 									<div class="rating-1">
 										<div class="user-detail-heading">
@@ -1795,7 +1799,7 @@
 											</form>
 										</div>
 									</div>
-								</div>
+								</div> -->
 								<div class="spinner m-bottom">	
 									<div class="d-flex justify-content-center">
 										<a href="#"><div class="spinner-border" role="status">
