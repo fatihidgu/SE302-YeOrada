@@ -18,7 +18,7 @@ class RegisteredUserChangeForm(UserChangeForm):
 
     class Meta:
         model = RegisteredUser
-        fields = ('email', 'username', 'name', 'surname', 'password', 'isCustomer', 'isClient', 'isAdmin',)
+        fields = ('email', 'username', 'name', 'surname', 'isCustomer', 'isClient', 'isAdmin',)
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -29,3 +29,5 @@ class CommentForm(forms.Form):
     class Meta:
         model = Comment
         fields = ('text', 'rate',)
+
+

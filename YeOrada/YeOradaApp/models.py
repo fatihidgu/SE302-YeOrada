@@ -35,9 +35,9 @@ class RegisteredUser(AbstractBaseUser, PermissionsMixin):
 
 class Customer(models.Model):
     userEmail = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE, primary_key=True)
-    phone = models.CharField(max_length=200)
-    address = models.CharField(max_length=300)
-    bio = models.CharField(max_length=200)
+    city = models.CharField(max_length=200, null=True, blank=True)
+    country = models.CharField(max_length=200, null=True, blank=True)
+    bio = models.CharField(max_length=200, blank=True)
 
 
 class Client(models.Model):

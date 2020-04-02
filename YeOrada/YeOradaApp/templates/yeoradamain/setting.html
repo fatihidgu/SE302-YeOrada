@@ -16,7 +16,7 @@
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/static/css/style.css" rel="stylesheet">
 	<link href="/static/css/responsive.css" rel="stylesheet">
-	<link href="/static//mega.menu.css" rel="stylesheet">
+	<link href="/static/mega.menu.css" rel="stylesheet">
 	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
     
 	<!-- Owl Carousel for this template-->
@@ -249,8 +249,8 @@
 	<!--my-account start-->
 	<section class="my-account">			
 		<div class="profile-bg">
-			<img src="/static/images/profile/bg-img.jpg" alt="Responsive image">
-			<div class="my-Profile-dt">
+
+			<div class="my-Profile-dt" style="margin-top:8%">
 				<div class="container">
 					<div class="row">
 						<div class="container">							
@@ -259,8 +259,8 @@
 							</div>
 							<div class="profile-all-dt">
 								<div class="profile-name-dt">
-									<h1>John Doe</h1>
-									<p><span><i class="fas fa-map-marker-alt"></i></span>Sydney, Australia</p>
+									<h1>{{ user.name }} {{ user.surname }}</h1>
+									<p><span><i class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.country }}</p>
 								</div>								
 							</div>
 						</div>
@@ -278,7 +278,7 @@
 					<div class="left-tab-links">
 						<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
 							<a href="#edit-profile"  data-toggle="tab" class="item user-tab cursor-pointer active">Edit Profile</a>
-							<a href="#notification-setting" data-toggle="tab" class="item user-tab cursor-pointer">Notification Setting</a>
+
 							<a href="#change-password" data-toggle="tab" class="item user-tab cursor-pointer">Change Password</a>
 							<a href="#delete-account" data-toggle="tab" class="item user-tab cursor-pointer" id="bookmarks" data-tab="bookmarks">Deactivate Account</a>													
 						</div>						
@@ -290,10 +290,11 @@
 							<div class="timeline">
 								<div class="tab-content-heading">
 									<h4>Profile Information</h4>
-									<a href="my_profile_dashbord.html"><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+									<a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
 								</div>
 								<div class="edit-profile">
-									<form>
+									<form method="post">
+                                        {% csrf_token %}
 										<div class="setting-dt">
 											<h4>Avatar</h4>										
 											<div class="avtar">
@@ -310,50 +311,42 @@
 												</div>
 											</div>
 										</div>
-										<div class="setting-dt b-top padding-b">
-											<h4>Background Image</h4>										
-											<div class="background-img">
-												<img src="/static/images/profile/bg.jpg" alt="">
-											</div>
-											<div class="upload-avatar">
-												<div class="input-heading">Upload a New Background Image*</div>	
-												<div class="input-container">																					
-													<input class="file-upload-input" type="file" onchange="readURL(this);" accept="image/*">
-													<button class="browse-btn">
-													  Choose File
-													</button>
-													<span class="file-info">Upload a file</span>
-												</div>
-											</div>
-										</div>
+                                         <div class="form-group"></div>
+
 										<div class="form-group">
-											<label for="nameUser">Full Name*</label>
-											<input type="text" class="video-form" id="nameUser"  placeholder="John Doe">							
+											<label for="nameUser">Name*</label>
+											<input name="name" type="text" class="video-form" id="nameUser" value="{{ user.name }}">
 										</div>
-										<div class="form-group">
-											<label for="locationUser">Where Are You Live?*</label>
-											<div class="field-input">
-												<input type="email" class="video-form" id="locationUser" placeholder="Sydney">							
-												<i class="fas fa-search"></i>
-											</div>											
+                                        <div class="form-group">
+											<label for="surnameUser">Surname*</label>
+											<input name="surname" type="text" class="video-form" id="surnameUser" value="{{ user.surname }}">
 										</div>
-										<div class="form-group">
-											<label for="textareaDescription">Description*</label>
-											<textarea class="text-area" id="textareaDescription" placeholder="Description"></textarea>							
+                                        <div class="form-group">
+											<label for="username">Username*</label>
+											<input name="username" type="text" class="video-form" id="username" value="{{ user.username }}">
 										</div>
-										<div class="form-group">
+                                        <div class="form-group">
 											<label for="emailAddress">Email Address*</label>
-											<input type="text" class="video-form" id="emailAddress" placeholder="johndoe@gmail.com">							
+											<input name="email" type="text" class="video-form" id="emailAddress" value={{ user.email }}>
+										</div>
+                                        <div class="form-group">
+											<label for="locationUser">Country*</label>
+											<div class="field-input">
+												<input name="country" type="text" class="video-form" id="locationUser" value="{{ customer.country }} ">
+												<i class="fas fa-search"></i>
+											</div>
 										</div>
 										<div class="form-group">
-											<label for="telPhone">Phone Number*</label>
-											<input type="text" class="video-form" id="telPhone" placeholder="+02 123 456 7890">							
+											<label for="locationUser">City*</label>
+											<div class="field-input">
+												<input name="city" type="text" class="video-form" id="locationUser" value="{{ customer.city }} ">
+												<i class="fas fa-search"></i>
+											</div>
 										</div>
-										<div class="form-group">
-											<label for="webSite">Website*</label>
-											<input type="text" class="video-form" id="webSite" placeholder="http://ww.yoursite.com">							
-										</div>
-										<button type="submit" class="change-btn btn-link">Save Changes</button>
+                                        {{ error_message1|linebreaks }}
+                                        <br>
+
+										<button  name="saveChanges" type="submit" class="change-btn btn-link">Save Changes</button>
 									</form>
 								</div>
 							</div>							
@@ -362,7 +355,7 @@
 							<div class="profile-about">
 								<div class="tab-content-heading">
 									<h4>Notification Setting</h4>
-									<a href="my_profile_dashbord.html"><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+									<a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
 								</div>
 								<div class="noti-setting">
 									<div class="noti-all-st">
@@ -441,23 +434,26 @@
 							<div class="timeline">
 								<div class="tab-content-heading">
 									<h4>Change Password</h4>
-									<a href="my_profile_dashbord.html"><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+									<a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
 								</div>
 								<div class="edit-profile">
-									<form>										
+									<form method="POST">
+                                        {% csrf_token %}
 										<div class="form-group">
-											<label for="OldPassword">Old Password*</label>
-											<input type="password" class="video-form" id="OldPassword" placeholder="Enter Old Password">							
+											<label for="old_password">Old Password*</label>
+											<input name="old_password" type="password" class="video-form" id="OldPassword" placeholder="Enter Old Password">
 										</div>										
 										<div class="form-group">
-											<label for="newPassword">New Password*</label>
-											<input type="password" class="video-form" id="newPassword" placeholder="Enter New Password">							
+											<label for="new_password1">New Password*</label>
+											<input  name="new_password1" type="password" class="video-form" id="Password1" placeholder="Enter New Password">
 										</div>
 										<div class="form-group">
-											<label for="confirmPassword">Confirm Password*</label>
-											<input type="password" class="video-form" id="confirmPassword" placeholder="Enter Confirm Password">							
+											<label for="new_password2">Confirm Password*</label>
+											<input name="new_password2" type="password" class="video-form" id="Password2" placeholder="Enter Confirm Password">
 										</div>
-										<button type="submit" class="change-btn btn-link">Save Password</button>
+                                        {{ passwordChangeForm.errors }}
+                                        <br>
+										<button name="changePassword" type="submit" class="change-btn btn-link">Save Password</button>
 									</form>
 								</div>
 							</div>							
@@ -466,7 +462,7 @@
 							<div class="timeline">
 								<div class="tab-content-heading">
 									<h4>Deactivate Account</h4>
-									<a href="my_profile_dashbord.html"><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+									<a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
 								</div>
 								<div class="edit-profile">
 									<form>										
@@ -481,7 +477,7 @@
 						</div>																													
 					</div>
 				</div>
-				<div class="col-lg-3 col-md-4 col-12">
+				<div class="col-lg-3 col-md-4 col-12" hidden>
 					<div class="natto-profile-link">
 						<div class="link-title">
 							<h4>Natto Profile Link</h4>
