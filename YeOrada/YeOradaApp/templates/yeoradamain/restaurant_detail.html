@@ -1609,7 +1609,7 @@
 											</ul>
 										</div>
 											<textarea class="description-area" name="text" placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
-											<input type="text" class="rating-input" name="search" placeholder="@ Tags with friends">
+											<input type="text" class="rating-input" name="search" placeholder="@ Tags with friends" hidden>
 										<div class="add-image">
                                                 <input type="file" name="commentPhoto" id="file">
 											    <label for="file"><i class="far fa-image"></i> Add Photo</label>
@@ -1626,13 +1626,13 @@
 													<li class="image-select">
 														<img src="/static/images/restaurant-detail/add-2.jpg" alt="">
 														<div class="close-icon">
-															<i class="fas fa-window-close"></i>																							
+															<i class="fas fa-window-close"></i>
 														</div>
 													</li>
 													<li class="image-select">
 														<img src="/static/images/restaurant-detail/add-3.jpg" alt="">
 														<div class="close-icon">
-															<i class="fas fa-window-close"></i>																							
+															<i class="fas fa-window-close"></i>
 														</div>
 													</li>
 												</ul>	
@@ -1652,7 +1652,7 @@
 									<div class="rating-1">
 										<div class="user-detail-heading">
 											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-5.png" alt=""></a>
-											<h4> {{comment.customerEmail.userEmail}}</h4><br>
+											<h4> {{comment.customerEmail.userEmail.name}} {{ comment.customerEmail.userEmail.surname }}</h4><br>
 											<div class="rate-star">
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
@@ -1705,16 +1705,19 @@
 											</li>												
 										</ul>
 									</div>
+									{% for key,value in answersList.items %}
+									{% if key == comment.id %}
+									{% for answer in value %}
 									<div class="reply-review-1">
 										<div class="user-detail-heading">
 											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											<h4>Rock Smith</h4>
+											<h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
 										</div>
 										<div class="reply-time">								
 											<p><i class="far fa-clock"></i>2 hours ago</p>
 										</div>
 										<div class="comment-description">
-											<p> Thank you</p>
+											<p>{{ answer.answer }}</p>
 										</div>
 										<div class="like-report">
 										<ul>
@@ -1732,14 +1735,19 @@
 										</ul>
 									</div>
 									</div>
+									{% endfor %}
+									{% endif %}
+									{% endfor %}
 									<div class="reply-comment">
 										<div class="post-items">											
 											<div class="reply-dp">
 												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
 											</div>
-											<form>
-												<input type="text" class="comment-input" name="post" placeholder="Write a comment - @tag friends">
-												<input class="reply-btn btn-link" type="submit" value="Post Comment">
+											<form method="POST">
+												<input name="commentId" type="hidden" value="{{ comment.id }}">
+												<input type="text" class="comment-input" name="post" placeholder="Write a comment">
+												{% csrf_token %}
+												<input class="reply-btn btn-link" name="postComment" type="submit" value="Post Comment">
 											</form>
 										</div>
 									</div>
