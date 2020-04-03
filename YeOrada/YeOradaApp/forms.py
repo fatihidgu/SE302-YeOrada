@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 
-from .models import RegisteredUser, Comment
+from .models import RegisteredUser, Comment, CommentAnswer
 
 
 class RegisteredUserCreationForm(UserCreationForm):
@@ -31,3 +31,8 @@ class CommentForm(forms.Form):
         fields = ('text', 'rate',)
 
 
+class CommentAnswerForm(forms.Form):
+
+    class Meta:
+        model = CommentAnswer
+        fields = ('answer',)
