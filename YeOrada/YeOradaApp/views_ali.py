@@ -5,15 +5,6 @@ from YeOradaApp.models import Comment, Customer, Client, CommentAnswer
 
 
 def clientprofile(request):
-    commentForm = CommentForm()
-    commentAnswerForm = CommentAnswerForm()
-    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
-    answersList = dict()
-    numberOfComment = list()
-    for comments in commentList:
-        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id)
-        numberOfComment.append(commentAnswers.count())
-        answersList.update({comments.id:commentAnswers})
 
     if 'publishReview' in request.POST:
         if request.user.is_authenticated:
@@ -26,6 +17,7 @@ def clientprofile(request):
                     comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=1)
                     #uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
+                    return redirect('clientprofile')
         else:
             return redirect('signin')
 
@@ -40,8 +32,19 @@ def clientprofile(request):
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     commentAnswer = CommentAnswer(customerEmail=customerObject, commentId=commentObject, answer=answer)
                     commentAnswer.save()
+                    return redirect('clientprofile')
         else:
             return redirect('signin')
+
+    commentForm = CommentForm()
+    commentAnswerForm = CommentAnswerForm()
+    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
+    answersList = dict()
+    numberOfComment = list()
+    for comments in commentList:
+        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id)
+        numberOfComment.append(commentAnswers.count())
+        answersList.update({comments.id: commentAnswers})
 
     return render(request, 'yeoradamain/restaurant_detail.html', {'commentForm':commentForm, 'commentList':commentList,
                                                                   'commentAnswerForm':commentAnswerForm, 'answersList':answersList, 'numberOfComment':numberOfComment,})
