@@ -34,4 +34,5 @@ admin.site.register(Admin)
 admin.site.register(Comment)
 admin.site.register(CommentAnswer)
 admin.site.register(CommentLike)
+admin.site.register(ClientCuisine)
 

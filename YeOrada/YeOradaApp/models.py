@@ -41,14 +41,27 @@ class Customer(models.Model):
 
 
 class Client(models.Model):
+    RESTAURANT = 'Restaurant'
+    CAFE = 'Cafe'
+    BAR = 'Bar'
+    CATEGORIES = [
+        (RESTAURANT, 'Restaurant'),
+        (CAFE, 'Cafe'),
+        (BAR, 'Bar'),
+    ]
+    name = models.CharField(max_length=250, null=True, blank=True)
     userEmail = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE, primary_key=True)
     phone = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
-    address = models.CharField(max_length=300)
+    address1 = models.CharField(max_length=300, null=True, blank=True)
+    address2 = models.CharField(max_length=300, null=True, blank=True)
     state = models.CharField(max_length=200)
     workingHours = models.CharField(max_length=200)
     workingDays = models.CharField(max_length=200)
-    description = models.CharField(max_length=200)
+    info = models.TextField(blank=True, null=True)
+    category = models.CharField(max_length=200, null=True, blank=True, choices=CATEGORIES)
+    rate = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
+    rateCount = models.IntegerField(null=True, blank=True)
 
 
 class Admin(models.Model):
@@ -72,3 +85,28 @@ class CommentAnswer(models.Model):
 class CommentLike(models.Model):
     customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
     commentId = models.ForeignKey(Comment, on_delete=models.CASCADE)
+
+
+class ClientCuisine(models.Model):
+    KEBAP = 'Kebap'
+    GRILL = 'Grill'
+    TURKISH = 'Turkish'
+    PIDE = 'Pide'
+    DONER = 'Döner'
+    FASTFOOD = 'Fast Food'
+    HOMEMADE = 'Homemade'
+    SEAFOOD = 'Seafood'
+    CAFEANDRESTAURANT = 'Cafe & Restaurant'
+    CUISINES = [
+        (KEBAP, 'Kebap'),
+        (GRILL, 'Grill'),
+        (TURKISH, 'Turkish'),
+        (PIDE, 'Pide'),
+        (DONER, 'Döner'),
+        (FASTFOOD, 'Fast Food'),
+        (HOMEMADE, 'Homemade'),
+        (SEAFOOD, 'Seafood'),
+        (CAFEANDRESTAURANT, 'Cafe & Restaurant'),
+    ]
+    customerEmail = models.ForeignKey(Client, on_delete=models.CASCADE)
+    cuisine = models.CharField(max_length=200, choices=CUISINES)
