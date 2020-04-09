@@ -85,6 +85,7 @@ class CommentAnswer(models.Model):
 class CommentLike(models.Model):
     customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
     commentId = models.ForeignKey(Comment, on_delete=models.CASCADE)
+    isLiked = models.BooleanField(blank=True, null=True)
 
 
 class ClientCuisine(models.Model):
