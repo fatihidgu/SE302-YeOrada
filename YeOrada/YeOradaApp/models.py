@@ -96,7 +96,13 @@ class ClientCuisine(models.Model):
     FASTFOOD = 'Fast Food'
     HOMEMADE = 'Homemade'
     SEAFOOD = 'Seafood'
+    LUNCH = 'Lunch'
+    BREAKFAST = 'Breakfast'
+    DINNER = 'Dinner'
+    PIZZA = 'Pizza'
     CAFEANDRESTAURANT = 'Cafe & Restaurant'
+    CHINESE = 'Chinese'
+    KOREAN = 'Korean'
     CUISINES = [
         (KEBAP, 'Kebap'),
         (GRILL, 'Grill'),
@@ -107,6 +113,12 @@ class ClientCuisine(models.Model):
         (HOMEMADE, 'Homemade'),
         (SEAFOOD, 'Seafood'),
         (CAFEANDRESTAURANT, 'Cafe & Restaurant'),
+        (LUNCH, 'Lunch'),
+        (BREAKFAST, 'Breakfast'),
+        (DINNER, 'Dinner'),
+        (PIZZA, 'Pizza'),
+        (CHINESE, 'Chinese'),
+        (KOREAN, 'Korean'),
     ]
     customerEmail = models.ForeignKey(Client, on_delete=models.CASCADE)
     cuisine = models.CharField(max_length=200, choices=CUISINES)
