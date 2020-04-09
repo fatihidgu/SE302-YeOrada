@@ -13,4 +13,5 @@ urlpatterns = [
     path('settings', views.settings, name='settings'),
     path('clientsearch', views.clientsearch, name='clientsearch'),
     url(r'^logout/$', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
+    path('likeComment', views.likeComment, name='likeComment'),
 ]
