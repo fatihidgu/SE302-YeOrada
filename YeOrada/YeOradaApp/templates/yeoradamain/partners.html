@@ -1,4 +1,5 @@
 {% extends 'yeoradamain/base.html' %}
+{% load custom_filter %}
 
 {% block content1 %}
     <meta charset="utf-8">
@@ -354,7 +355,12 @@
 								<div class="detail-text">
 									<ul>
 										<li>Open - Close : {{ client.workingHours }} ({{ client.workingDays }})</li>
-										<li>Cuisines : Lunch, Breakfast, Dinner</li>
+
+										<li>Cuisines :
+                                            {% for cuisine in clientcuisines|filterCuisines:client.userEmail %}
+                                                {{ cuisine.cuisine }},
+                                            {% endfor %}
+                                                </li>
 										<li>Reviews : <div class="review-stars">
 											{% if client.rate >= 1 %}
                                             <i class="fas fa-star"></i>

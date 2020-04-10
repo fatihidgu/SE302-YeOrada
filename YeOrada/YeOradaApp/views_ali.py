@@ -1,11 +1,11 @@
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from YeOradaApp.forms import CommentForm, CommentAnswerForm
-from YeOradaApp.models import Comment, Customer, Client, CommentAnswer
+from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike
 
 
 def clientprofile(request):
-
     if 'publishReview' in request.POST:
         if request.user.is_authenticated:
             if request.user.isCustomer:
@@ -15,7 +15,7 @@ def clientprofile(request):
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     clientObject = Client.objects.filter(userEmail="sivasetliekmek@gmail.com").first()
                     comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=1)
-                    #uploaded_image = request.POST.get('commentPhoto')
+                    # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
                     return redirect('clientprofile')
         else:
@@ -46,5 +46,30 @@ def clientprofile(request):
         numberOfComment.append(commentAnswers.count())
         answersList.update({comments.id: commentAnswers})
 
-    return render(request, 'yeoradamain/restaurant_detail.html', {'commentForm':commentForm, 'commentList':commentList,
-                                                                  'commentAnswerForm':commentAnswerForm, 'answersList':answersList, 'numberOfComment':numberOfComment,})
+    customerr = Customer.objects.filter(userEmail=request.user).first()
+    customerLikes = CommentLike.objects.filter(customerEmail=customerr)
+
+    return render(request, 'yeoradamain/restaurant_detail.html',
+                  {'commentForm': commentForm, 'commentList': commentList,
+                   'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
+                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes, })
+
+
+def likeComment(request):
+    if request.user.is_authenticated:
+        if request.user.isCustomer:
+            commentId = request.GET.get('commentId', None)
+            #print("comment id is ",commentId)
+            commentId2 = Comment.objects.filter(id=commentId).first()
+            customerEmail = Customer.objects.filter(userEmail=request.user).first()
+            commentLike = CommentLike.objects.filter(customerEmail=customerEmail, commentId=commentId2)
+            if commentLike.count() == 0:
+                createCommentLike = CommentLike(customerEmail=customerEmail, commentId=commentId2, isLiked=True)
+                createCommentLike.save()
+            else:
+                if commentLike.first().isLiked:
+                    commentLike.update(isLiked=False)
+                else:
+                    commentLike.update(isLiked=True)
+
+    return JsonResponse({}, status = 400)
