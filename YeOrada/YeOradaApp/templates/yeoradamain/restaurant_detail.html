@@ -1,5 +1,5 @@
 {% extends 'yeoradamain/base.html' %}
-
+{% load custom_filter %}
 {% block content1 %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -1660,25 +1660,24 @@
                                                 <li>
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Likes">
-                                                    {% if customerLikes %}
-													<i class="fas fa-heart" onclick="likeComment()"></i>
-													<ins>Like 562</ins>
+                                                    {% for customerlike in customerLikes|filterComments:comment.id %}
+                                                        {% if customerlike %}
+                                                            {% if customerlike.isLiked == True %}
+                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
+                                                                   onclick="likeComment({{ comment.id }})"></i>
+                                                                <ins>Like True</ins>
+                                                            {% elif customerlike.isLiked == False %}
+                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                                   onclick="likeComment({{ comment.id }})"></i>
+                                                                <ins>Like False</ins>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if not customerLikes|filterComments:comment.id %}
+                                                        <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                           onclick="likeComment({{ comment.id }})"></i>
+                                                        <ins>Like None</ins>
                                                     {% endif %}
-
-                                                    {% block javascript %}
-                                                    <script>
-                                                        function likeComment() {
-                                                            var commentId = {{ comment.id }};
-                                                            $.ajax({
-                                                                url: '{% url 'likeComment' %}',
-                                                                data: {
-                                                                    'commentId': commentId
-                                                                },
-                                                                dataType: 'json',
-                                                            });
-                                                        }
-                                                    </script>
-                                                    {% endblock javascript %}
 
 												</span>
                                                 </li>
@@ -2100,4 +2099,32 @@
             $('.datepicker').datepicker();
         });
     </script>
+
+    {% block javascript %}
+        <script>
+            function likeComment(cid) {
+                var commentId = cid;
+                var color1 = document.getElementById(cid).style.color;
+
+                if (color1 == 'rgb(255,168,3)')
+                {
+                    document.getElementById(cid).style.color = 'rgb(132,117,119)';
+                    alert("i m ok, bro!");
+                }
+                else if (color1 == 'rgb(132,117,119)')
+                {
+                    document.getElementById(cid).style.color = 'rgb(255,168,3)';
+                    alert("i m ok, bro!2");
+                }
+                $.ajax({
+                    url: '{% url 'likeComment' %}',
+                    data: {
+                        'commentId': commentId
+                    },
+                    dataType: 'json',
+                });
+            }
+        </script>
+    {% endblock javascript %}
+
 {% endblock %}

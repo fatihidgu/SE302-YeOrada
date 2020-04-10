@@ -46,9 +46,8 @@ def clientprofile(request):
         numberOfComment.append(commentAnswers.count())
         answersList.update({comments.id: commentAnswers})
 
-    customerr = Customer.objects.filter(userEmail=request.user)
-    customerLikes = CommentLike.objects.filter(customerEmail=customerr).all()
-
+    customerr = Customer.objects.filter(userEmail=request.user).first()
+    customerLikes = CommentLike.objects.filter(customerEmail=customerr)
 
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
