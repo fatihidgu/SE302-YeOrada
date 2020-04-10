@@ -1633,7 +1633,7 @@
 
                                         </div>
 
-                                        <div class="review-tags">
+                                        <div hidden class="review-tags">
                                             <p>
                                                 <ins>Tags :</ins>
                                                 <a href="#">Johnson,</a> <a href="#"> Jasica,</a><a href="#"> Joy
@@ -1665,18 +1665,18 @@
                                                             {% if customerlike.isLiked == True %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like True</ins>
+                                                                <ins>Like 01</ins>
                                                             {% elif customerlike.isLiked == False %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like False</ins>
+                                                                <ins>Like 01</ins>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% if not customerLikes|filterComments:comment.id %}
                                                         <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                            onclick="likeComment({{ comment.id }})"></i>
-                                                        <ins>Like None</ins>
+                                                        <ins>Like 01</ins>
                                                     {% endif %}
 
 												</span>
@@ -1708,14 +1708,8 @@
                                                         </div>
                                                         <div class="like-report">
                                                             <ul>
-                                                                <li>
-												<span class="views" data-toggle="tooltip" data-placement="top"
-                                                      title="Likes">
-													<i class="fas fa-heart"></i>
-													<ins>Like 1</ins>
-												</span>
-                                                                </li>
-                                                                <li>
+
+                                                                <li style="margin-top: 1%">
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Comments">
 													<ins>Report</ins>
@@ -2100,21 +2094,19 @@
         });
     </script>
 
-    {% block javascript %}
+
         <script>
             function likeComment(cid) {
                 var commentId = cid;
                 var color1 = document.getElementById(cid).style.color;
 
-                if (color1 == 'rgb(255,168,3)')
+                if (color1 == 'rgb(255, 168, 3)')
                 {
-                    document.getElementById(cid).style.color = 'rgb(132,117,119)';
-                    alert("i m ok, bro!");
+                    document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
                 }
-                else if (color1 == 'rgb(132,117,119)')
+                else if (color1 == 'rgb(132, 117, 119)')
                 {
-                    document.getElementById(cid).style.color = 'rgb(255,168,3)';
-                    alert("i m ok, bro!2");
+                    document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
                 }
                 $.ajax({
                     url: '{% url 'likeComment' %}',
@@ -2125,6 +2117,6 @@
                 });
             }
         </script>
-    {% endblock javascript %}
+
 
 {% endblock %}

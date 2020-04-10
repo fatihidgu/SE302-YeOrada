@@ -2,7 +2,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
 from YeOradaApp.forms import RegisteredUserChangeForm
-from YeOradaApp.models import Customer, RegisteredUser
+from YeOradaApp.models import Customer, RegisteredUser, Comment
 
 
 def settings(request):
@@ -49,3 +49,11 @@ def settings(request):
 
     return render(request, 'yeoradamain/setting.html',
                   {'user': user, 'customer': customer, 'error_message1': error_message1, 'passwordChangeForm': passwordChangeForm, })
+
+
+def myprofile(request):
+    comments = Comment.objects.filter(customerEmail=request.user.email)
+    user = request.user
+    customer = Customer.objects.filter(userEmail=user.email).first()
+    return render(request, 'yeoradamain/user_profile_view.html',
+                  {'user': user, 'customer': customer, 'comments': comments,})
