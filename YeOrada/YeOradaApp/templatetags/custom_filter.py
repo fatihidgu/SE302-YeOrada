@@ -1,14 +1,18 @@
 from django import template
 
-from YeOradaApp.models import Comment
+from YeOradaApp.models import Comment, Client
 
 register = template.Library()
 
 
 @register.filter
 def filterCuisines(clientcuisines, clientEmail):
-    clientcuisines.filter(customerEmail=clientEmail)
-    return clientcuisines
+    clientObject = Client.objects.filter(userEmail=clientEmail).first()
+    cuisineList = list()
+    for x in clientcuisines:
+        if x.customerEmail == clientObject:
+            cuisineList.append(x)
+    return cuisineList
 
 
 @register.filter

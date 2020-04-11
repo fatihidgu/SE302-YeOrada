@@ -14,7 +14,7 @@ class UsersManagersTests(TestCase):
         try:
             # username is None for the AbstractUser option
             # username does not exist for the AbstractBaseUser option
-            self.assertIsNone(user.username)
+            self.assertIsNotNone(user.username)
         except AttributeError:
             pass
         with self.assertRaises(TypeError):
@@ -34,7 +34,7 @@ class UsersManagersTests(TestCase):
         try:
             # username is None for the AbstractUser option
             # username does not exist for the AbstractBaseUser option
-            self.assertIsNone(admin_user.username)
+            self.assertIsNotNone(admin_user.username)
         except AttributeError:
             pass
         with self.assertRaises(ValueError):
