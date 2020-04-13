@@ -1,4 +1,5 @@
 {% extends 'yeoradamain/base.html' %}
+{% load custom_filter %}
 {% block content1 %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -97,14 +98,17 @@
 								<div class="tab-content-heading">
 									<h4>My Comments</h4>
 								</div>
-                                {% for comment in comments %}
-								<div class="main-comments">
-									<div class="rating-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-5.png" alt=""></a>
-											<h4>{{ user.name }} {{ user.surname }}</h4><br>
-											<div class="rate-star">
-												{% if comment.rate >= 1 %}
+                               {% for comment in commentList %}
+                                    <div class="main-comments">
+
+                                        <div class="rating-1">
+                                            <div class="user-detail-heading">
+                                                <a href="user_profile_view.html"><img
+                                                        src="/static/images/recipe-details/comment-5.png" alt=""></a>
+                                                <h4> {{ comment.customerEmail.userEmail.name }} {{ comment.customerEmail.userEmail.surname }}</h4>
+                                                <br>
+                                                <div class="rate-star">
+                                                    {% if comment.rate >= 1 %}
                                             <i class="fas fa-star"></i>
                                             {% endif %}
                                             {% if comment.rate >= 2 %}
@@ -119,89 +123,123 @@
                                             {% if comment.rate == 5 %}
                                             <i class="fas fa-star"></i>
                                             {% endif %}
-												<span>{{ comment.rate }}</span>
-											</div>
-										</div>
-										<div class="reply-time">
-											<p><i class="far fa-clock"></i>{{ comment.date }}</p>
-										</div>
-										<div class="comment-description">
-											<p>{{ comment.text }}</p>
-										</div>
+                                                    <span>{{ comment.rate }}</span>
+                                                </div>
+                                            </div>
+                                            <div class="reply-time">
+                                                <p><i class="far fa-clock"></i>{{ comment.date }}</p>
+                                            </div>
+                                            <div class="comment-description">
+                                                <p>{{ comment.text }}</p>
+                                            </div>
 
-									</div>
+                                        </div>
 
-									<div class="post-images">
-										<div class="select-images">
-											<ul>
-												<li class="image-select">
-													<img src="/static/images/restaurant-detail/add-1.jpg" alt="">
-												</li>
-												<li class="image-select">
-													<img src="/static/images/restaurant-detail/add-2.jpg" alt="">
-												</li>
-												<li class="image-select">
-													<img src="/static/images/restaurant-detail/add-3.jpg" alt="">
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="like-comment-dt">
-										<ul>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
-													<i class="fas fa-heart"></i>
-													<ins>Like 562</ins>
+                                        <div hidden class="review-tags">
+                                            <p>
+                                                <ins>Tags :</ins>
+                                                <a href="#">Johnson,</a> <a href="#"> Jasica,</a><a href="#"> Joy
+                                                William,</a> <a href="#"> Johnson,</a><a href="#"> Jass Singh,</a>&nbsp;
+                                                <span> and</span>&nbsp; <a href="#">8 others</a></p>
+                                        </div>
+                                        <div class="post-images">
+                                            <div class="select-images">
+                                                <ul>
+                                                    <li class="image-select">
+                                                        <img src="/static/images/restaurant-detail/add-1.jpg" alt="">
+                                                    </li>
+                                                    <li class="image-select">
+                                                        <img src="/static/images/restaurant-detail/add-2.jpg" alt="">
+                                                    </li>
+                                                    <li class="image-select">
+                                                        <img src="/static/images/restaurant-detail/add-3.jpg" alt="">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <div class="like-comment-dt">
+                                            <ul>
+                                                <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Likes">
+                                                    {% for customerlike in customerLikes|filterComments:comment.id %}
+                                                        {% if customerlike %}
+                                                            {% if customerlike.isLiked == True %}
+                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
+                                                                   onclick="likeComment({{ comment.id }})"></i>
+                                                                <ins>Like 01</ins>
+                                                            {% elif customerlike.isLiked == False %}
+                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                                   onclick="likeComment({{ comment.id }})"></i>
+                                                                <ins>Like 01</ins>
+                                                            {% endif %}
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    {% if not customerLikes|filterComments:comment.id %}
+                                                        <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                           onclick="likeComment({{ comment.id }})"></i>
+                                                        <ins>Like 01</ins>
+                                                    {% endif %}
+
 												</span>
-											</li>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                                </li>
+                                                <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Comments">
 													<i class="fas fa-comment-alt"></i>
 													<ins>Comments 01</ins>
 												</span>
-											</li>
-										</ul>
-									</div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        {% for key,value in answersList.items %}
+                                            {% if key == comment.id %}
+                                                {% for answer in value %}
+                                                    <div class="reply-review-1">
+                                                        <div class="user-detail-heading">
+                                                            <a href="user_profile_view.html"><img
+                                                                    src="/static/images/recipe-details/reply-1.png"
+                                                                    alt=""></a>
+                                                            <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
+                                                        </div>
+                                                        <div class="reply-time">
+                                                            <p><i class="far fa-clock"></i>2 hours ago</p>
+                                                        </div>
+                                                        <div class="comment-description">
+                                                            <p>{{ answer.answer }}</p>
+                                                        </div>
+                                                        <div class="like-report">
+                                                            <ul>
 
-									<div class="reply-review-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											<h4> Rock Smith</h4>
-										</div>
-										<div class="reply-time">
-											<p><i class="far fa-clock"></i>12 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p> Thank you</p>
-										</div>
-										<div class="like-report">
-											<ul>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
-														<i class="fas fa-heart"></i>
-														<ins>Like 1</ins>
-													</span>
-												</li>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
-														<ins>Report</ins>
-													</span>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="reply-comment">
-										<div class="post-items">
-											<div class="reply-dp">
-												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											</div>
-											<form>
-												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
-												<input class="reply-btn btn-link" type="submit" value="Post">
-											</form>
-										</div>
-									</div>
-								</div>
+                                                                <li style="margin-top: 1%">
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Comments">
+													<ins>Report</ins>
+												</span>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            {% endif %}
+                                        {% endfor %}
+                                        <div class="reply-comment">
+                                            <div class="post-items">
+                                                <div class="reply-dp">
+                                                    <a href="my_dashboard.html"><img
+                                                            src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                                </div>
+                                                <form method="POST">
+                                                    <input name="commentId" type="hidden" value="{{ comment.id }}">
+                                                    <input type="text" class="comment-input" name="post"
+                                                           placeholder="Write a comment">
+                                                    {% csrf_token %}
+                                                    <input class="reply-btn btn-link" name="postComment" type="submit"
+                                                           value="Post Comment" style="margin-top: 3%;">
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
                                 {% endfor %}
 							</div>
 
@@ -818,4 +856,28 @@
 	<script src="/static/js/owlslider.js"></script>
 	<script src="/static/js/bootstrap-select.js"></script>
 	<script src="/static/js/dashboard-tabs-reload.js"></script>
+
+        <script>
+            function likeComment(cid) {
+                var commentId = cid;
+                var color1 = document.getElementById(cid).style.color;
+
+                if (color1 == 'rgb(255, 168, 3)')
+                {
+                    document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+                }
+                else if (color1 == 'rgb(132, 117, 119)')
+                {
+                    document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
+                }
+                $.ajax({
+                    url: '{% url 'likeComment' %}',
+                    data: {
+                        'commentId': commentId
+                    },
+                    dataType: 'json',
+                });
+            }
+        </script>
+
 {% endblock %}
