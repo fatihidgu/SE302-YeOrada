@@ -1,8 +1,8 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
-from YeOradaApp.forms import RegisteredUserChangeForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment
+from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike
 
 
 def settings(request):
@@ -17,12 +17,13 @@ def settings(request):
         userObject = RegisteredUser.objects.filter(email=request.user.email).first()
         customerObject = Customer.objects.filter(userEmail=request.user).first()
 
-        #user = RegisteredUser(email=email, name=name, surname=surname, username=username)
-        #customer = Customer(city=city, country=country, userEmail=userObject.first())
+        # user = RegisteredUser(email=email, name=name, surname=surname, username=username)
+        # customer = Customer(city=city, country=country, userEmail=userObject.first())
 
         emailCheck = RegisteredUser.objects.filter(email=email)
         usernameCheck = RegisteredUser.objects.filter(username=username)
-        if (emailCheck.first() and email != request.user.email) or (usernameCheck.first() and username != request.user.username):
+        if (emailCheck.first() and email != request.user.email) or (
+                usernameCheck.first() and username != request.user.username):
             error_message1 = "* Email or username are already used"
             user = request.user
             customer = Customer.objects.filter(userEmail=user.email).first()
@@ -48,12 +49,44 @@ def settings(request):
     customer = Customer.objects.filter(userEmail=user.email).first()
 
     return render(request, 'yeoradamain/setting.html',
-                  {'user': user, 'customer': customer, 'error_message1': error_message1, 'passwordChangeForm': passwordChangeForm, })
+                  {'user': user, 'customer': customer, 'error_message1': error_message1,
+                   'passwordChangeForm': passwordChangeForm, })
 
 
 def myprofile(request):
     comments = Comment.objects.filter(customerEmail=request.user.email)
     user = request.user
-    customer = Customer.objects.filter(userEmail=user.email).first()
+    if 'postComment' in request.POST:
+        if request.user.is_authenticated:
+            if request.user.isCustomer:
+                commentAnswerForm = CommentAnswerForm(request.POST)
+                if commentAnswerForm.is_valid():
+                    answer = request.POST.get('post')
+                    commentId = request.POST.get('commentId')
+                    commentObject = Comment.objects.filter(id=commentId).first()
+                    customerObject = Customer.objects.filter(userEmail=request.user.email).first()
+                    commentAnswer = CommentAnswer(customerEmail=customerObject, commentId=commentObject, answer=answer)
+                    commentAnswer.save()
+                    return redirect('myprofile')
+        else:
+            return redirect('signin')
+
+
+    commentForm = CommentForm()
+    commentAnswerForm = CommentAnswerForm()
+    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
+    answersList = dict()
+    numberOfComment = list()
+    for comments in commentList:
+        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id)
+        numberOfComment.append(commentAnswers.count())
+        answersList.update({comments.id: commentAnswers})
+
+    customer = Customer.objects.filter(userEmail=request.user).first()
+    customerLikes = CommentLike.objects.filter(customerEmail=customer)
+
     return render(request, 'yeoradamain/user_profile_view.html',
-                  {'user': user, 'customer': customer, 'comments': comments,})
+              {'user': user, 'customer': customer, 'comments': comments, 'commentForm': commentForm,
+               'commentList': commentList,
+               'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
+               'numberOfComment': numberOfComment, 'customerLikes': customerLikes, })
