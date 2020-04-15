@@ -14,11 +14,11 @@ def clientprofile(request, username):
                     text = request.POST.get('text')
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     clientObject= Client.objects.filter(userEmail__username=username).first()
-
-                    comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=1)
+                    rate = request.POST.get('rate')
+                    comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate)
                     # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
-                    return redirect('clientprofile')
+                    return redirect('clientprofile', username)
         else:
             return redirect('signin')
 
@@ -33,7 +33,7 @@ def clientprofile(request, username):
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     commentAnswer = CommentAnswer(customerEmail=customerObject, commentId=commentObject, answer=answer)
                     commentAnswer.save()
-                    return redirect('clientprofile')
+                    return redirect('clientprofile', username)
         else:
             return redirect('signin')
 
