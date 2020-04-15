@@ -5,7 +5,7 @@ from YeOradaApp.forms import CommentForm, CommentAnswerForm
 from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike
 
 
-def clientprofile(request):
+def clientprofile(request, username):
     if 'publishReview' in request.POST:
         if request.user.is_authenticated:
             if request.user.isCustomer:
@@ -13,7 +13,8 @@ def clientprofile(request):
                 if commentForm.is_valid():
                     text = request.POST.get('text')
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
-                    clientObject = Client.objects.filter(userEmail="sivasetliekmek@gmail.com").first()
+                    clientObject= Client.objects.filter(userEmail__username=username).first()
+
                     comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=1)
                     # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
@@ -38,7 +39,8 @@ def clientprofile(request):
 
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
-    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
+    clientObject = Client.objects.filter(userEmail__username=username).first()
+    commentList = Comment.objects.filter(clientEmail=clientObject.userEmail.email)
     answersList = dict()
     numberOfComment = list()
     for comments in commentList:

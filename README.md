@@ -29,3 +29,8 @@ $ python manage.py runserver
 ##
 
 Source: https://github.com/ro6ley/plaindjango
+
+##
+
+python -m pip install --upgrade pip
+python -m pip install --upgrade Pillow
