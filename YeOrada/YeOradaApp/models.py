@@ -38,6 +38,7 @@ class Customer(models.Model):
     city = models.CharField(max_length=200, null=True, blank=True)
     country = models.CharField(max_length=200, null=True, blank=True)
     bio = models.CharField(max_length=200, blank=True)
+    image = models.ImageField(default='default.jpg', upload_to='customer_pics')
 
 
 class Client(models.Model):
