@@ -1555,13 +1555,14 @@
                                             <div class="select-rating">
                                                 <h4>Your Rating :</h4>
                                                 <ul class="rating-stars">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li id = "one" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "two" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "three" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "four" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "five" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
                                                 </ul>
                                             </div>
+                                            <input type="hidden" id="rateId" name="rate" value="">
                                             <textarea class="description-area" name="text"
                                                       placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
                                             <input type="text" class="rating-input" name="search"
@@ -2118,5 +2119,70 @@
             }
         </script>
 
+    <script>
+function mouseOnRate(id) {
+    if (id == "one"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#e1e1e1";
+        document.getElementById("three").style.color = "#e1e1e1";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "two"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#e1e1e1";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "three"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "four"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "five"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#ffa803";
+    }
+}
+
+function clickRate(id) {
+    var value = document.getElementById(id).id;
+    if (value == "one"){
+        document.getElementById("rateId").value = "1";
+        document.getElementById("one").style.color = "#ffa803";
+    } else if (value == "two"){
+        document.getElementById("rateId").value = "2";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+    } else if (value == "three"){
+        document.getElementById("rateId").value = "3";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+    } else if (value == "four"){
+        document.getElementById("rateId").value = "4";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+    } else if (value == "five"){
+        document.getElementById("rateId").value = "5";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#ffa803";
+    }
+}
+</script>
 
 {% endblock %}

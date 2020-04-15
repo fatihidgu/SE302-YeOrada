@@ -81,6 +81,7 @@ class CommentAnswer(models.Model):
     customerEmail = models.ForeignKey(Customer, on_delete=models.CASCADE)
     commentId = models.ForeignKey(Comment, on_delete=models.CASCADE)
     answer = models.TextField()
+    date = models.DateTimeField(default=timezone.now)
 
 
 class CommentLike(models.Model):
