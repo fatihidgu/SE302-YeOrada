@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 
-    <title>Natto | Restaurant Detail View </title>
+    <title>Restaurant Detail View </title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,16 +35,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="left-title-text">
-                        <h3>Restaurant Detail View</h3>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="right-title-text">
-                        <ul>
+                       <ul>
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                             <li class="breadcrumb-item"><a href="partners.html">Partners</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Restaurant Detail View</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-title-text">
+
                     </div>
                 </div>
             </div>
@@ -108,25 +108,7 @@
                             <img src="/static/images/restaurant-detail/thumbs/img-8.jpg" alt="">
                         </div>
                     </div>
-                    <div class="profile-toolbar padding-b padding-t">
-                        <div class="user-details">
-                            <div class="user-picy">
-                                <a href="user_profile_view.html"><img src="/static/images/recipe-details/user-dp.png"
-                                                                      alt=""></a>
-                            </div>
-                            <div class="name-location">
-                                <a href="user_profile_view.html"><h4>John Doe</h4></a>
-                                <p>Owner</p>
-                            </div>
-                        </div>
-                        <div class="right-side-btns">
-                            <div class="online-offline-2">
-                                <p><span class="span-1 active"><i class="fas fa-circle"></i></span>Online</p>
-                            </div>
-                            <a href="#" class="right-btn-c btn-link" title="Call Us"><i class="fas fa-phone"></i>Call Us</a>
-                            <a href="#" class="right-btn-c btn-link" title="Order Now">Order Now</a>
-                        </div>
-                    </div>
+
                     <div class="resto-dt">
                         <div class="resto-detail">
                             <div class="resto-picy">
@@ -134,14 +116,14 @@
                                                                       alt=""></a>
                             </div>
                             <div class="name-location">
-                                <a href="restaurant_detail.html"><h1>Restaurant Name</h1></a>
-                                <p><span><i class="fas fa-map-marker-alt"></i></span>Sidney, Australia</p>
+                                <a href="restaurant_detail.html"><h1>{{ clientObject.name }} </h1></a>
+                                <p><span><i class="fas fa-map-marker-alt"></i></span>{{ clientObject.state }} , {{ clientObject.city }}</p>
                             </div>
                         </div>
                         <div class="right-side-btns">
                             <div class="bagde-dt">
                                 <div class="partner-badge">
-                                    Partner
+                                    Verified
                                 </div>
                             </div>
                             <div class="resto-review-stars">
@@ -150,44 +132,24 @@
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
-                                <span>4.5/5</span>
+                                <span>{{ clientObject.rate }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="published-like-comments">
                         <div class="published-time">
-                            <span><i class="far fa-calendar-alt"></i> Member since August 2018</span>
+                            <span><i class="far fa-calendar-alt"></i> Member since {{ registeredUser.date_joined }}</span>
                         </div>
                         <div class="like-comments">
                             <ul>
-                                <li>
-									<span class="views" data-toggle="tooltip" data-placement="top" title="Bookmark">
-										<i class="far fa-bookmark"></i>
-										<ins>Bookmark</ins>
-									</span>
-                                </li>
+
                                 <li>
 									<span class="views" data-toggle="tooltip" data-placement="top" title="Add Reviews">
 										<i class="fas fa-pencil-alt"></i>
 										<ins>Add Reviews</ins>
 									</span>
                                 </li>
-                                <li>
-                                    <div class="btn-group social-share">
-										<span class="dropdown-toggle-no-caret views" data-toggle="dropdown"
-                                              aria-haspopup="true" aria-expanded="false" role="main" title="">
-											<i class="fas fa-share-alt"></i>
-											<ins>Share</ins></span>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
-                                            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
-                                            <a href="#"><i class="fab fa-google-plus-g"></i>Google+</a>
-                                            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
-                                            <a href="#"><i class="fab fa-pinterest-p"></i>Pinterest</a>
-                                            <a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -200,13 +162,7 @@
                                 <a href="#menu" class="nav-link" data-toggle="tab">Menu</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#order-online" class="nav-link" data-toggle="tab">Order Online</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="#reviews" class="nav-link" data-toggle="tab">Reviews</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#book-a-table" class="nav-link" data-toggle="tab">Book a Table</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#photos" class="nav-link" data-toggle="tab">Photos</a>
@@ -223,9 +179,7 @@
                                                     <div class="flex-dt">
                                                         <ul class="view-dt">
                                                             <li>Name</li>
-                                                            <li>Owner</li>
                                                             <li>Phone Number</li>
-                                                            <li>Restaurant Number</li>
                                                             <li>Email</li>
                                                             <li>Cuisines</li>
                                                         </ul>
@@ -234,16 +188,13 @@
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
-                                                            <li>:</li>
-                                                            <li>:</li>
+
                                                         </ul>
                                                         <ul class="view-dt-1">
-                                                            <li>Restaurant Name</li>
-                                                            <li>John Doe</li>
-                                                            <li>+2 123 456 7890</li>
-                                                            <li>+2 987 654 3210</li>
-                                                            <li>Restaurantname@gmail.com</li>
-                                                            <li>Dhabas</li>
+                                                            <li>{{ clientObject.name }}</li>
+                                                            <li>{{ clientObject.phone }}</li>
+                                                            <li>{{ clientObject.userEmail }}</li>
+                                                            <li>çeşit çeşit maşallah</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -251,27 +202,24 @@
                                                     <div class="flex-dt">
                                                         <ul class="view-dt">
                                                             <li>Opening Hours</li>
-                                                            <li>Status</li>
-                                                            <li>Country</li>
+                                                            <li>City</li>
+                                                            <li>State</li>
                                                             <li>Address</li>
-                                                            <li>Featured</li>
-                                                            <li>Discount</li>
+
                                                         </ul>
                                                         <ul class="view-dt">
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
-                                                            <li>:</li>
-                                                            <li>:</li>
+
+
                                                         </ul>
                                                         <ul class="view-dt-1">
-                                                            <li>9Am to 12PM (Mon-Sun)</li>
-                                                            <li>Online</li>
-                                                            <li>Australia</li>
-                                                            <li><a href="#" class="direction">Get Direction</a></li>
-                                                            <li>Treading</li>
-                                                            <li>10% off on al orders</li>
+                                                            <li>{{ clientObject.workingHours }} {{ clientObject.workingDays }}</li>
+                                                            <li>{{ clientObject.city }}</li>
+                                                            <li>{{ clientObject.state }}</li>
+                                                            <li>{{ clientObject.address1 }}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -281,14 +229,7 @@
                                 </div>
                                 <div class="restaurants-detail-bg">
                                     <h4>Description</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula ut nisl id
-                                        aliquam. Phasellus vestibulum ante eget aliquet sodales. Aliquam erat enim,
-                                        venenatis eget fringilla ac, euismod ac sapien. Sed tincidunt diam eget orci
-                                        finibus blandit. Sed eget interdum quam. Proin arcu dolor, eleifend ut commodo
-                                        sed, accumsan et ipsum. Mauris laoreet bibendum dolor, at vestibulum neque
-                                        facilisis sed. Donec a eros quam. Cras lobortis, nunc a dignissim maximus, leo
-                                        nunc imperdiet tellus, sed viverra felis elit ac arcu. Sed et sapien venenatis
-                                        leo ullamcorper finibus eu id lectus. Aliquam tristique pulvinar vehicula.</p>
+                                    <p>{{ clientObject.info }}</p>
                                 </div>
                                 <div class="ads-offer">
                                     <div class="container">
@@ -300,10 +241,7 @@
                                                     <h1>10% off </h1>
                                                     <p>on all orders get the code : 156CD85</p>
                                                 </div>
-                                                <div class="offer-order">
-                                                    <a href="#" class="offer-btn-1 btn-link" title="Order Now">Order
-                                                        Now </a>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1971,9 +1909,6 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4">
-                    <div class="show-map-result">
-                        <a href="#">Get Direction</a>
-                    </div>
                     <div class="popular-restaurants">
                         <h4>Popular Restaurents </h4>
                         <div class="popular-restaurants-items">
