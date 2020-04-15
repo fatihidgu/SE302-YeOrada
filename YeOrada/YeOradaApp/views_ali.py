@@ -31,6 +31,8 @@ def clientprofile(request, username):
                     commentId = request.POST.get('commentId')
                     commentObject = Comment.objects.filter(id=commentId).first()
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
+                    commentObject.commentNumber += 1
+                    commentObject.save()
                     commentAnswer = CommentAnswer(customerEmail=customerObject, commentId=commentObject, answer=answer)
                     commentAnswer.save()
                     return redirect('clientprofile', username)
@@ -72,7 +74,12 @@ def likeComment(request):
             else:
                 if commentLike.first().isLiked:
                     commentLike.update(isLiked=False)
+                    if (commentId2.likeNumber >= 0):
+                        commentId2.likeNumber -= 1
+                    commentId2.save()
                 else:
                     commentLike.update(isLiked=True)
+                    commentId2.likeNumber += 1
+                    commentId2.save()
 
     return JsonResponse({}, status = 400)

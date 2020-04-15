@@ -75,6 +75,8 @@ class Comment(models.Model):
     date = models.DateTimeField(default=timezone.now)
     text = models.TextField()
     rate = models.IntegerField()
+    likeNumber = models.IntegerField(default=0, null=True, blank=True)
+    commentNumber = models.IntegerField(default=0, null=True, blank=True)
 
 
 class CommentAnswer(models.Model):

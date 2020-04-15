@@ -1501,7 +1501,7 @@
                                                 </ul>
                                             </div>
                                             <input type="hidden" id="rateId" name="rate" value="">
-                                            <textarea class="description-area" name="text"
+                                            <textarea class="description-area" name="text" maxlength="1200"
                                                       placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
                                             <input type="text" class="rating-input" name="search"
                                                    placeholder="@ Tags with friends" hidden>
@@ -1604,18 +1604,18 @@
                                                             {% if customerlike.isLiked == True %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                             {% elif customerlike.isLiked == False %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% if not customerLikes|filterComments:comment.id %}
                                                         <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                            onclick="likeComment({{ comment.id }})"></i>
-                                                        <ins>Like 01</ins>
+                                                        <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                     {% endif %}
 
 												</span>
@@ -1624,7 +1624,7 @@
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Comments">
 													<i class="fas fa-comment-alt"></i>
-													<ins>Comments 01</ins>
+													<ins>{{ comment.commentNumber }}</ins>
 												</span>
                                                 </li>
                                             </ul>
@@ -1640,7 +1640,7 @@
                                                             <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
                                                         </div>
                                                         <div class="reply-time">
-                                                            <p><i class="far fa-clock"></i>2 hours ago</p>
+                                                            <p><i class="far fa-clock"></i>{{ answer.date }}</p>
                                                         </div>
                                                         <div class="comment-description">
                                                             <p>{{ answer.answer }}</p>
@@ -1668,7 +1668,7 @@
                                                 </div>
                                                 <form method="POST">
                                                     <input name="commentId" type="hidden" value="{{ comment.id }}">
-                                                    <input type="text" class="comment-input" name="post"
+                                                    <input type="text" class="comment-input" name="post" maxlength="150"
                                                            placeholder="Write a comment">
                                                     {% csrf_token %}
                                                     <input class="reply-btn btn-link" name="postComment" type="submit"
@@ -2039,15 +2039,26 @@
                 if (color1 == 'rgb(255, 168, 3)')
                 {
                     document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+                    var value = document.getElementsByName("commentId").innerHTML;
+                    value++;
+                    alert(value);
+                    document.getElementsByName("commentId").innerHTML = value;
                 }
                 else if (color1 == 'rgb(132, 117, 119)')
                 {
                     document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
+                    var value = document.getElementsByName("commentId").innerHTML;
+                    value--;
+                    alert(value);
+                    document.getElementsByName("commentId").innerHTML = value;
                 }
+
+
                 $.ajax({
                     url: '{% url 'likeComment' %}',
                     data: {
                         'commentId': commentId
+
                     },
                     dataType: 'json',
                 });
