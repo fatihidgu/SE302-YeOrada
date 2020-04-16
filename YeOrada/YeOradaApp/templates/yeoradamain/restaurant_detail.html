@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 
-    <title>Natto | Restaurant Detail View </title>
+    <title>Restaurant Detail View </title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -35,16 +35,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="left-title-text">
-                        <h3>Restaurant Detail View</h3>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="right-title-text">
-                        <ul>
+                       <ul>
                             <li class="breadcrumb-item"><a href="index.html">Home</a></li>
                             <li class="breadcrumb-item"><a href="partners.html">Partners</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Restaurant Detail View</li>
                         </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-title-text">
+
                     </div>
                 </div>
             </div>
@@ -108,25 +108,7 @@
                             <img src="/static/images/restaurant-detail/thumbs/img-8.jpg" alt="">
                         </div>
                     </div>
-                    <div class="profile-toolbar padding-b padding-t">
-                        <div class="user-details">
-                            <div class="user-picy">
-                                <a href="user_profile_view.html"><img src="/static/images/recipe-details/user-dp.png"
-                                                                      alt=""></a>
-                            </div>
-                            <div class="name-location">
-                                <a href="user_profile_view.html"><h4>John Doe</h4></a>
-                                <p>Owner</p>
-                            </div>
-                        </div>
-                        <div class="right-side-btns">
-                            <div class="online-offline-2">
-                                <p><span class="span-1 active"><i class="fas fa-circle"></i></span>Online</p>
-                            </div>
-                            <a href="#" class="right-btn-c btn-link" title="Call Us"><i class="fas fa-phone"></i>Call Us</a>
-                            <a href="#" class="right-btn-c btn-link" title="Order Now">Order Now</a>
-                        </div>
-                    </div>
+
                     <div class="resto-dt">
                         <div class="resto-detail">
                             <div class="resto-picy">
@@ -134,60 +116,50 @@
                                                                       alt=""></a>
                             </div>
                             <div class="name-location">
-                                <a href="restaurant_detail.html"><h1>Restaurant Name</h1></a>
-                                <p><span><i class="fas fa-map-marker-alt"></i></span>Sidney, Australia</p>
+                                <a href="restaurant_detail.html"><h1>{{ clientObject.name }} </h1></a>
+                                <p><span><i class="fas fa-map-marker-alt"></i></span>{{ clientObject.state }} , {{ clientObject.city }}</p>
                             </div>
                         </div>
                         <div class="right-side-btns">
                             <div class="bagde-dt">
                                 <div class="partner-badge">
-                                    Partner
+                                    Verified
                                 </div>
                             </div>
                             <div class="resto-review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <span>4.5/5</span>
+                                {% if clientObject.rate >= 1 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate >= 2 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate >= 3 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+											{% if clientObject.rate >= 4 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate == 5 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                <span>{{ clientObject.rate }}</span>
                             </div>
                         </div>
                     </div>
                     <div class="published-like-comments">
                         <div class="published-time">
-                            <span><i class="far fa-calendar-alt"></i> Member since August 2018</span>
+                            <span><i class="far fa-calendar-alt"></i> Member since {{ registeredUser.date_joined }}</span>
                         </div>
                         <div class="like-comments">
                             <ul>
-                                <li>
-									<span class="views" data-toggle="tooltip" data-placement="top" title="Bookmark">
-										<i class="far fa-bookmark"></i>
-										<ins>Bookmark</ins>
-									</span>
-                                </li>
+
                                 <li>
 									<span class="views" data-toggle="tooltip" data-placement="top" title="Add Reviews">
 										<i class="fas fa-pencil-alt"></i>
 										<ins>Add Reviews</ins>
 									</span>
                                 </li>
-                                <li>
-                                    <div class="btn-group social-share">
-										<span class="dropdown-toggle-no-caret views" data-toggle="dropdown"
-                                              aria-haspopup="true" aria-expanded="false" role="main" title="">
-											<i class="fas fa-share-alt"></i>
-											<ins>Share</ins></span>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#"><i class="fab fa-facebook-f"></i>Facebook</a>
-                                            <a href="#"><i class="fab fa-twitter"></i>Twitter</a>
-                                            <a href="#"><i class="fab fa-google-plus-g"></i>Google+</a>
-                                            <a href="#"><i class="fab fa-instagram"></i>Instagram</a>
-                                            <a href="#"><i class="fab fa-pinterest-p"></i>Pinterest</a>
-                                            <a href="#"><i class="fab fa-linkedin-in"></i>LinkedIn</a>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                     </div>
@@ -200,13 +172,7 @@
                                 <a href="#menu" class="nav-link" data-toggle="tab">Menu</a>
                             </li>
                             <li class="nav-item">
-                                <a href="#order-online" class="nav-link" data-toggle="tab">Order Online</a>
-                            </li>
-                            <li class="nav-item">
                                 <a href="#reviews" class="nav-link" data-toggle="tab">Reviews</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#book-a-table" class="nav-link" data-toggle="tab">Book a Table</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#photos" class="nav-link" data-toggle="tab">Photos</a>
@@ -223,9 +189,7 @@
                                                     <div class="flex-dt">
                                                         <ul class="view-dt">
                                                             <li>Name</li>
-                                                            <li>Owner</li>
                                                             <li>Phone Number</li>
-                                                            <li>Restaurant Number</li>
                                                             <li>Email</li>
                                                             <li>Cuisines</li>
                                                         </ul>
@@ -234,16 +198,17 @@
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
-                                                            <li>:</li>
-                                                            <li>:</li>
+
                                                         </ul>
                                                         <ul class="view-dt-1">
-                                                            <li>Restaurant Name</li>
-                                                            <li>John Doe</li>
-                                                            <li>+2 123 456 7890</li>
-                                                            <li>+2 987 654 3210</li>
-                                                            <li>Restaurantname@gmail.com</li>
-                                                            <li>Dhabas</li>
+                                                            <li>{{ clientObject.name }}</li>
+                                                            <li>{{ clientObject.phone }}</li>
+                                                            <li>{{ clientObject.userEmail }}</li>
+                                                            <li>
+                                                                {% for cuisine in clientcuisines|filterCuisines:clientObject.userEmail %}
+                                                                    {{ cuisine.cuisine }},
+                                                                {% endfor %}
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -251,27 +216,24 @@
                                                     <div class="flex-dt">
                                                         <ul class="view-dt">
                                                             <li>Opening Hours</li>
-                                                            <li>Status</li>
-                                                            <li>Country</li>
+                                                            <li>City</li>
+                                                            <li>State</li>
                                                             <li>Address</li>
-                                                            <li>Featured</li>
-                                                            <li>Discount</li>
+
                                                         </ul>
                                                         <ul class="view-dt">
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
                                                             <li>:</li>
-                                                            <li>:</li>
-                                                            <li>:</li>
+
+
                                                         </ul>
                                                         <ul class="view-dt-1">
-                                                            <li>9Am to 12PM (Mon-Sun)</li>
-                                                            <li>Online</li>
-                                                            <li>Australia</li>
-                                                            <li><a href="#" class="direction">Get Direction</a></li>
-                                                            <li>Treading</li>
-                                                            <li>10% off on al orders</li>
+                                                            <li>{{ clientObject.workingHours }} ({{ clientObject.workingDays }})</li>
+                                                            <li>{{ clientObject.city }}</li>
+                                                            <li>{{ clientObject.state }}</li>
+                                                            <li>{{ clientObject.address1 }}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -281,14 +243,7 @@
                                 </div>
                                 <div class="restaurants-detail-bg">
                                     <h4>Description</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vehicula ut nisl id
-                                        aliquam. Phasellus vestibulum ante eget aliquet sodales. Aliquam erat enim,
-                                        venenatis eget fringilla ac, euismod ac sapien. Sed tincidunt diam eget orci
-                                        finibus blandit. Sed eget interdum quam. Proin arcu dolor, eleifend ut commodo
-                                        sed, accumsan et ipsum. Mauris laoreet bibendum dolor, at vestibulum neque
-                                        facilisis sed. Donec a eros quam. Cras lobortis, nunc a dignissim maximus, leo
-                                        nunc imperdiet tellus, sed viverra felis elit ac arcu. Sed et sapien venenatis
-                                        leo ullamcorper finibus eu id lectus. Aliquam tristique pulvinar vehicula.</p>
+                                    <p>{{ clientObject.info }}</p>
                                 </div>
                                 <div class="ads-offer">
                                     <div class="container">
@@ -300,10 +255,7 @@
                                                     <h1>10% off </h1>
                                                     <p>on all orders get the code : 156CD85</p>
                                                 </div>
-                                                <div class="offer-order">
-                                                    <a href="#" class="offer-btn-1 btn-link" title="Order Now">Order
-                                                        Now </a>
-                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -1555,14 +1507,15 @@
                                             <div class="select-rating">
                                                 <h4>Your Rating :</h4>
                                                 <ul class="rating-stars">
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
-                                                    <li><i class="fas fa-star"></i></li>
+                                                    <li id = "one" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "two" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "three" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "four" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
+                                                    <li id = "five" onclick="clickRate(id)" onmouseover="mouseOnRate(id)" ><i class="fas fa-star"></i></li>
                                                 </ul>
                                             </div>
-                                            <textarea class="description-area" name="text"
+                                            <input type="hidden" id="rateId" name="rate" value="">
+                                            <textarea class="description-area" name="text" maxlength="1200"
                                                       placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
                                             <input type="text" class="rating-input" name="search"
                                                    placeholder="@ Tags with friends" hidden>
@@ -1665,18 +1618,18 @@
                                                             {% if customerlike.isLiked == True %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                             {% elif customerlike.isLiked == False %}
                                                                 <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% if not customerLikes|filterComments:comment.id %}
                                                         <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
                                                            onclick="likeComment({{ comment.id }})"></i>
-                                                        <ins>Like 01</ins>
+                                                        <p name = "{{ comment.id }}">{{ comment.likeNumber }}</p>
                                                     {% endif %}
 
 												</span>
@@ -1685,7 +1638,7 @@
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Comments">
 													<i class="fas fa-comment-alt"></i>
-													<ins>Comments 01</ins>
+													<ins>{{ comment.commentNumber }}</ins>
 												</span>
                                                 </li>
                                             </ul>
@@ -1701,7 +1654,7 @@
                                                             <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
                                                         </div>
                                                         <div class="reply-time">
-                                                            <p><i class="far fa-clock"></i>2 hours ago</p>
+                                                            <p><i class="far fa-clock"></i>{{ answer.date }}</p>
                                                         </div>
                                                         <div class="comment-description">
                                                             <p>{{ answer.answer }}</p>
@@ -1729,7 +1682,7 @@
                                                 </div>
                                                 <form method="POST">
                                                     <input name="commentId" type="hidden" value="{{ comment.id }}">
-                                                    <input type="text" class="comment-input" name="post"
+                                                    <input type="text" class="comment-input" name="post" maxlength="150"
                                                            placeholder="Write a comment">
                                                     {% csrf_token %}
                                                     <input class="reply-btn btn-link" name="postComment" type="submit"
@@ -1970,11 +1923,8 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-4">
-                    <div class="show-map-result">
-                        <a href="#">Get Direction</a>
-                    </div>
                     <div class="popular-restaurants">
-                        <h4>Popular Restaurents </h4>
+                        <h4>Popular Restaurants </h4>
                         <div class="popular-restaurants-items">
                             <ul class="list-unstyled">
                                 <li>
@@ -2066,7 +2016,7 @@
                         </div>
                     </div>
                     <div class="google-ads">
-                        <a href="#"><img src="/static/images/partners/google-ad.jpg" alt="image" title="Google Ads"></a>
+
                     </div>
                 </div>
             </div>
@@ -2103,20 +2053,96 @@
                 if (color1 == 'rgb(255, 168, 3)')
                 {
                     document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+                    var value = document.getElementsByName("commentId").innerHTML;
+                    value++;
+                    alert(value);
+                    document.getElementsByName("commentId").innerHTML = value;
                 }
                 else if (color1 == 'rgb(132, 117, 119)')
                 {
                     document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
+                    var value = document.getElementsByName("commentId").innerHTML;
+                    value--;
+                    alert(value);
+                    document.getElementsByName("commentId").innerHTML = value;
                 }
+
+
                 $.ajax({
                     url: '{% url 'likeComment' %}',
                     data: {
                         'commentId': commentId
+
                     },
                     dataType: 'json',
                 });
             }
         </script>
 
+    <script>
+function mouseOnRate(id) {
+    if (id == "one"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#e1e1e1";
+        document.getElementById("three").style.color = "#e1e1e1";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "two"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#e1e1e1";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "three"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#e1e1e1";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "four"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#e1e1e1";
+    } else if (id == "five"){
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#ffa803";
+    }
+}
+
+function clickRate(id) {
+    var value = document.getElementById(id).id;
+    if (value == "one"){
+        document.getElementById("rateId").value = "1";
+        document.getElementById("one").style.color = "#ffa803";
+    } else if (value == "two"){
+        document.getElementById("rateId").value = "2";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+    } else if (value == "three"){
+        document.getElementById("rateId").value = "3";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+    } else if (value == "four"){
+        document.getElementById("rateId").value = "4";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+    } else if (value == "five"){
+        document.getElementById("rateId").value = "5";
+        document.getElementById("one").style.color = "#ffa803";
+        document.getElementById("two").style.color = "#ffa803";
+        document.getElementById("three").style.color = "#ffa803";
+        document.getElementById("four").style.color = "#ffa803";
+        document.getElementById("five").style.color = "#ffa803";
+    }
+}
+</script>
 
 {% endblock %}

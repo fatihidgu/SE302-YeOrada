@@ -53,6 +53,8 @@
 		<div class="container">		
 			<div class="row">	
 				<div class="col-lg-3 col-md-4">
+                    <form method="post">
+                        {% csrf_token %}
 					<div class="filters partner-bottom">
 						<div class="filter-heading">						
 							<h3>Filters</h3>
@@ -92,34 +94,6 @@
 										  <input type="checkbox" id="c5" name="cb">
 										  <label for="c5">Forest District</label>
 										</p>
-										<p>
-										  <input type="checkbox" id="c6" name="cb">
-										  <label for="c6">Greater Western Sydney</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c7" name="cb">
-										  <label for="c7">Hills District</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c8" name="cb">
-										  <label for="c8">Inner West</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c9" name="cb">
-										  <label for="c9"> Macarthur</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c10" name="cb">
-										  <label for="c10">Central Business</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c11" name="cb">
-										  <label for="c11">Main Market</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c12" name="cb">
-										  <label for="c12">Eastern</label>
-										</p>											
 									</div>									
 								</div>
 							</div>
@@ -130,25 +104,17 @@
 								<div id="collapseTwo" class="collapse" data-parent="#accordiontwo">								
 									<div class="filter-checkbox">
 										<p>
-										  <input type="checkbox" id="c13" name="cb">
-										  <label for="c13"> Breakfast</label>
+										  <input type="checkbox" id="c13" name="Restaurant">
+										  <label for="c13">Restaurant</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c14" name="cb">
-										  <label for="c14">Lunch</label>
+										  <input type="checkbox" id="c14" name="Cafe">
+										  <label for="c14">Cafe</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c15" name="cb">
-										  <label for="c15"> Dinner</label>
+										  <input type="checkbox" id="c15" name="Bar">
+										  <label for="c15">Bar</label>
 										</p>
-										<p>
-										  <input type="checkbox" id="c16" name="cb">
-										  <label for="c16">Cafe's</label>
-										</p>
-										<p>
-										  <input type="checkbox" id="c17" name="cb">
-										  <label for="c17">Delivery</label>
-										</p>																		
 									</div>																		
 								</div>
 							</div>
@@ -159,53 +125,65 @@
 								<div id="collapseThree" class="collapse" data-parent="#accordionthree">									
 									<div class="filter-checkbox">
 										<p>
-										  <input type="checkbox" id="c18" name="cb">
-										  <label for="c18">Pizza</label>
+										  <input type="checkbox" id="c18" name="Kebap">
+										  <label for="c18">Kebap</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c19" name="cb">
-										  <label for="c19">Drinks & Beer Restaurants</label>
+										  <input type="checkbox" id="c19" name="Grill">
+										  <label for="c19">Grill</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c20" name="cb">
-										  <label for="c20">Cakes & Desserts</label>
+										  <input type="checkbox" id="c20" name="Turkish">
+										  <label for="c20">Turkish</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c21" name="cb">
-										  <label for="c21">Sushi</label>
+										  <input type="checkbox" id="c21" name="Pide">
+										  <label for="c21">Pide</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c22" name="cb">
-										  <label for="c22">Fast Food</label>
+										  <input type="checkbox" id="c22" name="Döner">
+										  <label for="c22">Döner</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c23" name="cb">
-										  <label for="c23">Shawarma</label>
+										  <input type="checkbox" id="c23" name="Fast Food">
+										  <label for="c23">Fastfood</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c24" name="cb">
-										  <label for="c24">Fish</label>
+										  <input type="checkbox" id="c24" name="Homemade">
+										  <label for="c24">Homemade</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c25" name="cb">
-										  <label for="c25">Lunch</label>
+										  <input type="checkbox" id="c25" name="Seafood">
+										  <label for="c25">Seafood</label>
 										</p>														
 										<p>
-										  <input type="checkbox" id="c26" name="cb">
-										  <label for="c26">Coffee Cafe’s</label>
+										  <input type="checkbox" id="c26" name="Lunch">
+										  <label for="c26">Lunch</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c27" name="cb">
-										  <label for="c27">Cheese Tika</label>
+										  <input type="checkbox" id="c27" name="Breakfast">
+										  <label for="c27">Breakfast</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c28" name="cb">
-										  <label for="c28">Samosa and Pakodas</label>
+										  <input type="checkbox" id="c28" name="Dinner">
+										  <label for="c28">Dinner</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c29" name="cb">
-										  <label for="c29">Chinese</label>
-										</p>										
+										  <input type="checkbox" id="c29" name="Pizza">
+										  <label for="c29">Pizza</label>
+										</p>
+                                        <p>
+										  <input type="checkbox" id="c30c1" name="CafeRestaurant">
+										  <label for="c30c1">Cafe & Restaurant</label>
+										</p>
+                                        <p>
+										  <input type="checkbox" id="c31c2" name="Chinese">
+										  <label for="c31c2">Chinese</label>
+										</p>
+                                        <p>
+										  <input type="checkbox" id="c32c3" name="Korean">
+										  <label for="c32c3">Korean</label>
+										</p>
 									</div>																		
 								</div>
 							</div>
@@ -302,30 +280,32 @@
 								<div id="collapseSix" class="collapse"  data-parent="#accordionsix">									
 									<div class="filter-checkbox">
 										<p>
-										  <input type="checkbox" id="c47" name="cb">
+										  <input type="checkbox" id="c47" name="five_star">
 										  <label for="c47" class="rating-color"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c48" name="cb">
+										  <input type="checkbox" id="c48" name="four_star">
 										  <label for="c48" class="rating-color"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c49" name="cb">
+										  <input type="checkbox" id="c49" name="three_star">
 										  <label for="c49" class="rating-color"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c50" name="cb">
+										  <input type="checkbox" id="c50" name="two_star">
 										  <label for="c50" class="rating-color"><i class="fas fa-star"></i><i class="fas fa-star"></i></label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c51" name="cb">
+										  <input type="checkbox" id="c51" name="one_star">
 										  <label for="c51" class="rating-color"><i class="fas fa-star"></i></label>
 										</p>																																																		
 									</div>																		
 								</div>
 							</div>
 						</div>
+                        <button type="submit" class="btn btn-secondary" name ="search" style="float: right; margin-top: 3%; background-color: #ffa803;">Search</button>
 					</div>
+                    </form>
 				</div>				
 				<div class="col-lg-6 col-md-8">
                     {% for client in clients %}
@@ -343,7 +323,6 @@
 											<div class="partner-badge">
 												Verified
 											</div>
-
 										</div>
 									</div>
 									<div class="online-offline" hidden>
@@ -388,7 +367,7 @@
 							</div>
 							<div class="partner-bottombar">
 								<ul class="bottom-partner-links">
-									<li><a href="#" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
+									<li><a href="{% url 'clientprofile' client.userEmail.username %}" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
 									<li class="line-lr"><a href="#" data-toggle="tooltip" data-placement="top" title="Order Now"><i class="far fa-edit"></i></i>Add Review</a></li>
 									<li><a href="#" data-toggle="tooltip" data-placement="top" title="View Menu"><i class="fas fa-book"></i>View Menu</a></li>
 								</ul>
@@ -524,4 +503,18 @@
 	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
 	<script src="/static/js/owlslider.js"></script>
 	<script src="/static/js/custom.js"></script>
+
+    <script>
+    function filter(type, value){
+        $.ajax({
+                    url: '{% url 'clientsearch' %}',
+                    type: 'GET',
+                    data: {
+                        'type': type,
+                        'value': value
+                    },
+                    dataType: 'json',
+                });
+    }
+    </script>
 {% endblock %}
