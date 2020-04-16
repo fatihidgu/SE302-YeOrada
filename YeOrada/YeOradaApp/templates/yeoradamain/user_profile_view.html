@@ -103,8 +103,8 @@
 
                                         <div class="rating-1">
                                             <div class="user-detail-heading">
-                                                <a href="user_profile_view.html"><img
-                                                        src="/static/images/recipe-details/comment-5.png" alt=""></a>
+                                              <img
+                                                        src="{{ customer.image.url }}" alt="">
                                                 <h4> {{ comment.customerEmail.userEmail.name }} {{ comment.customerEmail.userEmail.surname }}</h4>
                                                 <br>
                                                 <div class="rate-star">
@@ -197,9 +197,9 @@
                                                 {% for answer in value %}
                                                     <div class="reply-review-1">
                                                         <div class="user-detail-heading">
-                                                            <a href="user_profile_view.html"><img
-                                                                    src="/static/images/recipe-details/reply-1.png"
-                                                                    alt=""></a>
+                                                           <img
+                                                                   src="{{ answer.customerEmail.image.url }}"
+                                                                    alt="">
                                                             <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
                                                         </div>
                                                         <div class="reply-time">
@@ -226,8 +226,8 @@
                                         <div class="reply-comment">
                                             <div class="post-items">
                                                 <div class="reply-dp">
-                                                    <a href="my_dashboard.html"><img
-                                                            src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                                   <img
+                                                             src="{{ customer.image.url }}" alt="">
                                                 </div>
                                                 <form method="POST">
                                                     <input name="commentId" type="hidden" value="{{ comment.id }}">
