@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
 from YeOradaApp.forms import CommentForm, CommentAnswerForm
-from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike, RegisteredUser
+from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike, RegisteredUser, ClientCuisine
 
 
 def clientprofile(request, username):
@@ -54,10 +54,11 @@ def clientprofile(request, username):
     customerLikes = CommentLike.objects.filter(customerEmail=customerr)
 
     registeredUser =  RegisteredUser.objects.filter(username=username).first()
+    clientcuisines = ClientCuisine.objects.all()
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
-                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes,'registeredUser':registeredUser,'clientObject':clientObject, })
+                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes,'registeredUser':registeredUser,'clientObject':clientObject, 'clientcuisines': clientcuisines, })
 
 
 def likeComment(request):

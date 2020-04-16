@@ -127,11 +127,21 @@
                                 </div>
                             </div>
                             <div class="resto-review-stars">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                                {% if clientObject.rate >= 1 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate >= 2 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate >= 3 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+											{% if clientObject.rate >= 4 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
+                                            {% if clientObject.rate == 5 %}
+                                            <i class="fas fa-star"></i>
+                                            {% endif %}
                                 <span>{{ clientObject.rate }}</span>
                             </div>
                         </div>
@@ -194,7 +204,11 @@
                                                             <li>{{ clientObject.name }}</li>
                                                             <li>{{ clientObject.phone }}</li>
                                                             <li>{{ clientObject.userEmail }}</li>
-                                                            <li>çeşit çeşit maşallah</li>
+                                                            <li>
+                                                                {% for cuisine in clientcuisines|filterCuisines:clientObject.userEmail %}
+                                                                    {{ cuisine.cuisine }},
+                                                                {% endfor %}
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -216,7 +230,7 @@
 
                                                         </ul>
                                                         <ul class="view-dt-1">
-                                                            <li>{{ clientObject.workingHours }} {{ clientObject.workingDays }}</li>
+                                                            <li>{{ clientObject.workingHours }} ({{ clientObject.workingDays }})</li>
                                                             <li>{{ clientObject.city }}</li>
                                                             <li>{{ clientObject.state }}</li>
                                                             <li>{{ clientObject.address1 }}</li>
@@ -1910,7 +1924,7 @@
                 </div>
                 <div class="col-lg-3 col-md-4">
                     <div class="popular-restaurants">
-                        <h4>Popular Restaurents </h4>
+                        <h4>Popular Restaurants </h4>
                         <div class="popular-restaurants-items">
                             <ul class="list-unstyled">
                                 <li>
@@ -2002,7 +2016,7 @@
                         </div>
                     </div>
                     <div class="google-ads">
-                        <a href="#"><img src="/static/images/partners/google-ad.jpg" alt="image" title="Google Ads"></a>
+
                     </div>
                 </div>
             </div>
