@@ -130,23 +130,23 @@
 								<div id="collapseTwo" class="collapse" data-parent="#accordiontwo">								
 									<div class="filter-checkbox">
 										<p>
-										  <input type="checkbox" id="c13" name="cb">
+										  <input type="checkbox" id="c13" name="category" onclick="filter(value)">
 										  <label for="c13"> Breakfast</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c14" name="cb">
+										  <input type="checkbox" id="c14" name="category">
 										  <label for="c14">Lunch</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c15" name="cb">
+										  <input type="checkbox" id="c15" name="category">
 										  <label for="c15"> Dinner</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c16" name="cb">
+										  <input type="checkbox" id="c16" name="category">
 										  <label for="c16">Cafe's</label>
 										</p>
 										<p>
-										  <input type="checkbox" id="c17" name="cb">
+										  <input type="checkbox" id="c17" name="category">
 										  <label for="c17">Delivery</label>
 										</p>																		
 									</div>																		
@@ -388,7 +388,7 @@
 							</div>
 							<div class="partner-bottombar">
 								<ul class="bottom-partner-links">
-									<li><a href="#" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
+									<li><a href="{% url 'clientprofile' client.userEmail.username %}" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
 									<li class="line-lr"><a href="#" data-toggle="tooltip" data-placement="top" title="Order Now"><i class="far fa-edit"></i></i>Add Review</a></li>
 									<li><a href="#" data-toggle="tooltip" data-placement="top" title="View Menu"><i class="fas fa-book"></i>View Menu</a></li>
 								</ul>
@@ -524,4 +524,13 @@
 	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
 	<script src="/static/js/owlslider.js"></script>
 	<script src="/static/js/custom.js"></script>
+
+    <script>
+    function filter(value){
+        $.get('clientsearch',  // url
+      function (data, textStatus, jqXHR) {  // success callback
+          alert('status: ' + textStatus + ', data:' + data);
+      });
+    }
+    </script>
 {% endblock %}
