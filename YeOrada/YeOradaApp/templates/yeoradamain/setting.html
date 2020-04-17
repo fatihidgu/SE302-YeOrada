@@ -103,20 +103,22 @@
                                         {% csrf_token %}
                                         <div class="setting-dt">
                                             <h4>Avatar</h4>
-                                            <div class="avtar">
-                                                <img src="/static/images/profile/avatar.jpg" alt="">
+                                            <div>
+                                                <br>
+                                                <img style= "width: 150px;" id ="user-avatar1" src="/static/images/profile/avatar.jpg" alt="">
                                             </div>
-                                            <div class="upload-avatar">
-                                                <div class="input-heading">Upload a New Avatar*</div>
+                                            <br>
+                                            <div class="upload-avatar" style="margin-top: -1%;">
                                                 <div class="input-container">
                                                     <input class="file-upload-input" type="file"
-                                                           onchange="readURL(this);" accept="image/*">
+                                                           onchange="loadFile(event);" accept="image/*" id="avatar-input1">
                                                     <button class="browse-btn">
                                                         Choose File
                                                     </button>
                                                     <span class="file-info">Upload a file</span>
                                                 </div>
                                             </div>
+                                            <br>
                                         </div>
                                         <div class="form-group"></div>
 
@@ -342,4 +344,10 @@
 <script src="/static/js/owlslider.js"></script>
 <script src="/static/js/bootstrap-select.js"></script>
 <script src="/static/js/dashboard-tabs-reload.js"></script>
+    <script>
+    var loadFile = function(event) {
+	    var image = document.getElementById('user-avatar1');
+	    image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
 {% endblock %}
