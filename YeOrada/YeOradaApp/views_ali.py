@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
 
-from YeOradaApp.forms import CommentForm, CommentAnswerForm
+from YeOradaApp.forms import CommentForm, CommentAnswerForm, ImageUploadForm
 from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike, RegisteredUser, ClientCuisine
 
 
@@ -12,6 +12,7 @@ def clientprofile(request, username):
                 commentForm = CommentForm(request.POST)
                 if commentForm.is_valid():
                     text = request.POST.get('text')
+                    form = ImageUploadForm(request.FILES) # for image 1,2,3
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     clientObject= Client.objects.filter(userEmail__username=username).first()
                     rate = request.POST.get('rate')
@@ -42,11 +43,11 @@ def clientprofile(request, username):
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
     clientObject = Client.objects.filter(userEmail__username=username).first()
-    commentList = Comment.objects.filter(clientEmail=clientObject.userEmail.email)
+    commentList = Comment.objects.filter(clientEmail=clientObject.userEmail.email).order_by('-date')
     answersList = dict()
     numberOfComment = list()
     for comments in commentList:
-        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id)
+        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id).order_by('date')
         numberOfComment.append(commentAnswers.count())
         answersList.update({comments.id: commentAnswers})
 
@@ -55,10 +56,14 @@ def clientprofile(request, username):
 
     registeredUser =  RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
+
+
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
-                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes,'registeredUser':registeredUser,'clientObject':clientObject, 'clientcuisines': clientcuisines, })
+                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes,
+                   'registeredUser':registeredUser,'clientObject':clientObject,
+                   'clientcuisines': clientcuisines, 'customerr':customerr, })
 
 
 def likeComment(request):
@@ -75,7 +80,7 @@ def likeComment(request):
             else:
                 if commentLike.first().isLiked:
                     commentLike.update(isLiked=False)
-                    if (commentId2.likeNumber >= 0):
+                    if (commentId2.likeNumber > 0):
                         commentId2.likeNumber -= 1
                     commentId2.save()
                 else:
