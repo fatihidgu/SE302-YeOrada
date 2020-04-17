@@ -36,3 +36,10 @@ class CommentAnswerForm(forms.Form):
     class Meta:
         model = CommentAnswer
         fields = ('answer',)
+
+
+class ImageUploadForm(forms.Form):
+
+    class Meta:
+        model = Comment
+        fields = ('image','image2','image3',)

@@ -77,6 +77,9 @@ class Comment(models.Model):
     rate = models.IntegerField()
     likeNumber = models.IntegerField(default=0, null=True, blank=True)
     commentNumber = models.IntegerField(default=0, null=True, blank=True)
+    image = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
+    image2 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
+    image3 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
 
 
 class CommentAnswer(models.Model):
