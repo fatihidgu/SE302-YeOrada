@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model, login
 from django.urls import reverse
 from django.contrib.auth.forms import PasswordChangeForm
 from YeOradaApp.models import *
-import requests
 import json
 from django.contrib.auth.models import User
 import unittest

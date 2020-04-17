@@ -76,7 +76,9 @@ def likeComment(request):
             commentLike = CommentLike.objects.filter(customerEmail=customerEmail, commentId=commentId2)
             if commentLike.count() == 0:
                 createCommentLike = CommentLike(customerEmail=customerEmail, commentId=commentId2, isLiked=True)
+                commentId2.likeNumber += 1
                 createCommentLike.save()
+                commentId2.save()
             else:
                 if commentLike.first().isLiked:
                     commentLike.update(isLiked=False)

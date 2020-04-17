@@ -47,7 +47,10 @@ def signup(request):
                     error_message1 = "* You must accept the Terms of Service and the Content Policy."
                 else:
                     form.save()
-                    return redirect('home')
+                    user = RegisteredUser.objects.filter(email=form.cleaned_data['email']).first()
+                    customer = Customer(userEmail=user)
+                    customer.save()
+                    return redirect('signin')
             else:
                 error_message2 = "* Passwords doesn't match."
     else:
