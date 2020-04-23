@@ -44,6 +44,14 @@ def settings(request):
         if passwordChangeForm.is_valid():
             passwordChangeForm.save()
 
+    elif 'yourEmail' in request.POST:
+        if request.POST.get('Email') == request.user.email:
+            ruser = RegisteredUser.objects.filter(email=request.user.email)
+            ruser.update(is_active=False)
+            return redirect('home')
+        else:
+            print("Error verilecek bitmedi")
+
     user = request.user
     passwordChangeForm = PasswordChangeForm(request.user)
     customer = Customer.objects.filter(userEmail=user.email).first()
@@ -71,10 +79,9 @@ def myprofile(request):
         else:
             return redirect('signin')
 
-
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
-    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
+    commentList = Comment.objects.filter(customerEmail=request.user.email).order_by('-date')
     answersList = dict()
     numberOfComment = list()
     for comments in commentList:
@@ -86,7 +93,7 @@ def myprofile(request):
     customerLikes = CommentLike.objects.filter(customerEmail=customer)
 
     return render(request, 'yeoradamain/user_profile_view.html',
-              {'user': user, 'customer': customer, 'comments': comments, 'commentForm': commentForm,
-               'commentList': commentList,
-               'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
-               'numberOfComment': numberOfComment, 'customerLikes': customerLikes, })
+                  {'user': user, 'customer': customer, 'comments': comments, 'commentForm': commentForm,
+                   'commentList': commentList,
+                   'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
+                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes, })
