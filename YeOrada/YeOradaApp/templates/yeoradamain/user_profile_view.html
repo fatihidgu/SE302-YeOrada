@@ -65,7 +65,7 @@
 								<div class="profile-name-dt">
 									 <h1>{{ user.name }} {{ user.surname }}</h1>
 									<p><span><i
-                                            class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.country }}
+                                            class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.state }}
                                     </p>
 								</div>
 							</div>
@@ -99,33 +99,39 @@
 									<h4>My Comments</h4>
 								</div>
                                {% for comment in commentList %}
+
                                     <div class="main-comments">
 
                                         <div class="rating-1">
+                                        <a  href="{% url 'clientprofile' comment.clientEmail.userEmail.username %}" style="float:right"  ><p>{{ comment.clientEmail.name }} <i class="fas fa-angle-double-right"></i> </p></a>
                                             <div class="user-detail-heading">
-                                              <img
-                                                        src="{{ customer.image.url }}" alt="">
+                                                <a href="user_profile_view.html"><img
+                                                        src="{{ comment.customerEmail.image.url }}" alt=""></a>
                                                 <h4> {{ comment.customerEmail.userEmail.name }} {{ comment.customerEmail.userEmail.surname }}</h4>
+
                                                 <br>
+
+
                                                 <div class="rate-star">
                                                     {% if comment.rate >= 1 %}
-                                            <i class="fas fa-star"></i>
-                                            {% endif %}
-                                            {% if comment.rate >= 2 %}
-                                            <i class="fas fa-star"></i>
-                                            {% endif %}
-                                            {% if comment.rate >= 3 %}
-                                            <i class="fas fa-star"></i>
-                                            {% endif %}
-											{% if comment.rate >= 4 %}
-                                            <i class="fas fa-star"></i>
-                                            {% endif %}
-                                            {% if comment.rate == 5 %}
-                                            <i class="fas fa-star"></i>
-                                            {% endif %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 2 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 3 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 4 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate == 5 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
                                                     <span>{{ comment.rate }}</span>
                                                 </div>
                                             </div>
+
                                             <div class="reply-time">
                                                 <p><i class="far fa-clock"></i>{{ comment.date }}</p>
                                             </div>
@@ -165,20 +171,23 @@
                                                     {% for customerlike in customerLikes|filterComments:comment.id %}
                                                         {% if customerlike %}
                                                             {% if customerlike.isLiked == True %}
-                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #ffa803"
+                                                                <i id="{{ comment.id }}" class="fas fa-heart"
+                                                                   style="color: #ffa803"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <ins id="{{ comment.id }}a">{{ comment.likeNumber }}</ins>
                                                             {% elif customerlike.isLiked == False %}
-                                                                <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                                <i id="{{ comment.id }}" class="fas fa-heart"
+                                                                   style="color: #847577"
                                                                    onclick="likeComment({{ comment.id }})"></i>
-                                                                <ins>Like 01</ins>
+                                                                <ins id="{{ comment.id }}a">{{ comment.likeNumber }}</ins>
                                                             {% endif %}
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% if not customerLikes|filterComments:comment.id %}
-                                                        <i id="{{ comment.id }}" class="fas fa-heart" style="color: #847577"
+                                                        <i id="{{ comment.id }}" class="fas fa-heart"
+                                                           style="color: #847577"
                                                            onclick="likeComment({{ comment.id }})"></i>
-                                                        <ins>Like 01</ins>
+                                                        <ins id="{{ comment.id }}a">{{ comment.likeNumber }}</ins>
                                                     {% endif %}
 
 												</span>
@@ -187,55 +196,60 @@
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Comments">
 													<i class="fas fa-comment-alt"></i>
-													<ins>Comments 01</ins>
+													<ins>{{ comment.commentNumber }}</ins>
 												</span>
                                                 </li>
                                             </ul>
                                         </div>
-                                        {% for key,value in answersList.items %}
-                                            {% if key == comment.id %}
-                                                {% for answer in value %}
-                                                    <div class="reply-review-1">
-                                                        <div class="user-detail-heading">
-                                                           <img
-                                                                   src="{{ answer.customerEmail.image.url }}"
-                                                                    alt="">
-                                                            <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
-                                                        </div>
-                                                        <div class="reply-time">
-                                                            <p><i class="far fa-clock"></i>2 hours ago</p>
-                                                        </div>
-                                                        <div class="comment-description">
-                                                            <p>{{ answer.answer }}</p>
-                                                        </div>
-                                                        <div class="like-report">
-                                                            <ul>
 
-                                                                <li style="margin-top: 1%">
+                                        <div style="width: 100%; max-height: 300px; overflow-y: scroll;">
+                                            {% for key,value in answersList.items %}
+                                                {% if key == comment.id %}
+                                                    {% for answer in value %}
+                                                        <div class="reply-review-1">
+                                                            <div class="user-detail-heading">
+                                                                <a href="user_profile_view.html"><img
+                                                                        src="{{ answer.customerEmail.image.url }}"
+                                                                        alt=""></a>
+                                                                <h4>{{ answer.customerEmail.userEmail.name }} {{ answer.customerEmail.userEmail.surname }}</h4>
+                                                            </div>
+                                                            <div class="reply-time">
+                                                                <p><i class="far fa-clock"></i>{{ answer.date }}</p>
+                                                            </div>
+                                                            <div class="comment-description">
+                                                                <p>{{ answer.answer }}</p>
+                                                            </div>
+                                                            <div class="like-report">
+                                                                <ul>
+
+                                                                    <li style="margin-top: 1%">
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Comments">
 													<ins>Report</ins>
 												</span>
-                                                                </li>
-                                                            </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                {% endfor %}
-                                            {% endif %}
-                                        {% endfor %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+
+
                                         <div class="reply-comment">
                                             <div class="post-items">
                                                 <div class="reply-dp">
-                                                   <img
-                                                             src="{{ customer.image.url }}" alt="">
+                                                    <a href="my_dashboard.html"><img
+                                                            src="{{ customerr.image.url }}" alt=""></a>
                                                 </div>
                                                 <form method="POST">
                                                     <input name="commentId" type="hidden" value="{{ comment.id }}">
-                                                    <input type="text" class="comment-input" name="post"
+                                                    <input type="text" class="comment-input" name="post" maxlength="150"
                                                            placeholder="Write a comment">
                                                     {% csrf_token %}
                                                     <input class="reply-btn btn-link" name="postComment" type="submit"
-                                                           value="Post Comment" style="margin-top: 3%;">
+                                                           value="Post Comment">
                                                 </form>
                                             </div>
                                         </div>
@@ -858,26 +872,142 @@
 	<script src="/static/js/dashboard-tabs-reload.js"></script>
 
         <script>
-            function likeComment(cid) {
-                var commentId = cid;
-                var color1 = document.getElementById(cid).style.color;
+        function likeComment(cid) {
+            var commentId = cid;
+            var commentIda = cid + "a";
+            //alert(commentIda);
+            var color1 = document.getElementById(cid).style.color;
 
-                if (color1 == 'rgb(255, 168, 3)')
-                {
-                    document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+            if (color1 == 'rgb(255, 168, 3)') {
+                document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+                var value = document.getElementById(commentIda).innerText;
+                if (value > 0){
+                    value--;
                 }
-                else if (color1 == 'rgb(132, 117, 119)')
-                {
-                    document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
-                }
-                $.ajax({
-                    url: '{% url 'likeComment' %}',
-                    data: {
-                        'commentId': commentId
-                    },
-                    dataType: 'json',
-                });
+                //alert(value);
+                document.getElementById(commentIda).innerText = value;
+            } else if (color1 == 'rgb(132, 117, 119)') {
+                document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
+                var value = document.getElementById(commentIda).innerText;
+                value++;
+                //alert(value);
+                document.getElementById(commentIda).innerText = value;
             }
-        </script>
+
+
+            $.ajax({
+                url: '{% url 'likeComment' %}',
+                data: {
+                    'commentId': commentId
+
+                },
+                dataType: 'json',
+            });
+        }
+    </script>
+
+    <script>
+        function mouseOnRate(id) {
+            if (id == "one") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#e1e1e1";
+                document.getElementById("three").style.color = "#e1e1e1";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "two") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#e1e1e1";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "three") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "four") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "five") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#ffa803";
+            }
+        }
+
+        function clickRate(id) {
+            var value = document.getElementById(id).id;
+            if (value == "one") {
+                document.getElementById("rateId").value = "1";
+                document.getElementById("one").style.color = "#ffa803";
+            } else if (value == "two") {
+                document.getElementById("rateId").value = "2";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+            } else if (value == "three") {
+                document.getElementById("rateId").value = "3";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+            } else if (value == "four") {
+                document.getElementById("rateId").value = "4";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+            } else if (value == "five") {
+                document.getElementById("rateId").value = "5";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#ffa803";
+            }
+        }
+    </script>
+
+    <script>
+        function commentWithPhoto(event) {
+            var image = document.getElementById('photoForComment');
+            var image2 = document.getElementById('photoForComment2');
+            var image3 = document.getElementById('photoForComment3');
+            alert(image.src)
+
+            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                image.src = URL.createObjectURL(event.target.files[0]);
+
+            } else {
+                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                    image2.src = URL.createObjectURL(event.target.files[0]);
+                } else{
+                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                        image3.src = URL.createObjectURL(event.target.files[0]);
+                    } else {
+                        alert("You can add maximum 3 pictures in a comment!");
+                    }
+                }
+            }
+        }
+
+        function deletePhoto(id) {
+            var image = document.getElementById('photoForComment');
+            var image2 = document.getElementById('photoForComment2');
+            var image3 = document.getElementById('photoForComment3');
+
+            if (id == "first"){
+                image.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+            } else if (id == "second"){
+                image2.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+            } else if (id == "third") {
+                image3.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+            }
+        }
+    </script>
 
 {% endblock %}

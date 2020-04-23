@@ -36,7 +36,7 @@ class RegisteredUser(AbstractBaseUser, PermissionsMixin):
 class Customer(models.Model):
     userEmail = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE, primary_key=True)
     city = models.CharField(max_length=200, null=True, blank=True)
-    country = models.CharField(max_length=200, null=True, blank=True)
+    state = models.CharField(max_length=200, null=True, blank=True)
     bio = models.CharField(max_length=200, blank=True)
     image = models.ImageField(default='default.jpg', upload_to='customer_pics')
 
