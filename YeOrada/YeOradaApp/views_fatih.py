@@ -1,41 +1,49 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Client
+
 
 def clientsettings(request):
     error_message1 = ""
     if 'saveChanges' in request.POST:
-        name = request.POST.get('owner name')
+        name = request.POST.get('name')
         surname = request.POST.get('surname')
         email = request.POST.get('email')
-        city = request.POST.get('city')
-        country = request.POST.get('country')
         username = request.POST.get('username')
+        city = request.POST.get('city')
+        phone = request.POST.get('phone')
+        state = request.POST.get('state')
+        address1 = request.POST.get('address1')
+        address2 = request.POST.get('address2')
+        workinghours = request.POST.get('workinghours')
+        workingdays = request.POST.get('workingdays')
+        info = request.POST.get('info')
         userObject = RegisteredUser.objects.filter(email=request.user.email).first()
-        customerObject = Customer.objects.filter(userEmail=request.user).first()
-
-        # user = RegisteredUser(email=email, name=name, surname=surname, username=username)
-        # customer = Customer(city=city, country=country, userEmail=userObject.first())
-
+        clientObject = Client.objects.filter(userEmail=request.user).first()
         emailCheck = RegisteredUser.objects.filter(email=email)
         usernameCheck = RegisteredUser.objects.filter(username=username)
-        if (emailCheck.first() and email != request.user.email) or (
-                usernameCheck.first() and username != request.user.username):
-            error_message1 = "* Email or username are already used"
+        if usernameCheck.first() and username != request.user.username:
+            error_message1 = "*Username are already used"
             user = request.user
-            customer = Customer.objects.filter(userEmail=user.email).first()
+            client = Customer.objects.filter(userEmail=user.email).first()
         else:
             userObject.name = name;
             userObject.surname = surname;
             userObject.username = username;
 
-            customerObject.city = city;
-            customerObject.country = country;
+            clientObject.phone = phone
+            clientObject.city = city
+            clientObject.address1 = address1
+            clientObject.address2 = address2
+            clientObject.state = state
+            clientObject.workingHours = workinghours
+            clientObject.workingDays = workingdays
+            clientObject.info = info
 
             userObject.save()
-            customerObject.save()
-            return redirect('settings')
+            clientObject.save()
+            return redirect('clientsettings')
 
     elif 'changePassword' in request.POST:
         passwordChangeForm = PasswordChangeForm(request.user, request.POST)
@@ -52,9 +60,8 @@ def clientsettings(request):
 
     user = request.user
     passwordChangeForm = PasswordChangeForm(request.user)
-    customer = Customer.objects.filter(userEmail=user.email).first()
-    #customer client olcak
+    client = Client.objects.filter(userEmail=user.email).first()
 
-    return render(request, 'yeoradamain/setting.html',
-                  {'user': user, 'customer': customer, 'error_message1': error_message1,
+    return render(request, 'yeoradamain/setting_client.html',
+                  {'user': user, 'client': client, 'error_message1': error_message1,
                    'passwordChangeForm': passwordChangeForm, })
