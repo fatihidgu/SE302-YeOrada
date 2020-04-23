@@ -81,7 +81,7 @@ def myprofile(request):
 
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
-    commentList = Comment.objects.filter(clientEmail="sivasetliekmek@gmail.com")
+    commentList = Comment.objects.filter(customerEmail=request.user.email).order_by('-date')
     answersList = dict()
     numberOfComment = list()
     for comments in commentList:
