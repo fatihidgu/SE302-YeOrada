@@ -60,7 +60,7 @@
                             </div>
                             <div class="profile-all-dt">
                                 <div class="profile-name-dt">
-                                    <h1>{{ user.name }} {{ user.phone }}</h1>
+                                        <h1>{{ client.name }}</h1>
                                     <p><span><i
                                             class="fas fa-map-marker-alt"></i></span>{{ client.city }}, {{ client.state }}
                                     </p>
@@ -96,7 +96,7 @@
                             <div class="timeline">
                                 <div class="tab-content-heading">
                                     <h4>Profile Information Client</h4>
-                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                    <a href={% url 'clientsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="edit-profile">
                                     <form method="post">
@@ -122,17 +122,17 @@
                                         </div>
                                         <div class="form-group"></div>
 
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label for="nameUser">Owner Name*</label>
                                             <input name="name" type="text" class="video-form" id="nameUser"
                                                    value="{{ user.name }}">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label for="surnameUser">Owner Surname*</label>
                                             <input name="surname" type="text" class="video-form" id="surnameUser"
                                                    value="{{ user.surname }}">
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label for="username">Username*</label>
                                             <input name="username" type="text" class="video-form" id="username"
                                                    value="{{ user.username }}">
@@ -218,7 +218,7 @@
                         </div>
                         <div class="tab-pane" id="notification-setting">
                             <div class="profile-about">
-                                <div class="tab-content-heading">
+                                <div class="tab-content-heading" >
                                     <h4>Notification Setting</h4>
                                     <a href={% url 'clientsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
