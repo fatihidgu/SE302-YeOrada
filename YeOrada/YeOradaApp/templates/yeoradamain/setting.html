@@ -62,7 +62,7 @@
                                 <div class="profile-name-dt">
                                     <h1>{{ user.name }} {{ user.surname }}</h1>
                                     <p><span><i
-                                            class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.country }}
+                                            class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.state }}
                                     </p>
                                 </div>
                             </div>
@@ -138,15 +138,15 @@
                                                    value="{{ user.username }}">
                                         </div>
                                         <div class="form-group">
-                                            <label for="emailAddress">Email Address*</label>
+                                            <label for="emailAddress" hidden>Email Address*</label>
                                             <input name="email" type="text" class="video-form" id="emailAddress"
-                                                   value={{ user.email }} disabled>
+                                                   value={{ user.email }} disabled hidden>
                                         </div>
                                         <div class="form-group">
-                                            <label for="locationUser">Country*</label>
+                                            <label for="locationUser">State*</label>
                                             <div class="field-input">
                                                 <input name="country" type="text" class="video-form" id="locationUser"
-                                                       value="{{ customer.country }} ">
+                                                       value="{{ customer.state }} ">
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
@@ -297,13 +297,14 @@
                                     <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="edit-profile">
-                                    <form>
+                                    <form method="POST">
+                                        {% csrf_token %}
                                         <div class="form-group">
-                                            <label for="yourPassword">Your Password*</label>
-                                            <input type="password" class="video-form" id="yourPassword"
-                                                   placeholder="Enter Your Password">
+                                            <label for="yourPassword">Your Email*</label>
+                                            <input name="Email" type="text" class="video-form" id="yourPassword"
+                                                   placeholder="Enter Your Email">
                                         </div>
-                                        <button type="submit" class="change-btn btn-link">Deactivate Account</button>
+                                        <button name="yourEmail" type="submit" class="change-btn btn-link">Deactivate Account</button>
                                     </form>
                                 </div>
                             </div>
