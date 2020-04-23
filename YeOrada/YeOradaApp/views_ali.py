@@ -12,11 +12,15 @@ def clientprofile(request, username):
                 commentForm = CommentForm(request.POST)
                 if commentForm.is_valid():
                     text = request.POST.get('text')
-                    form = ImageUploadForm(request.FILES) # for image 1,2,3
+
+                    imgOne = request.FILES['commentPhotoOne']
+                    imgTwo = request.FILES['commentPhotoTwo']
+                    imgThr = request.FILES['commentPhotoThr']
+
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
                     clientObject= Client.objects.filter(userEmail__username=username).first()
                     rate = request.POST.get('rate')
-                    comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate)
+                    comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate, image=imgOne, image2=imgTwo, image3=imgThr)
                     # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
                     return redirect('clientprofile', username)
