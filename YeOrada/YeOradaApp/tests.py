@@ -1,9 +1,10 @@
-from decimal import Decimal
+from django.http import HttpRequest
 from django.test import TestCase, Client
 from django.contrib.auth import get_user_model, login
 from django.urls import reverse
 from django.contrib.auth.forms import PasswordChangeForm
 from YeOradaApp.models import *
+import json
 from django.contrib.auth.models import User
 import unittest
 import os
@@ -51,28 +52,28 @@ class UsersManagersTests(TestCase):
 
 class UserViewTest(TestCase):
 
-    def test_view_url_exists_at_desired_location_home(self):
+    def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/home')
         self.assertEqual(response.status_code, 200)
 
-    def test_view_url_accessible_by_name_home(self):
+    def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
 
-    def test_view_uses_correct_template_home(self):
+    def test_view_uses_correct_template(self):
         response = self.client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'yeoradamain/index.html')
 
-    def test_view_url_exists_at_desired_location_clientsearch(self):
+    def test_view_url_exists_at_desired_location(self):
         response = self.client.get('/clientsearch')
         self.assertEqual(response.status_code, 200)
 
-    def test_view_url_accessible_by_name_clientsearch(self):
+    def test_view_url_accessible_by_name(self):
         response = self.client.get(reverse('clientsearch'))
         self.assertEqual(response.status_code, 200)
 
-    def test_view_uses_correct_template_clientsearch(self):
+    def test_view_uses_correct_template(self):
         response = self.client.get(reverse('clientsearch'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'yeoradamain/partners.html')
@@ -119,16 +120,13 @@ class SettingsTest(TestCase):
 
 class LikeTest(TestCase):
 
-    def test_likeComment_zero(self):
+    def likeComment(self):
         User = get_user_model()
         user = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
                                         username='username')
         customer = Customer.objects.create(userEmail=user, city='city', country='country')
-        user1 = User.objects.create_user(email='normal1@user.com', password='foo', surname="surname", name='name',
-                                         username='username1')
-        client = Client.objects.create(userEmail=user1)
-        comment1= Comment(customerEmail=customer, clientEmail=client, date='2011-11-11', text="Çok güzel yorum", rate=Decimal(4.0), likeNumber=0, commentNumber=0,)
-        comment1.save()
+
+        comment1= Comment(customerEmail='normal@user.com', clientEmail='normal1@user.com', date=timezone.now, text="Çok güzel yorum", rate=4, likeNumber=0, commentNumber=0)
         commentId = comment1.id
         commentId2 = Comment.objects.filter(id=commentId).first()
         customerEmail = Customer.objects.filter(userEmail=user).first()
@@ -138,25 +136,18 @@ class LikeTest(TestCase):
             createCommentLike.save()
         self.assertEqual(createCommentLike.isLiked, True)
 
-    def test_likeComment_decrease(self):
+    def likeComment1(self):
         User = get_user_model()
         user = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
                                         username='username')
         customer = Customer.objects.create(userEmail=user, city='city', country='country')
-        user1 = User.objects.create_user(email='normal1@user.com', password='foo', surname="surname", name='name',
-                                         username='username1')
-        client = Client.objects.create(userEmail=user1)
-        comment1= Comment(customerEmail=customer, clientEmail=client, date='2011-11-11', text="Çok güzel yorum", rate=Decimal(4.0), likeNumber=1, commentNumber=0)
-        comment1.save()
-        commentId = Comment.objects.filter(text="Çok güzel yorum",date='2011-11-11').first()
 
-        commentId2 = Comment.objects.filter(id=commentId.id).first()
-
+        comment1= Comment(customerEmail='normal@user.com', clientEmail='normal1@user.com', date=timezone.now, text="Çok güzel yorum", rate=4, likeNumber=1, commentNumber=0)
+        commentId = comment1.id
+        commentId2 = Comment.objects.filter(id=commentId).first()
         customerEmail = Customer.objects.filter(userEmail=user).first()
-
-        commentLike = CommentLike.objects.filter(customerEmail=customerEmail, commentId=commentId)
-
-        if commentLike.count() == 1:
+        commentLike = CommentLike.objects.filter(customerEmail=customerEmail, commentId=commentId2)
+        if commentLike.count() == 0:
             createCommentLike = CommentLike(customerEmail=customerEmail, commentId=commentId2, isLiked=True)
             createCommentLike.save()
         else:
@@ -165,18 +156,17 @@ class LikeTest(TestCase):
                 if (commentId2.likeNumber >= 0):
                     commentId2.likeNumber -= 1
                 commentId2.save()
+        self.assertEqual(createCommentLike.isLiked, False)
+        self.assertEqual(commentLike.isLiked, False)
         self.assertEqual(commentId2.likeNumber, comment1.likeNumber)
 
-    def test_likeComment_increase(self):
+    def likeComment2(self):
         User = get_user_model()
         user = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
                                         username='username')
         customer = Customer.objects.create(userEmail=user, city='city', country='country')
-        user1 = User.objects.create_user(email='normal1@user.com', password='foo', surname="surname", name='name',
-                                        username='username1')
-        client=Client.objects.create(userEmail=user1)
-        comment1= Comment(customerEmail=customer, clientEmail=client, date='2011-11-11', text="Çok güzel yorum", rate=Decimal(4.0), likeNumber=1, commentNumber=0)
-        comment1.save()
+
+        comment1= Comment(customerEmail='normal@user.com', clientEmail='normal1@user.com', date=timezone.now, text="Çok güzel yorum", rate=4, likeNumber=1, commentNumber=0)
         commentId = comment1.id
         commentId2 = Comment.objects.filter(id=commentId).first()
         customerEmail = Customer.objects.filter(userEmail=user).first()
@@ -188,6 +178,6 @@ class LikeTest(TestCase):
             commentLike.update(isLiked=True)
             commentId2.likeNumber += 1
             commentId2.save()
-        self.assertEqual(commentLike.get().isLiked, True)
+        self.assertEqual(commentLike.isLiked, True)
         self.assertEqual(commentId2.likeNumber, comment1.likeNumber)
 
