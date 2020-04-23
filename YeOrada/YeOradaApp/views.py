@@ -14,7 +14,9 @@ from .views_yaren import *
 
 
 def index(request):
-    return render(request, 'yeoradamain/index.html', {})
+    clients = Client.objects.all().order_by('-rateCount')[:10]
+
+    return render(request, 'yeoradamain/index.html', {'clients':clients,})
 
 
 def signin(request):
