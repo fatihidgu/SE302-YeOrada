@@ -1504,7 +1504,8 @@
                                     <div class="comment-post">
                                         <div class="post-items">
                                             <a href="my_dashboard.html">
-                                                    <img style="width: 50px; height: 50px; border-radius: 50%; float: left" src="{{ customerr.image.url }}">
+                                                <img style="width: 50px; height: 50px; border-radius: 50%; float: left"
+                                                     src="{{ customerr.image.url }}">
                                             </a>
                                             <div class="select-rating">
                                                 <h4>Your Rating :</h4>
@@ -1527,8 +1528,8 @@
                                             <input type="text" class="rating-input" name="search"
                                                    placeholder="@ Tags with friends" hidden>
                                             <!-- <div class="add-image"> -->
-                                                <!-- <input type="file" name="commentPhoto" id="file" onchange="commentWithPhoto(event)"> -->
-                                                <!-- <label for="file"><i class="far fa-image"></i> Add Photo</label> -->
+                                            <!-- <input type="file" name="commentPhoto" id="file" onchange="commentWithPhoto(event)"> -->
+                                            <!-- <label for="file"><i class="far fa-image"></i> Add Photo</label> -->
                                             <!-- </div> -->
                                             <div class="images">
                                                 <div class="select-images">
@@ -1536,34 +1537,46 @@
 
                                                         <li class="image-select">
                                                             <label for="file">
-                                                            <input hidden type="file" name="commentPhotoOne" id="file" onchange="commentWithPhoto(event)">
-                                                            <img id = "photoForComment" name = "image" src="/static/images/restaurant-detail/add-1.jpg"
-                                                                 alt="">
+                                                                <input hidden type="file" name="commentPhotoOne"
+                                                                       id="file" onchange="commentWithPhoto(event)">
+                                                                <input hidden id="file1checking" name="fileOneChecking" value="0">
+                                                                <img id="photoForComment" name="image"
+                                                                     src="/static/images/restaurant-detail/add-1.jpg"
+                                                                     alt="">
                                                             </label>
                                                             <div class="close-icon">
-                                                                <i id ="first" onclick="deletePhoto(id)" class="fas fa-window-close"></i>
+                                                                <i id="first" onclick="deletePhoto(id)"
+                                                                   class="fas fa-window-close"></i>
                                                             </div>
                                                         </li>
 
                                                         <li class="image-select">
                                                             <label for="file2">
-                                                            <input hidden type="file" name="commentPhotoTwo" id="file2" onchange="commentWithPhoto(event)">
-                                                            <img id = "photoForComment2" name = "image2" src="/static/images/restaurant-detail/add-1.jpg"
-                                                                 alt="">
+                                                                <input hidden type="file" name="commentPhotoTwo"
+                                                                       id="file2" onchange="commentWithPhoto(event)">
+                                                                <input hidden id="file2checking" name="fileTwoChecking" value="0">
+                                                                <img id="photoForComment2" name="image2"
+                                                                     src="/static/images/restaurant-detail/add-1.jpg"
+                                                                     alt="">
                                                             </label>
                                                             <div class="close-icon">
-                                                                <i id ="second" onclick="deletePhoto(id)" class="fas fa-window-close"></i>
+                                                                <i id="second" onclick="deletePhoto(id)"
+                                                                   class="fas fa-window-close"></i>
                                                             </div>
                                                         </li>
 
                                                         <li class="image-select">
                                                             <label for="file3">
-                                                            <input hidden type="file" name="commentPhotoThr" id="file3" onchange="commentWithPhoto(event)">
-                                                            <img id = "photoForComment3" name = "image3" src="/static/images/restaurant-detail/add-1.jpg"
-                                                                 alt="">
+                                                                <input hidden type="file" name="commentPhotoThr"
+                                                                       id="file3" onchange="commentWithPhoto(event)">
+                                                                <input hidden id="file3checking" name="fileThrChecking" value="0">
+                                                                <img id="photoForComment3" name="image3"
+                                                                     src="/static/images/restaurant-detail/add-1.jpg"
+                                                                     alt="">
                                                             </label>
                                                             <div class="close-icon">
-                                                                <i id ="third" onclick="deletePhoto(id)" class="fas fa-window-close"></i>
+                                                                <i id="third" onclick="deletePhoto(id)"
+                                                                   class="fas fa-window-close"></i>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -1624,62 +1637,96 @@
                                                 <span> and</span>&nbsp; <a href="#">8 others</a></p>
                                         </div>
                                         <div class="post-images">
-                                            <div class="select-images" id="gallery" data-toggle="modal" data-target="#exampleModal">
+                                            <div class="select-images" id="gallery" data-toggle="modal"
+                                                 data-target="#exampleModal{{ comment.id }}">
                                                 <ul>
+                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoOne" onclick="viewPhoto('viewedPhotoOne')" src={{ comment.image.url }} alt="">
+                                                        <img id="viewedPhotoOne" onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
+                                                             src={{ comment.image.url }} alt="">
                                                     </li>
+                                                    {% endif %}
+                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoTwo" onclick="viewPhoto('viewedPhotoTwo')" src={{ comment.image2.url }} alt="">
+                                                        <img id="viewedPhotoTwo" onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
+                                                             src={{ comment.image2.url }} alt="">
                                                     </li>
+                                                    {% endif %}
+                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoThr" onclick="viewPhoto('viewedPhotoThr')" src={{ comment.image3.url }} alt="">
+                                                        <img id="viewedPhotoThr" onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
+                                                             src={{ comment.image3.url }} alt="">
                                                     </li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
 
-                                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div id="carouselExample" class="carousel slide" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselExample" data-slide-to="0"></li>
-            <li data-target="#carouselExample" data-slide-to="1"></li>
-            <li data-target="#carouselExample" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div id="firstClass" class="carousel-item active">
-              <img class="d-block w-100" src={{ comment.image.url }} alt="">
-            </div>
-            <div id="secondClass" class="carousel-item">
-              <img class="d-block w-100" src={{ comment.image2.url }} alt="">
-            </div>
-            <div id="thirdClass" class="carousel-item">
-              <img class="d-block w-100" src={{ comment.image3.url }} alt="">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+                                            <div class="modal fade" id="exampleModal{{ comment.id }}" tabindex="-1" role="dialog"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="carouselExample" class="carousel slide"
+                                                                 data-ride="carousel">
+                                                                <ol class="carousel-indicators">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                    <li data-target="#carouselExample"
+                                                                        data-slide-to="0"></li>{% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                    <li data-target="#carouselExample"
+                                                                        data-slide-to="1"></li>{% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                    <li data-target="#carouselExample"
+                                                                        data-slide-to="2"></li>{% endif %}
+                                                                </ol>
+                                                                <div class="carousel-inner">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                    <div id="firstClass{{ comment.id }}" class="carousel-item active">
+                                                                        <img class="d-block w-100"
+                                                                             src={{ comment.image.url }} alt="">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                    <div id="secondClass{{ comment.id }}" class="carousel-item">
+                                                                        <img class="d-block w-100"
+                                                                             src={{ comment.image2.url }} alt="">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                    <div id="thirdClass{{ comment.id }}" class="carousel-item">
+                                                                        <img class="d-block w-100"
+                                                                             src={{ comment.image3.url }} alt="">
+                                                                    </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <a class="carousel-control-prev" href="#carouselExample"
+                                                                   role="button" data-slide="prev">
+                                                                    <span class="carousel-control-prev-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                                <a class="carousel-control-next" href="#carouselExample"
+                                                                   role="button" data-slide="next">
+                                                                    <span class="carousel-control-next-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 
 
                                         </div>
@@ -2138,7 +2185,7 @@
             if (color1 == 'rgb(255, 168, 3)') {
                 document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
                 var value = document.getElementById(commentIda).innerText;
-                if (value > 0){
+                if (value > 0) {
                     value--;
                 }
                 //alert(value);
@@ -2236,15 +2283,18 @@
             var image3 = document.getElementById('photoForComment3');
             //alert(image.src)
 
-            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                 image.src = URL.createObjectURL(event.target.files[0]);
+                document.getElementById('file1checking').value = 1;
 
             } else {
-                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                     image2.src = URL.createObjectURL(event.target.files[0]);
-                } else{
-                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                    document.getElementById('file2checking').value = 1;
+                } else {
+                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                         image3.src = URL.createObjectURL(event.target.files[0]);
+                        document.getElementById('file3checking').value = 1;
                     } else {
                         alert("You can add maximum 3 pictures in a comment!");
                     }
@@ -2257,39 +2307,38 @@
             var image2 = document.getElementById('photoForComment2');
             var image3 = document.getElementById('photoForComment3');
 
-            var imgOneFile = document.getElementById('file');
-            var imgTwoFile = document.getElementById('file2');
-            var imgThrFile = document.getElementById('file3');
-
-            if (id == "first"){
+            if (id == "first") {
                 image.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
-                imgOneFile.value = "/static/images/restaurant-detail/add-1.jpg";
-            } else if (id == "second"){
+                document.getElementById('file').value = null;
+                document.getElementById('file1checking').value = 0;
+            } else if (id == "second") {
                 image2.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
-                imgTwoFile.value = "/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file2').value = null;
+                document.getElementById('file2checking').value = 0;
             } else if (id == "third") {
                 image3.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
-                imgThrFile.value = "/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file3').value = null;
+                document.getElementById('file3checking').value = 0;
             }
         }
     </script>
 
     <script>
-    function viewPhoto(id) {
-        if (id == "viewedPhotoOne"){
-            document.getElementById('firstClass').className = "carousel-item active";
-            document.getElementById('secondClass').className = "carousel-item";
-            document.getElementById('thirdClass').className = "carousel-item";
-        } else if (id == "viewedPhotoTwo"){
-            document.getElementById('firstClass').className = "carousel-item";
-            document.getElementById('secondClass').className = "carousel-item active";
-            document.getElementById('thirdClass').className = "carousel-item";
-        } else if (id == "viewedPhotoThr"){
-            document.getElementById('firstClass').className = "carousel-item";
-            document.getElementById('secondClass').className = "carousel-item";
-            document.getElementById('thirdClass').className = "carousel-item active";
+        function viewPhoto(id, cid) {
+            if (id == "viewedPhotoOne") {
+                document.getElementById('firstClass'+cid).className = "carousel-item active";
+                document.getElementById('secondClass'+cid).className = "carousel-item";
+                document.getElementById('thirdClass'+cid).className = "carousel-item";
+            } else if (id == "viewedPhotoTwo") {
+                document.getElementById('firstClass'+cid).className = "carousel-item";
+                document.getElementById('secondClass'+cid).className = "carousel-item active";
+                document.getElementById('thirdClass'+cid).className = "carousel-item";
+            } else if (id == "viewedPhotoThr") {
+                document.getElementById('firstClass'+cid).className = "carousel-item";
+                document.getElementById('secondClass'+cid).className = "carousel-item";
+                document.getElementById('thirdClass'+cid).className = "carousel-item active";
+            }
         }
-    }
     </script>
 
 {% endblock %}
