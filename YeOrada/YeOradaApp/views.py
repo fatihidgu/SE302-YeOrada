@@ -22,12 +22,18 @@ def index(request):
 def signin(request):
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
+
+        registeredUser = RegisteredUser.objects.filter(email=form.data.get('username')).first()
+
+        if (registeredUser is not None) and (not registeredUser.is_active):
+            registeredUser.is_active = True
+            registeredUser.save()
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('home')
         else:
-            error_message = "* Wrong Password or Username."
+            error_message = "* Wrong Email or Password."
     else:
         error_message = ""
         form = AuthenticationForm()

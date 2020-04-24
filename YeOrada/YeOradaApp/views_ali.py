@@ -12,15 +12,56 @@ def clientprofile(request, username):
                 commentForm = CommentForm(request.POST)
                 if commentForm.is_valid():
                     text = request.POST.get('text')
-
-                    imgOne = request.FILES['commentPhotoOne']
-                    imgTwo = request.FILES['commentPhotoTwo']
-                    imgThr = request.FILES['commentPhotoThr']
+                    imgOne = None
+                    imgTwo = None
+                    imgThr = None
 
                     customerObject = Customer.objects.filter(userEmail=request.user.email).first()
-                    clientObject= Client.objects.filter(userEmail__username=username).first()
+                    clientObject = Client.objects.filter(userEmail__username=username).first()
                     rate = request.POST.get('rate')
-                    comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate, image=imgOne, image2=imgTwo, image3=imgThr)
+
+                    newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (clientObject.rateCount + 1))
+                    clientObject.rate = newRate
+                    clientObject.save()
+
+                    print(request.POST.get('fileOneChecking'),", ",request.POST.get('fileTwoChecking')," ve ",request.POST.get('fileThrChecking'))
+                    if request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
+                        imgOne = request.FILES['commentPhotoOne']
+                        imgTwo = request.FILES['commentPhotoTwo']
+                        imgThr = request.FILES['commentPhotoThr']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image=imgOne, image2=imgTwo, image3=imgThr)
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
+                        imgOne = request.FILES['commentPhotoOne']
+                        imgTwo = request.FILES['commentPhotoTwo']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image=imgOne, image2=imgTwo)
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
+                        imgOne = request.FILES['commentPhotoOne']
+                        imgThr = request.FILES['commentPhotoThr']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image=imgOne, image3=imgThr)
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '0':
+                        imgOne = request.FILES['commentPhotoOne']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image=imgOne)
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
+                        imgTwo = request.FILES['commentPhotoTwo']
+                        imgThr = request.FILES['commentPhotoThr']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image2=imgTwo, image3=imgThr)
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
+                        imgTwo = request.FILES['commentPhotoTwo']
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image2=imgTwo)
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
+                        imgOne = request.FILES['commentPhotoOne']
+
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
+                                          image=imgOne)
+                    else:
+                        comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate)
+
                     # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
                     return redirect('clientprofile', username)
