@@ -203,9 +203,8 @@
                                         </div>
 
                                         <div style="width: 100%; max-height: 300px; overflow-y: scroll;">
-                                            {% for key,value in answersList.items %}
-                                                {% if key == comment.id %}
-                                                    {% for answer in value %}
+
+                                                    {% for answer in answersList|filterAnswers:comment.id %}
                                                         <div class="reply-review-1">
                                                             <div class="user-detail-heading">
                                                                 <a href="user_profile_view.html"><img
@@ -232,8 +231,8 @@
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
+
+
                                         </div>
 
 
@@ -241,7 +240,7 @@
                                             <div class="post-items">
                                                 <div class="reply-dp">
                                                     <a href="my_dashboard.html"><img
-                                                            src="{{ customerr.image.url }}" alt=""></a>
+                                                            src="{{ customer.image.url }}" alt=""></a>
                                                 </div>
                                                 <form method="POST">
                                                     <input name="commentId" type="hidden" value="{{ comment.id }}">

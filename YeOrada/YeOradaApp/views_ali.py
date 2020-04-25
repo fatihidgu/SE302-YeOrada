@@ -20,41 +20,50 @@ def clientprofile(request, username):
                     clientObject = Client.objects.filter(userEmail__username=username).first()
                     rate = request.POST.get('rate')
 
-                    newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (clientObject.rateCount + 1))
+                    newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (
+                                clientObject.rateCount + 1))
                     clientObject.rate = newRate
                     clientObject.save()
 
-                    print(request.POST.get('fileOneChecking'),", ",request.POST.get('fileTwoChecking')," ve ",request.POST.get('fileThrChecking'))
-                    if request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
+                    print(request.POST.get('fileOneChecking'), ", ", request.POST.get('fileTwoChecking'), " ve ",
+                          request.POST.get('fileThrChecking'))
+                    if request.POST.get('fileOneChecking') == '1' and request.POST.get(
+                            'fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
                         imgOne = request.FILES['commentPhotoOne']
                         imgTwo = request.FILES['commentPhotoTwo']
                         imgThr = request.FILES['commentPhotoThr']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image=imgOne, image2=imgTwo, image3=imgThr)
-                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get(
+                            'fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
                         imgOne = request.FILES['commentPhotoOne']
                         imgTwo = request.FILES['commentPhotoTwo']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image=imgOne, image2=imgTwo)
-                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get(
+                            'fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
                         imgOne = request.FILES['commentPhotoOne']
                         imgThr = request.FILES['commentPhotoThr']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image=imgOne, image3=imgThr)
-                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '0':
+                    elif request.POST.get('fileOneChecking') == '1' and request.POST.get(
+                            'fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '0':
                         imgOne = request.FILES['commentPhotoOne']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image=imgOne)
-                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get(
+                            'fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '1':
                         imgTwo = request.FILES['commentPhotoTwo']
                         imgThr = request.FILES['commentPhotoThr']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image2=imgTwo, image3=imgThr)
-                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get(
+                            'fileTwoChecking') == '1' and request.POST.get('fileThrChecking') == '0':
                         imgTwo = request.FILES['commentPhotoTwo']
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
                                           image2=imgTwo)
-                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get('fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
+                    elif request.POST.get('fileOneChecking') == '0' and request.POST.get(
+                            'fileTwoChecking') == '0' and request.POST.get('fileThrChecking') == '1':
                         imgOne = request.FILES['commentPhotoOne']
 
                         comment = Comment(customerEmail=customerObject, clientEmail=clientObject, text=text, rate=rate,
@@ -89,33 +98,26 @@ def clientprofile(request, username):
     commentAnswerForm = CommentAnswerForm()
     clientObject = Client.objects.filter(userEmail__username=username).first()
     commentList = Comment.objects.filter(clientEmail=clientObject.userEmail.email).order_by('-date')
-    answersList = dict()
-    numberOfComment = list()
-    for comments in commentList:
-        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id).order_by('date')
-        numberOfComment.append(commentAnswers.count())
-        answersList.update({comments.id: commentAnswers})
+    answersList = CommentAnswer.objects.all()
 
     customerr = Customer.objects.filter(userEmail=request.user).first()
     customerLikes = CommentLike.objects.filter(customerEmail=customerr)
 
-    registeredUser =  RegisteredUser.objects.filter(username=username).first()
+    registeredUser = RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
-
 
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
-                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes,
-                   'registeredUser':registeredUser,'clientObject':clientObject,
-                   'clientcuisines': clientcuisines, 'customerr':customerr, })
+                   'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
+                   'clientcuisines': clientcuisines, 'customerr': customerr, })
 
 
 def likeComment(request):
     if request.user.is_authenticated:
         if request.user.isCustomer:
             commentId = request.GET.get('commentId', None)
-            #print("comment id is ",commentId)
+            # print("comment id is ",commentId)
             commentId2 = Comment.objects.filter(id=commentId).first()
             customerEmail = Customer.objects.filter(userEmail=request.user).first()
             commentLike = CommentLike.objects.filter(customerEmail=customerEmail, commentId=commentId2)
@@ -135,4 +137,4 @@ def likeComment(request):
                     commentId2.likeNumber += 1
                     commentId2.save()
 
-    return JsonResponse({}, status = 400)
+    return JsonResponse({}, status=400)

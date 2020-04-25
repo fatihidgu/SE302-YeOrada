@@ -5,7 +5,7 @@ from YeOradaApp.models import Client, ClientCuisine
 
 
 def clientsearch(request):
-    clients = Client.objects.all()
+    clients = Client.objects.filter(userEmail__is_active=True)
     clientcuisines = ClientCuisine.objects.all()
 
     if 'searchRestaurant' in request.POST:

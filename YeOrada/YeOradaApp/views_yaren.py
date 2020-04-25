@@ -82,12 +82,7 @@ def myprofile(request):
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
     commentList = Comment.objects.filter(customerEmail=request.user.email).order_by('-date')
-    answersList = dict()
-    numberOfComment = list()
-    for comments in commentList:
-        commentAnswers = CommentAnswer.objects.filter(commentId=comments.id)
-        numberOfComment.append(commentAnswers.count())
-        answersList.update({comments.id: commentAnswers})
+    answersList = CommentAnswer.objects.all()
 
     customer = Customer.objects.filter(userEmail=request.user).first()
     customerLikes = CommentLike.objects.filter(customerEmail=customer)
@@ -96,4 +91,4 @@ def myprofile(request):
                   {'user': user, 'customer': customer, 'comments': comments, 'commentForm': commentForm,
                    'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
-                   'numberOfComment': numberOfComment, 'customerLikes': customerLikes, })
+                   'customerLikes': customerLikes, })

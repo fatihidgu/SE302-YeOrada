@@ -58,62 +58,104 @@
                 <div class="col-lg-9 col-md-12">
                     <div id="sync1" class="owl-carousel owl-theme">
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-1.jpg" alt="">
+                            {% if clientObject.image1.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image1.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-2.jpg" alt="">
+                            {% if clientObject.image2.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image2.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-3.jpg" alt="">
+                            {% if clientObject.image3.url != "/media/defaultClient.jpg" %}
+                            <img  style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image3.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-4.jpg" alt="">
+                            {% if clientObject.image4.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image4.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-5.jpg" alt="">
+                            {% if clientObject.image5.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image5.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-6.jpg" alt="">
+                            {% if clientObject.image6.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;"  src="{{ clientObject.image6.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-7.jpg" alt="">
+                            {% if clientObject.image7.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image7.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/img-8.jpg" alt="">
+                            {% if clientObject.image8.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image8.url }}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="item">
+                            {% if clientObject.image9.url != "/media/defaultClient.jpg" %}
+                            <img style ="max-height: 500px; max-width: 848px; width: initial; margin: auto;" src="{{ clientObject.image9.url }}" alt="">
+                            {% endif %}
                         </div>
                     </div>
                     <div id="sync2" class="owl-carousel owl-theme">
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-1.jpg" alt="">
+                            {% if clientObject.image1.url != "/media/defaultClient.jpg" %}
+                            <img src="{{ clientObject.image1.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-2.jpg" alt="">
+                            {% if clientObject.image2.url != "/media/defaultClient.jpg" %}
+                            <img  src="{{ clientObject.image2.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-3.jpg" alt="">
+                            {% if clientObject.image3.url != "/media/defaultClient.jpg" %}
+                            <img src="{{ clientObject.image3.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-4.jpg" alt="">
+                            {% if clientObject.image4.url != "/media/defaultClient.jpg" %}
+                            <img  src="{{ clientObject.image4.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-5.jpg" alt="">
+                            {% if clientObject.image5.url != "/media/defaultClient.jpg" %}
+                            <img  src="{{ clientObject.image5.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-6.jpg" alt="">
+                            {% if clientObject.image6.url != "/media/defaultClient.jpg" %}
+                            <img src="{{ clientObject.image6.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-7.jpg" alt="">
+                            {% if clientObject.image7.url != "/media/defaultClient.jpg" %}
+                            <img  src="{{ clientObject.image7.url }}" alt="">
+                            {% endif %}
                         </div>
                         <div class="item">
-                            <img src="/static/images/restaurant-detail/thumbs/img-8.jpg" alt="">
+                            {% if clientObject.image8.url != "/media/defaultClient.jpg" %}
+                            <img src="{{ clientObject.image8.url }}" alt="">
+                            {% endif %}
+                        </div>
+                        <div class="item">
+                            {% if clientObject.image9.url != "/media/defaultClient.jpg" %}
+                            <img  src="{{ clientObject.image9.url }}" alt="">
+                            {% endif %}
                         </div>
                     </div>
 
                     <div class="resto-dt">
                         <div class="resto-detail">
                             <div class="resto-picy">
-                                <a href="restaurant_detail.html"><img src="/static/images/restaurant-detail/logo-10.jpg"
-                                                                      alt=""></a>
+                                <img style="width: 70px;" src="{{ clientObject.logo.url  }}"
+                                                                      alt="">
                             </div>
                             <div class="name-location">
                                 <a href="restaurant_detail.html"><h1>{{ clientObject.name }} </h1></a>
@@ -143,7 +185,7 @@
                                 {% if clientObject.rate == 5 %}
                                     <i class="fas fa-star"></i>
                                 {% endif %}
-                                <span>{{ clientObject.rate }}</span>
+                                <span>{{ clientObject.rate }}</span> <a style="font-size: 14px;">({{ clientObject.rateCount }})</a>
                             </div>
                         </div>
                     </div>
@@ -1642,19 +1684,19 @@
                                                 <ul>
                                                     {% if comment.image.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoOne" onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
+                                                        <img style="width: 200px;" id="viewedPhotoOne" onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
                                                              src={{ comment.image.url }} alt="">
                                                     </li>
                                                     {% endif %}
                                                     {% if comment.image2.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoTwo" onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
+                                                        <img style="width: 200px;" id="viewedPhotoTwo" onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
                                                              src={{ comment.image2.url }} alt="">
                                                     </li>
                                                     {% endif %}
                                                     {% if comment.image3.url != "/media/defaultComment.jpg" %}
                                                     <li class="image-select">
-                                                        <img id="viewedPhotoThr" onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
+                                                        <img style="width: 200px;" id="viewedPhotoThr" onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
                                                              src={{ comment.image3.url }} alt="">
                                                     </li>
                                                     {% endif %}
@@ -1770,9 +1812,9 @@
                                         </div>
 
                                         <div style="width: 100%; max-height: 300px; overflow-y: scroll;">
-                                            {% for key,value in answersList.items %}
-                                                {% if key == comment.id %}
-                                                    {% for answer in value %}
+
+
+                                                    {% for answer in answersList|filterAnswers:comment.id %}
                                                         <div class="reply-review-1">
                                                             <div class="user-detail-heading">
                                                                 <a href="user_profile_view.html"><img
@@ -1799,8 +1841,7 @@
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-                                                {% endif %}
-                                            {% endfor %}
+
                                         </div>
 
 

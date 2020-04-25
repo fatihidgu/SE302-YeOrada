@@ -63,6 +63,21 @@ class Client(models.Model):
     category = models.CharField(max_length=200, null=True, blank=True, choices=CATEGORIES)
     rate = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
     rateCount = models.IntegerField(null=True, blank=True)
+    image1 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image2 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image3 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image4 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image5 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image6 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image7 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image8 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    image9 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
+    logo = models.ImageField(default='defaultLogo.jpg', upload_to='client_logo_pics')
+    menu1 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
+    menu2 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
+    menu3 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
+    menu4 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
+    menu5 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
 
 
 class Admin(models.Model):
