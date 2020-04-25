@@ -30,6 +30,7 @@ def signin(request):
             registeredUser.is_active = True
             control = True
             registeredUser.save()
+            print(control)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
