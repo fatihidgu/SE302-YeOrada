@@ -329,7 +329,6 @@
                                             <input name="new_password2" type="password" class="video-form"
                                                    id="Password2" placeholder="Enter Confirm Password">
                                         </div>
-                                        {{ error_message2|linebreaks }}
                                         {{ passwordChangeForm.errors|linebreaks }}
                                         <br>
                                         <button name="changePassword" type="submit" class="change-btn btn-link">Save
@@ -354,7 +353,7 @@
                                                    placeholder="Enter Your Email">
                                         </div>
                                         <button name="yourEmail" type="submit" class="change-btn btn-link">Deactivate Account</button>
-                                         {{ error_message3|linebreaks }}
+                                         {{ error_message2|linebreaks }}
                                     </form>
                                 </div>
                             </div>
