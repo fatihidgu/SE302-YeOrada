@@ -20,6 +20,7 @@ def index(request):
 
 
 def signin(request):
+    control = False
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
 
@@ -27,11 +28,12 @@ def signin(request):
 
         if (registeredUser is not None) and (not registeredUser.is_active):
             registeredUser.is_active = True
+            control = True
             registeredUser.save()
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return render(request, 'yeoradamain/index.html', {'control': control})
         else:
             error_message = "* Wrong Email or Password."
     else:

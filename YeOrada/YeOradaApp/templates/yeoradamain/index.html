@@ -29,6 +29,7 @@
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content2 %}
+    <p id="demo"> </p>
 	<!--banner start-->
 		<section class="block-preview">
 			<div class="cover-banner" style="background-image: url('{% static 'images/homepage/banner.png' %}')"></div>
@@ -781,6 +782,14 @@
 
     {% block content3 %}
     <!--Bootstrap core JavaScript-->
+        <script>
+function myFunction() {
+  alert("You activated your profile again. Welcome back.");
+}
+{% if control %}
+document.getElementById("demo").innerHTML = myFunction();
+{% endif %}
+</script>
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--Core plugin JavaScript-->
