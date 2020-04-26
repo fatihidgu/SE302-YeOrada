@@ -18,7 +18,7 @@
 	<link href="/static/css/responsive.css" rel="stylesheet">
 	<link href="/static/css/mega.menu.css" rel="stylesheet">
 	<link href="/static/css/owlslider.css" rel="stylesheet">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- Owl Carousel for this template-->
 	<link href="/static/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
 	<link href="/static/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
@@ -29,6 +29,25 @@
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 {% endblock %}
 {% block content2 %}
+        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Account Activation</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Your account is activated now. Welcome back!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color:#ffa803;" >Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 	<!--banner start-->
 		<section class="block-preview">
 			<div class="cover-banner" style="background-image: url('{% static 'images/homepage/banner.png' %}')"></div>
@@ -776,11 +795,21 @@
 				</div>
 			</div>
 		</section>
-	<!--download-link end-->	
+	<!--download-link end-->
+
 	{% endblock %}
 
     {% block content3 %}
     <!--Bootstrap core JavaScript-->
+        <script type="text/javascript">
+        {% if control == True %}
+    $(window).on('load',function(){
+        $('#exampleModalLong').modal('show');
+    });
+        {% endif %}
+        </script>
+
+
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--Core plugin JavaScript-->

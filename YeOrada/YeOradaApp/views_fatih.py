@@ -7,7 +7,6 @@ from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, 
 def clientsettings(request):
     error_message1 = ""
     error_message2 = ""
-    error_message3 = ""
     passwordChangeForm = PasswordChangeForm(request.user)
     if 'saveChanges' in request.POST:
         name = request.POST.get('name')
@@ -51,7 +50,6 @@ def clientsettings(request):
     elif 'changePassword' in request.POST:
         passwordChangeForm = PasswordChangeForm(request.user, request.POST)
         if passwordChangeForm.is_valid():
-            error_message2="Successfully changed"
             passwordChangeForm.save()
             return redirect('home')
 
@@ -61,11 +59,11 @@ def clientsettings(request):
             ruser.update(is_active=False)
             return redirect('home')
         else:
-            error_message3 = "You entered wrong mail"
+            error_message2 = "You entered wrong mail"
 
     user = request.user
     client = Client.objects.filter(userEmail=user.email).first()
 
     return render(request, 'yeoradamain/setting_client.html',
                   {'user': user, 'client': client, 'error_message1': error_message1,
-                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2, 'error_message3': error_message3})
+                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2})
