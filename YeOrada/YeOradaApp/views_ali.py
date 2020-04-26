@@ -107,11 +107,13 @@ def clientprofile(request, username):
     registeredUser = RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
 
+    clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
+
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
-                   'clientcuisines': clientcuisines, 'customerr': customerr, })
+                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, })
 
 
 def likeComment(request):

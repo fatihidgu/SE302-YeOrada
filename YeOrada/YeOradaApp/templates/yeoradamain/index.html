@@ -342,17 +342,18 @@
 				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
 					<div class="all-meal">
 						<div class="top">
-							<a href="meal_detail.html"><div class="bg-gradient"></div></a>
+							<a href="{% url 'clientprofile' clients.userEmail.username %}"><div class="bg-gradient"></div></a>
 							<div class="top-img">
-								<img src="/static/images/homepage/meals/img-1.jpg" alt="">
+								<img src="{{ clients.image1.url }}" style="width:100%;margin:auto;height:100%"  alt="">
+
 							</div>
 							<div class="logo-img">
-								<img src="/static/images/homepage/meals/logo-1.jpg" alt="">
+								<img src="{{ clients.logo.url }}"  style="width:64px" alt="">
 							</div>
 							<div class="top-text">
 								<div class="heading"><h4><a href="{% url 'clientprofile' clients.userEmail.username %}">{{clients.name}}</a></h4></div>
 								<div class="sub-heading">
-								<h5><a href="restaurant_detail.html">{{clients.category}}</a></h5>
+								<h5>{{clients.category}}</h5>
 								</div>
 							</div>
 						</div>
