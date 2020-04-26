@@ -1705,7 +1705,7 @@
 
                                             <div class="modal fade" id="exampleModal{{ comment.id }}" tabindex="-1" role="dialog"
                                                  aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <button type="button" class="close" data-dismiss="modal"
@@ -1714,17 +1714,17 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <div id="carouselExample" class="carousel slide"
+                                                            <div id="carouselExample{{ comment.id }}" class="carousel slide"
                                                                  data-ride="carousel">
                                                                 <ol class="carousel-indicators">
                                                                     {% if comment.image.url != "/media/defaultComment.jpg" %}
-                                                                    <li data-target="#carouselExample"
+                                                                    <li data-target="#carouselExample{{ comment.id }}"
                                                                         data-slide-to="0"></li>{% endif %}
                                                                     {% if comment.image2.url != "/media/defaultComment.jpg" %}
-                                                                    <li data-target="#carouselExample"
+                                                                    <li data-target="#carouselExample{{ comment.id }}"
                                                                         data-slide-to="1"></li>{% endif %}
                                                                     {% if comment.image3.url != "/media/defaultComment.jpg" %}
-                                                                    <li data-target="#carouselExample"
+                                                                    <li data-target="#carouselExample{{ comment.id }}"
                                                                         data-slide-to="2"></li>{% endif %}
                                                                 </ol>
                                                                 <div class="carousel-inner">
@@ -1747,13 +1747,13 @@
                                                                     </div>
                                                                     {% endif %}
                                                                 </div>
-                                                                <a class="carousel-control-prev" href="#carouselExample"
+                                                                <a class="carousel-control-prev" href="#carouselExample{{ comment.id }}"
                                                                    role="button" data-slide="prev">
                                                                     <span class="carousel-control-prev-icon"
                                                                           aria-hidden="true"></span>
                                                                     <span class="sr-only">Previous</span>
                                                                 </a>
-                                                                <a class="carousel-control-next" href="#carouselExample"
+                                                                <a class="carousel-control-next" href="#carouselExample{{ comment.id }}"
                                                                    role="button" data-slide="next">
                                                                     <span class="carousel-control-next-icon"
                                                                           aria-hidden="true"></span>
