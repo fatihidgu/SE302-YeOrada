@@ -12,12 +12,12 @@ def clientsearch(request):
         name = request.POST.get('restaurant')
 
         if len(name.split()) == 0:
-            clients = Client.objects.all()
+            clients = Client.objects.filter(userEmail__is_active=True)
         else:
-            clients = Client.objects.filter(name__icontains=name)
+            clients = Client.objects.filter(name__icontains=name, userEmail__is_active=True)
         clientcuisines = ClientCuisine.objects.all()
     elif 'search' in request.POST:
-        clientQuerySet = Client.objects.all()
+        clientQuerySet = Client.objects.filter(userEmail__is_active=True)
         clients = list()
 
         for client in clientQuerySet:

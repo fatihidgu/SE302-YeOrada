@@ -313,10 +313,10 @@
 						<div class="partner-bar">
 							<div class="partner-topbar">
 								<div class="partner-dt">
-									<a href="restaurant_detail.html"><img src="{{ client.logo.url }}" alt=""></a>
+									<a href="{% url 'clientprofile' client.userEmail.username %}"><img src="{{ client.logo.url }}" alt=""></a>
 									<div class="partner-name">
                                         <p style ="color: #ffa803; margin-top: -1%;" >{{ client.category }}</p>
-										<a href="restaurant_detail.html"><h4>{{ client.name }} </h4></a>
+										<a href="{% url 'clientprofile' client.userEmail.username %}"><h4>{{ client.name }} </h4></a>
 										<div class="country">{{ client.state }}, {{ client.city }}</div>
 										<p><span><i class="fas fa-map-marker-alt"></i></span>{{ client.address1 }}</p>
 										<div class="bagde-dt">

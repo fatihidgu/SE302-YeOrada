@@ -23,6 +23,7 @@ def clientprofile(request, username):
                     newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (
                                 clientObject.rateCount + 1))
                     clientObject.rate = newRate
+                    clientObject.rateCount = clientObject.rateCount+1;
                     clientObject.save()
 
                     print(request.POST.get('fileOneChecking'), ", ", request.POST.get('fileTwoChecking'), " ve ",
