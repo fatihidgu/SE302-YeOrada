@@ -181,5 +181,6 @@ def clientsearch(request):
 
                 if not starFlag:
                     clients.remove(client)
+    clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
 
-    return render(request, 'yeoradamain/partners.html', {'clients': clients, 'clientcuisines': clientcuisines, })
+    return render(request, 'yeoradamain/partners.html', {'clients': clients, 'clientcuisines': clientcuisines,'clienty':clienty })
