@@ -1,0 +1,337 @@
+{% extends 'yeoradamain/base.html' %}
+{% block content1 %}
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Favicon -->
+    <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+
+    <title>Natto | Setting</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <link href="/static/mega.menu.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-select.css" rel="stylesheet">
+
+    <!-- Owl Carousel for this template-->
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+
+    <!-- Fontawesome styles for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block content2 %}
+    <!--title-bar start-->
+    <section class="title-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-title-text">
+                        <h3>My Account</h3>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-title-text">
+                        <ul>
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="my_profile_dashbord.html">My Account</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Setting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--title-bar end-->
+    <!--my-account start-->
+    <section class="my-account">
+        <div class="profile-bg">
+
+            <div class="my-Profile-dt" style="margin-top:8%">
+                <div class="container">
+                    <div class="row">
+                        <div class="container">
+                            <div class="profile-dpt">
+                                <img src="{{ customer.image.url }}" alt="" style="width: 210px;">
+                            </div>
+                            <div class="profile-all-dt">
+                                <div class="profile-name-dt">
+                                    <h1>{{ user.name }} {{ user.surname }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--my-account end-->
+    <!--my-account-tabs start-->
+    <section class="all-profile-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="left-tab-links">
+                        <div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
+                            <a href="#edit-profile" data-toggle="tab" class="item user-tab cursor-pointer active">Edit
+                                Profile</a>
+
+                            <a href="#change-password" data-toggle="tab" class="item user-tab cursor-pointer">Change
+                                Password</a>
+                            <a href="#delete-account" data-toggle="tab" class="item user-tab cursor-pointer"
+                               id="bookmarks" data-tab="bookmarks">Deactivate Account</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-8 col-12">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="edit-profile">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Profile Information</h4>
+                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                </div>
+                                <div class="edit-profile">
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <div class="setting-dt">
+                                            <h4>Avatar</h4>
+                                            <div>
+                                                <br>
+                                                <img style= "width: 150px;" id ="user-avatar1" src="/static/images/profile/avatar.jpg" alt="">
+                                            </div>
+                                            <br>
+                                            <div class="upload-avatar" style="margin-top: -1%;">
+                                                <div class="input-container">
+                                                    <input class="file-upload-input" type="file"
+                                                           onchange="loadFile(event);" accept="image/*" id="avatar-input1">
+                                                    <button class="browse-btn">
+                                                        Choose File
+                                                    </button>
+                                                    <span class="file-info">Upload a file</span>
+                                                </div>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="form-group"></div>
+
+                                        <div class="form-group">
+                                            <label for="nameUser">Name*</label>
+                                            <input name="name" type="text" class="video-form" id="nameUser"
+                                                   value="{{ user.name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="surnameUser">Surname*</label>
+                                            <input name="surname" type="text" class="video-form" id="surnameUser"
+                                                   value="{{ user.surname }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="username">Username*</label>
+                                            <input name="username" type="text" class="video-form" id="username"
+                                                   value="{{ user.username }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="emailAddress" hidden>Email Address*</label>
+                                            <input name="email" type="text" class="video-form" id="emailAddress"
+                                                   value={{ user.email }} disabled hidden>
+                                        </div>
+
+                                        {{ error_message1|linebreaks }}
+                                        <br>
+
+                                        <button name="saveChanges2" type="submit" class="change-btn btn-link">Save
+                                            Changes
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="notification-setting">
+                            <div class="profile-about">
+                                <div class="tab-content-heading">
+                                    <h4>Notification Setting</h4>
+                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                </div>
+                                <div class="noti-setting">
+                                    <div class="noti-all-st">
+                                        <ul>
+                                            <li>
+                                                <div class="noti-st">
+                                                    <div class="noti-left-t">
+                                                        Activity on my photos
+                                                    </div>
+                                                    <div class="noti-right-b">
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customSwitch1">
+                                                            <label class="custom-control-label"
+                                                                   for="customSwitch1"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="noti-st">
+                                                    <div class="noti-left-t">
+                                                        Activity on my reviews
+                                                    </div>
+                                                    <div class="noti-right-b">
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customSwitch2">
+                                                            <label class="custom-control-label"
+                                                                   for="customSwitch2"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="noti-st">
+                                                    <div class="noti-left-t">
+                                                        Someone follows me
+                                                    </div>
+                                                    <div class="noti-right-b">
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customSwitch3">
+                                                            <label class="custom-control-label"
+                                                                   for="customSwitch3"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="noti-st">
+                                                    <div class="noti-left-t">
+                                                        Update from Natto
+                                                    </div>
+                                                    <div class="noti-right-b">
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customSwitch4">
+                                                            <label class="custom-control-label"
+                                                                   for="customSwitch4"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="noti-st">
+                                                    <div class="noti-left-t">
+                                                        Hide my profile from search engine
+                                                    </div>
+                                                    <div class="noti-right-b">
+                                                        <div class="custom-control custom-switch">
+                                                            <input type="checkbox" class="custom-control-input"
+                                                                   id="customSwitch5">
+                                                            <label class="custom-control-label"
+                                                                   for="customSwitch5"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="change-password">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Change Password</h4>
+                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                </div>
+                                <div class="edit-profile">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="old_password">Old Password*</label>
+                                            <input name="old_password" type="password" class="video-form"
+                                                   id="OldPassword" placeholder="Enter Old Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password1">New Password*</label>
+                                            <input name="new_password1" type="password" class="video-form"
+                                                   id="Password1" placeholder="Enter New Password">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="new_password2">Confirm Password*</label>
+                                            <input name="new_password2" type="password" class="video-form"
+                                                   id="Password2" placeholder="Enter Confirm Password">
+                                        </div>
+                                        {{ passwordChangeForm.errors }}
+                                        <br>
+                                        <button name="changePassword" type="submit" class="change-btn btn-link">Save
+                                            Password
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="delete-account">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Deactivate Account</h4>
+                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                </div>
+                                <div class="edit-profile">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <label for="yourPassword">Your Email*</label>
+                                            <input name="Email" type="text" class="video-form" id="yourPassword"
+                                                   placeholder="Enter Your Email">
+                                        </div>
+                                        <button name="yourEmail" type="submit" class="change-btn btn-link">Deactivate Account</button>
+                                         {{ error_message2|linebreaks }}
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12" hidden>
+                    <div class="natto-profile-link">
+                        <div class="link-title">
+                            <h4>Natto Profile Link</h4>
+                        </div>
+                        <div class="link-dt">
+                            <p>You can now register a short url to</p>
+                            <p>your profile. e.g.</p>
+                            <p>natto.com/username</p>
+                            <div class="form-group">
+                                <label for="usernameLink">You can set your profile URL only once.</label>
+                                <input type="text" class="video-form" id="usernameLink"
+                                       placeholder="Natto.com/username">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--my-account-tabs end-->
+{% endblock %}
+
+{% block content3 %}
+    <!-- Bootstrap core JavaScript-->
+<script src="/static/vendor/jquery/jquery.min.js"></script>
+<script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Core plugin JavaScript-->
+<script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+<!-- Assect scripts for this page-->
+<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
+<script src="/static/js/owlslider.js"></script>
+<script src="/static/js/bootstrap-select.js"></script>
+<script src="/static/js/dashboard-tabs-reload.js"></script>
+    <script>
+    var loadFile = function(event) {
+	    var image = document.getElementById('user-avatar1');
+	    image.src = URL.createObjectURL(event.target.files[0]);
+    };
+    </script>
+{% endblock %}
