@@ -7,816 +7,943 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-	<!-- Favicon -->
-	<link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+    <!-- Favicon -->
+    <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 
     <title>Natto | Home </title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link href="/static/css/responsive.css" rel="stylesheet">
-	<link href="/static/css/mega.menu.css" rel="stylesheet">
-	<link href="/static/css/owlslider.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <link href="/static/css/mega.menu.css" rel="stylesheet">
+    <link href="/static/css/owlslider.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<!-- Owl Carousel for this template-->
-	<link href="/static/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-	<link href="/static/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIVX6GlP0RDDM3vcFhgzYnugViFmxl0g&libraries=places"></script>
+    <!-- Owl Carousel for this template-->
+    <link href="/static/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
+    <link href="/static/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
 
     <!-- Fontawesome styles for this template-->
 
 
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <script>
+        $(document).ready(function () {
+            var autocomplete;
+            var input = document.getElementById('search_location');
+            var options = {
+
+                componentRestrictions: {country: 'tr'}
+            };
+
+            autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            autocomplete.setFields(['address_component']);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                var componentLength = place.address_components.length;
+
+                var state = 3;
+                var city = 2;
+
+                if ( place.address_components[componentLength - 1].long_name != 'Türkiye'){
+                    state++;
+                    city++;
+                }
+
+                document.getElementById('state_input').value = place.address_components[componentLength - state].long_name;
+                document.getElementById('city_input').value = place.address_components[componentLength - city].long_name;
+            });
+        });
+    </script>
+
 {% endblock %}
 {% block content2 %}
-        <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Account Activation</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        Your account is activated now. Welcome back!
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal" style="background-color:#ffa803;" >Close</button>
-      </div>
+    <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Account Activation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your account is activated now. Welcome back!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            style="background-color:#ffa803;">Close
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
-	<!--banner start-->
-		<section class="block-preview">
-			<div class="cover-banner" style="background-image: url('{% static 'images/homepage/banner.png' %}')"></div>
-			<div class="container">
-				<div class="row">	
-					<div class="col-lg-8 col-md-6 col-sm-12">
-						<div class="left-text-b">
-                            <img src="/static/images/logo.png" alt="" style="width: 306px;">
-							<h1 class="title">Find the Best Restaurants </h1>
-						</div>
-					</div>
-					<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
-						<form method="post" action="clientsearch">
-                            {% csrf_token %}
-							<div class="form-box">
-								<div class="input-group-prepend">
-								  <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
-								</div>
-								<input  class="find-address skills" name="location" type="text" placeholder="Enter your location"/>
-								<div class="input-group-prepend">
-								  <div class="input-group-text-1"><i class="fas fa-utensils"></i></div>
-								</div>
-								<input  class="find-resto skills" name="restaurant" type="text" placeholder="Enter restaurant name"/>
-								<button class="search-btn btn-link" type="submit" name="searchRestaurant">Find Restaurant</button>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</section>
-	<!--banner end-->
-	
-	<!--browse-places start-->
-	<section class="browse-places">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="browse-heading">
-						<h6> Browse Places </h6>
-					</div>
-				</div>
-			</div>
-			<div class="row">				
-				<div class="col-lg-12 col-md-12">
-					<div class="owl-carousel browse-owl owl-theme">
-						<div class="item">
-							<div class="places">
-								<a href="#">
-									<div class="b-icon">
-										<img src="/static/images/homepage/browse_places/01.svg" alt="">
-									</div>
-									<div class="b-text">
-										Near by
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="places">
-								<a href="#">
-									<div class="b-icon">
-										<img src="/static/images/homepage/browse_places/02.svg" alt="">
-									</div>
-									<div class="b-text">
-										Cafes & Restaurants
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="places">
-								<a href="#">
-									<div class="b-icon">
-										<img src="/static/images/homepage/browse_places/03.svg" alt="">
-									</div>
-									<div class="b-text">
-										Bars & Pubs
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="places">
-								<a href="#">
-									<div class="b-icon">
-										<img src="/static/images/homepage/browse_places/04.svg" alt="">
-									</div>
-									<div class="b-text">
-										Desserts & Bakes
-									</div>
-								</a>
-							</div>
-						</div>
-						<div class="item">
-							<div class="places">
-								<a href="#">
-									<div class="b-icon">
-									<img src="/static/images/homepage/browse_places/06.svg" alt="">
-									</div>
-									<div class="b-text">
-									Newly Opened
-									</div>
-								</a>
-							</div>
-						</div>				
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--browse-places end-->	
-	<!--how-to-work start-->
-	<section class="how-to-work">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-12 col-xs-12">
-					<div class="work-item">
-						<div class="work-img">
-							<img src="/static/images/homepage/how-to-work/img_1.svg" alt="">
-						</div>
-						<div class="work-text">
-							<h4>Choose Your Restaurant</h4>
-							<p>Search near restaurants or the ones you are looking for.</p>
-						</div>
-					</div>
-				</div><div class="col-md-4 col-sm-12 col-xs-12">
-					<div class="work-item">
-						<div class="work-img">
-							<img src="/static/images/homepage/how-to-work/img_2.svg" alt="">
-						</div>
-						<div class="work-text">
-							<h4>Write Reviews</h4>
-							<p>Add reviews to the restaurants. Give a rate or add some photos. It's all up to you!</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4 col-sm-12 col-xs-12">
-					<div class="work-item">
-						<div class="work-img">
-							<img src="/static/images/homepage/how-to-work/img_3.svg" alt="">
-						</div>
-						<div class="work-text">
-							<h4>Add to Favourites</h4>
-							<p>Select your favourite restaurants and them to your favourites.</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--how-to-work end-->	
-	<!--discover-new-restaurants-&-book-now start-->
-	<section class="new-restaurants-book-now">		
-		<div class="container" hidden>
-			<Div class="row">
-				<div class="col-md-12">
-					<div class="new-heading">
-						<h1> Discover New Restaurants & Book Now </h1>
-					</div>
-				</div>
-			</div>
-			<div class="row">				
-				<div class="col-md-12">						
-					<div class="new-resto">
-						<div class="large-12 columns">
-							 <div class="owl-carousel dis-owl owl-theme">																																		
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_1.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_2.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_3.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_4.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_5.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_1.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_2.jpg" alt=""></a></div>
-								<div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_3.jpg" alt=""></a></div>
-							</div>         
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--discover-new-restaurants-&-book-now end-->
+    <!--banner start-->
+    <section class="block-preview">
+        <div class="cover-banner" style="background-image: url('{% static 'images/homepage/banner.png' %}')"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-6 col-sm-12">
+                    <div class="left-text-b">
+                        <img src="/static/images/logo.png" alt="" style="width: 306px;">
+                        <h1 class="title">Find the Best Restaurants </h1>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                    <form method="post" action="clientsearch">
+                        {% csrf_token %}
+                        <div class="form-box">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                            </div>
+                            <input id="search_location" class="find-address skills" name="location" type="text"
+                                   placeholder="Enter location"/>
+                            <input type="hidden" id="state_input" name="state_input"/>
+                            <input type="hidden" id="city_input" name="city_input"/>
+                            <div class="input-group-prepend">
+                                <div class="input-group-text-1"><i class="fas fa-utensils"></i></div>
+                            </div>
+                            <input class="find-resto skills" name="restaurant" type="text"
+                                   placeholder="Enter restaurant name" />
+                            <button class="search-btn btn-link" type="submit" name="searchRestaurant">Find Restaurant
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--banner end-->
+
+    <!--browse-places start-->
+    <section class="browse-places">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="browse-heading">
+                        <h6> Browse Places </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div class="owl-carousel browse-owl owl-theme">
+                        <div class="item">
+                            <div class="places">
+                                <a href="#">
+                                    <div class="b-icon">
+                                        <img src="/static/images/homepage/browse_places/01.svg" alt="">
+                                    </div>
+                                    <div class="b-text">
+                                        Near by
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="places">
+                                <a href="#">
+                                    <div class="b-icon">
+                                        <img src="/static/images/homepage/browse_places/02.svg" alt="">
+                                    </div>
+                                    <div class="b-text">
+                                        Cafes & Restaurants
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="places">
+                                <a href="#">
+                                    <div class="b-icon">
+                                        <img src="/static/images/homepage/browse_places/03.svg" alt="">
+                                    </div>
+                                    <div class="b-text">
+                                        Bars & Pubs
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="places">
+                                <a href="#">
+                                    <div class="b-icon">
+                                        <img src="/static/images/homepage/browse_places/04.svg" alt="">
+                                    </div>
+                                    <div class="b-text">
+                                        Desserts & Bakes
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="places">
+                                <a href="#">
+                                    <div class="b-icon">
+                                        <img src="/static/images/homepage/browse_places/06.svg" alt="">
+                                    </div>
+                                    <div class="b-text">
+                                        Newly Opened
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--browse-places end-->
+    <!--how-to-work start-->
+    <section class="how-to-work">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="work-item">
+                        <div class="work-img">
+                            <img src="/static/images/homepage/how-to-work/img_1.svg" alt="">
+                        </div>
+                        <div class="work-text">
+                            <h4>Choose Your Restaurant</h4>
+                            <p>Search near restaurants or the ones you are looking for.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="work-item">
+                        <div class="work-img">
+                            <img src="/static/images/homepage/how-to-work/img_2.svg" alt="">
+                        </div>
+                        <div class="work-text">
+                            <h4>Write Reviews</h4>
+                            <p>Add reviews to the restaurants. Give a rate or add some photos. It's all up to you!</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="work-item">
+                        <div class="work-img">
+                            <img src="/static/images/homepage/how-to-work/img_3.svg" alt="">
+                        </div>
+                        <div class="work-text">
+                            <h4>Add to Favourites</h4>
+                            <p>Select your favourite restaurants and them to your favourites.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--how-to-work end-->
+    <!--discover-new-restaurants-&-book-now start-->
+    <section class="new-restaurants-book-now">
+        <div class="container" hidden>
+            <Div class="row">
+                <div class="col-md-12">
+                    <div class="new-heading">
+                        <h1> Discover New Restaurants & Book Now </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="new-resto">
+                        <div class="large-12 columns">
+                            <div class="owl-carousel dis-owl owl-theme">
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_1.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_2.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_3.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_4.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_5.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_1.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_2.jpg"
+                                                                   alt=""></a></div>
+                                <div class="item"><a href="#"><img src="/static/images/homepage/resto-book/img_3.jpg"
+                                                                   alt=""></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--discover-new-restaurants-&-book-now end-->
     <!--quick-searches start-->
-	<section class="quick-searches">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="new-heading">
-						<h1> Quick Searches </h1>
-					</div>
-					<div class="sub-title">
-						Discover Restaurants By Type of Meal
-					</div>
-				</div>
-			</div>
-			<div class="row justify-content-center">
-				<div class="col-lg-8 col-md-8">
-					<div class="all-meals">
-						<div class="row justify-content-center">
-							<div class="col-lg-10 col-md-8">
-								<div class="owl-carousel searchs-owl owl-theme">
-									<div class="item">
-										<a href="#">
-											<div class="meal-icon">
-												<img src="/static/images/homepage/quick-searches/meal-1.svg" alt="">
-											</div>
-											<div class="meal-title">
-												Breakfast
-											</div>
-										</a>
-									</div>
-									<div class="item">
-										<a href="#">
-											<div class="meal-icon">
-												<img src="/static/images/homepage/quick-searches/meal-2.svg" alt="">
-											</div>
-											<div class="meal-title">
-												Lunch
-											</div>
-										</a>
-									</div>
-									<div class="item">
-										<a href="#">
-											<div class="meal-icon">
-												<img src="/static/images/homepage/quick-searches/meal-3.svg" alt="">
-											</div>
-											<div class="meal-title">
-												Dinner
-											</div>
-										</a>
-									</div>
-									<div class="item">
-										<a href="#">
-											<div class="meal-icon">
-												<img src="/static/images/homepage/quick-searches/meal-4.svg" alt="">
-											</div>
-											<div class="meal-title">
-												Cafe's
-											</div>
-										</a>
-									</div>
-									<div class="item">
-										<a href="#">
-											<div class="meal-icon">
-												<img src="/static/images/homepage/quick-searches/meal-5.svg" alt="">
-											</div>
-											<div class="meal-title">
-												Fast Food
-											</div>
-										</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--quick-searches end-->
-
-	<!--order-food-online-in-your-area start-->
-	<section class="order-food-online">		
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="new-heading">
-						<h1> Popular Restaurants In Your Area </h1>
-					</div>
-					<div class="your-location">
-						<span><i class="fas fa-map-marker-alt"></i>İstanbul</span>Change Location
-					</div>
-					<div class="all-items">
-						<div class="search col-lg-4 col-md-6 col-sm-12 col-xs-12">
-							<form>
-								<input  class="search-location" name="search" type="search" placeholder="Enter Your Location"/>
-								<div class="icon-btn">
-									<div class="cross-icon">
-									<i class="fas fa-crosshairs"></i>
-									</div>
-									<div class="s-m-btn">
-										<button class="search-meal-btn btn-link">Search</button>
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-                {% for clients in clients %}
-				<div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
-					<div class="all-meal">
-						<div class="top">
-							<a href="{% url 'clientprofile' clients.userEmail.username %}"><div class="bg-gradient"></div></a>
-							<div class="top-img">
-								<img src="{{ clients.image1.url }}" style="width:100%;margin:auto;height:100%"  alt="">
-
-							</div>
-							<div class="logo-img">
-								<img src="{{ clients.logo.url }}"  style="width:64px" alt="">
-							</div>
-							<div class="top-text">
-								<div class="heading"><h4><a href="{% url 'clientprofile' clients.userEmail.username %}">{{clients.name}}</a></h4></div>
-								<div class="sub-heading">
-								<h5>{{clients.category}}</h5>
-								</div>
-							</div>
-						</div>
-						<div class="bottom">
-							<div class="bottom-text">
-								<div class="delivery" style="font-size: 13px"><i class="fas fa-map-marker-alt"></i>Location : {{clients.state}}, {{clients.city}}</div>
-								<div class="time" style="font-size: 13px"><i class="far fa-clock"></i>Opening Hours :{{clients.workingHours}}</div>
-                                <div class="time" style="font-size: 13px"><i class="fas fa-briefcase"></i>Working Days :{{clients.workingDays}}</div>
-								<div class="star" >
-									{% if clients.rate >= 1 %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% endif %}
-									 {% if clients.rate >= 2 %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% endif %}
-									{% if clients.rate >= 3 %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% endif %}
-									{% if clients.rate >= 4 %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% endif %}
-									{% if clients.rate >= 5 %}
-                                                        <i class="fas fa-star"></i>
-                                                    {% endif %}
-									<span>{{clients.rate}}</span> <a style="color: #847577">({{clients.rateCount}})</a>
+    <section class="quick-searches">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="new-heading">
+                        <h1> Quick Searches </h1>
+                    </div>
+                    <div class="sub-title">
+                        Discover Restaurants By Type of Meal
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-8">
+                    <div class="all-meals">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-10 col-md-8">
+                                <div class="owl-carousel searchs-owl owl-theme">
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="meal-icon">
+                                                <img src="/static/images/homepage/quick-searches/meal-1.svg" alt="">
+                                            </div>
+                                            <div class="meal-title">
+                                                Breakfast
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="meal-icon">
+                                                <img src="/static/images/homepage/quick-searches/meal-2.svg" alt="">
+                                            </div>
+                                            <div class="meal-title">
+                                                Lunch
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="meal-icon">
+                                                <img src="/static/images/homepage/quick-searches/meal-3.svg" alt="">
+                                            </div>
+                                            <div class="meal-title">
+                                                Dinner
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="meal-icon">
+                                                <img src="/static/images/homepage/quick-searches/meal-4.svg" alt="">
+                                            </div>
+                                            <div class="meal-title">
+                                                Cafe's
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="item">
+                                        <a href="#">
+                                            <div class="meal-icon">
+                                                <img src="/static/images/homepage/quick-searches/meal-5.svg" alt="">
+                                            </div>
+                                            <div class="meal-title">
+                                                Fast Food
+                                            </div>
+                                        </a>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--quick-searches end-->
 
-							</div>
-						</div>
-					</div>					
-				</div>
-  {% endfor %}
+    <!--order-food-online-in-your-area start-->
+    <section class="order-food-online">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="new-heading">
+                        <h1> Popular Restaurants In Your Area </h1>
+                    </div>
+                    <div class="your-location">
+                        <span><i class="fas fa-map-marker-alt"></i>İstanbul</span>Change Location
+                    </div>
+                    <div class="all-items">
+                        <div class="search col-lg-4 col-md-6 col-sm-12 col-xs-12">
+                            <form>
+                                <input class="search-location" name="search" type="search"
+                                       placeholder="Enter Your Location"/>
+                                <div class="icon-btn">
+                                    <div class="cross-icon">
+                                        <i class="fas fa-crosshairs"></i>
+                                    </div>
+                                    <div class="s-m-btn">
+                                        <button class="search-meal-btn btn-link">Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {% for clients in clients %}
+                    <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
+                        <div class="all-meal">
+                            <div class="top">
+                                <a href="{% url 'clientprofile' clients.userEmail.username %}">
+                                    <div class="bg-gradient"></div>
+                                </a>
+                                <div class="top-img">
+                                    <img src="{{ clients.image1.url }}" style="width:100%;margin:auto;height:100%"
+                                         alt="">
 
-			<div class="meal-btn" hidden>
-				<a href="#" class="m-btn btn-link">Show All</a>
-			</div>
-		</div>
-	</section>
-	<!--order-food-online-in-your-area end-->	
-	<!--offer-banners start-->
-	<section class="offer-banners">
-		<div class="container" hidden>
-			<div class="row">
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="banner">
-						<div class="ads-banner" style="background-image: url(/static/images/homepage/offer-banners/banner-1.jpg)"></div>
-						<div class="banner-items">
-							<div class="bnnr-text">
-							<h2>Order Food Online</h2>
-							<p>Use code to get 50% off upto $5<br> on your next order.</p>
-							</div>
-							<div class="offer-button">
-								<a href="#" class="of-btn btn-link">Order Now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-					<div class="banner">
-						<div class="ads-banner" style="background-image: url(/static/images/homepage/offer-banners/banner-2.jpg)"></div>
-						<div class="banner-items">
-							<div class="bnnr-text">
-							<h2>Membership<span><i class="fas fa-long-arrow-alt-right"></i></span>Open Now</h2>
-							<p>Memberships are now open for<br> purchases.</p>
-							</div>
-							<div class="offer-button">
-								<a href="#" class="of-btn btn-link">Sign up Now</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--offer-banners end-->
-	
-	<!--featured-restaurants start-->
-	<section class="featured-restaurants"hidden>
-		<div class="container" >
-			<div class="row">									
-				<div class="col-lg-8">
-					<div class="new-heading">
-						<h1> Featured Restaurants </h1>
-					</div>
-					<div class ="bg-resto">
-						<div class="resto-item">	
-							<div class="row">	
-								<div class="col-md-4 col-sm-12">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_01.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Food Roster </a></h4>
-											<p>Indian Restaurant</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-12">															
-									<div class="resto-location">
-										<span><i class="fas fa-map-marker-alt"></i></span>New York City,1569  
-									</div>						
-								</div>	
-								<div class="col-md-4 col-sm-12">															
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>						
-								</div>
-							</div>						
-						</div>
-						<div class="resto-item">	
-							<div class="row">	
-								<div class="col-md-4 col-sm-12">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_02.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Chef House </a></h4>
-											<p>American Restaurant</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-12">															
-									<div class="resto-location">
-										<span><i class="fas fa-map-marker-alt"></i></span>New York City,1569  
-									</div>						
-								</div>	
-								<div class="col-md-4 col-sm-12">															
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>						
-								</div>
-							</div>						
-						</div>
-						<div class="resto-item">	
-							<div class="row">	
-								<div class="col-md-4 col-sm-12">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_03.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Rooster </a></h4>
-											<p>Indian Restaurant</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-12">															
-									<div class="resto-location">
-										<span><i class="fas fa-map-marker-alt"></i></span>New York City,1569  
-									</div>						
-								</div>	
-								<div class="col-md-4 col-sm-12">															
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>						
-								</div>
-							</div>						
-						</div>
-						<div class="resto-item">	
-							<div class="row">	
-								<div class="col-md-4 col-sm-12">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_04.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Limon Resto </a></h4>
-											<p>Australian Restaurant</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-12">															
-									<div class="resto-location">
-										<span><i class="fas fa-map-marker-alt"></i></span>New York City,1569  
-									</div>						
-								</div>	
-								<div class="col-md-4 col-sm-12">															
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>						
-								</div>
-							</div>						
-						</div>
-						<div class="resto-item">	
-							<div class="row">	
-								<div class="col-md-4 col-sm-12">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_05.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Ramen Bakery </a></h4>
-											<p>Canadian Bakery</p>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-4 col-sm-12">															
-									<div class="resto-location">
-										<span><i class="fas fa-map-marker-alt"></i></span>New York City,1569  
-									</div>						
-								</div>	
-								<div class="col-md-4 col-sm-12">															
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>						
-								</div>
-							</div>						
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="new-heading treading-sellers">
-						<h1> Treading This Week Sellers</h1>
-					</div>
-					<div class ="bg-resto">
-						<div class="treading-item">	
-							<div class="row">	
-								<div class=" col-lg-7 col-md-6">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_06.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Steak Resto </a></h4>
-											<p>Treading</p>
-										</div>										
-									</div>
-									
-								</div>	
-								<div class="col-lg-5 col-md-6 ">
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#">View Menu</a>  
-									</div>
-								</div>
-							</div>						
-						</div>		
-						<div class="treading-item">	
-							<div class="row">	
-								<div class="col-lg-7 col-md-6">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_02.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Meshi Restaurant </a></h4>
-											<p>Treading</p>
-										</div>										
-									</div>
-									
-								</div>	
-								<div class="col-lg-5 col-md-6">
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>
-								</div>
-							</div>						
-						</div>
-						<div class="treading-item">	
-							<div class="row">	
-								<div class="col-lg-7 col-md-6">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_07.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Momo Resto </a></h4>
-											<p>Treading</p>
-										</div>										
-									</div>
-									
-								</div>	
-								<div class="col-lg-5 col-md-6">
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>
-								</div>
-							</div>						
-						</div>	
-						<div class="treading-item">	
-							<div class="row">	
-								<div class="col-lg-7 col-md-6">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_01.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Rooster </a></h4>
-											<p>Treading</p>
-										</div>										
-									</div>
-									
-								</div>	
-								<div class="col-lg-5 col-md-6">
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>
-								</div>
-							</div>						
-						</div>	
-						<div class="treading-item">	
-							<div class="row">	
-								<div class="col-lg-7 col-md-6">
-									<div class="resto-img">
-										<img src="/static/images/homepage/featured-restaurants/logo_03.jpg" alt="">
-										<div class="resto-name">
-											<h4><a href="#"> Limon Bakery </a></h4>
-											<p>Treading</p>
-										</div>										
-									</div>
-									
-								</div>	
-								<div class="col-lg-5 col-md-6">
-									<div class="menu-btn">
-										<a class="mn-btn btn-link" href="#"> View Menu</a>  
-									</div>
-								</div>
-							</div>						
-						</div>	
-						
-					</div>
-				</div>
-				
-			</div>	
-		</div>
-		
-	</section>
-	<!--featured restaurants end-->	
-	<!--explore-your-favorite-recipes start-->
-	<section class="explore-recipes"hidden>
-		<div class="container" >
-			<div class="row">	
-				<div class="col-md-12">
-					<div class="new-heading">
-						<h1> Explore Your Favorite Recipes </h1>
-					</div>	
-				</div>
-			</div>
-			<div class="b-recipes">
-				<div class="row">
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_01.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>North Indian</h6>
-									<p>75 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_02.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>Fast Food</h6>
-									<p>105 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_03.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>Italian Food</h6>
-									<p>35 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_04.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>Chinese Food</h6>
-									<p>60 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_05.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>Street Food</h6>
-									<p>45 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					<div class="col-lg-4 col-md-6">
-						<a href="#">
-						<div class="recipe-item">
-							<img src="/static/images/homepage/recipes/recipe_06.jpg" alt="">
-							 <div class="overlay">
-								<div class="recipes-title">	
-									<h6>Bakery</h6>
-									<p>20 Videos</p>
-								 </div>
-							 </div>
-						</div>
-						</a>
-					</div>
-					
-				</div>
-			</div>
-			<div class="meal-btn">
-				<a href="#" class="m-btn btn-link">Show All</a>
-			</div>
-		</div>
-	</section>
-	<!--explore-your-favorite-recipes end-->	
-	<!--download-link start-->
-	<section class="pocket-block-preview">
-			<div class="pocket-cover-banner" style="background-image: url(/static/images/homepage/bottom-banner.jpg)"></div>
-			<div class="container" hidden>
-				<div class="row">	
-					<div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
-						<div class="pocket-items">
-							<div class="new-heading">
-								<h1>Natto in Your Pocket</h1>
-							</div>
-							<div class="line">
-								<img src="/static/images/homepage/line.svg" alt="">
-							</div>
-							<p>We’ll send you a link, open it on your phone to download the app.</p>
-							<form class="search-form">
-								<input type="text" class="send-link" placeholder="Enter your email address">
-								<button type="submit" class="pocket-btn">Send Link</button>
-							</form>
-							<div class="download-btns">
-								<a href="#"><img src="/static/images/homepage/app-store.png" alt=""></a>
-								<a href="#"><img src="/static/images/homepage/play-store.png" alt=""></a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-5 col-md-5">
-						<div class="mobile-image">
-							<img src="/static/images/homepage/mobile.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	<!--download-link end-->
+                                </div>
+                                <div class="logo-img">
+                                    <img src="{{ clients.logo.url }}" style="width:64px" alt="">
+                                </div>
+                                <div class="top-text">
+                                    <div class="heading"><h4><a
+                                            href="{% url 'clientprofile' clients.userEmail.username %}">{{ clients.name }}</a>
+                                    </h4></div>
+                                    <div class="sub-heading">
+                                        <h5>{{ clients.category }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bottom">
+                                <div class="bottom-text">
+                                    <div class="delivery" style="font-size: 13px"><i class="fas fa-map-marker-alt"></i>Location
+                                        : {{ clients.state }}, {{ clients.city }}</div>
+                                    <div class="time" style="font-size: 13px"><i class="far fa-clock"></i>Opening Hours
+                                        :{{ clients.workingHours }}</div>
+                                    <div class="time" style="font-size: 13px"><i class="fas fa-briefcase"></i>Working
+                                        Days :{{ clients.workingDays }}</div>
+                                    <div class="star">
+                                        {% if clients.rate >= 1 %}
+                                            <i class="fas fa-star"></i>
+                                        {% endif %}
+                                        {% if clients.rate >= 2 %}
+                                            <i class="fas fa-star"></i>
+                                        {% endif %}
+                                        {% if clients.rate >= 3 %}
+                                            <i class="fas fa-star"></i>
+                                        {% endif %}
+                                        {% if clients.rate >= 4 %}
+                                            <i class="fas fa-star"></i>
+                                        {% endif %}
+                                        {% if clients.rate >= 5 %}
+                                            <i class="fas fa-star"></i>
+                                        {% endif %}
+                                        <span>{{ clients.rate }}</span> <a
+                                            style="color: #847577">({{ clients.rateCount }})</a>
+                                    </div>
 
-	{% endblock %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
 
-    {% block content3 %}
+                <div class="meal-btn" hidden>
+                    <a href="#" class="m-btn btn-link">Show All</a>
+                </div>
+            </div>
+    </section>
+    <!--order-food-online-in-your-area end-->
+    <!--offer-banners start-->
+    <section class="offer-banners">
+        <div class="container" hidden>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="banner">
+                        <div class="ads-banner"
+                             style="background-image: url(/static/images/homepage/offer-banners/banner-1.jpg)"></div>
+                        <div class="banner-items">
+                            <div class="bnnr-text">
+                                <h2>Order Food Online</h2>
+                                <p>Use code to get 50% off upto $5<br> on your next order.</p>
+                            </div>
+                            <div class="offer-button">
+                                <a href="#" class="of-btn btn-link">Order Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                    <div class="banner">
+                        <div class="ads-banner"
+                             style="background-image: url(/static/images/homepage/offer-banners/banner-2.jpg)"></div>
+                        <div class="banner-items">
+                            <div class="bnnr-text">
+                                <h2>Membership<span><i class="fas fa-long-arrow-alt-right"></i></span>Open Now</h2>
+                                <p>Memberships are now open for<br> purchases.</p>
+                            </div>
+                            <div class="offer-button">
+                                <a href="#" class="of-btn btn-link">Sign up Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--offer-banners end-->
+
+    <!--featured-restaurants start-->
+    <section class="featured-restaurants" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="new-heading">
+                        <h1> Featured Restaurants </h1>
+                    </div>
+                    <div class="bg-resto">
+                        <div class="resto-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_01.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Food Roster </a></h4>
+                                            <p>Indian Restaurant</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-location">
+                                        <span><i class="fas fa-map-marker-alt"></i></span>New York City,1569
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resto-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_02.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Chef House </a></h4>
+                                            <p>American Restaurant</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-location">
+                                        <span><i class="fas fa-map-marker-alt"></i></span>New York City,1569
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resto-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_03.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Rooster </a></h4>
+                                            <p>Indian Restaurant</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-location">
+                                        <span><i class="fas fa-map-marker-alt"></i></span>New York City,1569
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resto-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_04.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Limon Resto </a></h4>
+                                            <p>Australian Restaurant</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-location">
+                                        <span><i class="fas fa-map-marker-alt"></i></span>New York City,1569
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="resto-item">
+                            <div class="row">
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_05.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Ramen Bakery </a></h4>
+                                            <p>Canadian Bakery</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="resto-location">
+                                        <span><i class="fas fa-map-marker-alt"></i></span>New York City,1569
+                                    </div>
+                                </div>
+                                <div class="col-md-4 col-sm-12">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="new-heading treading-sellers">
+                        <h1> Treading This Week Sellers</h1>
+                    </div>
+                    <div class="bg-resto">
+                        <div class="treading-item">
+                            <div class="row">
+                                <div class=" col-lg-7 col-md-6">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_06.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Steak Resto </a></h4>
+                                            <p>Treading</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5 col-md-6 ">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#">View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="treading-item">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_02.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Meshi Restaurant </a></h4>
+                                            <p>Treading</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="treading-item">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_07.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Momo Resto </a></h4>
+                                            <p>Treading</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="treading-item">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_01.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Rooster </a></h4>
+                                            <p>Treading</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="treading-item">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-6">
+                                    <div class="resto-img">
+                                        <img src="/static/images/homepage/featured-restaurants/logo_03.jpg" alt="">
+                                        <div class="resto-name">
+                                            <h4><a href="#"> Limon Bakery </a></h4>
+                                            <p>Treading</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-5 col-md-6">
+                                    <div class="menu-btn">
+                                        <a class="mn-btn btn-link" href="#"> View Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+    <!--featured restaurants end-->
+    <!--explore-your-favorite-recipes start-->
+    <section class="explore-recipes" hidden>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="new-heading">
+                        <h1> Explore Your Favorite Recipes </h1>
+                    </div>
+                </div>
+            </div>
+            <div class="b-recipes">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_01.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>North Indian</h6>
+                                        <p>75 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_02.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>Fast Food</h6>
+                                        <p>105 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_03.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>Italian Food</h6>
+                                        <p>35 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_04.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>Chinese Food</h6>
+                                        <p>60 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_05.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>Street Food</h6>
+                                        <p>45 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <a href="#">
+                            <div class="recipe-item">
+                                <img src="/static/images/homepage/recipes/recipe_06.jpg" alt="">
+                                <div class="overlay">
+                                    <div class="recipes-title">
+                                        <h6>Bakery</h6>
+                                        <p>20 Videos</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+            <div class="meal-btn">
+                <a href="#" class="m-btn btn-link">Show All</a>
+            </div>
+        </div>
+    </section>
+    <!--explore-your-favorite-recipes end-->
+    <!--download-link start-->
+    <section class="pocket-block-preview">
+        <div class="pocket-cover-banner" style="background-image: url(/static/images/homepage/bottom-banner.jpg)"></div>
+        <div class="container" hidden>
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
+                    <div class="pocket-items">
+                        <div class="new-heading">
+                            <h1>Natto in Your Pocket</h1>
+                        </div>
+                        <div class="line">
+                            <img src="/static/images/homepage/line.svg" alt="">
+                        </div>
+                        <p>We’ll send you a link, open it on your phone to download the app.</p>
+                        <form class="search-form">
+                            <input type="text" class="send-link" placeholder="Enter your email address">
+                            <button type="submit" class="pocket-btn">Send Link</button>
+                        </form>
+                        <div class="download-btns">
+                            <a href="#"><img src="/static/images/homepage/app-store.png" alt=""></a>
+                            <a href="#"><img src="/static/images/homepage/play-store.png" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 col-md-5">
+                    <div class="mobile-image">
+                        <img src="/static/images/homepage/mobile.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--download-link end-->
+
+{% endblock %}
+
+{% block content3 %}
     <!--Bootstrap core JavaScript-->
-        <script type="text/javascript">
+    <script type="text/javascript">
         {% if control == True %}
-    $(window).on('load',function(){
-        $('#exampleModalLong').modal('show');
-    });
+            $(window).on('load', function () {
+                $('#exampleModalLong').modal('show');
+            });
         {% endif %}
-        </script>
+    </script>
+
+    <script>
+        let locations = [
+            "Alabama",
+            "Alaska",
+            "Arizona",
+            "Arkansas",
+            "California",
+            "Colorado",
+            "Connecticut",
+            "Delaware",
+            "Florida",
+            "Georgia",
+            "Hawaii",
+            "Idaho",
+            "Illnois",
+            "Indiana",
+            "Iowa",
+            "Kansas",
+            "Kentucky",
+            "Louisiana",
+            "Maine",
+            "Maryland",
+            "Massachusetts",
+            "Michigan",
+            "Minnesota",
+            "Mississippi",
+            "Missouri",
+            "Montana",
+            "Nebraska",
+            "Nevada",
+            "New Hampshire",
+            "New Jersey",
+            "New Mexico",
+            "New York",
+            "North Carolina",
+            "North Dakota",
+            "Ohio",
+            "Oklahoma",
+            "Oregon",
+            "Pennsylvania",
+            "Rhode Island",
+            "South Carolina",
+            "South Dakota",
+            "Tennessee",
+            "Texas",
+            "Utah",
+            "Vermont",
+            "Virginia",
+            "Washington",
+            "West Virginia",
+            "Wisconsin",
+            "Wyoming"
+        ];
+
+        $('#form-autocomplete-4').mdbAutocomplete({
+            data: locations,
+            dataColor: 'green',
+            inputFocus: '2px solid green',
+            inputBlur: '1px solid #ced4da',
+            inputFocusShadow: '0 1px 0 0 #4285f4',
+            inputBlurShadow: ''
+        });
+    </script>
 
 
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!--Core plugin JavaScript-->
     <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-	 <!--Assect scripts for this page-->
-	<script src="/static/vendor/OwlCarousel/owl.carousel.js"></script>
-	<script src="/static/js/owlslider.js"></script>
-    {% endblock %}
+    <!--Assect scripts for this page-->
+    <script src="/static/vendor/OwlCarousel/owl.carousel.js"></script>
+    <script src="/static/js/owlslider.js"></script>
+{% endblock %}
 
