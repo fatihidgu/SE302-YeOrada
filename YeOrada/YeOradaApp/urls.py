@@ -16,7 +16,8 @@ urlpatterns = [
     url(r'^logout/$', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     path('myprofile', views.myprofile, name='myprofile'),
     path('likeComment', views.likeComment, name='likeComment'),
-    path('clientsettings', views.clientsettings, name='clientsettings')
+    path('clientsettings', views.clientsettings, name='clientsettings'),
+    path('adminsettings', views.adminsettings, name='adminsettings'),
 ]
 
 if settings.DEBUG:

@@ -107,13 +107,28 @@ def clientprofile(request, username):
     registeredUser = RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
 
+
+    CountOfPhoto = 0
+    CountofComment = Comment.objects.filter(clientEmail=clientObject.userEmail.email)
+    for com in CountofComment:
+        if com.image != "defaultComment.jpg" and com.image2 == "defaultComment.jpg" and com.image3 == "defaultComment.jpg":
+            CountOfPhoto += 1
+        elif com.image != "defaultComment.jpg" and com.image2 != "defaultComment.jpg" and com.image3 == "defaultComment.jpg":
+            CountOfPhoto += 2
+        elif com.image != "defaultComment.jpg" and com.image2 != "defaultComment.jpg" and com.image3 != "defaultComment.jpg":
+            CountOfPhoto += 3
+
+    print(CountOfPhoto)
+
+
+
     clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
 
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
-                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, })
+                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, 'CountOfPhoto':CountOfPhoto, })
 
 
 def likeComment(request):

@@ -103,3 +103,50 @@ def myprofile(request):
                    'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, })
+
+
+def adminsettings(request):
+    error_message1 = ""
+    error_message2 = ""
+    passwordChangeForm = PasswordChangeForm(request.user)
+    if 'saveChanges2' in request.POST:
+        name = request.POST.get('name')
+        surname = request.POST.get('surname')
+        email = request.POST.get('email')
+        username = request.POST.get('username')
+        userObject = RegisteredUser.objects.filter(email=request.user.email).first()
+        emailCheck = RegisteredUser.objects.filter(email=email)
+        usernameCheck = RegisteredUser.objects.filter(username=username)
+        if (emailCheck.first() and email != request.user.email) or (
+                usernameCheck.first() and username != request.user.username):
+            error_message1 = "* Email or username are already used"
+
+
+        else:
+            userObject.name = name;
+            userObject.surname = surname;
+            userObject.username = username;
+
+            userObject.save()
+
+            return redirect('adminsettings')
+
+    elif 'changePassword' in request.POST:
+        passwordChangeForm = PasswordChangeForm(request.user, request.POST)
+        if passwordChangeForm.is_valid():
+            passwordChangeForm.save()
+            return redirect('home')
+
+    elif 'yourEmail' in request.POST:
+        if request.POST.get('Email') == request.user.email:
+            ruser = RegisteredUser.objects.filter(email=request.user.email)
+            ruser.update(is_active=False)
+            return redirect('home')
+        else:
+            error_message2 = "You entered wrong mail"
+
+    user = request.user
+
+    return render(request, 'yeoradamain/admin_settings.html',
+                  {'user': user, 'error_message1': error_message1,
+                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2})
