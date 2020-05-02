@@ -33,7 +33,14 @@ def clientsearch(request):
         clientcuisines = ClientCuisine.objects.all()
 
     elif 'search' in request.POST:
-        clientQuerySet = Client.objects.filter(userEmail__is_active=True)
+        city = request.POST.get('city_input')
+        state = request.POST.get('state_input')
+
+        if len(city.split()) == 0 and len(state.split()) == 0:
+            clientQuerySet = Client.objects.filter(userEmail__is_active=True)
+        else:
+            clientQuerySet = Client.objects.filter(userEmail__is_active=True, city=city, state=state)
+
         clients = list()
 
         for client in clientQuerySet:

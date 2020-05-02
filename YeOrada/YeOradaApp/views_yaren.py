@@ -16,6 +16,11 @@ def settings(request):
         city = request.POST.get('city')
         country = request.POST.get('country')
         username = request.POST.get('username')
+        imageCheck = request.POST.get('customer_avatar_check')
+
+        if len(imageCheck.split()) != 0:
+            image = request.FILES['customer_avatar']
+
         userObject = RegisteredUser.objects.filter(email=request.user.email).first()
         customerObject = Customer.objects.filter(userEmail=request.user).first()
 
@@ -36,6 +41,9 @@ def settings(request):
 
             customerObject.city = city;
             customerObject.country = country;
+
+            if len(imageCheck.split()) != 0:
+                customerObject.image = image
 
             userObject.save()
             customerObject.save()

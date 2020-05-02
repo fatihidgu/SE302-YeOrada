@@ -21,6 +21,12 @@ def clientsettings(request):
         workinghours = request.POST.get('workinghours')
         workingdays = request.POST.get('workingdays')
         info = request.POST.get('info')
+
+        imageCheck = request.POST.get('client_avatar_check')
+
+        if len(imageCheck.split()) != 0:
+            image = request.FILES['client_avatar']
+
         userObject = RegisteredUser.objects.filter(email=request.user.email).first()
         clientObject = Client.objects.filter(userEmail=request.user).first()
         emailCheck = RegisteredUser.objects.filter(email=email)
@@ -42,6 +48,9 @@ def clientsettings(request):
             clientObject.workingHours = workinghours
             clientObject.workingDays = workingdays
             clientObject.info = info
+
+            if len(imageCheck.split()) != 0:
+                clientObject.logo = image
 
             userObject.save()
             clientObject.save()
