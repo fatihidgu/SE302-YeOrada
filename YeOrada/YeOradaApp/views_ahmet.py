@@ -7,15 +7,31 @@ from YeOradaApp.models import Client, ClientCuisine
 def clientsearch(request):
     clients = Client.objects.filter(userEmail__is_active=True)
     clientcuisines = ClientCuisine.objects.all()
+    city = ""
+    state = ""
 
     if 'searchRestaurant' in request.POST:
         name = request.POST.get('restaurant')
+        city = request.POST.get('city_input')
+        state = request.POST.get('state_input')
+        print("State:", state)
+        print("City:", city)
 
         if len(name.split()) == 0:
-            clients = Client.objects.filter(userEmail__is_active=True)
+
+            if len(city.split()) == 0 and len(state.split()) == 0:
+                clients = Client.objects.filter(userEmail__is_active=True)
+            else:
+                clients = Client.objects.filter(userEmail__is_active=True, city=city, state=state)
         else:
-            clients = Client.objects.filter(name__icontains=name, userEmail__is_active=True)
+
+            if len(city.split()) == 0 and len(state.split()) == 0:
+                clients = Client.objects.filter(name__icontains=name, userEmail__is_active=True)
+            else:
+                clients = Client.objects.filter(userEmail__is_active=True, name__icontains=name, city=city, state=state)
+
         clientcuisines = ClientCuisine.objects.all()
+
     elif 'search' in request.POST:
         clientQuerySet = Client.objects.filter(userEmail__is_active=True)
         clients = list()
@@ -183,4 +199,4 @@ def clientsearch(request):
                     clients.remove(client)
     clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
 
-    return render(request, 'yeoradamain/partners.html', {'clients': clients, 'clientcuisines': clientcuisines,'clienty':clienty })
+    return render(request, 'yeoradamain/partners.html', {'clients': clients, 'clientcuisines': clientcuisines,'clienty': clienty, 'city': city, 'state': state, })

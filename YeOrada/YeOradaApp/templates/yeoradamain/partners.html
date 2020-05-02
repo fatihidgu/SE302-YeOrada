@@ -24,6 +24,42 @@
    	
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIVX6GlP0RDDM3vcFhgzYnugViFmxl0g&libraries=places"></script>
+
+    <script>
+        $(document).ready(function () {
+            var autocomplete;
+            var input = document.getElementById('search_location');
+            var options = {
+
+                componentRestrictions: {country: 'tr'}
+            };
+
+            autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            autocomplete.setFields(['address_component']);
+
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                var componentLength = place.address_components.length;
+
+                var state = 3;
+                var city = 2;
+
+                if ( place.address_components[componentLength - 1].long_name != 'Türkiye'){
+                    state++;
+                    city++;
+                }
+
+                document.getElementById('state_input').value = place.address_components[componentLength - state].long_name;
+                document.getElementById('city_input').value = place.address_components[componentLength - city].long_name;
+            });
+        });
+    </script>
+
 {% endblock %}
 
 {% block content2 %}
@@ -65,15 +101,23 @@
 								<div id="collapseOne" class="collapse show" data-parent="#accordionone">
 									<div class="search-area">
 										<form>
-											<input class="search-area-input" name="search" type="text" placeholder="Search your area">
-											<div class="icon-btn">
-												<div class="cross-area-icon">
-													<i class="fas fa-crosshairs"></i>
-												</div>										
-											</div>										
+                                            {% if city != "" and state != ""  %}
+                                                <div class="input-group-prepend">
+                                                     <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                                </div>
+                                                <input id="search_location" style="padding-right: 15px;" class="find-address skills" name="search" type="text" placeholder="Search your area" value="{{ state }}/{{ city }}, Türkiye">
+                                            {% else %}
+                                                <div class="input-group-prepend">
+                                                     <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                                </div>
+											    <input id="search_location" style="padding-right: 15px;" class="find-address skills" name="search" type="text" placeholder="Search your area">
+                                            {% endif %}
+
+                                             <input type="hidden" id="state_input" name="state_input" value="{{ state }}" />
+                                             <input type="hidden" id="city_input" name="city_input" value="{{ city }}" />
 										</form>
 									</div>
-									<div class="filter-checkbox">
+									<div class="filter-checkbox" hidden>
 										<p>
 										  <input type="checkbox" id="c1" name="cb">
 										  <label for="c1">All</label>
@@ -449,7 +493,6 @@
 
 {% block content3 %}
     <!-- Bootstrap core JavaScript-->
-    <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
