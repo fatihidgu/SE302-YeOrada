@@ -1552,6 +1552,7 @@
                             </div>
 
                             <div class="tab-pane" id="reviews">
+                            {% if user.isCustomer %}
                                 <form method="POST" enctype='multipart/form-data'>
                                     <div class="comment-post">
                                         <div class="post-items">
@@ -1646,9 +1647,10 @@
                                         </div>
                                     </div>
                                 </form>
-                                {% for comment in commentList %}
-                                    <div class="main-comments">
+                            {% endif %}
 
+                                {% for comment in commentList %}
+                                    <div class="main-comments" >
                                         <div class="rating-1">
                                             <div class="user-detail-heading">
                                                 <a href="user_profile_view.html"><img
@@ -1886,6 +1888,8 @@
                                         </div>
                                     </div>
                                 {% endfor %}
+
+
                                 <!--
 								<div class="main-comments">
 									<div class="rating-1">
@@ -1941,16 +1945,15 @@
 										</div>
 									</div>
 								</div> -->
-                                <div class="spinner m-bottom">
+                                <div class="spinner m-bottom" >
                                     <div class="d-flex justify-content-center">
                                         <a href="#">
-                                            <div class="spinner-border" role="status">
-                                                <span class="sr-only">Loading...</span>
-                                            </div>
+
                                         </a>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="tab-pane" id="book-a-table">
                                 <div class="restaurants-detail-bg m-bottom">
                                     <h4 class="n-bottom">Book a Table</h4>
@@ -2066,7 +2069,7 @@
                                                 {% if comment.image2.url != "/media/defaultComment.jpg" %}
                                                     <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
                                                          data-target="#exampleModal2"
-                                                         onclick="showPhoto('{{ comment.image.url }}', '{{ comment.customerEmail.userEmail.name }}', '{{ comment.customerEmail.userEmail.surname }}', '{{ comment.customerEmail.image.url }}', '{{ comment.date }}')">
+                                                         onclick="showPhoto('{{ comment.image2.url }}', '{{ comment.customerEmail.userEmail.name }}', '{{ comment.customerEmail.userEmail.surname }}', '{{ comment.customerEmail.image.url }}', '{{ comment.date }}')">
                                                         <div class="photo-gallery">
                                                             <img src="{{ comment.image2.url }}" alt="">
                                                             <a><i class="far fa-plus-square"></i></a>
@@ -2076,7 +2079,7 @@
                                                 {% if comment.image3.url != "/media/defaultComment.jpg" %}
                                                     <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
                                                          data-target="#exampleModal2"
-                                                         onclick="showPhoto('{{ comment.image.url }}', '{{ comment.customerEmail.userEmail.name }}', '{{ comment.customerEmail.userEmail.surname }}', '{{ comment.customerEmail.image.url }}', '{{ comment.date }}')">
+                                                         onclick="showPhoto('{{ comment.image3.url }}', '{{ comment.customerEmail.userEmail.name }}', '{{ comment.customerEmail.userEmail.surname }}', '{{ comment.customerEmail.image.url }}', '{{ comment.date }}')">
                                                         <div class="photo-gallery">
                                                             <img src="{{ comment.image3.url }}" alt="">
                                                             <a><i class="far fa-plus-square"></i></a>
@@ -2087,7 +2090,7 @@
 
                                             <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
                                                  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <img id="customerPhoto" style="width: 50px; border-radius: 50%" src="" alt="">
@@ -2111,7 +2114,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="spinner q-bottom">
+                                            <div class="spinner q-bottom" hidden>
                                                 <div class="d-flex justify-content-center">
                                                     <a href="#">
                                                         <div class="spinner-border" role="status">
