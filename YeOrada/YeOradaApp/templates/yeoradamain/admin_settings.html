@@ -56,10 +56,11 @@
                     <div class="row">
                         <div class="container">
                             <div class="profile-dpt">
-                                <img src="{{ customer.image.url }}" alt="" style="width: 210px;">
+                                <img src="/media/admin4.png" alt="" style="width: 210px; border-color: #CACFD2; ">
                             </div>
                             <div class="profile-all-dt">
                                 <div class="profile-name-dt">
+                                    <h5 style="color: #ffa803; margin-bottom: 2%;">Admin</h5>
                                     <h1>{{ user.name }} {{ user.surname }}</h1>
                                 </div>
                             </div>
@@ -82,8 +83,6 @@
 
                             <a href="#change-password" data-toggle="tab" class="item user-tab cursor-pointer">Change
                                 Password</a>
-                            <a href="#delete-account" data-toggle="tab" class="item user-tab cursor-pointer"
-                               id="bookmarks" data-tab="bookmarks">Deactivate Account</a>
                         </div>
                     </div>
                 </div>
@@ -93,31 +92,11 @@
                             <div class="timeline">
                                 <div class="tab-content-heading">
                                     <h4>Profile Information</h4>
-                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                    <a href={% url 'adminsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="edit-profile">
                                     <form method="post">
                                         {% csrf_token %}
-                                        <div class="setting-dt">
-                                            <h4>Avatar</h4>
-                                            <div>
-                                                <br>
-                                                <img style= "width: 150px;" id ="user-avatar1" src="/static/images/profile/avatar.jpg" alt="">
-                                            </div>
-                                            <br>
-                                            <div class="upload-avatar" style="margin-top: -1%;">
-                                                <div class="input-container">
-                                                    <input class="file-upload-input" type="file"
-                                                           onchange="loadFile(event);" accept="image/*" id="avatar-input1">
-                                                    <button class="browse-btn">
-                                                        Choose File
-                                                    </button>
-                                                    <span class="file-info">Upload a file</span>
-                                                </div>
-                                            </div>
-                                            <br>
-                                        </div>
-                                        <div class="form-group"></div>
 
                                         <div class="form-group">
                                             <label for="nameUser">Name*</label>
@@ -154,7 +133,7 @@
                             <div class="profile-about">
                                 <div class="tab-content-heading">
                                     <h4>Notification Setting</h4>
-                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                    <a href={% url 'adminsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="noti-setting">
                                     <div class="noti-all-st">
@@ -243,7 +222,7 @@
                             <div class="timeline">
                                 <div class="tab-content-heading">
                                     <h4>Change Password</h4>
-                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                    <a href={% url 'adminsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="edit-profile">
                                     <form method="POST">
@@ -276,7 +255,7 @@
                             <div class="timeline">
                                 <div class="tab-content-heading">
                                     <h4>Deactivate Account</h4>
-                                    <a href={% url 'settings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
+                                    <a href={% url 'adminsettings' %}><i class="fas fa-angle-double-left"></i>Back to Profile</a>
                                 </div>
                                 <div class="edit-profile">
                                     <form method="POST">

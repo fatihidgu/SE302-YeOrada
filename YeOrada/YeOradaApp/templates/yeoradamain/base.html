@@ -37,6 +37,8 @@
                                         {% endif %}
                                     {% if user.isCustomer %}<a class="dropdown-item" href="{% url 'settings' %}"> Settings</a>{% elif user.isClient %}
                                         <a class="dropdown-item" href="{% url 'clientsettings' %}"> Settings</a>
+                                        {% elif user.isAdmin %}
+                                        <a class="dropdown-item" href="{% url 'adminsettings' %}"> Settings</a>
                                         {% endif %}
                                     <a class="dropdown-item" href="{% url 'logout' %}"> Logout</a>
                                 </div>

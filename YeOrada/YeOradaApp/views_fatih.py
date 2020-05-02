@@ -60,7 +60,7 @@ def clientsettings(request):
         passwordChangeForm = PasswordChangeForm(request.user, request.POST)
         if passwordChangeForm.is_valid():
             passwordChangeForm.save()
-            return redirect('home')
+            return redirect('signin')
 
     elif 'yourEmail' in request.POST:
         if request.POST.get('Email') == request.user.email:

@@ -65,7 +65,7 @@
 								<div class="profile-name-dt">
 									 <h1>{{ user.name }} {{ user.surname }}</h1>
 									<p><span><i
-                                            class="fas fa-map-marker-alt"></i></span>{{ customer.city }}, {{ customer.state }}
+                                            class="fas fa-map-marker-alt"></i></span>{{ customer.state }}, {{ customer.city }}
                                     </p>
 								</div>
 							</div>
@@ -149,19 +149,108 @@
                                                 <span> and</span>&nbsp; <a href="#">8 others</a></p>
                                         </div>
                                         <div class="post-images">
-                                            <div class="select-images">
+                                            <div class="select-images" id="gallery" data-toggle="modal"
+                                                 data-target="#exampleModal{{ comment.id }}">
                                                 <ul>
-                                                    <li class="image-select">
-                                                        <img src="/static/images/restaurant-detail/add-1.jpg" alt="">
-                                                    </li>
-                                                    <li class="image-select">
-                                                        <img src="/static/images/restaurant-detail/add-2.jpg" alt="">
-                                                    </li>
-                                                    <li class="image-select">
-                                                        <img src="/static/images/restaurant-detail/add-3.jpg" alt="">
-                                                    </li>
+                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoOne"
+                                                                 onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
+                                                                 src={{ comment.image.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoTwo"
+                                                                 onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
+                                                                 src={{ comment.image2.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoThr"
+                                                                 onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
+                                                                 src={{ comment.image3.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
                                                 </ul>
                                             </div>
+
+                                            <div class="modal fade" id="exampleModal{{ comment.id }}" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="carouselExample{{ comment.id }}"
+                                                                 class="carousel slide"
+                                                                 data-ride="carousel">
+                                                                <ol class="carousel-indicators">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="0"></li>{% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="1"></li>{% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="2"></li>{% endif %}
+                                                                </ol>
+                                                                <div class="carousel-inner">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="firstClass{{ comment.id }}"
+                                                                             class="carousel-item active">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="secondClass{{ comment.id }}"
+                                                                             class="carousel-item">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image2.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="thirdClass{{ comment.id }}"
+                                                                             class="carousel-item">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image3.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <a class="carousel-control-prev"
+                                                                   href="#carouselExample{{ comment.id }}"
+                                                                   role="button" data-slide="prev">
+                                                                    <span class="carousel-control-prev-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                                <a class="carousel-control-next"
+                                                                   href="#carouselExample{{ comment.id }}"
+                                                                   role="button" data-slide="next">
+                                                                    <span class="carousel-control-next-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
                                         <div class="like-comment-dt">
                                             <ul>
@@ -870,7 +959,7 @@
 	<script src="/static/js/bootstrap-select.js"></script>
 	<script src="/static/js/dashboard-tabs-reload.js"></script>
 
-        <script>
+     <script>
         function likeComment(cid) {
             var commentId = cid;
             var commentIda = cid + "a";
@@ -880,7 +969,7 @@
             if (color1 == 'rgb(255, 168, 3)') {
                 document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
                 var value = document.getElementById(commentIda).innerText;
-                if (value > 0){
+                if (value > 0) {
                     value--;
                 }
                 //alert(value);
@@ -976,17 +1065,20 @@
             var image = document.getElementById('photoForComment');
             var image2 = document.getElementById('photoForComment2');
             var image3 = document.getElementById('photoForComment3');
-            alert(image.src)
+            //alert(image.src)
 
-            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                 image.src = URL.createObjectURL(event.target.files[0]);
+                document.getElementById('file1checking').value = 1;
 
             } else {
-                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                     image2.src = URL.createObjectURL(event.target.files[0]);
-                } else{
-                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg"){
+                    document.getElementById('file2checking').value = 1;
+                } else {
+                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
                         image3.src = URL.createObjectURL(event.target.files[0]);
+                        document.getElementById('file3checking').value = 1;
                     } else {
                         alert("You can add maximum 3 pictures in a comment!");
                     }
@@ -999,14 +1091,49 @@
             var image2 = document.getElementById('photoForComment2');
             var image3 = document.getElementById('photoForComment3');
 
-            if (id == "first"){
+            if (id == "first") {
                 image.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
-            } else if (id == "second"){
+                document.getElementById('file').value = null;
+                document.getElementById('file1checking').value = 0;
+            } else if (id == "second") {
                 image2.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file2').value = null;
+                document.getElementById('file2checking').value = 0;
             } else if (id == "third") {
                 image3.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file3').value = null;
+                document.getElementById('file3checking').value = 0;
             }
         }
+    </script>
+
+    <script>
+        function viewPhoto(id, cid) {
+            if (id == "viewedPhotoOne") {
+                document.getElementById('firstClass' + cid).className = "carousel-item active";
+                document.getElementById('secondClass' + cid).className = "carousel-item";
+                document.getElementById('thirdClass' + cid).className = "carousel-item";
+            } else if (id == "viewedPhotoTwo") {
+                document.getElementById('firstClass' + cid).className = "carousel-item";
+                document.getElementById('secondClass' + cid).className = "carousel-item active";
+                document.getElementById('thirdClass' + cid).className = "carousel-item";
+            } else if (id == "viewedPhotoThr") {
+                document.getElementById('firstClass' + cid).className = "carousel-item";
+                document.getElementById('secondClass' + cid).className = "carousel-item";
+                document.getElementById('thirdClass' + cid).className = "carousel-item active";
+            }
+        }
+    </script>
+
+    <script>
+
+        function showPhoto(url, name, surname, image, date) {
+            document.getElementById('showedPhotoId').src = url;
+            document.getElementById('exampleModalLabel').innerText = name + " " + surname;
+            document.getElementById('customerPhoto').src = image;
+            document.getElementById('dateofphoto').innerText = date;
+        }
+
     </script>
 
 {% endblock %}

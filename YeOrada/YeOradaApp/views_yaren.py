@@ -53,7 +53,7 @@ def settings(request):
         passwordChangeForm = PasswordChangeForm(request.user, request.POST)
         if passwordChangeForm.is_valid():
             passwordChangeForm.save()
-            return redirect('home')
+            return redirect('signin')
 
     elif 'yourEmail' in request.POST:
         if request.POST.get('Email') == request.user.email:
@@ -135,15 +135,7 @@ def adminsettings(request):
         passwordChangeForm = PasswordChangeForm(request.user, request.POST)
         if passwordChangeForm.is_valid():
             passwordChangeForm.save()
-            return redirect('home')
-
-    elif 'yourEmail' in request.POST:
-        if request.POST.get('Email') == request.user.email:
-            ruser = RegisteredUser.objects.filter(email=request.user.email)
-            ruser.update(is_active=False)
-            return redirect('home')
-        else:
-            error_message2 = "You entered wrong mail"
+            return redirect('signin')
 
     user = request.user
 
