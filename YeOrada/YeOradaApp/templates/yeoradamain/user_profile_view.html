@@ -412,66 +412,73 @@
 						<div class="tab-pane" id="photos">
 							<div class="timeline">
 								<div class="tab-content-heading">
-									<h4>Photos</h4>						
+									<h4>Photos</h4>
 								</div>
 								<div class="about-dtp">
 									<div class="photo-bg">
 										<div class="gallery-pf">
 											<div class="row">
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-1.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-2.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-3.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-4.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-5.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-6.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-7.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="/static/images/restaurant-detail/photo-8.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
-												<div class="col-lg-4 col-md-4 col-sm-6 col-6">	
-													<div class="photo-gallery">
-														<img src="i/static/mages/restaurant-detail/photo-2.jpg" alt="">
-														<a href="#"><i class="far fa-plus-square"></i></a>
-													</div>
-												</div>
+											{% for comment in commentList %}
+                                                {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+												{% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image2.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image3.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <img id="clientPhoto" style="width: 50px; border-radius: 50%" src="" alt="">
+                                                            <h5 style="margin-top: 2%; margin-left: 3%" class="modal-title"
+                                                                id="exampleModalLabel"></h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="showedPhotoId" style="width: 100%" src="">
+                                                        </div>
+                                                        <div class="reply-time">
+                                                <p  id="dateofphoto" value="" style="float:left;margin-left:18px" > <i class="far fa-clock"> </i> {{ comment.date }}</p>
+                                                         </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
 												
 											</div>
 										</div>
@@ -1127,11 +1134,12 @@
 
     <script>
 
-        function showPhoto(url, name, surname, image, date) {
+       var showPhoto= function (url, name, image, date) {
             document.getElementById('showedPhotoId').src = url;
-            document.getElementById('exampleModalLabel').innerText = name + " " + surname;
-            document.getElementById('customerPhoto').src = image;
-            document.getElementById('dateofphoto').innerText = date;
+            document.getElementById('exampleModalLabel').innerText = name ;
+            document.getElementById('clientPhoto').src = image;
+            document.getElementById('dateofphoto').innerText =date;
+
         }
 
     </script>
