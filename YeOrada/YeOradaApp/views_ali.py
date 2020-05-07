@@ -117,18 +117,28 @@ def clientprofile(request, username):
             CountOfPhoto += 2
         elif com.image != "defaultComment.jpg" and com.image2 != "defaultComment.jpg" and com.image3 != "defaultComment.jpg":
             CountOfPhoto += 3
-
     print(CountOfPhoto)
 
-
-
     clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
+
+    client_menu_count = 0;
+
+    if clientObject.menu1.url != "/media/defaultMenu.jpg":
+        client_menu_count = client_menu_count + 1
+    if clientObject.menu2.url != "/media/defaultMenu.jpg":
+        client_menu_count = client_menu_count + 1
+    if clientObject.menu3.url != "/media/defaultMenu.jpg":
+        client_menu_count = client_menu_count + 1
+    if clientObject.menu4.url != "/media/defaultMenu.jpg":
+        client_menu_count = client_menu_count + 1
+    if clientObject.menu5.url != "/media/defaultMenu.jpg":
+        client_menu_count = client_menu_count + 1
 
     return render(request, 'yeoradamain/restaurant_detail.html',
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
-                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, 'CountOfPhoto':CountOfPhoto, })
+                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, 'CountOfPhoto':CountOfPhoto, 'client_menu_count': client_menu_count, })
 
 
 def likeComment(request):

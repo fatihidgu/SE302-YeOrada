@@ -1,0 +1,1066 @@
+{% extends 'yeoradamain/base.html' %}
+{% load custom_filter %}
+{% block content1 %}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	
+	<!-- Favicon -->
+	<link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+	
+    <title>Natto | User Profile View</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/static/css/style.css" rel="stylesheet">
+	<link href="/static/css/responsive.css" rel="stylesheet">
+	<link href="/static/css/mega.menu.css" rel="stylesheet">
+	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
+    
+	<!-- Owl Carousel for this template-->
+	<link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+    	
+    <!-- Fontawesome styles for this template-->
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	
+{% endblock %}
+
+{% block content2 %}
+
+	<!--title-bar start-->
+	<section class="title-bar">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="left-title-text">
+					<h3>Admin Approvals View</h3>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="right-title-text">
+						<ul>
+							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">User Profile View</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--title-bar end-->
+	<!--my-account start-->
+	<section class="my-account">
+		<div class="profile-bg">
+
+			<div class="my-Profile-dt" style="margin-top:8%">
+                <div class="container">
+                    <div class="row">
+                        <div class="container">
+                            <div class="profile-dpt">
+                                <img src="/media/admin4.png" alt="" style="width: 210px; border-color: #CACFD2; ">
+                            </div>
+                            <div class="profile-all-dt">
+                                <div class="profile-name-dt">
+                                    <h5 style="color: #ffa803; margin-bottom: 2%;">Admin</h5>
+                                    <h1>{{ user.name }} {{ user.surname }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</section>
+	<!--my-account end-->
+	<!--my-account-tabs start-->
+	<section class="all-profile-details">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-md-4 col-12">
+					<div class="left-tab-links">
+						<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
+							<a href="#timeline"  data-toggle="tab" class="item user-tab cursor-pointer active">Approve Comments</a>
+
+
+
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-8 col-12">
+					<div class="tab-content">
+						<div class="tab-pane active" id="timeline">
+							<div class="timeline">
+								<div class="tab-content-heading">
+									<h4>Comment Confirmation Requests </h4>
+								</div>
+                               {% for comment in commentList %}
+
+                                    <div class="main-comments">
+
+                                        <div class="rating-1">
+                                        <a  href="{% url 'clientprofile' comment.clientEmail.userEmail.username %}" style="float:right"  ><p>{{ comment.clientEmail.name }} <i class="fas fa-angle-double-right"></i> </p></a>
+                                            <div class="user-detail-heading">
+                                                <a href="user_profile_view.html"><img
+                                                        src="{{ comment.customerEmail.image.url }}" alt=""></a>
+                                                <h4> {{ comment.customerEmail.userEmail.name }} {{ comment.customerEmail.userEmail.surname }}</h4>
+
+                                                <br>
+                                                <div class="rate-star">
+                                                    {% if comment.rate >= 1 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 2 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 3 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate >= 4 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    {% if comment.rate == 5 %}
+                                                        <i class="fas fa-star"></i>
+                                                    {% endif %}
+                                                    <span>{{ comment.rate }}</span>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="reply-time">
+                                                <p><i class="far fa-clock"></i>{{ comment.date }}</p>
+                                            </div>
+                                            <div class="comment-description">
+                                                <p>{{ comment.text }}</p>
+                                            </div>
+
+                                        </div>
+
+                                        <div hidden class="review-tags">
+                                            <p>
+                                                <ins>Tags :</ins>
+                                                <a href="#">Johnson,</a> <a href="#"> Jasica,</a><a href="#"> Joy
+                                                William,</a> <a href="#"> Johnson,</a><a href="#"> Jass Singh,</a>&nbsp;
+                                                <span> and</span>&nbsp; <a href="#">8 others</a></p>
+                                        </div>
+                                        <div class="post-images">
+                                            <div class="select-images" id="gallery" data-toggle="modal"
+                                                 data-target="#exampleModal{{ comment.id }}">
+                                                <ul>
+                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoOne"
+                                                                 onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
+                                                                 src={{ comment.image.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoTwo"
+                                                                 onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
+                                                                 src={{ comment.image2.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
+                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                        <li class="image-select">
+                                                            <img style="width: 200px;" id="viewedPhotoThr"
+                                                                 onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
+                                                                 src={{ comment.image3.url }} alt="">
+                                                        </li>
+                                                    {% endif %}
+                                                </ul>
+                                            </div>
+
+                                            <div class="modal fade" id="exampleModal{{ comment.id }}" tabindex="-1"
+                                                 role="dialog"
+                                                 aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div id="carouselExample{{ comment.id }}"
+                                                                 class="carousel slide"
+                                                                 data-ride="carousel">
+                                                                <ol class="carousel-indicators">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="0"></li>{% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="1"></li>{% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                        <li data-target="#carouselExample{{ comment.id }}"
+                                                                            data-slide-to="2"></li>{% endif %}
+                                                                </ol>
+                                                                <div class="carousel-inner">
+                                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="firstClass{{ comment.id }}"
+                                                                             class="carousel-item active">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="secondClass{{ comment.id }}"
+                                                                             class="carousel-item">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image2.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                                        <div id="thirdClass{{ comment.id }}"
+                                                                             class="carousel-item">
+                                                                            <img class="d-block w-100"
+                                                                                 src={{ comment.image3.url }} alt="">
+                                                                        </div>
+                                                                    {% endif %}
+                                                                </div>
+                                                                <a class="carousel-control-prev"
+                                                                   href="#carouselExample{{ comment.id }}"
+                                                                   role="button" data-slide="prev">
+                                                                    <span class="carousel-control-prev-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Previous</span>
+                                                                </a>
+                                                                <a class="carousel-control-next"
+                                                                   href="#carouselExample{{ comment.id }}"
+                                                                   role="button" data-slide="next">
+                                                                    <span class="carousel-control-next-icon"
+                                                                          aria-hidden="true"></span>
+                                                                    <span class="sr-only">Next</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="like-comment-dt">
+                                            <form method="POST">
+                                                 <input name="commentId" type="hidden" value="{{ comment.id }}">
+                                       {% csrf_token %}
+                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;" class="btn btn-warning" name="decline" type="submit"
+                                                           value="Decline">
+                                                <input style="margin-top:3%; float: right; width: 18%;" class="btn btn-success" name="accept" type="submit"
+                                                           value="Accept" >
+
+                                                </form>
+                                        </div>
+
+                                    </div>
+                                {% endfor %}
+							</div>
+
+						</div>
+						
+						<div class="tab-pane" id="about">
+							<div class="profile-about">
+								<div class="tab-content-heading">
+									<h4>About</h4>									
+								</div>
+								<div class="about-dtp">
+									<div class="about-bg">
+										<ul>
+											<li>
+												<div class="dp-detail">
+													<h6>Ful Name</h6>
+													<p>John Doe</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Location</h6>
+													<p>Hill District, Sydney, Australia</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Mobile Number</h6>
+													<p>+ 2 987 654 3210</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Email Address</h6>
+													<p>Johndoe@gmail.com</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Personal Website</h6>
+													<p>www.johndoe.com</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Description About Yopur Self</h6>
+													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum leo sit amet volutpat porta. Integer tincidunt id enim eget suscipit. Aenean vitae mi at arcu pulvinar dictum. Donec pretium ipsum diam, vitae posuere nunc dapibus ut. Vivamus tempus et magna at elementum</p>
+												</div>
+											</li>
+											<li>
+												<div class="dp-detail">
+													<h6>Social Accounts</h6>
+													<div class="my-social-links">
+														<a href="#" class="socail-btn-link f-btn"><i class="fab fa-facebook-f"></i></a>
+														<a href="#" class="socail-btn-link t-btn"><i class="fab fa-twitter"></i></a>
+														<a href="#" class="socail-btn-link g-btn"><i class="fab fa-google"></i></a>
+														<a href="#" class="socail-btn-link i-btn"><i class="fab fa-instagram"></i></a>
+														<a href="#" class="socail-btn-link y-btn"><i class="fab fa-youtube"></i></a>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>						
+						
+						<div class="tab-pane" id="photos" hidden>
+							<div class="timeline">
+								<div class="tab-content-heading" hidden>
+									<h4>ss</h4>
+								</div>
+								<div class="about-dtp" hidden>
+									<div class="photo-bg">
+										<div class="gallery-pf">
+											<div class="row">
+											{% for comment in commentList %}
+                                                {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+												{% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image2.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                                {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
+                                                         data-target="#exampleModal2"
+                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                        <div class="photo-gallery">
+                                                            <img src="{{ comment.image3.url }}" alt="">
+                                                            <a><i class="far fa-plus-square"></i></a>
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+
+                                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <img id="clientPhoto" class="rounded" style="width: 50px;" src="" alt="">
+                                                            <h5 style="margin-top: 2%; margin-left: 3%" class="modal-title"
+                                                                id="exampleModalLabel"></h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img id="showedPhotoId" style="width: 100%" src="">
+                                                        </div>
+                                                        <div class="restaurants-detail-bg" style="border: 0px; margin-top: -1%; display: flex;">
+                                                            <i style="float:left; margin-left: 3%; margin-top: 3px;" class="far fa-clock"></i>
+                                                        <p id="dateofphoto" style="margin-left: -2%;" value=""></p>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                    data-dismiss="modal">Close
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="followers">
+							<div class="timeline">
+								<div class="tab-content-heading">
+									<h4>Followers</h4>						
+								</div>
+								<div class="about-dtp">
+									<div class="follow-bg">
+										<ul>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-1.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Jassica William</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Follow</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-2.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Follow</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-3.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>John Doe</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Follow</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-5.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Follow</button>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="following">
+							<div class="timeline">
+								<div class="tab-content-heading">
+									<h4>Followings</h4>						
+								</div>
+								<div class="about-dtp">
+									<div class="follow-bg">
+										<ul>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-1.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Jassica William</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Following</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-2.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Following</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-3.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>John Doe</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Following</button>
+												</div>
+											</li>
+											<li>
+												<div class="suggestion-usd-2">
+													<a href="user_profile_view.html"><img src="/static/images/profile/noti-5.png" alt=""></a>
+													<div class="sgt-text-2">
+														<a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
+														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
+													</div>
+													<button class="btn-link">Following</button>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="recently-viewed-restaurants">
+							<div class="timeline">
+								<div class="tab-content-heading">
+									<h4>Recently Viewed Restaurants</h4>						
+								</div>
+								<div class="about-dtp">
+									<div class="recently-resto-bg">
+										<div class="container">
+											<div class="row">
+												<div class="col-lg-6 col-md-6 col-12 pm-right">
+													<div class="visit-restaurants">
+														<div class="recently-resto-picy">
+															<a href="restaurant_detail.html"><img src="/static/images/profile/view-1.jpg" alt=""></a>
+														</div>
+														<div class="recently-resto-dt">
+														<a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
+														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-12 pm-left">
+													<div class="visit-restaurants">
+														<div class="recently-resto-picy">
+															<a href="restaurant_detail.html"><img src="/static/images/profile/view-2.jpg" alt=""></a>
+														</div>
+														<div class="recently-resto-dt">
+														<a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
+														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-12 pm-right">
+													<div class="visit-restaurants">
+														<div class="recently-resto-picy">
+															<a href="restaurant_detail.html"><img src="/static/images/profile/view-3.jpg" alt=""></a>
+														</div>
+														<div class="recently-resto-dt">
+														 <a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
+														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
+														</div>
+													</div>
+												</div>
+												<div class="col-lg-6 col-md-6 col-12 pm-left">
+													<div class="visit-restaurants">
+														<div class="recently-resto-picy">
+															<a href="restaurant_detail.html"><img src="/static/images/profile/view-4.jpg" alt=""></a>
+														</div>
+														<div class="recently-resto-dt">
+														 <a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
+														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>									
+						</div>												
+						
+						<div class="tab-pane" id="reviews">
+							<div class="timeline">
+								<div class="tab-content-heading">
+									<h4>Reviews</h4>
+								</div>
+								<div class="main-comments">
+									<div class="rating-1">
+										<div class="user-detail-heading">
+											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-5.png" alt=""></a>
+											<h4> Joy Cutler</h4><br>
+											<div class="rate-star">
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="far fa-star"></i>								
+												<span>4.5</span> 
+											</div>
+										</div>
+										<div class="reply-time">											
+											<p><i class="far fa-clock"></i>12 hours ago</p>
+										</div>
+										<div class="comment-description">
+											<p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
+										</div>
+										
+									</div>
+																
+									<div class="like-comment-dt">
+										<ul>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+													<i class="fas fa-heart"></i>
+													<ins>Like 562</ins>
+												</span>
+											</li>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+													<i class="fas fa-comment-alt"></i>
+													<ins>Comments 01</ins>
+												</span>
+											</li>												
+										</ul>
+									</div>
+									<div class="reply-review-1">
+										<div class="user-detail-heading">
+											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
+											<h4> Rock Smith</h4>
+										</div>
+										<div class="reply-time">								
+											<p><i class="far fa-clock"></i>12 hours ago</p>
+										</div>
+										<div class="comment-description">
+											<p> Thank you</p>
+										</div>
+										<div class="like-report">
+											<ul>
+												<li>
+													<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+														<i class="fas fa-heart"></i>
+														<ins>Like 1</ins>
+													</span>
+												</li>
+												<li>
+													<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+														<ins>Report</ins>
+													</span>
+												</li>												
+											</ul>
+										</div>
+									</div>
+									<div class="reply-comment">
+										<div class="post-items">											
+											<div class="reply-dp">
+												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
+											</div>
+											<form>
+												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
+												<input class="reply-btn btn-link" type="submit" value="Post">
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="main-comments">
+									<div class="rating-1">
+										<div class="user-detail-heading">
+											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-2.png" alt=""></a>
+											<h4> Jassica William</h4><br>
+											<div class="rate-star">
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="far fa-star"></i>								
+												<span>4.5</span> 
+											</div>
+										</div>
+										<div class="reply-time">											
+											<p><i class="far fa-clock"></i>13 hours ago</p>
+										</div>
+										<div class="comment-description">
+											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum leo sit amet volutpat porta. Integer tincidunt id enim eget suscipit. Aenean vitae mi at arcu pulvinar dictum. Donec pretium ipsum diam, vitae posuere nunc dapibus ut. Vivamus tempus et magna at elementum. Morbi sed turpis vitae elit pellentesque pharetra vel ut nisl.</p>
+										</div>
+										
+									</div>
+																
+									<div class="like-comment-dt">
+										<ul>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+													<i class="fas fa-heart"></i>
+													<ins>Like 562</ins>
+												</span>
+											</li>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+													<i class="fas fa-comment-alt"></i>
+													<ins>Comments 0</ins>
+												</span>
+											</li>												
+										</ul>
+									</div>
+									
+									<div class="reply-comment">
+										<div class="post-items">											
+											<div class="reply-dp">
+												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
+											</div>
+											<form>
+												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
+												<input class="reply-btn btn-link" type="submit" value="Post">
+											</form>
+										</div>
+									</div>
+								</div>
+								<div class="main-comments">
+									<div class="rating-1">
+										<div class="user-detail-heading">
+											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-1.png" alt=""></a>
+											<h4> John Doe</h4><br>
+											<div class="rate-star">
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="fas fa-star"></i>
+												<i class="far fa-star"></i>								
+												<span>4.5</span> 
+											</div>
+										</div>
+										<div class="reply-time">											
+											<p><i class="far fa-clock"></i>12 hours ago</p>
+										</div>
+										<div class="comment-description">
+											<p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
+										</div>
+										
+									</div>								
+									<div class="like-comment-dt">
+										<ul>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+													<i class="fas fa-heart"></i>
+													<ins>Like 562</ins>
+												</span>
+											</li>
+											<li>
+												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+													<i class="fas fa-comment-alt"></i>
+													<ins>Comments 01</ins>
+												</span>
+											</li>												
+										</ul>
+									</div>
+									<div class="reply-review-1">
+										<div class="user-detail-heading">
+											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""  ></a>
+											<h4> Rock Smith</h4>
+										</div>
+										<div class="reply-time">								
+											<p><i class="far fa-clock"></i>12 hours ago</p>
+										</div>
+										<div class="comment-description">
+											<p> Thank you</p>
+										</div>
+										<div class="like-report">
+											<ul>
+												<li>
+													<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+														<i class="fas fa-heart"></i>
+														<ins>Like 1</ins>
+													</span>
+												</li>
+												<li>
+													<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+														<ins>Report</ins>
+													</span>
+												</li>												
+											</ul>
+										</div>
+									</div>
+									<div class="reply-comment">
+										<div class="post-items">											
+											<div class="reply-dp">
+												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
+											</div>
+											<form>
+												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
+												<input class="reply-btn btn-link" type="submit" value="Post">
+											</form>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</div>																																									
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-4 col-12">
+					<div class="suggested-peoples mt-0" hidden>
+						<div class="suggestions full-width">
+							<div class="sd-title">
+								<h3>Suggested Peoples</h3>
+								<i class="la la-ellipsis-v"></i>
+							</div><!--sd-title end-->
+							<div class="suggestions-list">
+								<div class="suggestion-usd">
+									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-1.png" alt=""></a>
+									<div class="sgt-text">
+										<a href="user_profile_view.html"><h4>Johnson</h4></a>
+										<span>7 Reviews</span>
+									</div>
+									<button><i class="fas fa-user-plus"></i></button>
+								</div>
+								<div class="suggestion-usd">
+									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-2.png" alt=""></a>
+									<div class="sgt-text">
+										<a href="user_profile_view.html"><h4>Jassia William</h4></a>
+										<span>5 Reviews</span>
+									</div>
+									<button><i class="fas fa-user-plus"></i></button>
+								</div>
+								<div class="suggestion-usd">
+									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-3.png" alt=""></a>
+									<div class="sgt-text">
+										<a href="user_profile_view.html"><h4>Rock</h4></a>
+										<span>0 Reviews</span>
+									</div>
+									<button><i class="fas fa-user-plus"></i></button>
+								</div>
+								<div class="suggestion-usd">
+									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-4.png" alt=""></a>
+									<div class="sgt-text">
+										<a href="user_profile_view.html"><h4>Davil Smith</h4></a>
+										<span>10 Reviews</span>
+									</div>
+									<button><i class="fas fa-user-plus"></i></button>
+								</div>
+								<div class="suggestion-usd">
+									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-5.png" alt=""></a>
+									<div class="sgt-text">
+										<a href="user_profile_view.html"><h4>Ricky Doe</h4></a>
+										<span>3 Reviews</span>
+									</div>
+									<button><i class="fas fa-user-plus"></i></button>
+								</div>
+							</div><!--suggestions-list end-->
+						</div>
+					</div>
+					
+					<div class="suggested-peoples h-top " hidden>
+						<div class="suggestions full-width">
+							<div class="sd-title">
+								<h3>Photos</h3>
+								<i class="la la-ellipsis-v"></i>
+							</div><!--sd-title end-->
+							<div class="suggestions-list">
+								<div class="pf-gallery">
+									<ul>
+										<li><a href="#" title=""><img src="/static/images/profile/right-1.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-2.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-3.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-4.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-5.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-6.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-7.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-8.jpg" alt=""></a></li>
+										<li><a href="#" title=""><img src="/static/images/profile/right-9.jpg" alt=""></a></li>
+									</ul>
+								</div>								
+							</div><!--photo-list end-->
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--my-account-tabs end-->
+	{% endblock %}
+
+    {% block content3 %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+	 <!-- Assect scripts for this page-->
+	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
+	<script src="/static/js/owlslider.js"></script>
+	<script src="/static/js/bootstrap-select.js"></script>
+	<script src="/static/js/dashboard-tabs-reload.js"></script>
+
+     <script>
+        function likeComment(cid) {
+            var commentId = cid;
+            var commentIda = cid + "a";
+            //alert(commentIda);
+            var color1 = document.getElementById(cid).style.color;
+
+            if (color1 == 'rgb(255, 168, 3)') {
+                document.getElementById(cid).style.color = 'rgb(132, 117, 119)';
+                var value = document.getElementById(commentIda).innerText;
+                if (value > 0) {
+                    value--;
+                }
+                //alert(value);
+                document.getElementById(commentIda).innerText = value;
+            } else if (color1 == 'rgb(132, 117, 119)') {
+                document.getElementById(cid).style.color = 'rgb(255, 168, 3)';
+                var value = document.getElementById(commentIda).innerText;
+                value++;
+                //alert(value);
+                document.getElementById(commentIda).innerText = value;
+            }
+
+
+            $.ajax({
+                url: '{% url 'likeComment' %}',
+                data: {
+                    'commentId': commentId
+
+                },
+                dataType: 'json',
+            });
+        }
+    </script>
+
+    <script>
+        function mouseOnRate(id) {
+            if (id == "one") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#e1e1e1";
+                document.getElementById("three").style.color = "#e1e1e1";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "two") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#e1e1e1";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "three") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#e1e1e1";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "four") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#e1e1e1";
+            } else if (id == "five") {
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#ffa803";
+            }
+        }
+
+        function clickRate(id) {
+            var value = document.getElementById(id).id;
+            if (value == "one") {
+                document.getElementById("rateId").value = "1";
+                document.getElementById("one").style.color = "#ffa803";
+            } else if (value == "two") {
+                document.getElementById("rateId").value = "2";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+            } else if (value == "three") {
+                document.getElementById("rateId").value = "3";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+            } else if (value == "four") {
+                document.getElementById("rateId").value = "4";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+            } else if (value == "five") {
+                document.getElementById("rateId").value = "5";
+                document.getElementById("one").style.color = "#ffa803";
+                document.getElementById("two").style.color = "#ffa803";
+                document.getElementById("three").style.color = "#ffa803";
+                document.getElementById("four").style.color = "#ffa803";
+                document.getElementById("five").style.color = "#ffa803";
+            }
+        }
+    </script>
+
+    <script>
+        function commentWithPhoto(event) {
+            var image = document.getElementById('photoForComment');
+            var image2 = document.getElementById('photoForComment2');
+            var image3 = document.getElementById('photoForComment3');
+            //alert(image.src)
+
+            if (image.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
+                image.src = URL.createObjectURL(event.target.files[0]);
+                document.getElementById('file1checking').value = 1;
+
+            } else {
+                if (image2.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
+                    image2.src = URL.createObjectURL(event.target.files[0]);
+                    document.getElementById('file2checking').value = 1;
+                } else {
+                    if (image3.src == "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg") {
+                        image3.src = URL.createObjectURL(event.target.files[0]);
+                        document.getElementById('file3checking').value = 1;
+                    } else {
+                        alert("You can add maximum 3 pictures in a comment!");
+                    }
+                }
+            }
+        }
+
+        function deletePhoto(id) {
+            var image = document.getElementById('photoForComment');
+            var image2 = document.getElementById('photoForComment2');
+            var image3 = document.getElementById('photoForComment3');
+
+            if (id == "first") {
+                image.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file').value = null;
+                document.getElementById('file1checking').value = 0;
+            } else if (id == "second") {
+                image2.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file2').value = null;
+                document.getElementById('file2checking').value = 0;
+            } else if (id == "third") {
+                image3.src = "http://127.0.0.1:8000/static/images/restaurant-detail/add-1.jpg";
+                document.getElementById('file3').value = null;
+                document.getElementById('file3checking').value = 0;
+            }
+        }
+    </script>
+
+    <script>
+        function viewPhoto(id, cid) {
+            if (id == "viewedPhotoOne") {
+                document.getElementById('firstClass' + cid).className = "carousel-item active";
+                document.getElementById('secondClass' + cid).className = "carousel-item";
+                document.getElementById('thirdClass' + cid).className = "carousel-item";
+            } else if (id == "viewedPhotoTwo") {
+                document.getElementById('firstClass' + cid).className = "carousel-item";
+                document.getElementById('secondClass' + cid).className = "carousel-item active";
+                document.getElementById('thirdClass' + cid).className = "carousel-item";
+            } else if (id == "viewedPhotoThr") {
+                document.getElementById('firstClass' + cid).className = "carousel-item";
+                document.getElementById('secondClass' + cid).className = "carousel-item";
+                document.getElementById('thirdClass' + cid).className = "carousel-item active";
+            }
+        }
+    </script>
+
+    <script>
+
+       var showPhoto= function (url, name, image, date) {
+            document.getElementById('showedPhotoId').src = url;
+            document.getElementById('exampleModalLabel').innerText = name ;
+            document.getElementById('clientPhoto').src = image;
+            document.getElementById('dateofphoto').innerText =date;
+
+        }
+
+    </script>
+
+{% endblock %}
