@@ -35,7 +35,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="left-title-text">
-					<h3>User Profile View</h3>
+					<h3>Admin Approvals View</h3>
 					</div>
 				</div>
 				<div class="col-md-6">
@@ -55,22 +55,22 @@
 		<div class="profile-bg">
 
 			<div class="my-Profile-dt" style="margin-top:8%">
-				<div class="container">
-					<div class="row">
-						<div class="container">
-							<div class="profile-dpt" >
-								<img src="/media/admin4.png" alt="" style="width: 210px;">
-							</div>
-							<div class="profile-all-dt">
-								<div class="profile-name-dt">
-									 <h1>{{ user.name }} {{ user.surname }}</h1>
-									<p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+                <div class="container">
+                    <div class="row">
+                        <div class="container">
+                            <div class="profile-dpt">
+                                <img src="/media/admin4.png" alt="" style="width: 210px; border-color: #CACFD2; ">
+                            </div>
+                            <div class="profile-all-dt">
+                                <div class="profile-name-dt">
+                                    <h5 style="color: #ffa803; margin-bottom: 2%;">Admin</h5>
+                                    <h1>{{ user.name }} {{ user.surname }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 		</div>
 	</section>
 	<!--my-account end-->
@@ -81,7 +81,7 @@
 				<div class="col-lg-3 col-md-4 col-12">
 					<div class="left-tab-links">
 						<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
-							<a href="#timeline"  data-toggle="tab" class="item user-tab cursor-pointer active">Comments</a>
+							<a href="#timeline"  data-toggle="tab" class="item user-tab cursor-pointer active">Approve Comments</a>
 
 
 
@@ -93,7 +93,7 @@
 						<div class="tab-pane active" id="timeline">
 							<div class="timeline">
 								<div class="tab-content-heading">
-									<h4>Comment Requests</h4>
+									<h4>Comment Confirmation Requests </h4>
 								</div>
                                {% for comment in commentList %}
 
@@ -252,11 +252,11 @@
                                             <form method="POST">
                                                  <input name="commentId" type="hidden" value="{{ comment.id }}">
                                        {% csrf_token %}
-                                            <input style="margin-top:3%;margin-bottom:3% " class="reply-btn btn-link" name="accept" type="submit"
+                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;" class="btn btn-warning" name="decline" type="submit"
+                                                           value="Decline">
+                                                <input style="margin-top:3%; float: right; width: 18%;" class="btn btn-success" name="accept" type="submit"
                                                            value="Accept" >
 
-                                            <input style="margin-top:3% " class="reply-btn btn-link" name="decline" type="submit"
-                                                           value="Decline">
                                                 </form>
                                         </div>
 

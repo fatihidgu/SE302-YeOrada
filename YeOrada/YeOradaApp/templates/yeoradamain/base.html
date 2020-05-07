@@ -34,7 +34,10 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="accountDropdown">
                                     {% if user.isCustomer %} <a class="dropdown-item" href="{% url 'myprofile' %}"> My Profile</a>{% elif user.isClient %}
                                         <a class="dropdown-item" href="{% url 'clientprofile' user.username %}"> My Restaurant</a>
+                                        {% elif user.isAdmin %}
+                                        <a class="dropdown-item" href="{% url 'adminprofile' %}"> Approvals</a>
                                         {% endif %}
+
                                     {% if user.isCustomer %}<a class="dropdown-item" href="{% url 'settings' %}"> Settings</a>{% elif user.isClient %}
                                         <a class="dropdown-item" href="{% url 'clientsettings' %}"> Settings</a>
                                         {% elif user.isAdmin %}
