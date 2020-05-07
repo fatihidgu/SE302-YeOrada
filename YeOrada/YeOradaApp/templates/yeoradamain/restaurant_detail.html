@@ -320,42 +320,114 @@
                             <div class="tab-pane" id="menu">
                                 <div class="restaurants-detail-bg m-bottom">
                                     <h4>Restaurant Menu Card</h4>
-                                    <p style="font-weight:500;">2 Images</p>
+                                    <p style="font-weight:500;">{{ client_menu_count }} Images</p>
                                     <div class="container">
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="tabbable tabs-left">
                                                     <ul class="nav nav-tabs flex-column">
+
+                                                        {% if clientObject.menu1.url != "/media/defaultMenu.jpg" %}
                                                         <li class="active">
                                                             <a href="#menu-1" data-toggle="tab">
                                                                 <div class="menu-thumbs">
-                                                                    <img src="/static/images/restaurant-detail/menu-logo-1.jpg"
+                                                                    <img style="width: 90px;" src="{{ clientObject.menu1.url }}"
                                                                          class="img-responsive" alt="">
                                                                 </div>
                                                             </a>
                                                         </li>
+                                                        {% endif %}
+
+                                                        {% if clientObject.menu2.url != "/media/defaultMenu.jpg" %}
                                                         <li>
                                                             <a href="#menu-2" data-toggle="tab">
                                                                 <div class="menu-thumbs">
-                                                                    <img src="/static/images/restaurant-detail/menu-logo-2.jpg"
+                                                                    <img style="width: 90px;" src="{{ clientObject.menu2.url }}"
                                                                          class="img-responsive" alt="">
                                                                 </div>
                                                             </a>
                                                         </li>
+                                                        {% endif %}
+
+                                                         {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
+                                                        <li>
+                                                            <a href="#menu-3" data-toggle="tab">
+                                                                <div class="menu-thumbs">
+                                                                    <img style="width: 90px;" src="{{ clientObject.menu3.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        {% endif %}
+
+                                                        {% if clientObject.menu4.url != "/media/defaultMenu.jpg" %}
+                                                        <li>
+                                                            <a href="#menu-4" data-toggle="tab">
+                                                                <div class="menu-thumbs">
+                                                                    <img style="width: 90px;" src="{{ clientObject.menu4.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        {% endif %}
+
+                                                         {% if clientObject.menu5.url != "/media/defaultMenu.jpg" %}
+                                                        <li>
+                                                            <a href="#menu-5" data-toggle="tab">
+                                                                <div class="menu-thumbs">
+                                                                    <img style="width: 90px;" src="{{ clientObject.menu5.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        {% endif %}
+
                                                     </ul>
                                                     <div class="tab-content">
+                                                        {% if clientObject.menu1.url != "/media/defaultMenu.jpg" %}
                                                         <div class="tab-pane active" id="menu-1">
                                                             <div class="menu-img-view">
-                                                                <img src="/static/images/restaurant-detail/menu-1.jpg"
+                                                                <img style="width: 600px;" src="{{ clientObject.menu1.url }}"
                                                                      class="img-responsive" alt="">
                                                             </div>
                                                         </div>
+                                                        {% endif %}
+
+                                                         {% if clientObject.menu2.url != "/media/defaultMenu.jpg" %}
                                                         <div class="tab-pane" id="menu-2">
                                                             <div class="menu-img-view">
-                                                                <img src="/static/images/restaurant-detail/menu-2.jpg"
+                                                                <img style="width: 600px;" src="{{ clientObject.menu2.url }}"
                                                                      class="img-responsive" alt="">
                                                             </div>
                                                         </div>
+                                                        {% endif %}
+
+                                                         {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
+                                                        <div class="tab-pane" id="menu-3">
+                                                            <div class="menu-img-view">
+                                                                <img style="width: 600px;" src="{{ clientObject.menu3.url }}"
+                                                                     class="img-responsive" alt="">
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                         {% if clientObject.menu4.url != "/media/defaultMenu.jpg" %}
+                                                        <div class="tab-pane" id="menu-4">
+                                                            <div class="menu-img-view">
+                                                                <img style="width: 600px;" src="{{ clientObject.menu4.url }}"
+                                                                     class="img-responsive" alt="">
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
+
+                                                        {% if clientObject.menu5.url != "/media/defaultMenu.jpg" %}
+                                                        <div class="tab-pane" id="menu-5">
+                                                            <div class="menu-img-view">
+                                                                <img style="width: 600px;" src="{{ clientObject.menu5.url }}"
+                                                                     class="img-responsive" alt="">
+                                                            </div>
+                                                        </div>
+                                                        {% endif %}
 
                                                     </div>
                                                 </div>
