@@ -1,12 +1,31 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Client
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Client, ClientCuisine
 
 
 def clientsettings(request):
     error_message1 = ""
     error_message2 = ""
+    clientcuisines = [
+       'Kebap',
+       'Grill',
+       'Turkish',
+       'Pide',
+       'Döner',
+       'Fast Food',
+        'Homemade',
+        'Seafood',
+       'Cafe & Restaurant',
+        'Lunch',
+        'Breakfast',
+       'Dinner',
+        'Pizza',
+        'Chinese',
+        'Korean', ]
+
+
+    clientObject = Client.objects.filter(userEmail__username=request.user.username).first()
     passwordChangeForm = PasswordChangeForm(request.user)
     if 'saveChanges' in request.POST:
         name = request.POST.get('name')
@@ -21,14 +40,13 @@ def clientsettings(request):
         workinghours = request.POST.get('workinghours')
         workingdays = request.POST.get('workingdays')
         info = request.POST.get('info')
-
         imageCheck = request.POST.get('client_avatar_check')
+
 
         if len(imageCheck.split()) != 0:
             image = request.FILES['client_avatar']
 
         userObject = RegisteredUser.objects.filter(email=request.user.email).first()
-        clientObject = Client.objects.filter(userEmail=request.user).first()
         emailCheck = RegisteredUser.objects.filter(email=email)
         usernameCheck = RegisteredUser.objects.filter(username=username)
         if usernameCheck.first() and username != request.user.username:
@@ -36,6 +54,8 @@ def clientsettings(request):
             user = request.user
             client = Customer.objects.filter(userEmail=user.email).first()
         else:
+
+
             userObject.name = name;
             userObject.surname = surname;
             userObject.username = username;
@@ -48,6 +68,16 @@ def clientsettings(request):
             clientObject.workingHours = workinghours
             clientObject.workingDays = workingdays
             clientObject.info = info
+
+            cuisineList = ClientCuisine.objects.filter(customerEmail=clientObject).get("cuisine")
+            print("my first ",cuisineList)
+            for item in clientcuisines:
+                cuisin = request.POST.get(item)
+                if cuisin == cuisineList:
+                    print("Burada", cuisin)
+            #clientcuisine=ClientCuisine(customerEmail=clientObject,cuisine='Seafood')
+            #clientcuisine.save()
+
 
             if len(imageCheck.split()) != 0:
                 clientObject.logo = image
@@ -75,4 +105,4 @@ def clientsettings(request):
 
     return render(request, 'yeoradamain/setting_client.html',
                   {'user': user, 'client': client, 'error_message1': error_message1,
-                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2})
+                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2, 'clientcuisines': clientcuisines, 'clientObject': clientObject })

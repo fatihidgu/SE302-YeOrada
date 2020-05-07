@@ -1,6 +1,6 @@
 from django import template
 
-from YeOradaApp.models import Comment, Client
+from YeOradaApp.models import Comment, Client, ClientCuisine
 
 register = template.Library()
 
@@ -31,3 +31,13 @@ def filterAnswers(answersList, commentId):
     customerAnswers = answersList.filter(commentId=commentObject)
 
     return customerAnswers
+
+
+@register.filter
+def filterCuisiness(clientcuisines, clientEmail):
+    clientObject = Client.objects.filter(userEmail=clientEmail).first()
+    clientcuisines1 = ClientCuisine.objects.filter(customerEmail=clientObject)
+    cuisineList=[]
+    for item in clientcuisines1:
+        cuisineList.append(item.cuisine)
+    return cuisineList
