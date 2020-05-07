@@ -221,9 +221,10 @@
 
                                                             {% for cuisine in clientcuisines %}
                                                                 {% if cuisine in clientcuisines|filterCuisiness:clientObject.userEmail %}
-                                                                    <input name="{{ cuisine }}"  type="checkbox" checked="True"/> {{ cuisine }}
+                                                                    
+                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox" checked="True"/> {{ cuisine }}
                                                                 {% else %}
-                                                                    <input name="{{ cuisine }}"  type="checkbox"  /> {{ cuisine }}
+                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox"  /> {{ cuisine }}
                                                                 {% endif %}
                                                             {% endfor %}
                                                         </td>

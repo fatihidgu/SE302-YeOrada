@@ -8,22 +8,21 @@ def clientsettings(request):
     error_message1 = ""
     error_message2 = ""
     clientcuisines = [
-       'Kebap',
-       'Grill',
-       'Turkish',
-       'Pide',
-       'Döner',
-       'Fast Food',
+        'Kebap',
+        'Grill',
+        'Turkish',
+        'Pide',
+        'Döner',
+        'Fast Food',
         'Homemade',
         'Seafood',
-       'Cafe & Restaurant',
+        'Cafe & Restaurant',
         'Lunch',
         'Breakfast',
-       'Dinner',
+        'Dinner',
         'Pizza',
         'Chinese',
         'Korean', ]
-
 
     clientObject = Client.objects.filter(userEmail__username=request.user.username).first()
     passwordChangeForm = PasswordChangeForm(request.user)
@@ -42,7 +41,6 @@ def clientsettings(request):
         info = request.POST.get('info')
         imageCheck = request.POST.get('client_avatar_check')
 
-
         if len(imageCheck.split()) != 0:
             image = request.FILES['client_avatar']
 
@@ -54,7 +52,6 @@ def clientsettings(request):
             user = request.user
             client = Customer.objects.filter(userEmail=user.email).first()
         else:
-
 
             userObject.name = name;
             userObject.surname = surname;
@@ -69,15 +66,15 @@ def clientsettings(request):
             clientObject.workingDays = workingdays
             clientObject.info = info
 
-            cuisineList = ClientCuisine.objects.filter(customerEmail=clientObject).get("cuisine")
-            print("my first ",cuisineList)
             for item in clientcuisines:
                 cuisin = request.POST.get(item)
-                if cuisin == cuisineList:
-                    print("Burada", cuisin)
-            #clientcuisine=ClientCuisine(customerEmail=clientObject,cuisine='Seafood')
-            #clientcuisine.save()
-
+                if len(ClientCuisine.objects.filter(customerEmail=clientObject,cuisine=cuisin))==0 and cuisin!= None :
+                    # ekle
+                    clientcuisine = ClientCuisine(customerEmail=clientObject, cuisine=cuisin)
+                    clientcuisine.save()
+                elif len(ClientCuisine.objects.filter(customerEmail=clientObject,cuisine=item))!=0 and cuisin==None:
+                    #delete
+                    clientdelete=ClientCuisine.objects.filter(cuisine=item).delete()
 
             if len(imageCheck.split()) != 0:
                 clientObject.logo = image
@@ -105,4 +102,5 @@ def clientsettings(request):
 
     return render(request, 'yeoradamain/setting_client.html',
                   {'user': user, 'client': client, 'error_message1': error_message1,
-                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2, 'clientcuisines': clientcuisines, 'clientObject': clientObject })
+                   'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2,
+                   'clientcuisines': clientcuisines, 'clientObject': clientObject})
