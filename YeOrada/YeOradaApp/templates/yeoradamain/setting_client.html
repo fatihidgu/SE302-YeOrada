@@ -216,19 +216,22 @@
 
                                             <ul class="view-dt-1">
                                                 <table id="tabl1">
-                                                    <tr>
-                                                        <td>
 
+                                                    <tr>
+
+                                                        <td>
                                                             {% for cuisine in clientcuisines %}
                                                                 {% if cuisine in clientcuisines|filterCuisiness:clientObject.userEmail %}
-                                                                    
                                                                     <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox" checked="True"/> {{ cuisine }}
                                                                 {% else %}
                                                                     <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox"  /> {{ cuisine }}
                                                                 {% endif %}
+                                                                <br> <div style="margin: 5%" > </div>
                                                             {% endfor %}
                                                         </td>
+
                                                     </tr>
+
                                                 </table>
                                             </ul>
                                         </div>
