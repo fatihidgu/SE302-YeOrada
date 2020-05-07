@@ -18,6 +18,7 @@ urlpatterns = [
     path('likeComment', views.likeComment, name='likeComment'),
     path('clientsettings', views.clientsettings, name='clientsettings'),
     path('adminsettings', views.adminsettings, name='adminsettings'),
+    path('adminprofile', views.adminprofile, name='adminprofile'),
 ]
 
 if settings.DEBUG:

@@ -142,3 +142,28 @@ def adminsettings(request):
     return render(request, 'yeoradamain/admin_settings.html',
                   {'user': user, 'error_message1': error_message1,
                    'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2})
+
+
+def adminprofile(request):
+    comments = Comment.objects.filter(is_Approved=False)
+    user = request.user
+    if 'accept' in request.POST:
+        if request.user.is_authenticated:
+                 commentId = request.POST.get('commentId')
+                 commentObject = Comment.objects.filter(id=commentId).update(is_Approved=True)
+
+                 return redirect('adminprofile')
+    elif 'decline' in request.POST:
+        if request.user.is_authenticated:
+             commentId = request.POST.get('commentId')
+             commentObject = Comment.objects.filter(id=commentId)
+             commentObject.delete()
+             return redirect('adminprofile')
+
+
+    commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
+    customer = Customer.objects.filter(userEmail=request.user).first()
+
+    return render(request, 'yeoradamain/admin_profile.html',
+                  {'user': user, 'customer': customer, 'comments': comments,
+                   'commentList': commentList, })
