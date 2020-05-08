@@ -212,7 +212,7 @@
                                         </div>
 
                                          <div class="form-group">
-                                            <label for="cuisineUser">Cuisines </label>
+                                            <label style="margin-bottom: 3%;" for="cuisineUser">Cuisines </label>
 
                                             <ul class="view-dt-1">
                                                 <table id="tabl1">
@@ -220,9 +220,9 @@
                                                         <td>
                                                             {% for cuisine in clientcuisines %}
                                                                 {% if cuisine in clientcuisines|filterCuisiness:clientObject.userEmail %}
-                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox" checked="True"/> {{ cuisine }}
+                                                                    <input style="color: black; font-size: 12px;" name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox" checked="True"/> {{ cuisine }}
                                                                 {% else %}
-                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox"  /> {{ cuisine }}
+                                                                    <input style="color: black; font-size: 12px;" name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox"  /> {{ cuisine }}
                                                                 {% endif %}
                                                                 <br> <div style="margin: 5%" > </div>
                                                             {% endfor %}

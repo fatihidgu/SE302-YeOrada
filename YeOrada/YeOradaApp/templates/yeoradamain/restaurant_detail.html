@@ -26,6 +26,7 @@
 
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
 {% endblock %}
 
 {% block content2 %}
@@ -205,16 +206,236 @@
                                     class="far fa-calendar-alt"></i> Member since {{ registeredUser.date_joined }}</span>
                         </div>
                         <div class="like-comments">
-                            <ul>
 
+                            <ul>
+                                {% if user.isClient and user.email == clientObject.userEmail.email%}
                                 <li>
-									<span class="views" data-toggle="tooltip" data-placement="top" title="Add Reviews">
+									<span class="views" data-toggle="modal" data-target="#clientPhotosPopUp"
+                                          data-placement="top"
+                                          title="Update Photos">
 										<i class="fas fa-pencil-alt"></i>
-										<ins>Add Reviews</ins>
+										<ins id="myBtn">Update Photos</ins>
 									</span>
                                 </li>
-
+                                {% endif %}
+                                {% if user.isCustomer %}
+                                <li>
+									<span class="views"
+                                          data-placement="top"
+                                          title="Add Review">
+										<i class="fas fa-pencil-alt"></i>
+										<ins id="myBtn">Add Review</ins>
+									</span>
+                                </li>
+                                {% endif %}
                             </ul>
+                            <form enctype="multipart/form-data" method="post">
+                                {% csrf_token %}
+                                <div class="modal bd-example-modal-lg" aria-labelledby="myLargeModalLabel" id="clientPhotosPopUp" tabindex="-1" role="dialog">
+                                    <div class="modal-dialog modal-lg" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Restaurant Photos</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                                <div class="images">
+                                                    <div class="select-images">
+                                                        <ul>
+                                                            <li class="image-select">
+                                                                <label for="fileClient">
+                                                                    <input hidden type="file" name="clientPhotoOne"
+                                                                           id="fileClient"
+                                                                           onchange="addClientPhoto('idOne', '1', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck1"
+                                                                           name="fileOneChecking"
+                                                                           value="0">
+                                                                    <img id="idOne" style="width: 200px;" name="nameOne"
+                                                                         src="{{ clientObject.image1.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="firstDelete"
+                                                                       onclick="deleteClientPhoto('idOne', '1')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="image-select">
+                                                                <label for="fileClient2">
+                                                                    <input hidden type="file" name="clientPhotoTwo"
+                                                                           id="fileClient2"
+                                                                           onchange="addClientPhoto('idTwo', '2', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck2"
+                                                                           name="fileTwoChecking"
+                                                                           value="0">
+                                                                    <img id="idTwo" style="width: 200px;" name="imageTwo"
+                                                                         src="{{ clientObject.image2.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="secondDelete"
+                                                                       onclick="deleteClientPhoto('idTwo', '2')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="image-select">
+                                                                <label for="fileClient3">
+                                                                    <input hidden type="file" name="clientPhotoThr"
+                                                                           id="fileClient3"
+                                                                           onchange="addClientPhoto('idThr', '3', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck3"
+                                                                           name="fileThrChecking"
+                                                                           value="0">
+                                                                    <img id="idThr" style="width: 200px;" name="imageThr"
+                                                                         src="{{ clientObject.image3.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="thirdDelete"
+                                                                       onclick="deleteClientPhoto('idThr', '3')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient4">
+                                                                    <input hidden type="file" name="clientPhotoFour"
+                                                                           id="fileClient4"
+                                                                           onchange="addClientPhoto('idFour', '4', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck4"
+                                                                           name="fileFourChecking"
+                                                                           value="0">
+                                                                    <img id="idFour" style="width: 200px;" name="imageFour"
+                                                                         src="{{ clientObject.image4.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="fourthDelete"
+                                                                       onclick="deleteClientPhoto('idFour', '4')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient5">
+                                                                    <input hidden type="file" name="clientPhotoFive"
+                                                                           id="fileClient5"
+                                                                           onchange="addClientPhoto('idFive', '5', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck5"
+                                                                           name="fileFiveChecking"
+                                                                           value="0">
+                                                                    <img id="idFive" style="width: 200px;" name="imageFive"
+                                                                         src="{{ clientObject.image5.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="fifthDelete"
+                                                                       onclick="deleteClientPhoto('idFive', '5')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient6">
+                                                                    <input hidden type="file" name="clientPhotoSix"
+                                                                           id="fileClient6"
+                                                                           onchange="addClientPhoto('idSix', '6', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck6"
+                                                                           name="fileSixChecking"
+                                                                           value="0">
+                                                                    <img id="idSix" style="width: 200px;" name="imageSix"
+                                                                         src="{{ clientObject.image6.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="sixthDelete"
+                                                                       onclick="deleteClientPhoto('idSix', '6')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient7">
+                                                                    <input hidden type="file" name="clientPhotoSeven"
+                                                                           id="fileClient7"
+                                                                           onchange="addClientPhoto('idSeven', '7', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck7"
+                                                                           name="fileSevenChecking"
+                                                                           value="0">
+                                                                    <img id="idSeven" style="width: 200px;" name="imageSeven"
+                                                                         src="{{ clientObject.image7.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="seventhDelete"
+                                                                       onclick="deleteClientPhoto('idSeven', '7')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient8">
+                                                                    <input hidden type="file" name="clientPhotoEight"
+                                                                           id="fileClient8"
+                                                                           onchange="addClientPhoto('idEight', '8', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck8"
+                                                                           name="fileEightChecking"
+                                                                           value="0">
+                                                                    <img id="idEight" style="width: 200px;" name="imageEight"
+                                                                         src="{{ clientObject.image8.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="eightthDelete"
+                                                                       onclick="deleteClientPhoto('idEight', '8')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                            <li class="image-select">
+                                                                <label for="fileClient9">
+                                                                    <input hidden type="file" name="clientPhotoNine"
+                                                                           id="fileClient9"
+                                                                           onchange="addClientPhoto('idNine', '9', event)">
+                                                                    <input hidden
+                                                                           id="clientcheck9"
+                                                                           name="fileNineChecking"
+                                                                           value="0">
+                                                                    <img id="idNine" style="width: 200px;" name="imageNine"
+                                                                         src="{{ clientObject.image9.url }}"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="ninethDelete"
+                                                                       onclick="deleteClientPhoto('idNine', '9')"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button name="Save" type="submit" class="btn btn-primary" style="background: #ffa803;">Save changes
+                                                </button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                                    Close
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                     <div class="all-tabs">
@@ -328,105 +549,115 @@
                                                     <ul class="nav nav-tabs flex-column">
 
                                                         {% if clientObject.menu1.url != "/media/defaultMenu.jpg" %}
-                                                        <li class="active">
-                                                            <a href="#menu-1" data-toggle="tab">
-                                                                <div class="menu-thumbs">
-                                                                    <img style="width: 90px;" src="{{ clientObject.menu1.url }}"
-                                                                         class="img-responsive" alt="">
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                            <li class="active">
+                                                                <a href="#menu-1" data-toggle="tab">
+                                                                    <div class="menu-thumbs">
+                                                                        <img style="width: 90px;"
+                                                                             src="{{ clientObject.menu1.url }}"
+                                                                             class="img-responsive" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
 
                                                         {% if clientObject.menu2.url != "/media/defaultMenu.jpg" %}
-                                                        <li>
-                                                            <a href="#menu-2" data-toggle="tab">
-                                                                <div class="menu-thumbs">
-                                                                    <img style="width: 90px;" src="{{ clientObject.menu2.url }}"
-                                                                         class="img-responsive" alt="">
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                            <li>
+                                                                <a href="#menu-2" data-toggle="tab">
+                                                                    <div class="menu-thumbs">
+                                                                        <img style="width: 90px;"
+                                                                             src="{{ clientObject.menu2.url }}"
+                                                                             class="img-responsive" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
 
-                                                         {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
-                                                        <li>
-                                                            <a href="#menu-3" data-toggle="tab">
-                                                                <div class="menu-thumbs">
-                                                                    <img style="width: 90px;" src="{{ clientObject.menu3.url }}"
-                                                                         class="img-responsive" alt="">
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                        {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
+                                                            <li>
+                                                                <a href="#menu-3" data-toggle="tab">
+                                                                    <div class="menu-thumbs">
+                                                                        <img style="width: 90px;"
+                                                                             src="{{ clientObject.menu3.url }}"
+                                                                             class="img-responsive" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
 
                                                         {% if clientObject.menu4.url != "/media/defaultMenu.jpg" %}
-                                                        <li>
-                                                            <a href="#menu-4" data-toggle="tab">
-                                                                <div class="menu-thumbs">
-                                                                    <img style="width: 90px;" src="{{ clientObject.menu4.url }}"
-                                                                         class="img-responsive" alt="">
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                            <li>
+                                                                <a href="#menu-4" data-toggle="tab">
+                                                                    <div class="menu-thumbs">
+                                                                        <img style="width: 90px;"
+                                                                             src="{{ clientObject.menu4.url }}"
+                                                                             class="img-responsive" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
 
-                                                         {% if clientObject.menu5.url != "/media/defaultMenu.jpg" %}
-                                                        <li>
-                                                            <a href="#menu-5" data-toggle="tab">
-                                                                <div class="menu-thumbs">
-                                                                    <img style="width: 90px;" src="{{ clientObject.menu5.url }}"
-                                                                         class="img-responsive" alt="">
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                        {% if clientObject.menu5.url != "/media/defaultMenu.jpg" %}
+                                                            <li>
+                                                                <a href="#menu-5" data-toggle="tab">
+                                                                    <div class="menu-thumbs">
+                                                                        <img style="width: 90px;"
+                                                                             src="{{ clientObject.menu5.url }}"
+                                                                             class="img-responsive" alt="">
+                                                                    </div>
+                                                                </a>
+                                                            </li>
                                                         {% endif %}
 
                                                     </ul>
                                                     <div class="tab-content">
                                                         {% if clientObject.menu1.url != "/media/defaultMenu.jpg" %}
-                                                        <div class="tab-pane active" id="menu-1">
-                                                            <div class="menu-img-view">
-                                                                <img style="width: 600px;" src="{{ clientObject.menu1.url }}"
-                                                                     class="img-responsive" alt="">
+                                                            <div class="tab-pane active" id="menu-1">
+                                                                <div class="menu-img-view">
+                                                                    <img style="width: 600px;"
+                                                                         src="{{ clientObject.menu1.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         {% endif %}
 
-                                                         {% if clientObject.menu2.url != "/media/defaultMenu.jpg" %}
-                                                        <div class="tab-pane" id="menu-2">
-                                                            <div class="menu-img-view">
-                                                                <img style="width: 600px;" src="{{ clientObject.menu2.url }}"
-                                                                     class="img-responsive" alt="">
+                                                        {% if clientObject.menu2.url != "/media/defaultMenu.jpg" %}
+                                                            <div class="tab-pane" id="menu-2">
+                                                                <div class="menu-img-view">
+                                                                    <img style="width: 600px;"
+                                                                         src="{{ clientObject.menu2.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         {% endif %}
 
-                                                         {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
-                                                        <div class="tab-pane" id="menu-3">
-                                                            <div class="menu-img-view">
-                                                                <img style="width: 600px;" src="{{ clientObject.menu3.url }}"
-                                                                     class="img-responsive" alt="">
+                                                        {% if clientObject.menu3.url != "/media/defaultMenu.jpg" %}
+                                                            <div class="tab-pane" id="menu-3">
+                                                                <div class="menu-img-view">
+                                                                    <img style="width: 600px;"
+                                                                         src="{{ clientObject.menu3.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         {% endif %}
 
-                                                         {% if clientObject.menu4.url != "/media/defaultMenu.jpg" %}
-                                                        <div class="tab-pane" id="menu-4">
-                                                            <div class="menu-img-view">
-                                                                <img style="width: 600px;" src="{{ clientObject.menu4.url }}"
-                                                                     class="img-responsive" alt="">
+                                                        {% if clientObject.menu4.url != "/media/defaultMenu.jpg" %}
+                                                            <div class="tab-pane" id="menu-4">
+                                                                <div class="menu-img-view">
+                                                                    <img style="width: 600px;"
+                                                                         src="{{ clientObject.menu4.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         {% endif %}
 
                                                         {% if clientObject.menu5.url != "/media/defaultMenu.jpg" %}
-                                                        <div class="tab-pane" id="menu-5">
-                                                            <div class="menu-img-view">
-                                                                <img style="width: 600px;" src="{{ clientObject.menu5.url }}"
-                                                                     class="img-responsive" alt="">
+                                                            <div class="tab-pane" id="menu-5">
+                                                                <div class="menu-img-view">
+                                                                    <img style="width: 600px;"
+                                                                         src="{{ clientObject.menu5.url }}"
+                                                                         class="img-responsive" alt="">
+                                                                </div>
                                                             </div>
-                                                        </div>
                                                         {% endif %}
 
                                                     </div>
@@ -1624,105 +1855,116 @@
                             </div>
 
                             <div class="tab-pane" id="reviews">
-                            {% if user.isCustomer %}
-                                <form method="POST" enctype='multipart/form-data'>
-                                    <div class="comment-post">
-                                        <div class="post-items">
-                                            <a href="my_dashboard.html">
-                                                <img style="width: 50px; height: 50px; border-radius: 50%; float: left"
-                                                     src="{{ customerr.image.url }}">
-                                            </a>
-                                            <div class="select-rating">
-                                                <h4>Your Rating :</h4>
-                                                <ul class="rating-stars">
-                                                    <li id="one" onclick="clickRate(id)" onmouseover="mouseOnRate(id)">
-                                                        <i class="fas fa-star"></i></li>
-                                                    <li id="two" onclick="clickRate(id)" onmouseover="mouseOnRate(id)">
-                                                        <i class="fas fa-star"></i></li>
-                                                    <li id="three" onclick="clickRate(id)"
-                                                        onmouseover="mouseOnRate(id)"><i class="fas fa-star"></i></li>
-                                                    <li id="four" onclick="clickRate(id)" onmouseover="mouseOnRate(id)">
-                                                        <i class="fas fa-star"></i></li>
-                                                    <li id="five" onclick="clickRate(id)" onmouseover="mouseOnRate(id)">
-                                                        <i class="fas fa-star"></i></li>
-                                                </ul>
-                                            </div>
-                                            <input type="hidden" id="rateId" name="rate" value="">
-                                            <textarea class="description-area" name="text" maxlength="1200"
-                                                      placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
-                                            <input type="text" class="rating-input" name="search"
-                                                   placeholder="@ Tags with friends" hidden>
-                                            <!-- <div class="add-image"> -->
-                                            <!-- <input type="file" name="commentPhoto" id="file" onchange="commentWithPhoto(event)"> -->
-                                            <!-- <label for="file"><i class="far fa-image"></i> Add Photo</label> -->
-                                            <!-- </div> -->
-                                            <div class="images">
-                                                <div class="select-images">
-                                                    <ul>
-
-                                                        <li class="image-select">
-                                                            <label for="file">
-                                                                <input hidden type="file" name="commentPhotoOne"
-                                                                       id="file" onchange="commentWithPhoto(event)">
-                                                                <input hidden id="file1checking" name="fileOneChecking"
-                                                                       value="0">
-                                                                <img id="photoForComment" name="image"
-                                                                     src="/static/images/restaurant-detail/add-1.jpg"
-                                                                     alt="">
-                                                            </label>
-                                                            <div class="close-icon">
-                                                                <i id="first" onclick="deletePhoto(id)"
-                                                                   class="fas fa-window-close"></i>
-                                                            </div>
+                                {% if user.isCustomer %}
+                                    <form method="POST" enctype='multipart/form-data'>
+                                        <div class="comment-post">
+                                            <div class="post-items">
+                                                <a href="my_dashboard.html">
+                                                    <img style="width: 50px; height: 50px; border-radius: 50%; float: left"
+                                                         src="{{ customerr.image.url }}">
+                                                </a>
+                                                <div class="select-rating">
+                                                    <h4>Your Rating :</h4>
+                                                    <ul class="rating-stars">
+                                                        <li id="one" onclick="clickRate(id)"
+                                                            onmouseover="mouseOnRate(id)">
+                                                            <i class="fas fa-star"></i></li>
+                                                        <li id="two" onclick="clickRate(id)"
+                                                            onmouseover="mouseOnRate(id)">
+                                                            <i class="fas fa-star"></i></li>
+                                                        <li id="three" onclick="clickRate(id)"
+                                                            onmouseover="mouseOnRate(id)"><i class="fas fa-star"></i>
                                                         </li>
-
-                                                        <li class="image-select">
-                                                            <label for="file2">
-                                                                <input hidden type="file" name="commentPhotoTwo"
-                                                                       id="file2" onchange="commentWithPhoto(event)">
-                                                                <input hidden id="file2checking" name="fileTwoChecking"
-                                                                       value="0">
-                                                                <img id="photoForComment2" name="image2"
-                                                                     src="/static/images/restaurant-detail/add-1.jpg"
-                                                                     alt="">
-                                                            </label>
-                                                            <div class="close-icon">
-                                                                <i id="second" onclick="deletePhoto(id)"
-                                                                   class="fas fa-window-close"></i>
-                                                            </div>
-                                                        </li>
-
-                                                        <li class="image-select">
-                                                            <label for="file3">
-                                                                <input hidden type="file" name="commentPhotoThr"
-                                                                       id="file3" onchange="commentWithPhoto(event)">
-                                                                <input hidden id="file3checking" name="fileThrChecking"
-                                                                       value="0">
-                                                                <img id="photoForComment3" name="image3"
-                                                                     src="/static/images/restaurant-detail/add-1.jpg"
-                                                                     alt="">
-                                                            </label>
-                                                            <div class="close-icon">
-                                                                <i id="third" onclick="deletePhoto(id)"
-                                                                   class="fas fa-window-close"></i>
-                                                            </div>
-                                                        </li>
+                                                        <li id="four" onclick="clickRate(id)"
+                                                            onmouseover="mouseOnRate(id)">
+                                                            <i class="fas fa-star"></i></li>
+                                                        <li id="five" onclick="clickRate(id)"
+                                                            onmouseover="mouseOnRate(id)">
+                                                            <i class="fas fa-star"></i></li>
                                                     </ul>
+                                                </div>
+                                                <input type="hidden" id="rateId" name="rate" value="">
+                                                <textarea class="description-area" name="text" maxlength="1200"
+                                                          placeholder="Please describe the reason for your rating to help the restaurant (150 words)"></textarea>
+                                                <input type="text" class="rating-input" name="search"
+                                                       placeholder="@ Tags with friends" hidden>
+                                                <!-- <div class="add-image"> -->
+                                                <!-- <input type="file" name="commentPhoto" id="file" onchange="commentWithPhoto(event)"> -->
+                                                <!-- <label for="file"><i class="far fa-image"></i> Add Photo</label> -->
+                                                <!-- </div> -->
+                                                <div class="images">
+                                                    <div class="select-images">
+                                                        <ul>
 
+                                                            <li class="image-select">
+                                                                <label for="file">
+                                                                    <input hidden type="file" name="commentPhotoOne"
+                                                                           id="file" onchange="commentWithPhoto(event)">
+                                                                    <input hidden id="file1checking"
+                                                                           name="fileOneChecking"
+                                                                           value="0">
+                                                                    <img id="photoForComment" name="image"
+                                                                         src="/static/images/restaurant-detail/add-1.jpg"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="first" onclick="deletePhoto(id)"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="image-select">
+                                                                <label for="file2">
+                                                                    <input hidden type="file" name="commentPhotoTwo"
+                                                                           id="file2"
+                                                                           onchange="commentWithPhoto(event)">
+                                                                    <input hidden id="file2checking"
+                                                                           name="fileTwoChecking"
+                                                                           value="0">
+                                                                    <img id="photoForComment2" name="image2"
+                                                                         src="/static/images/restaurant-detail/add-1.jpg"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="second" onclick="deletePhoto(id)"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+
+                                                            <li class="image-select">
+                                                                <label for="file3">
+                                                                    <input hidden type="file" name="commentPhotoThr"
+                                                                           id="file3"
+                                                                           onchange="commentWithPhoto(event)">
+                                                                    <input hidden id="file3checking"
+                                                                           name="fileThrChecking"
+                                                                           value="0">
+                                                                    <img id="photoForComment3" name="image3"
+                                                                         src="/static/images/restaurant-detail/add-1.jpg"
+                                                                         alt="">
+                                                                </label>
+                                                                <div class="close-icon">
+                                                                    <i id="third" onclick="deletePhoto(id)"
+                                                                       class="fas fa-window-close"></i>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+                                                <div class="publish">
+                                                    {% csrf_token %}
+                                                    <input class="rating-btn btn-link" name="publishReview"
+                                                           type="submit"
+                                                           value="Publish Review">
                                                 </div>
                                             </div>
-                                            <div class="publish">
-                                                {% csrf_token %}
-                                                <input class="rating-btn btn-link" name="publishReview" type="submit"
-                                                       value="Publish Review">
-                                            </div>
                                         </div>
-                                    </div>
-                                </form>
-                            {% endif %}
+                                    </form>
+                                {% endif %}
 
                                 {% for comment in commentList %}
-                                    <div class="main-comments" >
+                                    <div class="main-comments">
                                         <div class="rating-1">
                                             <div class="user-detail-heading">
                                                 <a href="user_profile_view.html"><img
@@ -1958,6 +2200,7 @@
                                                 </form>
                                             </div>
                                         </div>
+
                                     </div>
                                 {% endfor %}
 
@@ -1973,21 +2216,21 @@
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
 												<i class="fas fa-star"></i>
-												<i class="far fa-star"></i>								
-												<span>4.5</span> 
+												<i class="far fa-star"></i>
+												<span>4.5</span>
 											</div>
 										</div>
-										<div class="reply-time">											
+										<div class="reply-time">
 											<p><i class="far fa-clock"></i>13 hours ago</p>
 										</div>
 										<div class="comment-description">
 											<p>Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
 										</div>
-										
+
 									</div>
 									<div class="review-tags">
 										<p><ins>Tags :</ins><a href="#">Johnson,</a> <a href="#"> Jasica,</a><a href="#"> Joy William,</a> <a href="#"> Johnson,</a><a href="#"> Jass Singh,</a>&nbsp; <span> and</span>&nbsp; <a href="#">8 others</a></p>
-									</div>							
+									</div>
 									<div class="like-comment-dt">
 										<ul>
 											<li>
@@ -2001,12 +2244,12 @@
 													<i class="fas fa-comment-alt"></i>
 													<ins>Comments 0</ins>
 												</span>
-											</li>												
+											</li>
 										</ul>
 									</div>
-									
+
 									<div class="reply-comment">
-										<div class="post-items">											
+										<div class="post-items">
 											<div class="reply-dp">
 												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
 											</div>
@@ -2017,7 +2260,7 @@
 										</div>
 									</div>
 								</div> -->
-                                <div class="spinner m-bottom" >
+                                <div class="spinner m-bottom">
                                     <div class="d-flex justify-content-center">
                                         <a href="#">
 
@@ -2165,8 +2408,10 @@
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <img id="customerPhoto" style="width: 50px; border-radius: 50%" src="" alt="">
-                                                            <h5 style="margin-top: 2%; margin-left: 3%" class="modal-title"
+                                                            <img id="customerPhoto"
+                                                                 style="width: 50px; border-radius: 50%" src="" alt="">
+                                                            <h5 style="margin-top: 2%; margin-left: 3%"
+                                                                class="modal-title"
                                                                 id="exampleModalLabel"></h5>
                                                             <button type="button" class="close" data-dismiss="modal"
                                                                     aria-label="Close">
@@ -2177,8 +2422,9 @@
                                                             <img id="showedPhotoId" style="width: 100%" src="">
                                                         </div>
                                                         <div style="border: 0px; margin-top: -1%; display: flex;">
-                                                            <i style="float:left; margin-left: 3%; margin-top: 3px;" class="far fa-clock"></i>
-                                                        <p id="dateofphoto" style="margin-left: -2%;" value=""></p>
+                                                            <i style="float:left; margin-left: 3%; margin-top: 3px;"
+                                                               class="far fa-clock"></i>
+                                                            <p id="dateofphoto" style="margin-left: -2%;" value=""></p>
                                                         </div>
                                                         <div class="modal-footer">
                                                             <button type="button" class="btn btn-secondary"
@@ -2451,4 +2697,22 @@
         }
 
     </script>
+
+    <script>
+        function addClientPhoto(id, url, event) {
+            x = "clientcheck" + url;
+            //alert(x);
+            document.getElementById(id).src = URL.createObjectURL(event.target.files[0]);
+            document.getElementById(x).value = "exist";
+        }
+
+        function deleteClientPhoto(id, url) {
+            x = "clientcheck" + url;
+            //alert(id);
+            document.getElementById(id).src = "/media/defaultClient.jpg";
+            //document.getElementById(id).style.height = '100%';
+            document.getElementById(x).value = "notExist";
+        }
+    </script>
+
 {% endblock %}

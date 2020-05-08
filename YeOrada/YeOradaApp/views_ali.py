@@ -95,6 +95,60 @@ def clientprofile(request, username):
         else:
             return redirect('signin')
 
+    elif 'Save' in request.POST:
+        if request.user.is_authenticated:
+            if request.user.isClient:
+                clientObject = Client.objects.filter(userEmail__username=username).first()
+
+                if request.POST.get('fileOneChecking') == 'exist':
+                    clientObject.image1 = request.FILES['clientPhotoOne']
+                elif request.POST.get('fileOneChecking') == 'notExist':
+                    clientObject.image1 = 'defaultClient.jpg'
+
+                if request.POST.get('fileTwoChecking') == 'exist':
+                    clientObject.image2 = request.FILES['clientPhotoTwo']
+                elif request.POST.get('fileTwoChecking') == 'notExist':
+                    clientObject.image2 = 'defaultClient.jpg'
+
+                if request.POST.get('fileThrChecking') == 'exist':
+                    clientObject.image3 = request.FILES['clientPhotoThr']
+                elif request.POST.get('fileThrChecking') == 'notExist':
+                    clientObject.image3 = 'defaultClient.jpg'
+
+                if request.POST.get('fileFourChecking') == 'exist':
+                    clientObject.image4 = request.FILES['clientPhotoFour']
+                elif request.POST.get('fileFourChecking') == 'notExist':
+                    clientObject.image4 = 'defaultClient.jpg'
+
+                if request.POST.get('fileFiveChecking') == 'exist':
+                    clientObject.image5 = request.FILES['clientPhotoFive']
+                elif request.POST.get('fileFiveChecking') == 'notExist':
+                    clientObject.image5 = 'defaultClient.jpg'
+
+                if request.POST.get('fileSixChecking') == 'exist':
+                    clientObject.image6 = request.FILES['clientPhotoSix']
+                elif request.POST.get('fileSixChecking') == 'notExist':
+                    clientObject.image6 = 'defaultClient.jpg'
+
+                if request.POST.get('fileSevenChecking') == 'exist':
+                    clientObject.image7 = request.FILES['clientPhotoSeven']
+                elif request.POST.get('fileSevenChecking') == 'notExist':
+                    clientObject.image7 = 'defaultClient.jpg'
+
+                if request.POST.get('fileEightChecking') == 'exist':
+                    clientObject.image8 = request.FILES['clientPhotoEight']
+                elif request.POST.get('fileEightChecking') == 'notExist':
+                    clientObject.image8 = 'defaultClient.jpg'
+
+                if request.POST.get('fileNineChecking') == 'exist':
+                    clientObject.image9 = request.FILES['clientPhotoNine']
+                elif request.POST.get('fileNineChecking') == 'notExist':
+                    clientObject.image9 = 'defaultClient.jpg'
+
+                clientObject.save()
+
+                return redirect('clientprofile', username)
+
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
     clientObject = Client.objects.filter(userEmail__username=username).first()
