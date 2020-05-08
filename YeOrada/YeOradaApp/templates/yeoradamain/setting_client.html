@@ -1,4 +1,5 @@
 {% extends 'yeoradamain/base.html' %}
+{% load custom_filter %}
 {% block content1 %}
 <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -209,6 +210,32 @@
                                                            >{{ client.info }} </textarea>
                                             </div>
                                         </div>
+
+                                         <div class="form-group">
+                                            <label for="cuisineUser">Cuisines </label>
+
+                                            <ul class="view-dt-1">
+                                                <table id="tabl1">
+
+                                                    <tr>
+
+                                                        <td>
+                                                            {% for cuisine in clientcuisines %}
+                                                                {% if cuisine in clientcuisines|filterCuisiness:clientObject.userEmail %}
+                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox" checked="True"/> {{ cuisine }}
+                                                                {% else %}
+                                                                    <input name="{{ cuisine }}" value="{{ cuisine }}" type="checkbox"  /> {{ cuisine }}
+                                                                {% endif %}
+                                                                <br> <div style="margin: 5%" > </div>
+                                                            {% endfor %}
+                                                        </td>
+
+                                                    </tr>
+
+                                                </table>
+                                            </ul>
+                                        </div>
+
                                         {{ error_message1|linebreaks }}
                                         <br>
 
