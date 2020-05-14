@@ -252,10 +252,53 @@
                                             <form method="POST">
                                                  <input name="commentId" type="hidden" value="{{ comment.id }}">
                                        {% csrf_token %}
-                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;" class="btn btn-warning" name="decline" type="submit"
-                                                           value="Decline">
-                                                <input style="margin-top:3%; float: right; width: 18%;" class="btn btn-success" name="accept" type="submit"
-                                                           value="Accept" >
+                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;" class="btn btn-warning" name="decline" type="button"
+                                                           value="Decline" data-toggle="modal"   data-target="#exampleModalCenter2" >
+                                                <input style="margin-top:3%; float: right; width: 18%;" class="btn btn-success"  type="button"
+                                                           value="Accept" data-toggle="modal"   data-target="#exampleModalCenter" >
+
+<!-- Accept Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Accept</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Are you sure you want to approve this comment?
+      </div>
+      <div class="modal-footer">
+          <input class="btn btn-success" name="accept" type="submit" value="Yes" >
+          <input  class="btn btn-warning" type="button" value="No" data-dismiss="modal">
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Decline Modal -->
+<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Decline</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       Are you sure you want to reject  this comment?
+      </div>
+      <div class="modal-footer">
+          <input class="btn btn-success" name="decline" type="submit" value="Yes" >
+          <input  class="btn btn-warning" type="button" value="No" data-dismiss="modal">
+      </div>
+    </div>
+  </div>
+</div>
 
                                                 </form>
                                         </div>
