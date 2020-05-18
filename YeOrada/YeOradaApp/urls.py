@@ -19,6 +19,7 @@ urlpatterns = [
     path('clientsettings', views.clientsettings, name='clientsettings'),
     path('adminsettings', views.adminsettings, name='adminsettings'),
     path('adminprofile', views.adminprofile, name='adminprofile'),
+    path('newclient', views.newclient, name='newclient'),
 ]
 
 if settings.DEBUG:

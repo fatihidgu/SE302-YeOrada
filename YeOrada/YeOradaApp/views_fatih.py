@@ -104,3 +104,8 @@ def clientsettings(request):
                   {'user': user, 'client': client, 'error_message1': error_message1,
                    'passwordChangeForm': passwordChangeForm, 'error_message2': error_message2,
                    'clientcuisines': clientcuisines, 'clientObject': clientObject})
+
+
+def newclient(request):
+
+    return render(request, 'yeoradamain/add_restaurant.html', {})

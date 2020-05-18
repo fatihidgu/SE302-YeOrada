@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'YeOradaApp',
+    'django.contrib.admindocs',
 ]
 
 MIDDLEWARE = [
