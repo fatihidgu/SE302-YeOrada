@@ -160,7 +160,6 @@ def clientprofile(request, username):
                 elif request.POST.get('fileMenuOneChecking') == 'notExist':
                     clientObject.menu1 = 'defaultMenu.jpg'
 
-
                 if request.POST.get('fileMenuTwoChecking') == 'exist':
                     clientObject.menu2 = request.FILES['clientMenuPhotoTwo']
                 elif request.POST.get('fileMenuTwoChecking') == 'notExist':

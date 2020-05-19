@@ -2125,15 +2125,34 @@
                                                 <div class="publish">
                                                     {% csrf_token %}
                                                     <input class="rating-btn btn-link" name="publishReview"
-                                                           type="submit"
+                                                           type="submit" data-toggle="modal" data-target="#commentRequest"
                                                            value="Publish Review">
                                                 </div>
+
+                                                <div class="modal fade" id="commentRequest" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Sent for Approval</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Your comment is sent to approval.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
                                             </div>
                                         </div>
                                     </form>
                                 {% endif %}
 
                                 {% for comment in commentList %}
+                                    {% if comment.is_Approved %}
                                     <div class="main-comments">
                                         <div class="rating-1">
                                             <div class="user-detail-heading">
@@ -2372,6 +2391,7 @@
                                         </div>
 
                                     </div>
+                                    {% endif %}
                                 {% endfor %}
 
 
