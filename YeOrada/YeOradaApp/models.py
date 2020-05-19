@@ -96,6 +96,7 @@ class Comment(models.Model):
     image2 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
     image3 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
     is_Approved = models.BooleanField(default=False)
+    approved_by = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class CommentAnswer(models.Model):
