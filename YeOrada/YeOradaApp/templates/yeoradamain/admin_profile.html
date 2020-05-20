@@ -295,11 +295,13 @@
       <div class="modal-body">
        Are you sure you want to reject  this comment?
       </div>
-
+        <br>
         <label class="modal-body" for="reason">Reason to decline:</label>
 
-        <textarea style="margin-left:3%;margin-right:3%" id="reason" name="reason"
-          rows="5" cols="33"></textarea>
+        <div class="form-group" style="padding: 3%;">
+        <textarea class="form-control" id="reason" name="reason" style="color: black;" placeholder="Enter a valid reason..."
+          rows="5" ></textarea>
+        </div>
 
       <div class="modal-footer">
           <input class="btn btn-success" name="decline" type="submit" value="Yes" >
