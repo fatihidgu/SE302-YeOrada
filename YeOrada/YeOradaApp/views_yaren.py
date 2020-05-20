@@ -153,6 +153,8 @@ def adminprofile(request):
                  return redirect('adminprofile')
     elif 'decline' in request.POST:
         if request.user.is_authenticated:
+             reason = request.POST.get('reason')
+             print(reason)
              commentId = request.POST.get('commentId')
              commentObject = Comment.objects.filter(id=commentId)
              commentObject.delete()
