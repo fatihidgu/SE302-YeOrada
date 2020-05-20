@@ -10,7 +10,7 @@
     <!-- Favicon -->
     <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 
-    <title>Restaurant Detail View </title>
+    <title>{{ clientObject.name }}</title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -37,9 +37,9 @@
                 <div class="col-md-6">
                     <div class="left-title-text">
                         <ul>
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                            <li class="breadcrumb-item"><a href="partners.html">Partners</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Restaurant Detail View</li>
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{% url 'clientsearch' %}">Restaurants</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ clientObject.name }}</li>
                         </ul>
                     </div>
                 </div>
