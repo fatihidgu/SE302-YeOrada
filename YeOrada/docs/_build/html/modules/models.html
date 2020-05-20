@@ -1,0 +1,1201 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Models &#8212; YeOrada 29.05.2020 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Forms" href="forms.html" />
+    <link rel="prev" title="Views-5" href="views_fatih.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-YeOradaApp.models">
+<span id="models"></span><h1>Models<a class="headerlink" href="#module-YeOradaApp.models" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="YeOradaApp.models.Admin">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">Admin</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">userEmail</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Admin" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.Admin.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.Admin.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.Admin.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.Admin.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Admin.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.Admin.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Admin.userEmail">
+<code class="sig-name descname">userEmail</code><a class="headerlink" href="#YeOradaApp.models.Admin.userEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Admin.userEmail_id">
+<code class="sig-name descname">userEmail_id</code><a class="headerlink" href="#YeOradaApp.models.Admin.userEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.Client">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">Client</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">userEmail</span></em>, <em class="sig-param"><span class="n">phone</span></em>, <em class="sig-param"><span class="n">city</span></em>, <em class="sig-param"><span class="n">address1</span></em>, <em class="sig-param"><span class="n">address2</span></em>, <em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">workingHours</span></em>, <em class="sig-param"><span class="n">workingDays</span></em>, <em class="sig-param"><span class="n">info</span></em>, <em class="sig-param"><span class="n">category</span></em>, <em class="sig-param"><span class="n">rate</span></em>, <em class="sig-param"><span class="n">rateCount</span></em>, <em class="sig-param"><span class="n">image1</span></em>, <em class="sig-param"><span class="n">image2</span></em>, <em class="sig-param"><span class="n">image3</span></em>, <em class="sig-param"><span class="n">image4</span></em>, <em class="sig-param"><span class="n">image5</span></em>, <em class="sig-param"><span class="n">image6</span></em>, <em class="sig-param"><span class="n">image7</span></em>, <em class="sig-param"><span class="n">image8</span></em>, <em class="sig-param"><span class="n">image9</span></em>, <em class="sig-param"><span class="n">logo</span></em>, <em class="sig-param"><span class="n">menu1</span></em>, <em class="sig-param"><span class="n">menu2</span></em>, <em class="sig-param"><span class="n">menu3</span></em>, <em class="sig-param"><span class="n">menu4</span></em>, <em class="sig-param"><span class="n">menu5</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Client" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.models.Client.BAR">
+<code class="sig-name descname">BAR</code><em class="property"> = 'Bar'</em><a class="headerlink" href="#YeOradaApp.models.Client.BAR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.CAFE">
+<code class="sig-name descname">CAFE</code><em class="property"> = 'Cafe'</em><a class="headerlink" href="#YeOradaApp.models.Client.CAFE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.CATEGORIES">
+<code class="sig-name descname">CATEGORIES</code><em class="property"> = [('Restaurant', 'Restaurant'), ('Cafe', 'Cafe'), ('Bar', 'Bar')]</em><a class="headerlink" href="#YeOradaApp.models.Client.CATEGORIES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.Client.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.Client.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.Client.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.Client.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.RESTAURANT">
+<code class="sig-name descname">RESTAURANT</code><em class="property"> = 'Restaurant'</em><a class="headerlink" href="#YeOradaApp.models.Client.RESTAURANT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.address1">
+<code class="sig-name descname">address1</code><a class="headerlink" href="#YeOradaApp.models.Client.address1" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.address2">
+<code class="sig-name descname">address2</code><a class="headerlink" href="#YeOradaApp.models.Client.address2" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.category">
+<code class="sig-name descname">category</code><a class="headerlink" href="#YeOradaApp.models.Client.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.city">
+<code class="sig-name descname">city</code><a class="headerlink" href="#YeOradaApp.models.Client.city" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.clientcuisine_set">
+<code class="sig-name descname">clientcuisine_set</code><a class="headerlink" href="#YeOradaApp.models.Client.clientcuisine_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.comment_set">
+<code class="sig-name descname">comment_set</code><a class="headerlink" href="#YeOradaApp.models.Client.comment_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.Client.get_category_display">
+<code class="sig-name descname">get_category_display</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.CharField: category&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Client.get_category_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image1">
+<code class="sig-name descname">image1</code><a class="headerlink" href="#YeOradaApp.models.Client.image1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image2">
+<code class="sig-name descname">image2</code><a class="headerlink" href="#YeOradaApp.models.Client.image2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image3">
+<code class="sig-name descname">image3</code><a class="headerlink" href="#YeOradaApp.models.Client.image3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image4">
+<code class="sig-name descname">image4</code><a class="headerlink" href="#YeOradaApp.models.Client.image4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image5">
+<code class="sig-name descname">image5</code><a class="headerlink" href="#YeOradaApp.models.Client.image5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image6">
+<code class="sig-name descname">image6</code><a class="headerlink" href="#YeOradaApp.models.Client.image6" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image7">
+<code class="sig-name descname">image7</code><a class="headerlink" href="#YeOradaApp.models.Client.image7" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image8">
+<code class="sig-name descname">image8</code><a class="headerlink" href="#YeOradaApp.models.Client.image8" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.image9">
+<code class="sig-name descname">image9</code><a class="headerlink" href="#YeOradaApp.models.Client.image9" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.info">
+<code class="sig-name descname">info</code><a class="headerlink" href="#YeOradaApp.models.Client.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.logo">
+<code class="sig-name descname">logo</code><a class="headerlink" href="#YeOradaApp.models.Client.logo" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.menu1">
+<code class="sig-name descname">menu1</code><a class="headerlink" href="#YeOradaApp.models.Client.menu1" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.menu2">
+<code class="sig-name descname">menu2</code><a class="headerlink" href="#YeOradaApp.models.Client.menu2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.menu3">
+<code class="sig-name descname">menu3</code><a class="headerlink" href="#YeOradaApp.models.Client.menu3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.menu4">
+<code class="sig-name descname">menu4</code><a class="headerlink" href="#YeOradaApp.models.Client.menu4" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.menu5">
+<code class="sig-name descname">menu5</code><a class="headerlink" href="#YeOradaApp.models.Client.menu5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#YeOradaApp.models.Client.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.Client.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.phone">
+<code class="sig-name descname">phone</code><a class="headerlink" href="#YeOradaApp.models.Client.phone" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.rate">
+<code class="sig-name descname">rate</code><a class="headerlink" href="#YeOradaApp.models.Client.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.rateCount">
+<code class="sig-name descname">rateCount</code><a class="headerlink" href="#YeOradaApp.models.Client.rateCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#YeOradaApp.models.Client.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.userEmail">
+<code class="sig-name descname">userEmail</code><a class="headerlink" href="#YeOradaApp.models.Client.userEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.userEmail_id">
+<code class="sig-name descname">userEmail_id</code><a class="headerlink" href="#YeOradaApp.models.Client.userEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.workingDays">
+<code class="sig-name descname">workingDays</code><a class="headerlink" href="#YeOradaApp.models.Client.workingDays" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Client.workingHours">
+<code class="sig-name descname">workingHours</code><a class="headerlink" href="#YeOradaApp.models.Client.workingHours" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.ClientCuisine">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">ClientCuisine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">customerEmail</span></em>, <em class="sig-param"><span class="n">cuisine</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.ClientCuisine" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.BREAKFAST">
+<code class="sig-name descname">BREAKFAST</code><em class="property"> = 'Breakfast'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.BREAKFAST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.CAFEANDRESTAURANT">
+<code class="sig-name descname">CAFEANDRESTAURANT</code><em class="property"> = 'Cafe &amp; Restaurant'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.CAFEANDRESTAURANT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.CHINESE">
+<code class="sig-name descname">CHINESE</code><em class="property"> = 'Chinese'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.CHINESE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.CUISINES">
+<code class="sig-name descname">CUISINES</code><em class="property"> = [('Kebap', 'Kebap'), ('Grill', 'Grill'), ('Turkish', 'Turkish'), ('Pide', 'Pide'), ('Döner', 'Döner'), ('Fast Food', 'Fast Food'), ('Homemade', 'Homemade'), ('Seafood', 'Seafood'), ('Cafe &amp; Restaurant', 'Cafe &amp; Restaurant'), ('Lunch', 'Lunch'), ('Breakfast', 'Breakfast'), ('Dinner', 'Dinner'), ('Pizza', 'Pizza'), ('Chinese', 'Chinese'), ('Korean', 'Korean')]</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.CUISINES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.DINNER">
+<code class="sig-name descname">DINNER</code><em class="property"> = 'Dinner'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.DINNER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.DONER">
+<code class="sig-name descname">DONER</code><em class="property"> = 'Döner'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.DONER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.ClientCuisine.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.FASTFOOD">
+<code class="sig-name descname">FASTFOOD</code><em class="property"> = 'Fast Food'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.FASTFOOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.GRILL">
+<code class="sig-name descname">GRILL</code><em class="property"> = 'Grill'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.GRILL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.HOMEMADE">
+<code class="sig-name descname">HOMEMADE</code><em class="property"> = 'Homemade'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.HOMEMADE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.KEBAP">
+<code class="sig-name descname">KEBAP</code><em class="property"> = 'Kebap'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.KEBAP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.KOREAN">
+<code class="sig-name descname">KOREAN</code><em class="property"> = 'Korean'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.KOREAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.LUNCH">
+<code class="sig-name descname">LUNCH</code><em class="property"> = 'Lunch'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.LUNCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.ClientCuisine.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.PIDE">
+<code class="sig-name descname">PIDE</code><em class="property"> = 'Pide'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.PIDE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.PIZZA">
+<code class="sig-name descname">PIZZA</code><em class="property"> = 'Pizza'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.PIZZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.SEAFOOD">
+<code class="sig-name descname">SEAFOOD</code><em class="property"> = 'Seafood'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.SEAFOOD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.TURKISH">
+<code class="sig-name descname">TURKISH</code><em class="property"> = 'Turkish'</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.TURKISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.cuisine">
+<code class="sig-name descname">cuisine</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.cuisine" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.customerEmail">
+<code class="sig-name descname">customerEmail</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.customerEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.customerEmail_id">
+<code class="sig-name descname">customerEmail_id</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.customerEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.ClientCuisine.get_cuisine_display">
+<code class="sig-name descname">get_cuisine_display</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.CharField: cuisine&gt;</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.get_cuisine_display" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.ClientCuisine.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.ClientCuisine.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.Comment">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">Comment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">customerEmail</span></em>, <em class="sig-param"><span class="n">clientEmail</span></em>, <em class="sig-param"><span class="n">date</span></em>, <em class="sig-param"><span class="n">text</span></em>, <em class="sig-param"><span class="n">rate</span></em>, <em class="sig-param"><span class="n">likeNumber</span></em>, <em class="sig-param"><span class="n">commentNumber</span></em>, <em class="sig-param"><span class="n">image</span></em>, <em class="sig-param"><span class="n">image2</span></em>, <em class="sig-param"><span class="n">image3</span></em>, <em class="sig-param"><span class="n">is_Approved</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Comment" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.Comment.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.Comment.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.Comment.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.Comment.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.clientEmail">
+<code class="sig-name descname">clientEmail</code><a class="headerlink" href="#YeOradaApp.models.Comment.clientEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.clientEmail_id">
+<code class="sig-name descname">clientEmail_id</code><a class="headerlink" href="#YeOradaApp.models.Comment.clientEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.commentNumber">
+<code class="sig-name descname">commentNumber</code><a class="headerlink" href="#YeOradaApp.models.Comment.commentNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.commentanswer_set">
+<code class="sig-name descname">commentanswer_set</code><a class="headerlink" href="#YeOradaApp.models.Comment.commentanswer_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.commentlike_set">
+<code class="sig-name descname">commentlike_set</code><a class="headerlink" href="#YeOradaApp.models.Comment.commentlike_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.customerEmail">
+<code class="sig-name descname">customerEmail</code><a class="headerlink" href="#YeOradaApp.models.Comment.customerEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.customerEmail_id">
+<code class="sig-name descname">customerEmail_id</code><a class="headerlink" href="#YeOradaApp.models.Comment.customerEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.date">
+<code class="sig-name descname">date</code><a class="headerlink" href="#YeOradaApp.models.Comment.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.Comment.get_next_by_date">
+<code class="sig-name descname">get_next_by_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Comment.get_next_by_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.Comment.get_previous_by_date">
+<code class="sig-name descname">get_previous_by_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Comment.get_previous_by_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#YeOradaApp.models.Comment.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.image">
+<code class="sig-name descname">image</code><a class="headerlink" href="#YeOradaApp.models.Comment.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.image2">
+<code class="sig-name descname">image2</code><a class="headerlink" href="#YeOradaApp.models.Comment.image2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.image3">
+<code class="sig-name descname">image3</code><a class="headerlink" href="#YeOradaApp.models.Comment.image3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.is_Approved">
+<code class="sig-name descname">is_Approved</code><a class="headerlink" href="#YeOradaApp.models.Comment.is_Approved" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.likeNumber">
+<code class="sig-name descname">likeNumber</code><a class="headerlink" href="#YeOradaApp.models.Comment.likeNumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.Comment.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.rate">
+<code class="sig-name descname">rate</code><a class="headerlink" href="#YeOradaApp.models.Comment.rate" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Comment.text">
+<code class="sig-name descname">text</code><a class="headerlink" href="#YeOradaApp.models.Comment.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.CommentAnswer">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">CommentAnswer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">customerEmail</span></em>, <em class="sig-param"><span class="n">commentId</span></em>, <em class="sig-param"><span class="n">answer</span></em>, <em class="sig-param"><span class="n">date</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.CommentAnswer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.CommentAnswer.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.CommentAnswer.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.answer">
+<code class="sig-name descname">answer</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.answer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.commentId">
+<code class="sig-name descname">commentId</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.commentId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.commentId_id">
+<code class="sig-name descname">commentId_id</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.commentId_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.customerEmail">
+<code class="sig-name descname">customerEmail</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.customerEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.customerEmail_id">
+<code class="sig-name descname">customerEmail_id</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.customerEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.date">
+<code class="sig-name descname">date</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.date" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.CommentAnswer.get_next_by_date">
+<code class="sig-name descname">get_next_by_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.get_next_by_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.CommentAnswer.get_previous_by_date">
+<code class="sig-name descname">get_previous_by_date</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.get_previous_by_date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentAnswer.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.CommentAnswer.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.CommentLike">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">CommentLike</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id</span></em>, <em class="sig-param"><span class="n">customerEmail</span></em>, <em class="sig-param"><span class="n">commentId</span></em>, <em class="sig-param"><span class="n">isLiked</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.CommentLike" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.CommentLike.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.CommentLike.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.commentId">
+<code class="sig-name descname">commentId</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.commentId" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.commentId_id">
+<code class="sig-name descname">commentId_id</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.commentId_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.customerEmail">
+<code class="sig-name descname">customerEmail</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.customerEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.customerEmail_id">
+<code class="sig-name descname">customerEmail_id</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.customerEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.id">
+<code class="sig-name descname">id</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.id" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.isLiked">
+<code class="sig-name descname">isLiked</code><a class="headerlink" href="#YeOradaApp.models.CommentLike.isLiked" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.CommentLike.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.CommentLike.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.Customer">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">Customer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">userEmail</span></em>, <em class="sig-param"><span class="n">city</span></em>, <em class="sig-param"><span class="n">state</span></em>, <em class="sig-param"><span class="n">bio</span></em>, <em class="sig-param"><span class="n">image</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.Customer" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.Customer.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.Customer.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.Customer.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.Customer.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.bio">
+<code class="sig-name descname">bio</code><a class="headerlink" href="#YeOradaApp.models.Customer.bio" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.city">
+<code class="sig-name descname">city</code><a class="headerlink" href="#YeOradaApp.models.Customer.city" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.comment_set">
+<code class="sig-name descname">comment_set</code><a class="headerlink" href="#YeOradaApp.models.Customer.comment_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.commentanswer_set">
+<code class="sig-name descname">commentanswer_set</code><a class="headerlink" href="#YeOradaApp.models.Customer.commentanswer_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.commentlike_set">
+<code class="sig-name descname">commentlike_set</code><a class="headerlink" href="#YeOradaApp.models.Customer.commentlike_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.image">
+<code class="sig-name descname">image</code><a class="headerlink" href="#YeOradaApp.models.Customer.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>Just like the FileDescriptor, but for ImageFields. The only difference is
+assigning the width/height to the width_field/height_field, if appropriate.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;django.db.models.manager.Manager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.Customer.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.state">
+<code class="sig-name descname">state</code><a class="headerlink" href="#YeOradaApp.models.Customer.state" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.userEmail">
+<code class="sig-name descname">userEmail</code><a class="headerlink" href="#YeOradaApp.models.Customer.userEmail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related object on the forward side of a many-to-one or
+one-to-one (via ForwardOneToOneDescriptor subclass) relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Child.parent</span></code> is a <code class="docutils literal notranslate"><span class="pre">ForwardManyToOneDescriptor</span></code> instance.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.Customer.userEmail_id">
+<code class="sig-name descname">userEmail_id</code><a class="headerlink" href="#YeOradaApp.models.Customer.userEmail_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.models.RegisteredUser">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.models.</code><code class="sig-name descname">RegisteredUser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">last_login</span></em>, <em class="sig-param"><span class="n">is_superuser</span></em>, <em class="sig-param"><span class="n">username</span></em>, <em class="sig-param"><span class="n">email</span></em>, <em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">surname</span></em>, <em class="sig-param"><span class="n">password</span></em>, <em class="sig-param"><span class="n">isCustomer</span></em>, <em class="sig-param"><span class="n">isClient</span></em>, <em class="sig-param"><span class="n">isAdmin</span></em>, <em class="sig-param"><span class="n">date_joined</span></em>, <em class="sig-param"><span class="n">is_staff</span></em>, <em class="sig-param"><span class="n">is_active</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.RegisteredUser" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py exception">
+<dt id="YeOradaApp.models.RegisteredUser.DoesNotExist">
+<em class="property">exception </em><code class="sig-name descname">DoesNotExist</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.DoesNotExist" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py exception">
+<dt id="YeOradaApp.models.RegisteredUser.MultipleObjectsReturned">
+<em class="property">exception </em><code class="sig-name descname">MultipleObjectsReturned</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.MultipleObjectsReturned" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.REQUIRED_FIELDS">
+<code class="sig-name descname">REQUIRED_FIELDS</code><em class="property"> = []</em><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.REQUIRED_FIELDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.USERNAME_FIELD">
+<code class="sig-name descname">USERNAME_FIELD</code><em class="property"> = 'email'</em><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.USERNAME_FIELD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.admin_set">
+<code class="sig-name descname">admin_set</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.admin_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.client_set">
+<code class="sig-name descname">client_set</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.client_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.customer_set">
+<code class="sig-name descname">customer_set</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.customer_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.date_joined">
+<code class="sig-name descname">date_joined</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.date_joined" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.email">
+<code class="sig-name descname">email</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.email" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.RegisteredUser.get_next_by_date_joined">
+<code class="sig-name descname">get_next_by_date_joined</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date_joined&gt;</em>, <em class="sig-param">is_next=True</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.get_next_by_date_joined" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.models.RegisteredUser.get_previous_by_date_joined">
+<code class="sig-name descname">get_previous_by_date_joined</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">field=&lt;django.db.models.fields.DateTimeField: date_joined&gt;</em>, <em class="sig-param">is_next=False</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.get_previous_by_date_joined" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.groups">
+<code class="sig-name descname">groups</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.groups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.isAdmin">
+<code class="sig-name descname">isAdmin</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.isAdmin" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.isClient">
+<code class="sig-name descname">isClient</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.isClient" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.isCustomer">
+<code class="sig-name descname">isCustomer</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.isCustomer" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.is_staff">
+<code class="sig-name descname">is_staff</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.is_staff" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.logentry_set">
+<code class="sig-name descname">logentry_set</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.logentry_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the reverse side of a
+many-to-one relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="n">Parent</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;children&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Parent.children</span></code> is a <code class="docutils literal notranslate"><span class="pre">ReverseManyToOneDescriptor</span></code> instance.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.name">
+<code class="sig-name descname">name</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.objects">
+<code class="sig-name descname">objects</code><em class="property"> = &lt;YeOradaApp.managers.CustomUserManager object&gt;</em><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.objects" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.surname">
+<code class="sig-name descname">surname</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.surname" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.user_permissions">
+<code class="sig-name descname">user_permissions</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.user_permissions" title="Permalink to this definition">¶</a></dt>
+<dd><p>Accessor to the related objects manager on the forward and reverse sides of
+a many-to-many relation.</p>
+<p>In the example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Pizza</span><span class="p">(</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">toppings</span> <span class="o">=</span> <span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Topping</span><span class="p">,</span> <span class="n">related_name</span><span class="o">=</span><span class="s1">&#39;pizzas&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Pizza.toppings</span></code> and <code class="docutils literal notranslate"><span class="pre">Topping.pizzas</span></code> are <code class="docutils literal notranslate"><span class="pre">ManyToManyDescriptor</span></code>
+instances.</p>
+<p>Most of the implementation is delegated to a dynamically defined manager
+class built by <code class="docutils literal notranslate"><span class="pre">create_forward_many_to_many_manager()</span></code> defined below.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.models.RegisteredUser.username">
+<code class="sig-name descname">username</code><a class="headerlink" href="#YeOradaApp.models.RegisteredUser.username" title="Permalink to this definition">¶</a></dt>
+<dd><p>A wrapper for a deferred-loading field. When the value is read from this
+object the first time, the query is executed.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">YeOrada</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_ahmet.html">Views-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_yaren.html">Views-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_ali.html">Views-4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_fatih.html">Views-5</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Models</a></li>
+<li class="toctree-l1"><a class="reference internal" href="forms.html">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Tests</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="views_fatih.html" title="previous chapter">Views-5</a></li>
+      <li>Next: <a href="forms.html" title="next chapter">Forms</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ahmet Can Terlikçi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/models.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

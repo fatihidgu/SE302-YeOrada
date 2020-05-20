@@ -96,6 +96,7 @@ class Comment(models.Model):
     image2 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
     image3 = models.ImageField(default='defaultComment.jpg', upload_to='comment_pics')
     is_Approved = models.BooleanField(default=False)
+    approved_by = models.ForeignKey(Admin, on_delete=models.CASCADE, null=True, blank=True)
 
 
 class CommentAnswer(models.Model):
@@ -146,3 +147,21 @@ class ClientCuisine(models.Model):
     ]
     customerEmail = models.ForeignKey(Client, on_delete=models.CASCADE)
     cuisine = models.CharField(max_length=200, choices=CUISINES)
+
+
+class ClientApplicationForm(models.Model):
+    restaurant_name = models.CharField(max_length=250, unique=True)
+    city = models.CharField(max_length=200)
+    state = models.CharField(max_length=200)
+    owner_name = models.CharField(max_length=200)
+    owner_surname = models.CharField(max_length=200)
+    owner_email = models.EmailField(_('email address'))
+    owner_phone = models.CharField(max_length=200)
+    restaurant_phone = models.CharField(max_length=200)
+    restaurant_email = models.EmailField(_('email address'), unique=True)
+    workday_from = models.CharField(max_length=200)
+    workday_to = models.CharField(max_length=200)
+    workhour_from = models.CharField(max_length=200)
+    workhour_to = models.CharField(max_length=200)
+    restaurant_address = models.CharField(max_length=300)
+    will_be_verified = models.BooleanField(default=False)

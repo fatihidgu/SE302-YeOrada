@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'YeOradaApp',
+    'django.contrib.admindocs',
 ]
 
 MIDDLEWARE = [
@@ -104,7 +105,7 @@ AUTHENTICATION_BACKENDS = ('YeOradaApp.backends.MyAuthBackend','django.contrib.a
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Istanbul'
 
 USE_I18N = True
 

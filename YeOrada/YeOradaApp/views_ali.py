@@ -21,9 +21,9 @@ def clientprofile(request, username):
                     rate = request.POST.get('rate')
 
                     newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (
-                                clientObject.rateCount + 1))
+                            clientObject.rateCount + 1))
                     clientObject.rate = newRate
-                    clientObject.rateCount = clientObject.rateCount+1;
+                    clientObject.rateCount = clientObject.rateCount + 1;
                     clientObject.save()
 
                     print(request.POST.get('fileOneChecking'), ", ", request.POST.get('fileTwoChecking'), " ve ",
@@ -149,6 +149,41 @@ def clientprofile(request, username):
 
                 return redirect('clientprofile', username)
 
+    elif 'SaveMenu' in request.POST:
+        if request.user.is_authenticated:
+            if request.user.isClient:
+                clientObject = Client.objects.filter(userEmail__username=username).first()
+
+                if request.POST.get('fileMenuOneChecking') == 'exist':
+
+                    clientObject.menu1 = request.FILES['clientMenuPhotoOne']
+                elif request.POST.get('fileMenuOneChecking') == 'notExist':
+                    clientObject.menu1 = 'defaultMenu.jpg'
+
+                if request.POST.get('fileMenuTwoChecking') == 'exist':
+                    clientObject.menu2 = request.FILES['clientMenuPhotoTwo']
+                elif request.POST.get('fileMenuTwoChecking') == 'notExist':
+                    clientObject.menu2 = 'defaultMenu.jpg'
+
+                if request.POST.get('fileMenuThrChecking') == 'exist':
+                    clientObject.menu3 = request.FILES['clientMenuPhotoThr']
+                elif request.POST.get('fileMenuThrChecking') == 'notExist':
+                    clientObject.menu3 = 'defaultMenu.jpg'
+
+                if request.POST.get('fileMenuFourChecking') == 'exist':
+                    clientObject.menu4 = request.FILES['clientMenuPhotoFour']
+                elif request.POST.get('fileMenuFourChecking') == 'notExist':
+                    clientObject.menu4 = 'defaultMenu.jpg'
+
+                if request.POST.get('fileMenuFiveChecking') == 'exist':
+                    clientObject.menu5 = request.FILES['clientMenuPhotoFive']
+                elif request.POST.get('fileMenuFiveChecking') == 'notExist':
+                    clientObject.menu5 = 'defaultMenu.jpg'
+
+                clientObject.save()
+
+                return redirect('clientprofile', username)
+
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
     clientObject = Client.objects.filter(userEmail__username=username).first()
@@ -160,7 +195,6 @@ def clientprofile(request, username):
 
     registeredUser = RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
-
 
     CountOfPhoto = 0
     CountofComment = Comment.objects.filter(clientEmail=clientObject.userEmail.email)
@@ -192,7 +226,8 @@ def clientprofile(request, username):
                   {'commentForm': commentForm, 'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
-                   'clientcuisines': clientcuisines, 'customerr': customerr,'clienty': clienty, 'CountOfPhoto':CountOfPhoto, 'client_menu_count': client_menu_count, })
+                   'clientcuisines': clientcuisines, 'customerr': customerr, 'clienty': clienty,
+                   'CountOfPhoto': CountOfPhoto, 'client_menu_count': client_menu_count, })
 
 
 def likeComment(request):

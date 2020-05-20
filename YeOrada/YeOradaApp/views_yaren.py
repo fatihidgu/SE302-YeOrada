@@ -73,7 +73,6 @@ def settings(request):
 
 
 def myprofile(request):
-    comments = Comment.objects.filter(customerEmail=request.user.email)
     user = request.user
     if 'postComment' in request.POST:
         if request.user.is_authenticated:
@@ -92,14 +91,14 @@ def myprofile(request):
 
     commentForm = CommentForm()
     commentAnswerForm = CommentAnswerForm()
-    commentList = Comment.objects.filter(customerEmail=request.user.email).order_by('-date')
+    commentList = Comment.objects.filter(customerEmail=request.user.email, is_Approved=True).order_by('-date')
     answersList = CommentAnswer.objects.all()
 
     customer = Customer.objects.filter(userEmail=request.user).first()
     customerLikes = CommentLike.objects.filter(customerEmail=customer)
 
     return render(request, 'yeoradamain/user_profile_view.html',
-                  {'user': user, 'customer': customer, 'comments': comments, 'commentForm': commentForm,
+                  {'user': user, 'customer': customer, 'commentForm': commentForm,
                    'commentList': commentList,
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, })
@@ -145,7 +144,6 @@ def adminsettings(request):
 
 
 def adminprofile(request):
-    comments = Comment.objects.filter(is_Approved=False)
     user = request.user
     if 'accept' in request.POST:
         if request.user.is_authenticated:
@@ -155,15 +153,16 @@ def adminprofile(request):
                  return redirect('adminprofile')
     elif 'decline' in request.POST:
         if request.user.is_authenticated:
+             reason = request.POST.get('reason')
+             print(reason)
              commentId = request.POST.get('commentId')
              commentObject = Comment.objects.filter(id=commentId)
              commentObject.delete()
              return redirect('adminprofile')
 
-
     commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
     customer = Customer.objects.filter(userEmail=request.user).first()
 
     return render(request, 'yeoradamain/admin_profile.html',
-                  {'user': user, 'customer': customer, 'comments': comments,
+                  {'user': user, 'customer': customer,
                    'commentList': commentList, })

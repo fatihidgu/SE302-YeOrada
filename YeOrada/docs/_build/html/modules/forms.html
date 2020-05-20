@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Forms &#8212; YeOrada 29.05.2020 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tests" href="tests.html" />
+    <link rel="prev" title="Models" href="models.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-YeOradaApp.forms">
+<span id="forms"></span><h1>Forms<a class="headerlink" href="#module-YeOradaApp.forms" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="YeOradaApp.forms.CommentAnswerForm">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.forms.</code><code class="sig-name descname">CommentAnswerForm</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">files=None</em>, <em class="sig-param">auto_id='id_%s'</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">initial=None</em>, <em class="sig-param">error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em class="sig-param">label_suffix=None</em>, <em class="sig-param">empty_permitted=False</em>, <em class="sig-param">field_order=None</em>, <em class="sig-param">use_required_attribute=None</em>, <em class="sig-param">renderer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="YeOradaApp.forms.CommentAnswerForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentAnswerForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('answer',)</em><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentAnswerForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="models.html#YeOradaApp.models.CommentAnswer" title="YeOradaApp.models.CommentAnswer"><code class="xref py py-class docutils literal notranslate"><span class="pre">YeOradaApp.models.CommentAnswer</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentAnswerForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentAnswerForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.CommentAnswerForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.CommentAnswerForm.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.forms.CommentForm">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.forms.</code><code class="sig-name descname">CommentForm</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">files=None</em>, <em class="sig-param">auto_id='id_%s'</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">initial=None</em>, <em class="sig-param">error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em class="sig-param">label_suffix=None</em>, <em class="sig-param">empty_permitted=False</em>, <em class="sig-param">field_order=None</em>, <em class="sig-param">use_required_attribute=None</em>, <em class="sig-param">renderer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.CommentForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="YeOradaApp.forms.CommentForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#YeOradaApp.forms.CommentForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('text', 'rate')</em><a class="headerlink" href="#YeOradaApp.forms.CommentForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#YeOradaApp.forms.CommentForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="models.html#YeOradaApp.models.Comment" title="YeOradaApp.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">YeOradaApp.models.Comment</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.CommentForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.CommentForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.CommentForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.CommentForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.CommentForm.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.forms.ImageUploadForm">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.forms.</code><code class="sig-name descname">ImageUploadForm</code><span class="sig-paren">(</span><em class="sig-param">data=None</em>, <em class="sig-param">files=None</em>, <em class="sig-param">auto_id='id_%s'</em>, <em class="sig-param">prefix=None</em>, <em class="sig-param">initial=None</em>, <em class="sig-param">error_class=&lt;class 'django.forms.utils.ErrorList'&gt;</em>, <em class="sig-param">label_suffix=None</em>, <em class="sig-param">empty_permitted=False</em>, <em class="sig-param">field_order=None</em>, <em class="sig-param">use_required_attribute=None</em>, <em class="sig-param">renderer=None</em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="YeOradaApp.forms.ImageUploadForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.forms.ImageUploadForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('image', 'image2', 'image3')</em><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.ImageUploadForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="models.html#YeOradaApp.models.Comment" title="YeOradaApp.models.Comment"><code class="xref py py-class docutils literal notranslate"><span class="pre">YeOradaApp.models.Comment</span></code></a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.ImageUploadForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.ImageUploadForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {}</em><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.ImageUploadForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.ImageUploadForm.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.forms.</code><code class="sig-name descname">RegisteredUserChangeForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('email', 'username', 'name', 'surname', 'isCustomer', 'isClient', 'isAdmin')</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="models.html#YeOradaApp.models.RegisteredUser" title="YeOradaApp.models.RegisteredUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">YeOradaApp.models.RegisteredUser</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.Meta.widgets">
+<code class="sig-name descname">widgets</code><em class="property"> = {'password': &lt;django.forms.widgets.PasswordInput object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.Meta.widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {'email': &lt;django.forms.fields.EmailField object&gt;, 'isAdmin': &lt;django.forms.fields.BooleanField object&gt;, 'isClient': &lt;django.forms.fields.BooleanField object&gt;, 'isCustomer': &lt;django.forms.fields.BooleanField object&gt;, 'name': &lt;django.forms.fields.CharField object&gt;, 'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object&gt;, 'surname': &lt;django.forms.fields.CharField object&gt;, 'username': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {'password': &lt;django.contrib.auth.forms.ReadOnlyPasswordHashField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.RegisteredUserChangeForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserChangeForm.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm">
+<em class="property">class </em><code class="sig-prename descclassname">YeOradaApp.forms.</code><code class="sig-name descname">RegisteredUserCreationForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py class">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;, 'username': &lt;django.contrib.auth.forms.UsernameField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('email', 'username', 'name', 'surname', 'isCustomer', 'isClient', 'isAdmin')</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.model" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="models.html#YeOradaApp.models.RegisteredUser" title="YeOradaApp.models.RegisteredUser"><code class="xref py py-class docutils literal notranslate"><span class="pre">YeOradaApp.models.RegisteredUser</span></code></a></p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.Meta.widgets">
+<code class="sig-name descname">widgets</code><em class="property"> = {'password': &lt;django.forms.widgets.PasswordInput object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.Meta.widgets" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {'email': &lt;django.forms.fields.EmailField object&gt;, 'isAdmin': &lt;django.forms.fields.BooleanField object&gt;, 'isClient': &lt;django.forms.fields.BooleanField object&gt;, 'isCustomer': &lt;django.forms.fields.BooleanField object&gt;, 'name': &lt;django.forms.fields.CharField object&gt;, 'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;, 'surname': &lt;django.forms.fields.CharField object&gt;, 'username': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.base_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.declared_fields" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="YeOradaApp.forms.RegisteredUserCreationForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#YeOradaApp.forms.RegisteredUserCreationForm.media" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">YeOrada</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="views.html">Views</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_ahmet.html">Views-2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_yaren.html">Views-3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_ali.html">Views-4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="views_fatih.html">Views-5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="models.html">Models</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Forms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">Tests</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter">Models</a></li>
+      <li>Next: <a href="tests.html" title="next chapter">Tests</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Ahmet Can Terlikçi.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/modules/forms.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
