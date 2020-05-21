@@ -2,7 +2,11 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
 from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Admin
+
+from django.core import mail
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 def settings(request):
@@ -147,17 +151,40 @@ def adminprofile(request):
     user = request.user
     if 'accept' in request.POST:
         if request.user.is_authenticated:
+                 adminObject = Admin.objects.filter(userEmail=user)
                  commentId = request.POST.get('commentId')
-                 commentObject = Comment.objects.filter(id=commentId).update(is_Approved=True)
-
+                 commentObject = Comment.objects.filter(id=commentId).update(is_Approved=True, approved_by=adminObject)
                  return redirect('adminprofile')
     elif 'decline' in request.POST:
         if request.user.is_authenticated:
+             adminObject = Admin.objects.filter(userEmail=user).first()
+             admin_name = adminObject.userEmail.name
+             admin_surname = adminObject.userEmail.surname
+
              reason = request.POST.get('reason')
-             print(reason)
+             if len(reason.split()) == 0:
+                 reason = "No reason is provided by the customer representative."
              commentId = request.POST.get('commentId')
-             commentObject = Comment.objects.filter(id=commentId)
-             commentObject.delete()
+             commentSet = Comment.objects.filter(id=commentId)
+
+             commentObject = commentSet.first()
+             customer_name = commentObject.customerEmail.userEmail.name
+             customer_surname = commentObject.customerEmail.userEmail.surname
+             review = commentObject.text
+             date = commentObject.date
+             restaurant = commentObject.clientEmail.name
+
+             subject = 'Yeorada | Your review has just declined'
+             html_message = render_to_string('yeoradamain/declineReview.html', {'customer_name': customer_name, 'customer_surname': customer_surname,
+                                                                                'review': review, 'restaurant': restaurant, 'date': date,
+                                                                                'reason': reason, 'admin_name': admin_name, 'admin_surname': admin_surname, })
+             plain_message = strip_tags(html_message)
+             from_email = 'From <noreply.yeorada@gmail.com>'
+             to = 'noreply.yeorada@gmail.com'
+
+             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+             commentSet.delete()
              return redirect('adminprofile')
 
     commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
