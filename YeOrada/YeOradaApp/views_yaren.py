@@ -180,7 +180,7 @@ def adminprofile(request):
                                                                                 'reason': reason, 'admin_name': admin_name, 'admin_surname': admin_surname, })
              plain_message = strip_tags(html_message)
              from_email = 'From <noreply.yeorada@gmail.com>'
-             to = 'noreply.yeorada@gmail.com'
+             to = commentObject.customerEmail.userEmail.email
 
              mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
