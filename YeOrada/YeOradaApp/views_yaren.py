@@ -193,3 +193,8 @@ def adminprofile(request):
     return render(request, 'yeoradamain/admin_profile.html',
                   {'user': user, 'customer': customer,
                    'commentList': commentList, })
+
+
+def faq(request):
+
+    return render(request, 'yeoradamain/faq.html',)
