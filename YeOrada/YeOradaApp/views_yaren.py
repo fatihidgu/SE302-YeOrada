@@ -151,9 +151,31 @@ def adminprofile(request):
     user = request.user
     if 'accept' in request.POST:
         if request.user.is_authenticated:
-                 adminObject = Admin.objects.filter(userEmail=user)
+                 adminObject = Admin.objects.filter(userEmail=user).first()
                  commentId = request.POST.get('commentId')
-                 commentObject = Comment.objects.filter(id=commentId).update(is_Approved=True, approved_by=adminObject)
+                 commentSet = Comment.objects.filter(id=commentId)
+                 commentObject = commentSet.first()
+
+                 admin_name = adminObject.userEmail.name
+                 admin_surname = adminObject.userEmail.surname
+                 customer_name = commentObject.customerEmail.userEmail.name
+                 customer_surname = commentObject.customerEmail.userEmail.surname
+                 review = commentObject.text
+                 date = commentObject.date
+                 restaurant = commentObject.clientEmail.name
+
+                 subject = 'Yeorada | Your review has just accepted!'
+                 html_message = render_to_string('yeoradamain/acceptReview.html',
+                                                 {'customer_name': customer_name, 'customer_surname': customer_surname,
+                                                  'review': review, 'restaurant': restaurant, 'date': date, 'admin_name': admin_name,
+                                                  'admin_surname': admin_surname, })
+                 plain_message = strip_tags(html_message)
+                 from_email = 'From <noreply.yeorada@gmail.com>'
+                 to = commentObject.customerEmail.userEmail.email
+
+                 mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
+                 commentSet.update(is_Approved=True, approved_by=adminObject)
                  return redirect('adminprofile')
     elif 'decline' in request.POST:
         if request.user.is_authenticated:
