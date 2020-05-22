@@ -36,4 +36,5 @@ admin.site.register(CommentAnswer)
 admin.site.register(CommentLike)
 admin.site.register(ClientCuisine)
 admin.site.register(ClientApplicationForm)
+admin.site.register(ForgotPasswordCode)
 
