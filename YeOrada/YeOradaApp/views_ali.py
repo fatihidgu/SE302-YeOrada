@@ -1,8 +1,13 @@
+from random import randrange
+
+from django.contrib.auth.forms import PasswordChangeForm
 from django.http import JsonResponse
 from django.shortcuts import redirect, render
-
+from django.utils import timezone
+from django.contrib.auth.forms import SetPasswordForm
 from YeOradaApp.forms import CommentForm, CommentAnswerForm, ImageUploadForm
-from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike, RegisteredUser, ClientCuisine
+from YeOradaApp.models import Comment, Customer, Client, CommentAnswer, CommentLike, RegisteredUser, ClientCuisine, \
+    ForgotPasswordCode
 
 
 def clientprofile(request, username):
@@ -255,3 +260,45 @@ def likeComment(request):
                     commentId2.save()
 
     return JsonResponse({}, status=400)
+
+
+def forgotpassword(request):
+    error = ""
+
+    if "sendEmail" in request.POST:
+
+        email = request.POST.get('email')
+        registeredUser = RegisteredUser.objects.filter(email=email)
+        setPasswordForm = SetPasswordForm(registeredUser.first())
+        if registeredUser.count() == 0:
+            error = '*Invalid Email Address'
+        else:
+            code = randrange(10000000, 100000000)
+            userCode = ForgotPasswordCode.objects.filter(user=registeredUser.first())
+            if userCode.count() == 0:
+                forgotPasswordCode = ForgotPasswordCode(user=registeredUser.first(),code=code)
+                forgotPasswordCode.save()
+            else:
+                userCode.update(code=code,date_saved=timezone.now())
+            return render(request, 'yeoradamain/change_forgotpassword.html',{'registeredUser':registeredUser.first().email,'setPasswordForm':setPasswordForm} )
+    elif "changePassword" in request.POST:
+        inputCode = request.POST.get('code')
+        email = request.POST.get('email')
+        registeredUser = RegisteredUser.objects.filter(email=email).first()
+        forgotPasswordCode = ForgotPasswordCode.objects.filter(user=registeredUser).first()
+        validCode = forgotPasswordCode.code
+        error = ""
+        setPasswordForm = SetPasswordForm(registeredUser)
+        if inputCode == validCode:
+            setPasswordForm = SetPasswordForm(registeredUser, request.POST)
+            if setPasswordForm.is_valid():
+                setPasswordForm.save()
+                return redirect('signin')
+            return render(request, 'yeoradamain/change_forgotpassword.html',
+                          {'registeredUser': registeredUser.email, 'setPasswordForm': setPasswordForm, 'error': error})
+        else:
+            error = "*The code is not valid"
+            return render(request, 'yeoradamain/change_forgotpassword.html',{'registeredUser':registeredUser.email,'setPasswordForm':setPasswordForm,'error':error} )
+
+    return render(request, 'yeoradamain/forget_password.html',{'error': error})
+
