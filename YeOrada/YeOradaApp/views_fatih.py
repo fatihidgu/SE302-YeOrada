@@ -1,7 +1,8 @@
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Client, ClientCuisine
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Client, ClientCuisine, \
+    ClientApplicationForm
 
 
 def clientsettings(request):
@@ -68,13 +69,15 @@ def clientsettings(request):
 
             for item in clientcuisines:
                 cuisin = request.POST.get(item)
-                if len(ClientCuisine.objects.filter(customerEmail=clientObject,cuisine=cuisin))==0 and cuisin!= None :
+                if len(ClientCuisine.objects.filter(customerEmail=clientObject,
+                                                    cuisine=cuisin)) == 0 and cuisin != None:
                     # ekle
                     clientcuisine = ClientCuisine(customerEmail=clientObject, cuisine=cuisin)
                     clientcuisine.save()
-                elif len(ClientCuisine.objects.filter(customerEmail=clientObject,cuisine=item))!=0 and cuisin==None:
-                    #delete
-                    clientdelete=ClientCuisine.objects.filter(cuisine=item).delete()
+                elif len(
+                        ClientCuisine.objects.filter(customerEmail=clientObject, cuisine=item)) != 0 and cuisin == None:
+                    # delete
+                    clientdelete = ClientCuisine.objects.filter(cuisine=item).delete()
 
             if len(imageCheck.split()) != 0:
                 clientObject.logo = image
@@ -107,5 +110,51 @@ def clientsettings(request):
 
 
 def newclient(request):
+    # restemail
+    # restname
+    error_message1 = ""
+    error_message2 = ""
+    error_message3 = ""
+    # ClientApplicationForm
+    # Client
+    #
+    if 'sendformname' in request.POST:
+        rname = request.POST.get('rname')
+        rcity = request.POST.get('rcity')
+        rstate = request.POST.get('rstate')
+        oname = request.POST.get('oname')
+        osname = request.POST.get('osname')
+        oemail = request.POST.get('oemail')
+        ophone = request.POST.get('ophone')
+        rphone = request.POST.get('rphone')
+        remail = request.POST.get('remail')
+        wdaysfrom = request.POST.get('wdaysfrom')
+        wdaysto = request.POST.get('wdaysto')
+        whoursfrom = request.POST.get('whoursfrom')
+        whoursto = request.POST.get('whoursto')
+        address = request.POST.get('address')
+        verify = request.POST.get('verify')
+        if Client.objects.filter(userEmail=remail).first() or ClientApplicationForm.objects.filter(
+                restaurant_email=remail).first():
+            # email hatası
+            error_message1 = "Emailiniz hatalı"
 
-    return render(request, 'yeoradamain/add_restaurant.html', {})
+        if Client.objects.filter(name=rname).first() or ClientApplicationForm.objects.filter(
+                restaurant_name=rname).first():
+            # restaurant name hatası
+            error_message2 = "Restoran name hatalı"
+
+        if error_message1 == "" and error_message2 == "":
+            # kayıt işlemi
+            ClientApplicationForm.objects.create(restaurant_name=rname, city=rcity, state=rstate,
+                                                 owner_name=oname, owner_surname=osname,
+                                                 owner_email=oemail,
+                                                 owner_phone=ophone, restaurant_phone=rphone,
+                                                 restaurant_email=remail, workday_from=wdaysfrom,
+                                                 workday_to=wdaysto, workhour_from=whoursfrom,
+                                                 workhour_to=whoursto, restaurant_address=address,
+                                                 will_be_verified=verify).save()
+            error_message3="We sent your form successfully!"
+    return render(request, 'yeoradamain/add_restaurant.html', {'error_message1': error_message1,
+                                                               'error_message2': error_message2,
+                                                               'error_message3': error_message3})
