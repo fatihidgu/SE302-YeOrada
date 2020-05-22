@@ -20,6 +20,7 @@ urlpatterns = [
     path('adminsettings', views.adminsettings, name='adminsettings'),
     path('adminprofile', views.adminprofile, name='adminprofile'),
     path('newclient', views.newclient, name='newclient'),
+    path('faq', views.faq, name='faq'),
 ]
 
 if settings.DEBUG:
