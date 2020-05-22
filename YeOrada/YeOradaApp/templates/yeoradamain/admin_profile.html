@@ -6,58 +6,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-	
-	<!-- Favicon -->
-	<link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
-	
+
+    <!-- Favicon -->
+    <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+
     <title>YeOrada | Approvals</title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link href="/static/css/responsive.css" rel="stylesheet">
-	<link href="/static/css/mega.menu.css" rel="stylesheet">
-	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
-    
-	<!-- Owl Carousel for this template-->
-	<link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
-    	
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <link href="/static/css/mega.menu.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-select.css" rel="stylesheet">
+
+    <!-- Owl Carousel for this template-->
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-	
+
 {% endblock %}
 
 {% block content2 %}
 
-	<!--title-bar start-->
-	<section class="title-bar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="left-title-text">
-					<ul>
-							<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Approvals</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="right-title-text" hidden>
-						<ul>
-							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">User Profile View</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--title-bar end-->
-	<!--my-account start-->
-	<section class="my-account">
-		<div class="profile-bg">
+    <!--title-bar start-->
+    <section class="title-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-title-text">
+                        <ul>
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Approvals</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="right-title-text" hidden>
+                        <ul>
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">User Profile View</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--title-bar end-->
+    <!--my-account start-->
+    <section class="my-account">
+        <div class="profile-bg">
 
-			<div class="my-Profile-dt" style="margin-top:8%">
+            <div class="my-Profile-dt" style="margin-top:8%">
                 <div class="container">
                     <div class="row">
                         <div class="container">
@@ -74,36 +74,40 @@
                     </div>
                 </div>
             </div>
-		</div>
-	</section>
-	<!--my-account end-->
-	<!--my-account-tabs start-->
-	<section class="all-profile-details">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 col-md-4 col-12">
-					<div class="left-tab-links">
-						<div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
-							<a href="#timeline"  data-toggle="tab" class="item user-tab cursor-pointer active">Approve Comments</a>
+        </div>
+    </section>
+    <!--my-account end-->
+    <!--my-account-tabs start-->
+    <section class="all-profile-details">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="left-tab-links">
+                        <div class="nav nav-pills nav-stacked nav-tabs ui vertical menu fluid">
+                            <a href="#timeline" data-toggle="tab" class="item user-tab cursor-pointer active">Approve
+                                Comments</a>
+                            <a href="#client-request" data-toggle="tab" class="item user-tab cursor-pointer">Client
+                                Application Forms</a>
 
 
-
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-6 col-md-8 col-12">
-					<div class="tab-content">
-						<div class="tab-pane active" id="timeline">
-							<div class="timeline">
-								<div class="tab-content-heading">
-									<h4>Comment Confirmation Requests </h4>
-								</div>
-                               {% for comment in commentList %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-8 col-12">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="timeline">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Comment Confirmation Requests </h4>
+                                </div>
+                                {% for comment in commentList %}
 
                                     <div class="main-comments">
 
                                         <div class="rating-1">
-                                        <a  href="{% url 'clientprofile' comment.clientEmail.userEmail.username %}" style="float:right"  ><p>{{ comment.clientEmail.name }} <i class="fas fa-angle-double-right"></i> </p></a>
+                                            <a href="{% url 'clientprofile' comment.clientEmail.userEmail.username %}"
+                                               style="float:right"><p>{{ comment.clientEmail.name }} <i
+                                                    class="fas fa-angle-double-right"></i></p></a>
                                             <div class="user-detail-heading">
                                                 <a href="user_profile_view.html"><img
                                                         src="{{ comment.customerEmail.image.url }}" alt=""></a>
@@ -253,693 +257,1123 @@
                                         </div>
                                         <div class="like-comment-dt">
                                             <form method="POST">
-                                                 <input name="commentId" type="hidden" value="{{ comment.id }}">
-                                       {% csrf_token %}
-                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;" class="btn btn-warning" name="decline" type="button"
-                                                           value="Decline" data-toggle="modal"   data-target="#exampleModalCenter2" >
-                                                <input style="margin-top:3%; float: right; width: 18%;" class="btn btn-success"  type="button"
-                                                           value="Accept" data-toggle="modal"   data-target="#exampleModalCenter" >
+                                                <input name="commentId" type="hidden" value="{{ comment.id }}">
+                                                {% csrf_token %}
+                                                <input style="margin-top:3%; margin-bottom:3%; float: right; margin-right: 5%; width: 18%; margin-left: 2%;"
+                                                       class="btn btn-warning" name="decline" type="button"
+                                                       value="Decline" data-toggle="modal"
+                                                       data-target="#exampleModalCenter2">
+                                                <input style="margin-top:3%; float: right; width: 18%;"
+                                                       class="btn btn-success" type="button"
+                                                       value="Accept" data-toggle="modal"
+                                                       data-target="#exampleModalCenter">
 
-<!-- Accept Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Accept</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       Are you sure you want to approve this comment?
-      </div>
-      <div class="modal-footer">
-          <input class="btn btn-success" name="accept" type="submit" value="Yes" >
-          <input  class="btn btn-warning" type="button" value="No" data-dismiss="modal">
+                                                <!-- Accept Modal -->
+                                                <div class="modal fade" id="exampleModalCenter" tabindex="-1"
+                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                    Accept</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to approve this comment?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <input class="btn btn-success" name="accept"
+                                                                       type="submit" value="Yes">
+                                                                <input class="btn btn-warning" type="button" value="No"
+                                                                       data-dismiss="modal">
 
-      </div>
-    </div>
-  </div>
-</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-<!-- Decline Modal -->
-<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Decline</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       Are you sure you want to reject  this comment?
-      </div>
-        <br>
-        <label class="modal-body" for="reason">Reason to decline:</label>
+                                                <!-- Decline Modal -->
+                                                <div class="modal fade" id="exampleModalCenter2" tabindex="-1"
+                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle">
+                                                                    Decline</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to reject this comment?
+                                                            </div>
+                                                            <br>
+                                                            <label class="modal-body" for="reason">Reason to
+                                                                decline:</label>
 
-        <div class="form-group" style="padding: 3%;">
-        <textarea class="form-control" id="reason" name="reason" style="color: black;" placeholder="Enter a valid reason..."
-          rows="5" ></textarea>
-        </div>
+                                                            <div class="form-group" style="padding: 3%;">
+        <textarea class="form-control" id="reason" name="reason" style="color: black;"
+                  placeholder="Enter a valid reason..."
+                  rows="5"></textarea>
+                                                            </div>
 
-      <div class="modal-footer">
-          <input class="btn btn-success" name="decline" type="submit" value="Yes" >
-          <input  class="btn btn-warning" type="button" value="No" data-dismiss="modal">
-      </div>
-    </div>
-  </div>
-</div>
+                                                            <div class="modal-footer">
+                                                                <input class="btn btn-success" name="decline"
+                                                                       type="submit" value="Yes">
+                                                                <input class="btn btn-warning" type="button" value="No"
+                                                                       data-dismiss="modal">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-                                                </form>
+                                            </form>
                                         </div>
 
                                     </div>
                                 {% endfor %}
-							</div>
+                            </div>
 
+                        </div>
+
+                        <div class="tab-pane" id="client-request">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Client Application Forms </h4>
+                                </div>
+                                <div class="main-comments" style="padding: 5%;">
+                                    <p style="color: #ffa803;">Cafe</p>
+                                    <h4 style="margin-top: 5px;">Bursa Kebap Bahçelievler Şubesi</h4>
+                                    <p style="margin-bottom: 5%; margin-top:5px;"><span><i
+                                            class="fas fa-map-marker-alt" style="color: #ffa803"></i></span>
+                                         Bahçelievler, İstanbul
+                                    </p>
+
+                                    <div class="form-group">
+                                        <label for="nameOwner">Owner's Name and Surname</label>
+                                        <input type="text" class="video-form" id="nameOwner1" value="Kenan Işık"
+                                               style="color: black;" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ownerEmail">Owner's Email Address</label>
+                                        <input type="Search" class="video-form" id="ownerEmail1"
+                                               value="kenan123@hotmail.com" style="color: black;" disabled>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="ownerPhone">Owner's Phone Number</label>
+                                        <input type="Search" class="video-form" id="ownerPhone1" value="5318745662"
+                                               style="color: black;" disabled>
+                                    </div>
+                                    <input style="margin-top:3%; float: right; width: 25%; background-color: #ffa803; border-color:#ffa803;"
+                                           class="btn btn-secondary" type="button"
+                                           value="View in Detail" data-toggle="modal"
+                                           data-target="#exampleModalCenter3">
+
+                                    <!-- View in Detail Modal -->
+                                    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter3" tabindex="-1" role="dialog"
+                                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <img src="/static/images/partner-with-us/icon-1.svg" style="width: 24px; margin-right: 8px;" alt="">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle3"> Restaurant Application Form</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container">
+			<div class="row justify-content-between">
+
+				<div class="col-lg-10 col-md-10 col-12">
+					<div class="basic-info">
+						<h4>Basic Info</h4>
+						<div class="form-group">
+							<label for="nameRestaurant">Restaurant Name*</label>
+							<input type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" value="Bursa Kebap Bahçelievler Şubesi" disabled>
 						</div>
-						
-						<div class="tab-pane" id="about">
-							<div class="profile-about">
-								<div class="tab-content-heading">
-									<h4>About</h4>									
-								</div>
-								<div class="about-dtp">
-									<div class="about-bg">
-										<ul>
-											<li>
-												<div class="dp-detail">
-													<h6>Ful Name</h6>
-													<p>John Doe</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Location</h6>
-													<p>Hill District, Sydney, Australia</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Mobile Number</h6>
-													<p>+ 2 987 654 3210</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Email Address</h6>
-													<p>Johndoe@gmail.com</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Personal Website</h6>
-													<p>www.johndoe.com</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Description About Yopur Self</h6>
-													<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum leo sit amet volutpat porta. Integer tincidunt id enim eget suscipit. Aenean vitae mi at arcu pulvinar dictum. Donec pretium ipsum diam, vitae posuere nunc dapibus ut. Vivamus tempus et magna at elementum</p>
-												</div>
-											</li>
-											<li>
-												<div class="dp-detail">
-													<h6>Social Accounts</h6>
-													<div class="my-social-links">
-														<a href="#" class="socail-btn-link f-btn"><i class="fab fa-facebook-f"></i></a>
-														<a href="#" class="socail-btn-link t-btn"><i class="fab fa-twitter"></i></a>
-														<a href="#" class="socail-btn-link g-btn"><i class="fab fa-google"></i></a>
-														<a href="#" class="socail-btn-link i-btn"><i class="fab fa-instagram"></i></a>
-														<a href="#" class="socail-btn-link y-btn"><i class="fab fa-youtube"></i></a>
-													</div>
-												</div>
-											</li>
-										</ul>
-									</div>
+						<div class="form-group">
+							<label for="searchCity">City*</label>
+							<input type="Search" class="video-form" id="searchCity" placeholder="Search City" value="İstanbul" disabled>
+						</div>
+                        <div class="form-group">
+							<label for="searchCity">State*</label>
+							<input type="Search" class="video-form" id="searchState" placeholder="Search State" value="Bahçelievler" disabled>
+						</div>
+						<div class="form-group" hidden>
+							<div class="checkbox-title">Are you the Owner or Manager of the Place?</div>
+							<div class="filter-radio">
+								<ul>
+									<li>
+									  <input type="radio" id="c1" name="cb1">
+									  <label for="c1">I’m the owner</label>
+									</li>
+									<li>
+									  <input type="radio" id="c2" name="cb1">
+									  <label for="c2">I’m the manager</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="basic-info">
+						<h4>Contact Info</h4>
+                        <div class="form-group">
+							<label for="emailAddress">Owner's Name*</label>
+							<input type="text" class="video-form" id="ownerName2" placeholder="Owner / Manager Name" value="Kenan" disabled>
+						</div>
+                        <div class="form-group">
+							<label for="emailAddress">Owner's Surname*</label>
+							<input type="text" class="video-form" id="ownerSurname2" placeholder="Owner / Manager Surname" value="Işık" disabled>
+						</div>
+						<div class="form-group">
+							<label for="emailAddress">Owner's Email Address*</label>
+							<input type="email" class="video-form" id="ownerEmail2" placeholder="Owner / Manager Email Address" value="kenan123@hotmail.com" disabled>
+						</div>
+						<div class="form-group">
+							<label for="telNumber1">Owner's Phone Number*</label>
+							<input type="tel" class="video-form" id="ownerPhone2" placeholder="Owner / Manager Phone Number" value="5318745662" disabled>
+						</div>
+						<div class="form-group">
+							<label for="telNumber2">Restaurant Phone Number*</label>
+							<input type="tel" class="video-form" id="resPhone2" placeholder="Restaurant Phone Number" value="2845132687" disabled>
+						</div>
+						<div class="form-group">
+							<label for="webSite">Restaurant Email Address*</label>
+							<input type="email" class="video-form" id="resEmail2" placeholder="Restaurant Email Address" value="bursakebapbahcelievler@bursakebap.com" disabled>
+						</div>
+						<div class="form-group" hidden>
+							<div class="checkbox-title">Open Status*</div>
+							<div class="filter-radio">
+								<ul>
+									<li>
+									  <input type="radio" id="c3" name="cb2">
+									  <label for="c3">This place already open</label>
+									</li>
+									<li>
+									  <input type="radio" id="c4" name="cb2">
+									  <label for="c4">This place is opening soon</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="basic-info">
+						<h4>Timing</h4>
+                        <div class="row">
+                            <div class="col-md-2 col-12">
+								<div class="checkbox-title" style="margin-top: 25%;">Working Days:</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">From*</div>
+									<input type="text" class="video-form" id="fromday" value="Monday" disabled>
 								</div>
 							</div>
-						</div>						
-						
-						<div class="tab-pane" id="photos" hidden>
-							<div class="timeline">
-								<div class="tab-content-heading" hidden>
-									<h4>ss</h4>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">To*</div>
+									<input type="text" class="video-form" id="today" value="Saturday" disabled>
 								</div>
-								<div class="about-dtp" hidden>
-									<div class="photo-bg">
-										<div class="gallery-pf">
-											<div class="row">
-											{% for comment in commentList %}
-                                                {% if comment.image.url != "/media/defaultComment.jpg" %}
-                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
-                                                         data-target="#exampleModal2"
-                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
-                                                        <div class="photo-gallery">
-                                                            <img src="{{ comment.image.url }}" alt="">
-                                                            <a><i class="far fa-plus-square"></i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-												{% if comment.image2.url != "/media/defaultComment.jpg" %}
-                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
-                                                         data-target="#exampleModal2"
-                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
-                                                        <div class="photo-gallery">
-                                                            <img src="{{ comment.image2.url }}" alt="">
-                                                            <a><i class="far fa-plus-square"></i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-                                                {% if comment.image3.url != "/media/defaultComment.jpg" %}
-                                                    <div class="col-lg-3 col-md-3 col-sm-6 col-6" data-toggle="modal"
-                                                         data-target="#exampleModal2"
-                                                         onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
-                                                        <div class="photo-gallery">
-                                                            <img src="{{ comment.image3.url }}" alt="">
-                                                            <a><i class="far fa-plus-square"></i></a>
-                                                        </div>
-                                                    </div>
-                                                {% endif %}
-                                            {% endfor %}
+							</div>
+							<div class="col-md-3 col-12" hidden>
+								<button class="add-time-btn">Add Time</button>
+							</div>
+							<div class="col-md-12">
+								<div class="selected-time" hidden>
+									<ul>
+										<li>Monday</li>
+										<li>9.00AM to 11.00PM</li>
+										<li><a href="#"><i class="far fa-window-close"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+                            <div class="col-md-2 col-12">
+								<div class="checkbox-title" style="margin-top: 25%;">Working Hours:</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">From*</div>
+									<input type="email" class="video-form" id="fromhour" value="12.00" disabled>
+								</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">To*</div>
+									<input type="email" class="video-form" id="tohour" value="22.00" disabled>
+								</div>
+							</div>
+							<div class="col-md-3 col-12" hidden>
+								<button class="add-time-btn">Add Time</button>
+							</div>
+							<div class="col-md-12">
+								<div class="selected-time" hidden>
+									<ul>
+										<li>Monday</li>
+										<li>9.00AM to 11.00PM</li>
+										<li><a href="#"><i class="far fa-window-close"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="basic-info c-top">
+						<h4>Location</h4>
+						<div class="form-group">
+							<label for="addressInput">Enter Address*</label>
+							<div class="field-input">
+								<input type="text" class="video-form" id="addressInput" value="Merkez mah. Eski cad. No:2" disabled>
+								<i class="fas fa-search"></i>
+							</div>
+						</div>
+						<div class="search-map-location" >
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6848.588137286094!2d75.8069355495411!3d30.878433570394723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a822f25912599%3A0xa51f780d31824240!2sShaheed+Bhagat+Singh+Nagar%2C+Ludhiana%2C+Punjab!5e0!3m2!1sen!2sin!4v1556363627043!5m2!1sen!2sin" style="border:0" allowfullscreen=""></iframe>
+						</div>
+					</div>
 
-                                            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-                                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <img id="clientPhoto" class="rounded" style="width: 50px;" src="" alt="">
-                                                            <h5 style="margin-top: 2%; margin-left: 3%" class="modal-title"
-                                                                id="exampleModalLabel"></h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                    aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
-                                                            </button>
+					<div class="basic-info c-top">
+						<h4>Verified Restaurant</h4>
+						<div class="form-group">
+							<div class="checkbox-title">Would you like to your restaurant to be approved ?</div>
+                            <p style="font-size: 11px;"> YeOrada will directly contact with you to explain the steps to verify your restaurant. </p>
+                            <br>
+							<div class="filter-radio">
+								<ul>
+									<li>
+									  <input type="radio" value="value5" id="c9" name="c5" checked="checked" disabled>
+									  <label for="c9">Yes</label>
+									</li>
+									<li>
+									  <input type="radio" value="value6" id="c10" name="c5" disabled>
+									  <label for="c10">No</label>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <input class="btn btn-success" type="submit"
+                                                           value="Accept" data-target="#exampleModalCenter4" data-toggle="modal">
+                                                    <input class="btn btn-warning" type="button" value="Decline" data-target="#exampleModalCenter5" data-toggle="modal">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Accept Modal Client-->
+                                                <div class="modal fade" id="exampleModalCenter4" tabindex="-1"
+                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle4">
+                                                                    Accept</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to approve this client application?
+                                                            </div>
+                                                            <div class="modal-footer">
+
+                                                                <form> <!-- Create new RegisteredUser and Client corresponding to the client application and also send an email -->
+                                                                    {% csrf_token %}
+                                                                <input type="hidden" name="client-form-id" value="" >
+                                                                <input class="btn btn-success" name="acceptClient"
+                                                                       type="submit" value="Yes">
+                                                                <input class="btn btn-warning" type="button" value="No"
+                                                                       data-dismiss="modal">
+                                                                </form>
+
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <img id="showedPhotoId" style="width: 100%" src="">
+                                                    </div>
+                                                </div>
+
+                                                <!-- Decline Modal Client-->
+                                                <div class="modal fade" id="exampleModalCenter5" tabindex="-1"
+                                                     role="dialog" aria-labelledby="exampleModalCenterTitle"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLongTitle5">
+                                                                    Decline</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Are you sure you want to reject this client application?
+                                                            </div>
+                                                            <br>
+                                                            <label class="modal-body" for="reasonClient">Reason to
+                                                                decline:</label>
+
+                                                            <form> <!-- Delete the corresponding client application from database and send an email about reason -->
+                                                                {% csrf_token %}
+                                                            <div class="form-group" style="padding: 3%;">
+                                                            <textarea class="form-control" id="reasonClient" name="reasonClient" style="color: black;"
+                                                                placeholder="Enter a valid reason..."
+                                                            rows="5"></textarea>
+                                                            </div>
+
+                                                            <div class="modal-footer">
+
+                                                                <input type="hidden" name="client-form-id" value="" >
+                                                                <input class="btn btn-success" name="declineClient"
+                                                                       type="submit" value="Yes">
+                                                                <input class="btn btn-warning" type="button" value="No"
+                                                                       data-dismiss="modal">
+                                                            </div>
+                                                            </form>
+
                                                         </div>
-                                                        <div class="restaurants-detail-bg" style="border: 0px; margin-top: -1%; display: flex;">
-                                                            <i style="float:left; margin-left: 3%; margin-top: 3px;" class="far fa-clock"></i>
-                                                        <p id="dateofphoto" style="margin-left: -2%;" value=""></p>
+                                                    </div>
+                                                </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tab-pane" id="about">
+                            <div class="profile-about">
+                                <div class="tab-content-heading">
+                                    <h4>About</h4>
+                                </div>
+                                <div class="about-dtp">
+                                    <div class="about-bg">
+                                        <ul>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Ful Name</h6>
+                                                    <p>John Doe</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Location</h6>
+                                                    <p>Hill District, Sydney, Australia</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Mobile Number</h6>
+                                                    <p>+ 2 987 654 3210</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Email Address</h6>
+                                                    <p>Johndoe@gmail.com</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Personal Website</h6>
+                                                    <p>www.johndoe.com</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Description About Yopur Self</h6>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                        Curabitur elementum leo sit amet volutpat porta. Integer
+                                                        tincidunt id enim eget suscipit. Aenean vitae mi at arcu
+                                                        pulvinar dictum. Donec pretium ipsum diam, vitae posuere nunc
+                                                        dapibus ut. Vivamus tempus et magna at elementum</p>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="dp-detail">
+                                                    <h6>Social Accounts</h6>
+                                                    <div class="my-social-links">
+                                                        <a href="#" class="socail-btn-link f-btn"><i
+                                                                class="fab fa-facebook-f"></i></a>
+                                                        <a href="#" class="socail-btn-link t-btn"><i
+                                                                class="fab fa-twitter"></i></a>
+                                                        <a href="#" class="socail-btn-link g-btn"><i
+                                                                class="fab fa-google"></i></a>
+                                                        <a href="#" class="socail-btn-link i-btn"><i
+                                                                class="fab fa-instagram"></i></a>
+                                                        <a href="#" class="socail-btn-link y-btn"><i
+                                                                class="fab fa-youtube"></i></a>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="photos" hidden>
+                            <div class="timeline">
+                                <div class="tab-content-heading" hidden>
+                                    <h4>ss</h4>
+                                </div>
+                                <div class="about-dtp" hidden>
+                                    <div class="photo-bg">
+                                        <div class="gallery-pf">
+                                            <div class="row">
+                                                {% for comment in commentList %}
+                                                    {% if comment.image.url != "/media/defaultComment.jpg" %}
+                                                        <div class="col-lg-3 col-md-3 col-sm-6 col-6"
+                                                             data-toggle="modal"
+                                                             data-target="#exampleModal2"
+                                                             onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                            <div class="photo-gallery">
+                                                                <img src="{{ comment.image.url }}" alt="">
+                                                                <a><i class="far fa-plus-square"></i></a>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                    data-dismiss="modal">Close
-                                                            </button>
+                                                    {% endif %}
+                                                    {% if comment.image2.url != "/media/defaultComment.jpg" %}
+                                                        <div class="col-lg-3 col-md-3 col-sm-6 col-6"
+                                                             data-toggle="modal"
+                                                             data-target="#exampleModal2"
+                                                             onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                            <div class="photo-gallery">
+                                                                <img src="{{ comment.image2.url }}" alt="">
+                                                                <a><i class="far fa-plus-square"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                    {% if comment.image3.url != "/media/defaultComment.jpg" %}
+                                                        <div class="col-lg-3 col-md-3 col-sm-6 col-6"
+                                                             data-toggle="modal"
+                                                             data-target="#exampleModal2"
+                                                             onclick=' showPhoto("{{ comment.image.url }}", "{{ comment.clientEmail.name }}" , "{{ comment.clientEmail.logo.url }}", "{{ comment.date }}")'>
+                                                            <div class="photo-gallery">
+                                                                <img src="{{ comment.image3.url }}" alt="">
+                                                                <a><i class="far fa-plus-square"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+
+                                                <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <img id="clientPhoto" class="rounded"
+                                                                     style="width: 50px;" src="" alt="">
+                                                                <h5 style="margin-top: 2%; margin-left: 3%"
+                                                                    class="modal-title"
+                                                                    id="exampleModalLabel"></h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <img id="showedPhotoId" style="width: 100%" src="">
+                                                            </div>
+                                                            <div class="restaurants-detail-bg"
+                                                                 style="border: 0px; margin-top: -1%; display: flex;">
+                                                                <i style="float:left; margin-left: 3%; margin-top: 3px;"
+                                                                   class="far fa-clock"></i>
+                                                                <p id="dateofphoto" style="margin-left: -2%;"
+                                                                   value=""></p>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Close
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="followers">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Followers</h4>
+                                </div>
+                                <div class="about-dtp">
+                                    <div class="follow-bg">
+                                        <ul>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-1.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Jassica William</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Follow</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-2.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Follow</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-3.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>John Doe</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Follow</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-5.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Follow</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="following">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Followings</h4>
+                                </div>
+                                <div class="about-dtp">
+                                    <div class="follow-bg">
+                                        <ul>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-1.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Jassica William</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Following</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-2.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Following</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-3.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>John Doe</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Following</button>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="suggestion-usd-2">
+                                                    <a href="user_profile_view.html"><img
+                                                            src="/static/images/profile/noti-5.png" alt=""></a>
+                                                    <div class="sgt-text-2">
+                                                        <a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
+                                                        <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney,
+                                                            Australia
+                                                        <p>
+                                                    </div>
+                                                    <button class="btn-link">Following</button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="recently-viewed-restaurants">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Recently Viewed Restaurants</h4>
+                                </div>
+                                <div class="about-dtp">
+                                    <div class="recently-resto-bg">
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-12 pm-right">
+                                                    <div class="visit-restaurants">
+                                                        <div class="recently-resto-picy">
+                                                            <a href="restaurant_detail.html"><img
+                                                                    src="/static/images/profile/view-1.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="recently-resto-dt">
+                                                            <a href="restaurant_detail.html"><h4>Restaurant Name</h4>
+                                                            </a>
+                                                            <p><span><i class="fas fa-map-marker-alt"></i></span>
+                                                                Sydney, Australia</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-12 pm-left">
+                                                    <div class="visit-restaurants">
+                                                        <div class="recently-resto-picy">
+                                                            <a href="restaurant_detail.html"><img
+                                                                    src="/static/images/profile/view-2.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="recently-resto-dt">
+                                                            <a href="restaurant_detail.html"><h4>Restaurant Name</h4>
+                                                            </a>
+                                                            <p><span><i class="fas fa-map-marker-alt"></i></span>
+                                                                Sydney, Australia</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-12 pm-right">
+                                                    <div class="visit-restaurants">
+                                                        <div class="recently-resto-picy">
+                                                            <a href="restaurant_detail.html"><img
+                                                                    src="/static/images/profile/view-3.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="recently-resto-dt">
+                                                            <a href="restaurant_detail.html"><h4>Restaurant Name</h4>
+                                                            </a>
+                                                            <p><span><i class="fas fa-map-marker-alt"></i></span>
+                                                                Sydney, Australia</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-12 pm-left">
+                                                    <div class="visit-restaurants">
+                                                        <div class="recently-resto-picy">
+                                                            <a href="restaurant_detail.html"><img
+                                                                    src="/static/images/profile/view-4.jpg" alt=""></a>
+                                                        </div>
+                                                        <div class="recently-resto-dt">
+                                                            <a href="restaurant_detail.html"><h4>Restaurant Name</h4>
+                                                            </a>
+                                                            <p><span><i class="fas fa-map-marker-alt"></i></span>
+                                                                Sydney, Australia</p>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="tab-pane" id="followers">
-							<div class="timeline">
-								<div class="tab-content-heading">
-									<h4>Followers</h4>						
-								</div>
-								<div class="about-dtp">
-									<div class="follow-bg">
-										<ul>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-1.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Jassica William</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Follow</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-2.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Follow</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-3.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>John Doe</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Follow</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-5.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Follow</button>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="tab-pane" id="following">
-							<div class="timeline">
-								<div class="tab-content-heading">
-									<h4>Followings</h4>						
-								</div>
-								<div class="about-dtp">
-									<div class="follow-bg">
-										<ul>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-1.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Jassica William</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Following</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-2.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Johnson Smith</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Following</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-3.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>John Doe</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Following</button>
-												</div>
-											</li>
-											<li>
-												<div class="suggestion-usd-2">
-													<a href="user_profile_view.html"><img src="/static/images/profile/noti-5.png" alt=""></a>
-													<div class="sgt-text-2">
-														<a href="user_profile_view.html"><h4>Rock Willliam</h4></a>
-														<p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia<p>
-													</div>
-													<button class="btn-link">Following</button>
-												</div>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="tab-pane" id="recently-viewed-restaurants">
-							<div class="timeline">
-								<div class="tab-content-heading">
-									<h4>Recently Viewed Restaurants</h4>						
-								</div>
-								<div class="about-dtp">
-									<div class="recently-resto-bg">
-										<div class="container">
-											<div class="row">
-												<div class="col-lg-6 col-md-6 col-12 pm-right">
-													<div class="visit-restaurants">
-														<div class="recently-resto-picy">
-															<a href="restaurant_detail.html"><img src="/static/images/profile/view-1.jpg" alt=""></a>
-														</div>
-														<div class="recently-resto-dt">
-														<a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
-														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-6 col-12 pm-left">
-													<div class="visit-restaurants">
-														<div class="recently-resto-picy">
-															<a href="restaurant_detail.html"><img src="/static/images/profile/view-2.jpg" alt=""></a>
-														</div>
-														<div class="recently-resto-dt">
-														<a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
-														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-6 col-12 pm-right">
-													<div class="visit-restaurants">
-														<div class="recently-resto-picy">
-															<a href="restaurant_detail.html"><img src="/static/images/profile/view-3.jpg" alt=""></a>
-														</div>
-														<div class="recently-resto-dt">
-														 <a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
-														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg-6 col-md-6 col-12 pm-left">
-													<div class="visit-restaurants">
-														<div class="recently-resto-picy">
-															<a href="restaurant_detail.html"><img src="/static/images/profile/view-4.jpg" alt=""></a>
-														</div>
-														<div class="recently-resto-dt">
-														 <a href="restaurant_detail.html"><h4>Restaurant Name</h4></a>
-														 <p><span><i class="fas fa-map-marker-alt"></i></span> Sydney, Australia</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>									
-						</div>												
-						
-						<div class="tab-pane" id="reviews">
-							<div class="timeline">
-								<div class="tab-content-heading">
-									<h4>Reviews</h4>
-								</div>
-								<div class="main-comments">
-									<div class="rating-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-5.png" alt=""></a>
-											<h4> Joy Cutler</h4><br>
-											<div class="rate-star">
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="far fa-star"></i>								
-												<span>4.5</span> 
-											</div>
-										</div>
-										<div class="reply-time">											
-											<p><i class="far fa-clock"></i>12 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
-										</div>
-										
-									</div>
-																
-									<div class="like-comment-dt">
-										<ul>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="reviews">
+                            <div class="timeline">
+                                <div class="tab-content-heading">
+                                    <h4>Reviews</h4>
+                                </div>
+                                <div class="main-comments">
+                                    <div class="rating-1">
+                                        <div class="user-detail-heading">
+                                            <a href="user_profile_view.html"><img
+                                                    src="/static/images/recipe-details/comment-5.png" alt=""></a>
+                                            <h4> Joy Cutler</h4><br>
+                                            <div class="rate-star">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <span>4.5</span>
+                                            </div>
+                                        </div>
+                                        <div class="reply-time">
+                                            <p><i class="far fa-clock"></i>12 hours ago</p>
+                                        </div>
+                                        <div class="comment-description">
+                                            <p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit
+                                                amet efficitur quam aliquam non. Integer gravida ex quis lacinia
+                                                consectetur.</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="like-comment-dt">
+                                        <ul>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Likes">
 													<i class="fas fa-heart"></i>
 													<ins>Like 562</ins>
 												</span>
-											</li>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                            </li>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Comments">
 													<i class="fas fa-comment-alt"></i>
 													<ins>Comments 01</ins>
 												</span>
-											</li>												
-										</ul>
-									</div>
-									<div class="reply-review-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											<h4> Rock Smith</h4>
-										</div>
-										<div class="reply-time">								
-											<p><i class="far fa-clock"></i>12 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p> Thank you</p>
-										</div>
-										<div class="like-report">
-											<ul>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="reply-review-1">
+                                        <div class="user-detail-heading">
+                                            <a href="user_profile_view.html"><img
+                                                    src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                            <h4> Rock Smith</h4>
+                                        </div>
+                                        <div class="reply-time">
+                                            <p><i class="far fa-clock"></i>12 hours ago</p>
+                                        </div>
+                                        <div class="comment-description">
+                                            <p> Thank you</p>
+                                        </div>
+                                        <div class="like-report">
+                                            <ul>
+                                                <li>
+													<span class="views" data-toggle="tooltip" data-placement="top"
+                                                          title="Likes">
 														<i class="fas fa-heart"></i>
 														<ins>Like 1</ins>
 													</span>
-												</li>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                                </li>
+                                                <li>
+													<span class="views" data-toggle="tooltip" data-placement="top"
+                                                          title="Comments">
 														<ins>Report</ins>
 													</span>
-												</li>												
-											</ul>
-										</div>
-									</div>
-									<div class="reply-comment">
-										<div class="post-items">											
-											<div class="reply-dp">
-												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											</div>
-											<form>
-												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
-												<input class="reply-btn btn-link" type="submit" value="Post">
-											</form>
-										</div>
-									</div>
-								</div>
-								<div class="main-comments">
-									<div class="rating-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-2.png" alt=""></a>
-											<h4> Jassica William</h4><br>
-											<div class="rate-star">
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="far fa-star"></i>								
-												<span>4.5</span> 
-											</div>
-										</div>
-										<div class="reply-time">											
-											<p><i class="far fa-clock"></i>13 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur elementum leo sit amet volutpat porta. Integer tincidunt id enim eget suscipit. Aenean vitae mi at arcu pulvinar dictum. Donec pretium ipsum diam, vitae posuere nunc dapibus ut. Vivamus tempus et magna at elementum. Morbi sed turpis vitae elit pellentesque pharetra vel ut nisl.</p>
-										</div>
-										
-									</div>
-																
-									<div class="like-comment-dt">
-										<ul>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="reply-comment">
+                                        <div class="post-items">
+                                            <div class="reply-dp">
+                                                <a href="my_dashboard.html"><img
+                                                        src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                            </div>
+                                            <form>
+                                                <input type="text" class="comment-input-1" name="post"
+                                                       placeholder="Write a comment - @tag friends">
+                                                <input class="reply-btn btn-link" type="submit" value="Post">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-comments">
+                                    <div class="rating-1">
+                                        <div class="user-detail-heading">
+                                            <a href="user_profile_view.html"><img
+                                                    src="/static/images/recipe-details/comment-2.png" alt=""></a>
+                                            <h4> Jassica William</h4><br>
+                                            <div class="rate-star">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <span>4.5</span>
+                                            </div>
+                                        </div>
+                                        <div class="reply-time">
+                                            <p><i class="far fa-clock"></i>13 hours ago</p>
+                                        </div>
+                                        <div class="comment-description">
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+                                                elementum leo sit amet volutpat porta. Integer tincidunt id enim eget
+                                                suscipit. Aenean vitae mi at arcu pulvinar dictum. Donec pretium ipsum
+                                                diam, vitae posuere nunc dapibus ut. Vivamus tempus et magna at
+                                                elementum. Morbi sed turpis vitae elit pellentesque pharetra vel ut
+                                                nisl.</p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="like-comment-dt">
+                                        <ul>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Likes">
 													<i class="fas fa-heart"></i>
 													<ins>Like 562</ins>
 												</span>
-											</li>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                            </li>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Comments">
 													<i class="fas fa-comment-alt"></i>
 													<ins>Comments 0</ins>
 												</span>
-											</li>												
-										</ul>
-									</div>
-									
-									<div class="reply-comment">
-										<div class="post-items">											
-											<div class="reply-dp">
-												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											</div>
-											<form>
-												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
-												<input class="reply-btn btn-link" type="submit" value="Post">
-											</form>
-										</div>
-									</div>
-								</div>
-								<div class="main-comments">
-									<div class="rating-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/comment-1.png" alt=""></a>
-											<h4> John Doe</h4><br>
-											<div class="rate-star">
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="far fa-star"></i>								
-												<span>4.5</span> 
-											</div>
-										</div>
-										<div class="reply-time">											
-											<p><i class="far fa-clock"></i>12 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit amet efficitur quam aliquam non. Integer gravida ex quis lacinia consectetur.</p>
-										</div>
-										
-									</div>								
-									<div class="like-comment-dt">
-										<ul>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="reply-comment">
+                                        <div class="post-items">
+                                            <div class="reply-dp">
+                                                <a href="my_dashboard.html"><img
+                                                        src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                            </div>
+                                            <form>
+                                                <input type="text" class="comment-input-1" name="post"
+                                                       placeholder="Write a comment - @tag friends">
+                                                <input class="reply-btn btn-link" type="submit" value="Post">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="main-comments">
+                                    <div class="rating-1">
+                                        <div class="user-detail-heading">
+                                            <a href="user_profile_view.html"><img
+                                                    src="/static/images/recipe-details/comment-1.png" alt=""></a>
+                                            <h4> John Doe</h4><br>
+                                            <div class="rate-star">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="far fa-star"></i>
+                                                <span>4.5</span>
+                                            </div>
+                                        </div>
+                                        <div class="reply-time">
+                                            <p><i class="far fa-clock"></i>12 hours ago</p>
+                                        </div>
+                                        <div class="comment-description">
+                                            <p>Morbi hendrerit ipsum vel feugiat maximus. Duis posuere justo neque, sit
+                                                amet efficitur quam aliquam non. Integer gravida ex quis lacinia
+                                                consectetur.</p>
+                                        </div>
+
+                                    </div>
+                                    <div class="like-comment-dt">
+                                        <ul>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Likes">
 													<i class="fas fa-heart"></i>
 													<ins>Like 562</ins>
 												</span>
-											</li>
-											<li>
-												<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                            </li>
+                                            <li>
+												<span class="views" data-toggle="tooltip" data-placement="top"
+                                                      title="Comments">
 													<i class="fas fa-comment-alt"></i>
 													<ins>Comments 01</ins>
 												</span>
-											</li>												
-										</ul>
-									</div>
-									<div class="reply-review-1">
-										<div class="user-detail-heading">
-											<a href="user_profile_view.html"><img src="/static/images/recipe-details/reply-1.png" alt=""  ></a>
-											<h4> Rock Smith</h4>
-										</div>
-										<div class="reply-time">								
-											<p><i class="far fa-clock"></i>12 hours ago</p>
-										</div>
-										<div class="comment-description">
-											<p> Thank you</p>
-										</div>
-										<div class="like-report">
-											<ul>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Likes">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="reply-review-1">
+                                        <div class="user-detail-heading">
+                                            <a href="user_profile_view.html"><img
+                                                    src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                            <h4> Rock Smith</h4>
+                                        </div>
+                                        <div class="reply-time">
+                                            <p><i class="far fa-clock"></i>12 hours ago</p>
+                                        </div>
+                                        <div class="comment-description">
+                                            <p> Thank you</p>
+                                        </div>
+                                        <div class="like-report">
+                                            <ul>
+                                                <li>
+													<span class="views" data-toggle="tooltip" data-placement="top"
+                                                          title="Likes">
 														<i class="fas fa-heart"></i>
 														<ins>Like 1</ins>
 													</span>
-												</li>
-												<li>
-													<span class="views" data-toggle="tooltip" data-placement="top" title="Comments">
+                                                </li>
+                                                <li>
+													<span class="views" data-toggle="tooltip" data-placement="top"
+                                                          title="Comments">
 														<ins>Report</ins>
 													</span>
-												</li>												
-											</ul>
-										</div>
-									</div>
-									<div class="reply-comment">
-										<div class="post-items">											
-											<div class="reply-dp">
-												<a href="my_dashboard.html"><img src="/static/images/recipe-details/reply-1.png" alt=""></a>
-											</div>
-											<form>
-												<input type="text" class="comment-input-1" name="post" placeholder="Write a comment - @tag friends">
-												<input class="reply-btn btn-link" type="submit" value="Post">
-											</form>
-										</div>
-									</div>
-								</div>
-							</div>	
-						</div>																																									
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-12">
-					<div class="suggested-peoples mt-0" hidden>
-						<div class="suggestions full-width">
-							<div class="sd-title">
-								<h3>Suggested Peoples</h3>
-								<i class="la la-ellipsis-v"></i>
-							</div><!--sd-title end-->
-							<div class="suggestions-list">
-								<div class="suggestion-usd">
-									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-1.png" alt=""></a>
-									<div class="sgt-text">
-										<a href="user_profile_view.html"><h4>Johnson</h4></a>
-										<span>7 Reviews</span>
-									</div>
-									<button><i class="fas fa-user-plus"></i></button>
-								</div>
-								<div class="suggestion-usd">
-									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-2.png" alt=""></a>
-									<div class="sgt-text">
-										<a href="user_profile_view.html"><h4>Jassia William</h4></a>
-										<span>5 Reviews</span>
-									</div>
-									<button><i class="fas fa-user-plus"></i></button>
-								</div>
-								<div class="suggestion-usd">
-									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-3.png" alt=""></a>
-									<div class="sgt-text">
-										<a href="user_profile_view.html"><h4>Rock</h4></a>
-										<span>0 Reviews</span>
-									</div>
-									<button><i class="fas fa-user-plus"></i></button>
-								</div>
-								<div class="suggestion-usd">
-									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-4.png" alt=""></a>
-									<div class="sgt-text">
-										<a href="user_profile_view.html"><h4>Davil Smith</h4></a>
-										<span>10 Reviews</span>
-									</div>
-									<button><i class="fas fa-user-plus"></i></button>
-								</div>
-								<div class="suggestion-usd">
-									<a href="user_profile_view.html"><img src="/static/images/find-recipes/user-5.png" alt=""></a>
-									<div class="sgt-text">
-										<a href="user_profile_view.html"><h4>Ricky Doe</h4></a>
-										<span>3 Reviews</span>
-									</div>
-									<button><i class="fas fa-user-plus"></i></button>
-								</div>
-							</div><!--suggestions-list end-->
-						</div>
-					</div>
-					
-					<div class="suggested-peoples h-top " hidden>
-						<div class="suggestions full-width">
-							<div class="sd-title">
-								<h3>Photos</h3>
-								<i class="la la-ellipsis-v"></i>
-							</div><!--sd-title end-->
-							<div class="suggestions-list">
-								<div class="pf-gallery">
-									<ul>
-										<li><a href="#" title=""><img src="/static/images/profile/right-1.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-2.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-3.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-4.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-5.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-6.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-7.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-8.jpg" alt=""></a></li>
-										<li><a href="#" title=""><img src="/static/images/profile/right-9.jpg" alt=""></a></li>
-									</ul>
-								</div>								
-							</div><!--photo-list end-->
-						</div>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--my-account-tabs end-->
-	{% endblock %}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="reply-comment">
+                                        <div class="post-items">
+                                            <div class="reply-dp">
+                                                <a href="my_dashboard.html"><img
+                                                        src="/static/images/recipe-details/reply-1.png" alt=""></a>
+                                            </div>
+                                            <form>
+                                                <input type="text" class="comment-input-1" name="post"
+                                                       placeholder="Write a comment - @tag friends">
+                                                <input class="reply-btn btn-link" type="submit" value="Post">
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12">
+                    <div class="suggested-peoples mt-0" hidden>
+                        <div class="suggestions full-width">
+                            <div class="sd-title">
+                                <h3>Suggested Peoples</h3>
+                                <i class="la la-ellipsis-v"></i>
+                            </div><!--sd-title end-->
+                            <div class="suggestions-list">
+                                <div class="suggestion-usd">
+                                    <a href="user_profile_view.html"><img src="/static/images/find-recipes/user-1.png"
+                                                                          alt=""></a>
+                                    <div class="sgt-text">
+                                        <a href="user_profile_view.html"><h4>Johnson</h4></a>
+                                        <span>7 Reviews</span>
+                                    </div>
+                                    <button><i class="fas fa-user-plus"></i></button>
+                                </div>
+                                <div class="suggestion-usd">
+                                    <a href="user_profile_view.html"><img src="/static/images/find-recipes/user-2.png"
+                                                                          alt=""></a>
+                                    <div class="sgt-text">
+                                        <a href="user_profile_view.html"><h4>Jassia William</h4></a>
+                                        <span>5 Reviews</span>
+                                    </div>
+                                    <button><i class="fas fa-user-plus"></i></button>
+                                </div>
+                                <div class="suggestion-usd">
+                                    <a href="user_profile_view.html"><img src="/static/images/find-recipes/user-3.png"
+                                                                          alt=""></a>
+                                    <div class="sgt-text">
+                                        <a href="user_profile_view.html"><h4>Rock</h4></a>
+                                        <span>0 Reviews</span>
+                                    </div>
+                                    <button><i class="fas fa-user-plus"></i></button>
+                                </div>
+                                <div class="suggestion-usd">
+                                    <a href="user_profile_view.html"><img src="/static/images/find-recipes/user-4.png"
+                                                                          alt=""></a>
+                                    <div class="sgt-text">
+                                        <a href="user_profile_view.html"><h4>Davil Smith</h4></a>
+                                        <span>10 Reviews</span>
+                                    </div>
+                                    <button><i class="fas fa-user-plus"></i></button>
+                                </div>
+                                <div class="suggestion-usd">
+                                    <a href="user_profile_view.html"><img src="/static/images/find-recipes/user-5.png"
+                                                                          alt=""></a>
+                                    <div class="sgt-text">
+                                        <a href="user_profile_view.html"><h4>Ricky Doe</h4></a>
+                                        <span>3 Reviews</span>
+                                    </div>
+                                    <button><i class="fas fa-user-plus"></i></button>
+                                </div>
+                            </div><!--suggestions-list end-->
+                        </div>
+                    </div>
 
-    {% block content3 %}
+                    <div class="suggested-peoples h-top " hidden>
+                        <div class="suggestions full-width">
+                            <div class="sd-title">
+                                <h3>Photos</h3>
+                                <i class="la la-ellipsis-v"></i>
+                            </div><!--sd-title end-->
+                            <div class="suggestions-list">
+                                <div class="pf-gallery">
+                                    <ul>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-1.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-2.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-3.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-4.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-5.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-6.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-7.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-8.jpg"
+                                                                      alt=""></a></li>
+                                        <li><a href="#" title=""><img src="/static/images/profile/right-9.jpg"
+                                                                      alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div><!--photo-list end-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--my-account-tabs end-->
+{% endblock %}
+
+{% block content3 %}
     <!-- Bootstrap core JavaScript-->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-	 <!-- Assect scripts for this page-->
-	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
-	<script src="/static/js/owlslider.js"></script>
-	<script src="/static/js/bootstrap-select.js"></script>
-	<script src="/static/js/dashboard-tabs-reload.js"></script>
+    <!-- Assect scripts for this page-->
+    <script src="/static/assets/owlcarousel/owl.carousel.js"></script>
+    <script src="/static/js/owlslider.js"></script>
+    <script src="/static/js/bootstrap-select.js"></script>
+    <script src="/static/js/dashboard-tabs-reload.js"></script>
 
-     <script>
+    <script>
         function likeComment(cid) {
             var commentId = cid;
             var commentIda = cid + "a";
@@ -1107,13 +1541,26 @@
 
     <script>
 
-       var showPhoto= function (url, name, image, date) {
+        var showPhoto = function (url, name, image, date) {
             document.getElementById('showedPhotoId').src = url;
-            document.getElementById('exampleModalLabel').innerText = name ;
+            document.getElementById('exampleModalLabel').innerText = name;
             document.getElementById('clientPhoto').src = image;
-            document.getElementById('dateofphoto').innerText =date;
+            document.getElementById('dateofphoto').innerText = date;
 
         }
+
+    </script>
+
+    <script>
+
+    $(document).ready(function () {
+
+ $('.modal').on("hidden.bs.modal", function (e) { //fire on closing modal box
+        if ($('.modal:visible').length) { // check whether parent modal is opend after child modal close
+            $('body').addClass('modal-open'); // if open mean length is 1 then add a bootstrap css class to body of the page
+        }
+    });
+});
 
     </script>
 
