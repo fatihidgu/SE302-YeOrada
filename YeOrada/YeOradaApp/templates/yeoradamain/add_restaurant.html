@@ -53,7 +53,8 @@
 	<!--title-bar end-->	
 	<!--add-restaurant start-->
 	<section class="add-restaurant">			
-	<form>	
+	<form method="POST">
+              {% csrf_token %}
 		<div class="container">					
 			<div class="row justify-content-between">
 				<div class="col-lg-6 col-md-8 col-12">
@@ -65,15 +66,15 @@
 						<h4>Basic Info</h4>
 						<div class="form-group">
 							<label for="nameRestaurant">Restaurant Name*</label>
-							<input type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name">							
+							<input name="rname" type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" >
 						</div>
 						<div class="form-group">
 							<label for="searchCity">City*</label>
-							<input type="Search" class="video-form" id="searchCity" placeholder="Search City">							
+							<input name="rcity" type="Search" class="video-form" id="searchCity" placeholder="Search City" >
 						</div>
                         <div class="form-group">
 							<label for="searchCity">State*</label>
-							<input type="Search" class="video-form" id="searchCity" placeholder="Search State">
+							<input name="rstate" type="Search" class="video-form" id="searchCity" placeholder="Search State" >
 						</div>
 						<div class="form-group" hidden>
 							<div class="checkbox-title">Are you the Owner or Manager of the Place?</div>
@@ -95,27 +96,27 @@
 						<h4>Contact Info</h4>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Name*</label>
-							<input type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Name">
+							<input name="oname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Name" >
 						</div>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Surname*</label>
-							<input type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Surname">
+							<input name="osname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Surname" >
 						</div>
 						<div class="form-group">
 							<label for="emailAddress">Owner's Email Address*</label>
-							<input type="email" class="video-form" id="emailAddress" placeholder="Owner / Manager Email Address">
+							<input name="oemail" type="email" class="video-form" id="emailAddress" placeholder="Owner / Manager Email Address" >
 						</div>
 						<div class="form-group">
 							<label for="telNumber1">Owner's Phone Number*</label>
-							<input type="tel" class="video-form" id="telNumber1" placeholder="Owner / Manager Phone Number">							
+							<input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="5xx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" contenteditable="false">
 						</div>
 						<div class="form-group">
 							<label for="telNumber2">Restaurant Phone Number*</label>
-							<input type="tel" class="video-form" id="telNumber2" placeholder="Restaurant Phone Number">							
+							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
 						</div>
 						<div class="form-group">
 							<label for="webSite">Restaurant Email Address*</label>
-							<input type="email" class="video-form" id="webSite" placeholder="Restaurant Email Address">
+							<input name="remail" type="email" class="video-form" id="webSite" placeholder="Restaurant Email Address" >
 						</div>
 						<div class="form-group" hidden>
 							<div class="checkbox-title">Open Status*</div>
@@ -142,28 +143,28 @@
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">From*</div>
-									<select class="selectpicker" tabindex="-98">
-										<option value="0">Monday</option>
-										<option value="1">Tuesday</option>
-										<option value="2">Wednesday</option>
-										<option value="3">Thursday</option>
-										<option value="4">Friday</option>
-										<option value="5">Saturday</option>
-										<option value="6">Sunday</option>
+									<select name="wdaysfrom" class="selectpicker" tabindex="-98" >
+										<option value="Monday">Monday</option>
+										<option value="Tuesday">Tuesday</option>
+										<option value="Wednesday">Wednesday</option>
+										<option value="Thursday">Thursday</option>
+										<option value="Friday">Friday</option>
+										<option value="Saturday">Saturday</option>
+										<option value="Sunday">Sunday</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">To*</div>
-									<select class="selectpicker" tabindex="-98">
-										<option value="0">Monday</option>
-										<option value="1">Tuesday</option>
-										<option value="2">Wednesday</option>
-										<option value="3">Thursday</option>
-										<option value="4">Friday</option>
-										<option value="5">Saturday</option>
-										<option value="6">Sunday</option>
+									<select name="wdaysto" class="selectpicker" tabindex="-98" >
+										<option value="Monday">Monday</option>
+										<option value="Tuesday">Tuesday</option>
+										<option value="Wednesday">Wednesday</option>
+										<option value="Thursday">Thursday</option>
+										<option value="Friday">Friday</option>
+										<option value="Saturday">Saturday</option>
+										<option value="Sunday">Sunday</option>
 									</select>
 								</div>
 							</div>
@@ -187,38 +188,38 @@
 							<div class="col-md-3 col-12">	
 								<div class="form-group">
 									<div class="checkbox-title">From*</div>
-									<select class="selectpicker" tabindex="-98">
-										<option value="0">12.00 AM</option>
-										<option value="1">01.00 AM</option>
-										<option value="2">02.00 AM</option>
-										<option value="3">03.00 AM</option>
-										<option value="4">04.00 AM</option>
-										<option value="5">05.00 AM</option>
-										<option value="6">06.00 AM</option>
-										<option value="7">07.00 AM</option>
-										<option value="8">08.00 AM</option>
-										<option value="9">09.00 AM</option>
-										<option value="9">10.00 AM</option>
-										<option value="9">11.00 AM</option>																																							  														  
+									<select name="whoursfrom" class="selectpicker" tabindex="-98" >
+										<option value="00.00">00.00</option>
+										<option value="01.00">01.00</option>
+										<option value="02.00">02.00</option>
+										<option value="03.00">03.00</option>
+										<option value="04.00">04.00</option>
+										<option value="05.00">05.00</option>
+										<option value="06.00">06.00</option>
+										<option value="07.00">07.00</option>
+										<option value="08.00">08.00</option>
+										<option value="09.00">09.00</option>
+										<option value="10.00">10.00</option>
+										<option value="11.00">11.00</option>
 									</select>
 								</div>
 							</div>
 							<div class="col-md-3 col-12">	
 								<div class="form-group">
 									<div class="checkbox-title">To*</div>
-									<select class="selectpicker" tabindex="-98">
-										<option value="0">12.00 PM</option>
-										<option value="1">01.00 PM</option>
-										<option value="2">02.00 PM</option>
-										<option value="3">03.00 PM</option>
-										<option value="4">04.00 PM</option>
-										<option value="5">05.00 PM</option>
-										<option value="6">06.00 PM</option>
-										<option value="7">07.00 PM</option>
-										<option value="8">08.00 PM</option>
-										<option value="9">09.00 PM</option>
-										<option value="9">10.00 PM</option>
-										<option value="9">11.00 PM</option>																																							  														  
+									<select name="whoursto" class="selectpicker" tabindex="-98" >
+										<option value="12.00">12.00</option>
+										<option value="13.00">13.00</option>
+										<option value="14.00">14.00</option>
+										<option value="15.00">15.00</option>
+										<option value="16.00">16.00</option>
+										<option value="17.00">17.00</option>
+										<option value="18.00">18.00</option>
+										<option value="19.00">19.00</option>
+										<option value="20.00">20.00</option>
+										<option value="21.00">21.00</option>
+										<option value="22.00">22.00</option>
+										<option value="23.00">23.00</option>
 									</select>
 								</div>
 							</div>
@@ -241,7 +242,7 @@
 						<div class="form-group">
 							<label for="addressInput">Enter Address*</label>
 							<div class="field-input">
-								<input type="text" class="video-form" id="addressInput" placeholder="Enter the address">							
+								<input name="address" type="text" class="video-form" id="addressInput" placeholder="Enter the address" >
 								<i class="fas fa-search"></i>
 							</div>											
 						</div>											
@@ -350,18 +351,24 @@
 							<div class="filter-radio">
 								<ul>
 									<li>
-									  <input type="radio" value="value5" id="c9" name="c5">
-									  <label for="c9">Yes</label>
+									  <input type="radio" value="1" id="verifyRestaurant" name="verify" >
+									  <label for="verifyRestaurant">Yes</label>
 									</li>
 									<li>
-									  <input type="radio" value="value6" id="c10" name="c5">
-									  <label for="c10">No</label>
+									  <input type="radio" value="0" id="verifyRestaurant1" name="verify" >
+									  <label for="verifyRestaurant1">No</label>
 									</li>
 								</ul>
 							</div>
 						</div>																			
 					</div>
-					<button type="submit" class="add-resto-btn1 btn-link">Become a Partner</button>
+                    {{ error_message1|linebreaks }}
+                    <br>
+                    {{ error_message2|linebreaks }}
+                    <br>
+                    {{ error_message3|linebreaks }}
+                    <br>
+					<button name="sendformname" type="submit" class="add-resto-btn1 btn-link">Become a Partner</button>
 				</div>
 				<div class="col-lg-5 col-md-4 col-12">
 					<div class="new-heading">						
