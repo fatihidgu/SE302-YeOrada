@@ -165,7 +165,7 @@ class ClientApplicationForm(models.Model):
     workhour_to = models.CharField(max_length=200)
     restaurant_address = models.CharField(max_length=300)
     will_be_verified = models.BooleanField(default=False)
-
+    category = models.CharField(max_length=200, null=True, blank=True)
 
 class ForgotPasswordCode(models.Model):
     user = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE)

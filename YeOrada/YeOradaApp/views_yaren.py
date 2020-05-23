@@ -1,8 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
 from django.shortcuts import render, redirect
 
 from YeOradaApp.forms import RegisteredUserChangeForm, CommentAnswerForm, CommentForm
-from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Admin
+from YeOradaApp.models import Customer, RegisteredUser, Comment, CommentAnswer, CommentLike, Admin, ClientApplicationForm, Client
 
 from django.core import mail
 from django.template.loader import render_to_string
@@ -111,6 +112,7 @@ def myprofile(request):
 def adminsettings(request):
     error_message1 = ""
     error_message2 = ""
+
     passwordChangeForm = PasswordChangeForm(request.user)
     if 'saveChanges2' in request.POST:
         name = request.POST.get('name')
@@ -149,6 +151,7 @@ def adminsettings(request):
 
 def adminprofile(request):
     user = request.user
+    applicationformlist = ClientApplicationForm.objects.all()
     if 'accept' in request.POST:
         if request.user.is_authenticated:
                  adminObject = Admin.objects.filter(userEmail=user).first()
@@ -208,13 +211,37 @@ def adminprofile(request):
 
              commentSet.delete()
              return redirect('adminprofile')
-
+    elif 'acceptClient' in request.POST:
+        User = get_user_model()
+        formset=ClientApplicationForm.objects.filter(id=request.POST.get('client-form-id'))
+        formobj=formset.first()
+        pwd = User.objects.make_random_password(length=12, allowed_chars='abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789')
+        usrname=formobj.restaurant_name.lower().replace(" ", "")
+        registered_user = User.objects.create_user(email=formobj.restaurant_email, password=pwd, username=usrname,
+                                                   name=formobj.owner_name, surname=formobj.owner_surname,
+                                                   isClient=True)
+        registered_user.save()
+        client_user = Client.objects.create(userEmail=registered_user, name=formobj.restaurant_name,
+                                            phone=formobj.restaurant_phone,
+                                            city=formobj.city, state=formobj.state, address1=formobj.restaurant_address,
+                                            workingHours=formobj.workhour_from + '-' + formobj.workhour_to,
+                                            workingDays=formobj.workday_from + '-' + formobj.workday_to,
+                                            category=formobj.category)
+        client_user.save()
+        formset.delete()
+        return redirect('adminprofile')
+    elif 'declineClient' in request.POST:
+        print(request.POST.get('reasonClient'))
+        formset = ClientApplicationForm.objects.filter(id=request.POST.get('client-form-id'))
+        formset.delete()
+        return redirect('adminprofile')
     commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
     customer = Customer.objects.filter(userEmail=request.user).first()
 
+
     return render(request, 'yeoradamain/admin_profile.html',
                   {'user': user, 'customer': customer,
-                   'commentList': commentList, })
+                   'commentList': commentList,'applicationformlist':applicationformlist })
 
 
 def faq(request):
