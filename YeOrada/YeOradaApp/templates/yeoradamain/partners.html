@@ -29,6 +29,16 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIVX6GlP0RDDM3vcFhgzYnugViFmxl0g&libraries=places"></script>
 
+    <style>
+    .custom-hover {
+        font-size: 15px;
+    }
+
+    .custom-hover:hover {
+        color: #ffa803;
+    }
+    </style>
+
     <script>
         $(document).ready(function () {
             var autocomplete;
@@ -54,10 +64,44 @@
                     city++;
                 }
 
-                document.getElementById('state_input').value = place.address_components[componentLength - state].long_name;
-                document.getElementById('city_input').value = place.address_components[componentLength - city].long_name;
+                var state_input = place.address_components[componentLength - state].long_name;
+                var city_input = place.address_components[componentLength - city].long_name;
+
+
+                document.getElementById('state_input').value = state_input;
+                document.getElementById('city_input').value = city_input;
+
+                if(state_input == city_input){
+                    document.getElementById('location-text').innerText= city_input + ", " + "Turkey";
+                }else if(state_input != "" && city_input != ""){
+                    document.getElementById('location-text').innerText= state_input + ", " +  city_input + ", " + "Turkey";
+                }
             });
+
+            var search_location = document.getElementById('search_location');
+
+            search_location.addEventListener('change', (event) => { // check if the user deleted the selected auto-complete text
+                var result = document.getElementById('search_location').value;
+
+                if( result == ""){
+                    document.getElementById('location-text').innerText= "Turkey";
+                    document.getElementById('state_input').value = "";
+                    document.getElementById('city_input').value = "";
+                }
+            });
+
         });
+    </script>
+
+    <script>
+
+    function deleteSearchLocation(){
+        document.getElementById('location-text').innerText= "Turkey";
+        document.getElementById('state_input').value = "";
+        document.getElementById('city_input').value = "";
+        document.getElementById('search_location').value = "";
+    }
+
     </script>
 
 {% endblock %}
@@ -102,16 +146,25 @@
 									<div class="search-area">
 										<form>
                                             {% if city != "" and state != ""  %}
-                                                <div class="input-group-prepend">
-                                                     <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                                <div style="margin-bottom: 3%;">
+                                                <span><i class="fas fa-map-marker-alt" style="color: #ffa803; margin-right: 4px;"></i></span>
+                                                <p id="location-text" style="display: inline; margin-right: 3px; font-size: 14px;">{{ state }}, {{ city }}, Turkey</p>
+                                                <i id="delete-search-location" onclick="deleteSearchLocation()" class="fas fa-window-close custom-hover" style="display: inline; "></i>
                                                 </div>
-                                                <input id="search_location" style="padding-right: 15px;" class="find-address skills" name="search" type="text" placeholder="Search your area" value="{{ state }}/{{ city }}, Türkiye">
+
                                             {% else %}
-                                                <div class="input-group-prepend">
-                                                     <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                                <div style="margin-bottom: 3%;">
+                                                <span><i class="fas fa-map-marker-alt" style="color: #ffa803; margin-right: 4px;"></i></span>
+                                                <p id="location-text" style="display: inline; margin-right: 3px; font-size: 14px;">Turkey</p>
+                                                <i id="delete-search-location" onclick="deleteSearchLocation()" class="fas fa-window-close custom-hover" style="display: inline; "></i>
                                                 </div>
-											    <input id="search_location" style="padding-right: 15px;" class="find-address skills" name="search" type="text" placeholder="Search your area">
+
                                             {% endif %}
+
+                                             <div class="input-group-prepend">
+                                                <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
+                                             </div>
+                                             <input id="search_location" style="padding-right: 15px;" class="find-address skills" name="search" type="text" placeholder="Search your area">
 
                                              <input type="hidden" id="state_input" name="state_input" value="{{ state }}" />
                                              <input type="hidden" id="city_input" name="city_input" value="{{ city }}" />

@@ -30,6 +30,17 @@
 
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
+    <style>
+    .custom-hover {
+        color: #fff;
+        font-size: 16px;
+    }
+
+    .custom-hover:hover {
+        color: #ffa803;
+    }
+    </style>
+
     <script>
         $(document).ready(function () {
             var autocomplete;
@@ -55,10 +66,44 @@
                     city++;
                 }
 
-                document.getElementById('state_input').value = place.address_components[componentLength - state].long_name;
-                document.getElementById('city_input').value = place.address_components[componentLength - city].long_name;
+                var state_input = place.address_components[componentLength - state].long_name;
+                var city_input = place.address_components[componentLength - city].long_name;
+
+
+                document.getElementById('state_input').value = state_input;
+                document.getElementById('city_input').value = city_input;
+
+                if(state_input == city_input){
+                    document.getElementById('location-text').innerText= city_input + ", " + "Turkey";
+                }else if(state_input != "" && city_input != ""){
+                    document.getElementById('location-text').innerText= state_input + ", " +  city_input + ", " + "Turkey";
+                }
             });
+
+            var search_location = document.getElementById('search_location');
+
+            search_location.addEventListener('change', (event) => { // check if the user deleted the selected auto-complete text
+                var result = document.getElementById('search_location').value;
+
+                if( result == ""){
+                    document.getElementById('location-text').innerText= "Turkey";
+                    document.getElementById('state_input').value = "";
+                    document.getElementById('city_input').value = "";
+                }
+            });
+
         });
+    </script>
+
+    <script>
+
+    function deleteSearchLocation(){
+        document.getElementById('location-text').innerText= "Turkey";
+        document.getElementById('state_input').value = "";
+        document.getElementById('city_input').value = "";
+        document.getElementById('search_location').value = "";
+    }
+
     </script>
 
 {% endblock %}
@@ -100,13 +145,39 @@
                     <form method="post" action="clientsearch">
                         {% csrf_token %}
                         <div class="form-box">
+                            <div style="margin-bottom: 5%;">
+                            <span><i class="fas fa-map-marker-alt" style="color: #ffa803; margin-right: 8px;"></i></span>
+                                {% if user.is_authenticated %}
+                                    {% if customer.state != None and customer.city != None %}
+                                        <p id="location-text" style="color: #fff; font-weight: bold; display: inline; margin-right: 5px;">{{ customer.state }}, {{ customer.city }}, Turkey</p>
+                                    {% else %}
+                                    <p id="location-text" style="color: #fff; font-weight: bold; display: inline; margin-right: 5px;">Turkey</p>
+                                    {% endif %}
+                                {% else %}
+                                <p id="location-text" style="color: #fff; font-weight: bold; display: inline; margin-right: 5px;">Turkey</p>
+                                {% endif %}
+                                <i id="delete-search-location" onclick="deleteSearchLocation()" class="fas fa-window-close custom-hover" style="display: inline; "></i>
+                            </div>
+
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-map-marker-alt"></i></div>
                             </div>
                             <input id="search_location" class="find-address skills" name="location" type="text"
                                    placeholder="Enter location"/>
-                            <input type="hidden" id="state_input" name="state_input"/>
-                            <input type="hidden" id="city_input" name="city_input"/>
+
+                            {% if user.is_authenticated %}
+                                    {% if customer.state != None and customer.city != None %}
+                                        <input type="hidden" id="state_input" name="state_input" value="{{ customer.state }}"/>
+                                        <input type="hidden" id="city_input" name="city_input" value="{{ customer.city }}"/>
+                                    {% else %}
+                                        <input type="hidden" id="state_input" name="state_input" />
+                                        <input type="hidden" id="city_input" name="city_input" />
+                                    {% endif %}
+                                {% else %}
+                                        <input type="hidden" id="state_input" name="state_input" />
+                                        <input type="hidden" id="city_input" name="city_input" />
+                                {% endif %}
+
                             <div class="input-group-prepend">
                                 <div class="input-group-text-1"><i class="fas fa-utensils"></i></div>
                             </div>

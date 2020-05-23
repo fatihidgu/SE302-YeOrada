@@ -15,26 +15,29 @@ from .views_yaren import *
 
 def index(request):
     clients = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
-
-    return render(request, 'yeoradamain/index.html', {'clients':clients,})
-
-
-def signin(request):
+    customer = None
     control = False
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
 
-        registeredUser = RegisteredUser.objects.filter(email=form.data.get('username')).first()
+    if request.user.is_authenticated:
+        customer = Customer.objects.filter(userEmail=request.user).first()
 
-        if (registeredUser is not None) and (not registeredUser.is_active):
+        if not request.user.is_active:
+            registeredUser = RegisteredUser.objects.filter(email=request.user.email)
             registeredUser.is_active = True
             control = True
             registeredUser.save()
-            print(control)
+
+    return render(request, 'yeoradamain/index.html', {'clients':clients, 'customer': customer, 'control': control, })
+
+
+def signin(request):
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return render(request, 'yeoradamain/index.html', {'control': control})
+            return redirect('home')
         else:
             error_message = "* Wrong Email or Password."
     else:
