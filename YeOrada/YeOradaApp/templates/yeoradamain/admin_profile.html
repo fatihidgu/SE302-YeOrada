@@ -347,42 +347,43 @@
                                 <div class="tab-content-heading">
                                     <h4>Client Application Forms </h4>
                                 </div>
+                                {% for apform in applicationformlist %}
                                 <div class="main-comments" style="padding: 5%;">
-                                    <p style="color: #ffa803;">Cafe</p>
-                                    <h4 style="margin-top: 5px;">Bursa Kebap Bahçelievler Şubesi</h4>
+                                    <p style="color: #ffa803;">{{ apform.category }}</p>
+                                    <h4 style="margin-top: 5px;">{{ apform.restaurant_name }}</h4>
                                     <p style="margin-bottom: 5%; margin-top:5px;"><span><i
                                             class="fas fa-map-marker-alt" style="color: #ffa803"></i></span>
-                                         Bahçelievler, İstanbul
+                                         {{ apform.state }}, {{ apform.city }}
                                     </p>
 
                                     <div class="form-group">
                                         <label for="nameOwner">Owner's Name and Surname</label>
-                                        <input type="text" class="video-form" id="nameOwner1" value="Kenan Işık"
+                                        <input type="text" class="video-form" id="nameOwner1" value="{{ apform.owner_name }},{{ apform.owner_surname }}"
                                                style="color: black;" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="ownerEmail">Owner's Email Address</label>
                                         <input type="Search" class="video-form" id="ownerEmail1"
-                                               value="kenan123@hotmail.com" style="color: black;" disabled>
+                                               value="{{ apform.owner_email }}" style="color: black;" disabled>
                                     </div>
                                     <div class="form-group">
                                         <label for="ownerPhone">Owner's Phone Number</label>
-                                        <input type="Search" class="video-form" id="ownerPhone1" value="5318745662"
+                                        <input type="Search" class="video-form" id="ownerPhone1" value="{{ apform.owner_phone }}"
                                                style="color: black;" disabled>
                                     </div>
                                     <input style="margin-top:3%; float: right; width: 25%; background-color: #ffa803; border-color:#ffa803;"
                                            class="btn btn-secondary" type="button"
                                            value="View in Detail" data-toggle="modal"
-                                           data-target="#exampleModalCenter3">
+                                           data-target="#exampleModalCenter3{{apform.id}}">
 
                                     <!-- View in Detail Modal -->
-                                    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter3" tabindex="-1" role="dialog"
+                                    <div class="modal fade bd-example-modal-lg" id="exampleModalCenter3{{apform.id}}" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <img src="/static/images/partner-with-us/icon-1.svg" style="width: 24px; margin-right: 8px;" alt="">
-                                                    <h5 class="modal-title" id="exampleModalLongTitle3"> Restaurant Application Form</h5>
+                                                    <h5 class="modal-title" id="exampleModalLongTitle3{{ apform.id }}"> Restaurant Application Form</h5>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                             aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
@@ -397,15 +398,15 @@
 						<h4>Basic Info</h4>
 						<div class="form-group">
 							<label for="nameRestaurant">Restaurant Name*</label>
-							<input type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" value="Bursa Kebap Bahçelievler Şubesi" disabled>
+							<input type="text" class="video-form" placeholder="Enter Restaurant Name" value="{{apform.restaurant_name}}" disabled>
 						</div>
 						<div class="form-group">
 							<label for="searchCity">City*</label>
-							<input type="Search" class="video-form" id="searchCity" placeholder="Search City" value="İstanbul" disabled>
+							<input type="Search" class="video-form" placeholder="Search City" value="{{apform.city}}" disabled>
 						</div>
                         <div class="form-group">
 							<label for="searchCity">State*</label>
-							<input type="Search" class="video-form" id="searchState" placeholder="Search State" value="Bahçelievler" disabled>
+							<input type="Search" class="video-form" placeholder="Search State" value="{{apform.state}}" disabled>
 						</div>
 						<div class="form-group" hidden>
 							<div class="checkbox-title">Are you the Owner or Manager of the Place?</div>
@@ -427,27 +428,27 @@
 						<h4>Contact Info</h4>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Name*</label>
-							<input type="text" class="video-form" id="ownerName2" placeholder="Owner / Manager Name" value="Kenan" disabled>
+							<input type="text" class="video-form" placeholder="Owner / Manager Name" value="{{apform.owner_name}}" disabled>
 						</div>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Surname*</label>
-							<input type="text" class="video-form" id="ownerSurname2" placeholder="Owner / Manager Surname" value="Işık" disabled>
+							<input type="text" class="video-form" placeholder="Owner / Manager Surname" value="{{apform.owner_surname}}" disabled>
 						</div>
 						<div class="form-group">
 							<label for="emailAddress">Owner's Email Address*</label>
-							<input type="email" class="video-form" id="ownerEmail2" placeholder="Owner / Manager Email Address" value="kenan123@hotmail.com" disabled>
+							<input type="email" class="video-form" placeholder="Owner / Manager Email Address" value="{{apform.owner_email}}" disabled>
 						</div>
 						<div class="form-group">
 							<label for="telNumber1">Owner's Phone Number*</label>
-							<input type="tel" class="video-form" id="ownerPhone2" placeholder="Owner / Manager Phone Number" value="5318745662" disabled>
+							<input type="tel" class="video-form" placeholder="Owner / Manager Phone Number" value="{{apform.owner_phone}}" disabled>
 						</div>
 						<div class="form-group">
 							<label for="telNumber2">Restaurant Phone Number*</label>
-							<input type="tel" class="video-form" id="resPhone2" placeholder="Restaurant Phone Number" value="2845132687" disabled>
+							<input type="tel" class="video-form" placeholder="Restaurant Phone Number" value="{{apform.restaurant_phone}}" disabled>
 						</div>
 						<div class="form-group">
 							<label for="webSite">Restaurant Email Address*</label>
-							<input type="email" class="video-form" id="resEmail2" placeholder="Restaurant Email Address" value="bursakebapbahcelievler@bursakebap.com" disabled>
+							<input type="email" class="video-form" placeholder="Restaurant Email Address" value="{{apform.restaurant_email}}" disabled>
 						</div>
 						<div class="form-group" hidden>
 							<div class="checkbox-title">Open Status*</div>
@@ -474,13 +475,13 @@
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">From*</div>
-									<input type="text" class="video-form" id="fromday" value="Monday" disabled>
+									<input type="text" class="video-form" value="{{apform.workday_from}}" disabled>
 								</div>
 							</div>
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">To*</div>
-									<input type="text" class="video-form" id="today" value="Saturday" disabled>
+									<input type="text" class="video-form" value="{{apform.workday_to}}" disabled>
 								</div>
 							</div>
 							<div class="col-md-3 col-12" hidden>
@@ -503,13 +504,13 @@
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">From*</div>
-									<input type="email" class="video-form" id="fromhour" value="12.00" disabled>
+									<input type="email" class="video-form" value="{{apform.workhour_from}}" disabled>
 								</div>
 							</div>
 							<div class="col-md-3 col-12">
 								<div class="form-group">
 									<div class="checkbox-title">To*</div>
-									<input type="email" class="video-form" id="tohour" value="22.00" disabled>
+									<input type="email" class="video-form" value="{{apform.workhour_to}}" disabled>
 								</div>
 							</div>
 							<div class="col-md-3 col-12" hidden>
@@ -529,9 +530,9 @@
 					<div class="basic-info c-top">
 						<h4>Location</h4>
 						<div class="form-group">
-							<label for="addressInput">Enter Address*</label>
+							<label for="addressInput">Restaurant Address*</label>
 							<div class="field-input">
-								<input type="text" class="video-form" id="addressInput" value="Merkez mah. Eski cad. No:2" disabled>
+								<input type="text" class="video-form" value="{{apform.restaurant_address}}" disabled>
 								<i class="fas fa-search"></i>
 							</div>
 						</div>
@@ -548,14 +549,26 @@
                             <br>
 							<div class="filter-radio">
 								<ul>
+                                    {% if apform.will_be_verified %}
 									<li>
-									  <input type="radio" value="value5" id="c9" name="c5" checked="checked" disabled>
-									  <label for="c9">Yes</label>
+									  <input type="radio" value="value5" id="c9{{ apform.id }}" checked="checked" disabled >
+									  <label for="c9{{ apform.id }}">Yes</label>
 									</li>
 									<li>
-									  <input type="radio" value="value6" id="c10" name="c5" disabled>
-									  <label for="c10">No</label>
+									  <input type="radio" value="value6" id="c10{{ apform.id }}"  disabled>
+									  <label for="c10{{ apform.id }}">No</label>
 									</li>
+                                    {% else %}
+                                        <li>
+									  <input type="radio" value="value5" id="c9{{ apform.id }}" disabled >
+									  <label for="c9{{ apform.id }}">Yes</label>
+									</li>
+									<li>
+									  <input type="radio" value="value6" id="c10{{ apform.id }}" checked="checked" disabled>
+									  <label for="c10{{ apform.id }}">No</label>
+									</li>
+                                    {% endif %}
+
 								</ul>
 							</div>
 						</div>
@@ -566,15 +579,15 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <input class="btn btn-success" type="submit"
-                                                           value="Accept" data-target="#exampleModalCenter4" data-toggle="modal">
-                                                    <input class="btn btn-warning" type="button" value="Decline" data-target="#exampleModalCenter5" data-toggle="modal">
+                                                           value="Accept" data-target="#exampleModalCenter4{{apform.id}}" data-toggle="modal">
+                                                    <input class="btn btn-warning" type="button" value="Decline" data-target="#exampleModalCenter5{{apform.id}}" data-toggle="modal">
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Accept Modal Client-->
-                                                <div class="modal fade" id="exampleModalCenter4" tabindex="-1"
+                                                <div class="modal fade" id="exampleModalCenter4{{apform.id}}" tabindex="-1"
                                                      role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -592,9 +605,9 @@
                                                             </div>
                                                             <div class="modal-footer">
 
-                                                                <form> <!-- Create new RegisteredUser and Client corresponding to the client application and also send an email -->
+                                                                <form method="POST"> <!-- Create new RegisteredUser and Client corresponding to the client application and also send an email -->
                                                                     {% csrf_token %}
-                                                                <input type="hidden" name="client-form-id" value="" >
+                                                                <input type="hidden" name="client-form-id" value="{{ apform.id }}" >
                                                                 <input class="btn btn-success" name="acceptClient"
                                                                        type="submit" value="Yes">
                                                                 <input class="btn btn-warning" type="button" value="No"
@@ -607,7 +620,7 @@
                                                 </div>
 
                                                 <!-- Decline Modal Client-->
-                                                <div class="modal fade" id="exampleModalCenter5" tabindex="-1"
+                                                <div class="modal fade" id="exampleModalCenter5{{apform.id}}" tabindex="-1"
                                                      role="dialog" aria-labelledby="exampleModalCenterTitle"
                                                      aria-hidden="true">
                                                     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -627,7 +640,7 @@
                                                             <label class="modal-body" for="reasonClient">Reason to
                                                                 decline:</label>
 
-                                                            <form> <!-- Delete the corresponding client application from database and send an email about reason -->
+                                                            <form method="POST"> <!-- Delete the corresponding client application from database and send an email about reason -->
                                                                 {% csrf_token %}
                                                             <div class="form-group" style="padding: 3%;">
                                                             <textarea class="form-control" id="reasonClient" name="reasonClient" style="color: black;"
@@ -637,7 +650,7 @@
 
                                                             <div class="modal-footer">
 
-                                                                <input type="hidden" name="client-form-id" value="" >
+                                                                <input type="hidden" name="client-form-id" value="{{ apform.id }}" >
                                                                 <input class="btn btn-success" name="declineClient"
                                                                        type="submit" value="Yes">
                                                                 <input class="btn btn-warning" type="button" value="No"
@@ -648,9 +661,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                 </div>
-
+{% endfor %}
                             </div>
 
                         </div>

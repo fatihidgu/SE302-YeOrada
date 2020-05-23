@@ -134,15 +134,16 @@ def newclient(request):
         whoursto = request.POST.get('whoursto')
         address = request.POST.get('address')
         verify = request.POST.get('verify')
+        rcategory=request.POST.get('category')
         if Client.objects.filter(userEmail=remail).first() or ClientApplicationForm.objects.filter(
                 restaurant_email=remail).first():
             # email hatası
-            error_message1 = "Emailiniz hatalı"
+            error_message1 = "This email has already taken before. Please use antoher one!"
 
         if Client.objects.filter(name=rname).first() or ClientApplicationForm.objects.filter(
                 restaurant_name=rname).first():
             # restaurant name hatası
-            error_message2 = "Restoran name hatalı"
+            error_message2 = "This restaurant name has already taken before. Please use another one!"
 
         if error_message1 == "" and error_message2 == "":
             # kayıt işlemi
@@ -153,7 +154,7 @@ def newclient(request):
                                                  restaurant_email=remail, workday_from=wdaysfrom,
                                                  workday_to=wdaysto, workhour_from=whoursfrom,
                                                  workhour_to=whoursto, restaurant_address=address,
-                                                 will_be_verified=verify).save()
+                                                 will_be_verified=verify, category=rcategory).save()
             error_message3="We sent your form successfully!"
     return render(request, 'yeoradamain/add_restaurant.html', {'error_message1': error_message1,
                                                                'error_message2': error_message2,
