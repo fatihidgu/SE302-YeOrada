@@ -166,6 +166,13 @@ def adminprofile(request):
                  review = commentObject.text
                  date = commentObject.date
                  restaurant = commentObject.clientEmail.name
+                 rate = commentObject.rate
+
+                 clientObject = Client.objects.filter(userEmail__email=commentObject.clientEmail.userEmail.email).first()
+                 newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (
+                         clientObject.rateCount + 1))
+                 clientObject.rate = newRate
+                 clientObject.rateCount = clientObject.rateCount + 1;
 
                  subject = 'Yeorada | Your review has just accepted!'
                  html_message = render_to_string('yeoradamain/acceptReview.html',
@@ -179,6 +186,7 @@ def adminprofile(request):
                  mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
 
                  commentSet.update(is_Approved=True, approved_by=adminObject)
+                 clientObject.save()
                  return redirect('adminprofile')
     elif 'decline' in request.POST:
         if request.user.is_authenticated:
@@ -237,7 +245,6 @@ def adminprofile(request):
         return redirect('adminprofile')
     commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
     customer = Customer.objects.filter(userEmail=request.user).first()
-
 
     return render(request, 'yeoradamain/admin_profile.html',
                   {'user': user, 'customer': customer,

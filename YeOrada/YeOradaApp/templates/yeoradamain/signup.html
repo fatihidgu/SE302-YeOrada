@@ -33,15 +33,15 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="left-title-text">
-					<h3>Login Now</h3>
+					<ul>
+							<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+							<li class="breadcrumb-item active" aria-current="page">Register Now</li>
+						</ul>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="right-title-text">  
-						<ul>
-							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Login Now</li>
-						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -61,37 +61,57 @@
                                     {% csrf_token %}
 									<div class="login-form">	
 										<div class="login-logo">									
-											<a href="index.html"><img src="/static/images/login-register/logo.svg" alt=""></a>
+											<a href="{% url 'home' %}"><img src="/static/images/logo.png" alt="" style="width: 130px;"></a>
 										</div>
 										<div class="create-text"><h4>Create Your Account</h4></div>										
 										<div class="form-group">
-											<input type="text" class="video-form" id="name" name="name" placeholder="Name">
+											<input type="text" class="video-form" id="name" name="name" placeholder="Name" required>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.name.errors }}
+                                            </div>
 										</div>
                                         <div class="form-group">
-											<input type="text" class="video-form" id="surname" name="surname" placeholder="Surname">
+											<input type="text" class="video-form" id="surname" name="surname" placeholder="Surname" required>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.surname.errors }}
+                                            </div>
 										</div>
                                         <div class="form-group">
-											<input type="text" class="video-form" id="username" name="username" placeholder="Username">
+											<input type="text" class="video-form" id="username" name="username" placeholder="Username" required>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.username.errors }}
+                                            </div>
 										</div>
 										<div class="form-group">
-											<input type="email" class="video-form" id="email" name="email" placeholder="Email Address">
+											<input type="email" class="video-form" id="email" name="email" placeholder="Email Address" required>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.email.errors }}
+                                            </div>
 										</div>
 										<div class="form-group">
-											<input type="password" class="video-form" id="password1" name="password1" placeholder="Password">
+											<input type="password" class="video-form" id="password1" name="password1" placeholder="Password" required>
+                                            <br>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.password1.errors }}
+                                            </div>
 										</div>
                                         <div class="form-group">
-											<input type="password" class="video-form" id="password2" name="password2" placeholder="Password (Again) ">
+											<input type="password" class="video-form" id="password2" name="password2" placeholder="Password (Again)" required>
+                                            <br>
+                                            <div style="float: left; margin-bottom: 5%; margin-top: 2%;">
+                                            {{ form.password2.errors }}
+                                            </div>
 										</div>
+
 										<div class="signup-checkbox text-left">
 											  <input type="checkbox" id="c1" name="cb">
 											  <label for="c1">I agree to YeOrada's <span>Terms of Service </span>and<span> Content Policy</span>.</label>
 										</div>
-                                        {{ form.errors }}
-                                        <p style="float: left">{{ error_message1 }}</p>
-                                        <p style="float: left">{{ error_message2 }}</p>
+                                        <p style="float: left; margin-bottom: 5%; margin-top: 2%;">{{ error_message1 }}</p>
+                                        <p style="float: left; margin-bottom: 5%;">{{ error_message2 }}</p>
 										<button type="submit" class="login-btn btn-link">Register Now</button>
 										<div class="forgot-password">	
-											<p>If you have an account?<a href="signin.html"><span style="color:#ffa803;"> - Login Now</span></a></p>
+											<p>If you have an account?<a href="{% url 'signin' %}"><span style="color:#ffa803;"> - Login Now</span></a></p>
 										</div>										
 									</div>	
 								</form>		

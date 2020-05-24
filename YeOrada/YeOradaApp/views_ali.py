@@ -29,12 +29,6 @@ def clientprofile(request, username):
                     clientObject = Client.objects.filter(userEmail__username=username).first()
                     rate = request.POST.get('rate')
 
-                    newRate = (((clientObject.rate * clientObject.rateCount) + int(rate)) / (
-                            clientObject.rateCount + 1))
-                    clientObject.rate = newRate
-                    clientObject.rateCount = clientObject.rateCount + 1;
-                    clientObject.save()
-
                     print(request.POST.get('fileOneChecking'), ", ", request.POST.get('fileTwoChecking'), " ve ",
                           request.POST.get('fileThrChecking'))
                     if request.POST.get('fileOneChecking') == '1' and request.POST.get(
