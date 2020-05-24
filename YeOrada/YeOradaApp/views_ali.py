@@ -216,7 +216,7 @@ def clientprofile(request, username):
             CountOfPhoto += 3
     print(CountOfPhoto)
 
-    clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
+    clienty = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:7]
 
     client_menu_count = 0;
 

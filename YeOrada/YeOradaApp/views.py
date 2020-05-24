@@ -14,7 +14,7 @@ from .views_yaren import *
 
 
 def index(request):
-    clients = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:10]
+    clients = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:12]
     customer = None
     control = False
 

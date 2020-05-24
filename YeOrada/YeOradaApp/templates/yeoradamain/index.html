@@ -469,8 +469,13 @@
                                     <div class="bg-gradient"></div>
                                 </a>
                                 <div class="top-img">
-                                    <img src="{{ clients.image1.url }}" style="width:100%;margin:auto;height:100%"
+                                    {% if clients.image1.url != "/media/defaultClient.jpg" %}
+                                        <img src="{{ clients.image1.url }}" style="width:100%;margin:auto;height:100%"
                                          alt="">
+                                    {% else %}
+                                        <img src="/media/defaultClientPhoto.png" style="width:100%;margin:auto;height:100%"
+                                         alt="">
+                                    {% endif %}
 
                                 </div>
                                 <div class="logo-img">
