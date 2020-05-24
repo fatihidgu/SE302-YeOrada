@@ -78,6 +78,7 @@ class Client(models.Model):
     menu3 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
     menu4 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
     menu5 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
+    is_verified = models.BooleanField(default=False)
 
 
 class Admin(models.Model):
@@ -166,6 +167,8 @@ class ClientApplicationForm(models.Model):
     restaurant_address = models.CharField(max_length=300)
     will_be_verified = models.BooleanField(default=False)
     category = models.CharField(max_length=200, null=True, blank=True)
+    date = models.DateTimeField(default=timezone.now)
+
 
 class ForgotPasswordCode(models.Model):
     user = models.ForeignKey(RegisteredUser, on_delete=models.CASCADE)

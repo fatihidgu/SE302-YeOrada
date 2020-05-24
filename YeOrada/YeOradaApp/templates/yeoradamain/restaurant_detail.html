@@ -184,9 +184,11 @@
                         </div>
                         <div class="right-side-btns">
                             <div class="bagde-dt">
+                                {% if clientObject.is_verified %}
                                 <div class="partner-badge">
                                     Verified
                                 </div>
+                                {% endif %}
                             </div>
                             <div class="resto-review-stars">
                                 {% if clientObject.rate >= 1 %}

@@ -151,7 +151,7 @@ def adminsettings(request):
 
 def adminprofile(request):
     user = request.user
-    applicationformlist = ClientApplicationForm.objects.all()
+    applicationformlist = ClientApplicationForm.objects.all().order_by('-date')
     if 'accept' in request.POST:
         if request.user.is_authenticated:
                  adminObject = Admin.objects.filter(userEmail=user).first()
@@ -234,7 +234,7 @@ def adminprofile(request):
                                             city=formobj.city, state=formobj.state, address1=formobj.restaurant_address,
                                             workingHours=formobj.workhour_from + '-' + formobj.workhour_to,
                                             workingDays=formobj.workday_from + '-' + formobj.workday_to,
-                                            category=formobj.category)
+                                            category=formobj.category, is_verified=formobj.will_be_verified)
         client_user.save()
         formset.delete()
         return redirect('adminprofile')

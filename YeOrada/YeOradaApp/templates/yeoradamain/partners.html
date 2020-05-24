@@ -417,9 +417,11 @@
 										<div class="country">{{ client.state }}, {{ client.city }}</div>
 										<p><span><i class="fas fa-map-marker-alt"></i></span>{{ client.address1 }}</p>
 										<div class="bagde-dt">
+                                            {% if client.is_verified %}
 											<div class="partner-badge">
 												Verified
 											</div>
+                                            {% endif %}
 										</div>
 									</div>
 									<div class="online-offline" hidden>

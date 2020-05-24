@@ -350,6 +350,9 @@
                                 {% for apform in applicationformlist %}
                                 <div class="main-comments" style="padding: 5%;">
                                     <p style="color: #ffa803;">{{ apform.category }}</p>
+                                    <div class="reply-time" style="margin-top: -8%;">
+                                        <p><i class="far fa-clock"></i>{{ apform.date }}</p>
+                                    </div>
                                     <h4 style="margin-top: 5px;">{{ apform.restaurant_name }}</h4>
                                     <p style="margin-bottom: 5%; margin-top:5px;"><span><i
                                             class="fas fa-map-marker-alt" style="color: #ffa803"></i></span>
@@ -358,7 +361,7 @@
 
                                     <div class="form-group">
                                         <label for="nameOwner">Owner's Name and Surname</label>
-                                        <input type="text" class="video-form" id="nameOwner1" value="{{ apform.owner_name }},{{ apform.owner_surname }}"
+                                        <input type="text" class="video-form" id="nameOwner1" value="{{ apform.owner_name }} {{ apform.owner_surname }}"
                                                style="color: black;" disabled>
                                     </div>
                                     <div class="form-group">

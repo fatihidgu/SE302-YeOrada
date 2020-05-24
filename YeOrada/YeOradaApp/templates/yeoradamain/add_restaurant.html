@@ -23,6 +23,78 @@
 	
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIVX6GlP0RDDM3vcFhgzYnugViFmxl0g&libraries=places"></script>
+
+    <style>
+    #map {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+    </style>
+
+    <script>
+      // This example adds a search box to a map, using the Google Place Autocomplete
+      // feature. People can enter geographical searches. The search box will return a
+      // pick list containing a mix of places and predicted search terms.
+
+      // This example requires the Places library. Include the libraries=places
+      // parameter when you first load the API. For example:
+      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+      $(document).ready(function () {
+          console.log("I am inside");
+
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 41.0082, lng: 28.9784},
+          zoom: 13,
+          mapTypeId: 'roadmap',
+            mapTypeControl: false,
+            streetViewControl: false
+        });
+
+        var options = {
+        componentRestrictions: {country: 'tr'}
+        };
+
+        var input = document.getElementById('addressInput');
+
+        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+        var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed.
+            window.alert("No details available for input: '" + place.name + "'");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+        });
+
+      });
+    </script>
+
 {% endblock %}
 
 
@@ -62,19 +134,39 @@
 						<img src="/static/images/partner-with-us/icon-1.svg" alt="">
 						<h1>Restaurant Application Form</h1>
 					</div>
+                {% for message in client_error_messages %}
+                    {% if message != "" %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Ops!</strong> {{ message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+
+                {% if succesfull_message != "" %}
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Ops!</strong> {{ succesfull_message }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endif %}
+
 					<div class="basic-info">
 						<h4>Basic Info</h4>
 						<div class="form-group">
 							<label for="nameRestaurant">Restaurant Name*</label>
-							<input name="rname" type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" >
+							<input name="rname" type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" required>
 						</div>
 						<div class="form-group">
 							<label for="searchCity">City*</label>
-							<input name="rcity" type="Search" class="video-form" id="searchCity" placeholder="Search City" >
+							<input name="rcity" type="Search" class="video-form" id="searchCity" placeholder="Search City" required>
 						</div>
                         <div class="form-group">
 							<label for="searchCity">State*</label>
-							<input name="rstate" type="Search" class="video-form" id="searchCity" placeholder="Search State" >
+							<input name="rstate" type="Search" class="video-form" id="searchCity" placeholder="Search State" required>
 						</div>
                           <div class="row">
                             <div class="col-md-2 col-12">
@@ -112,27 +204,27 @@
 						<h4>Contact Info</h4>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Name*</label>
-							<input name="oname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Name" >
+							<input name="oname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Name" required>
 						</div>
                         <div class="form-group">
 							<label for="emailAddress">Owner's Surname*</label>
-							<input name="osname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Surname" >
+							<input name="osname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Surname" required>
 						</div>
 						<div class="form-group">
 							<label for="emailAddress">Owner's Email Address*</label>
-							<input name="oemail" type="email" class="video-form" id="emailAddress" placeholder="Owner / Manager Email Address" >
+							<input name="oemail" type="email" class="video-form" id="emailAddress" placeholder="Owner / Manager Email Address" required>
 						</div>
 						<div class="form-group">
 							<label for="telNumber1">Owner's Phone Number*</label>
-							<input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="5xx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" contenteditable="false">
+							<input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="888-888-8888" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
 						</div>
 						<div class="form-group">
 							<label for="telNumber2">Restaurant Phone Number*</label>
-							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="xxx-xxx-xxxx" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" >
+							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="888-888-8888" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
 						</div>
 						<div class="form-group">
 							<label for="webSite">Restaurant Email Address*</label>
-							<input name="remail" type="email" class="video-form" id="webSite" placeholder="Restaurant Email Address" >
+							<input name="remail" type="email" class="video-form" id="webSite" placeholder="Restaurant Email Address" required>
 						</div>
 						<div class="form-group" hidden>
 							<div class="checkbox-title">Open Status*</div>
@@ -160,13 +252,12 @@
 								<div class="form-group">
 									<div class="checkbox-title">From*</div>
 									<select name="wdaysfrom" class="selectpicker" tabindex="-98" >
-										<option value="Monday">Monday</option>
+										<option value="Monday" selected>Monday</option>
 										<option value="Tuesday">Tuesday</option>
 										<option value="Wednesday">Wednesday</option>
 										<option value="Thursday">Thursday</option>
 										<option value="Friday">Friday</option>
 										<option value="Saturday">Saturday</option>
-										<option value="Sunday">Sunday</option>
 									</select>
 								</div>
 							</div>
@@ -174,12 +265,11 @@
 								<div class="form-group">
 									<div class="checkbox-title">To*</div>
 									<select name="wdaysto" class="selectpicker" tabindex="-98" >
-										<option value="Monday">Monday</option>
 										<option value="Tuesday">Tuesday</option>
 										<option value="Wednesday">Wednesday</option>
 										<option value="Thursday">Thursday</option>
 										<option value="Friday">Friday</option>
-										<option value="Saturday">Saturday</option>
+										<option value="Saturday" selected>Saturday</option>
 										<option value="Sunday">Sunday</option>
 									</select>
 								</div>
@@ -214,7 +304,7 @@
 										<option value="06.00">06.00</option>
 										<option value="07.00">07.00</option>
 										<option value="08.00">08.00</option>
-										<option value="09.00">09.00</option>
+										<option value="09.00" selected>09.00</option>
 										<option value="10.00">10.00</option>
 										<option value="11.00">11.00</option>
 									</select>
@@ -234,7 +324,7 @@
 										<option value="19.00">19.00</option>
 										<option value="20.00">20.00</option>
 										<option value="21.00">21.00</option>
-										<option value="22.00">22.00</option>
+										<option value="22.00" selected>22.00</option>
 										<option value="23.00">23.00</option>
 									</select>
 								</div>
@@ -256,15 +346,13 @@
 					<div class="basic-info c-top">
 						<h4>Location</h4>
 						<div class="form-group">
-							<label for="addressInput">Enter Address*</label>
+							<label for="addressInput" style="margin-right: 5px;">Restaurant Address*</label>
+                            <i class="fas fa-search" style="display: inline-block;"></i>
 							<div class="field-input">
-								<input name="address" type="text" class="video-form" id="addressInput" placeholder="Enter the address" >
-								<i class="fas fa-search"></i>
-							</div>											
-						</div>											
-						<div class="search-map-location">
-							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6848.588137286094!2d75.8069355495411!3d30.878433570394723!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a822f25912599%3A0xa51f780d31824240!2sShaheed+Bhagat+Singh+Nagar%2C+Ludhiana%2C+Punjab!5e0!3m2!1sen!2sin!4v1556363627043!5m2!1sen!2sin" style="border:0" allowfullscreen=""></iframe>
-						</div>						
+								<input name="address" type="text" class="video-form" placeholder="Enter the address" id="addressInput" style="width: 85%; margin-top: 2%; margin-left: 1%;" required>
+							</div>
+						</div>
+							<div class="container" id="map" style="height:300px; margin-top: -5%;"></div>
 					</div>
 					<div class="basic-info c-top" hidden>
 						<h4>Characteristics</h4>						
@@ -371,20 +459,15 @@
 									  <label for="verifyRestaurant">Yes</label>
 									</li>
 									<li>
-									  <input type="radio" value="0" id="verifyRestaurant1" name="verify" >
+									  <input type="radio" value="0" id="verifyRestaurant1" name="verify" checked="checked">
 									  <label for="verifyRestaurant1">No</label>
 									</li>
 								</ul>
 							</div>
 						</div>																			
 					</div>
-                    {{ error_message1|linebreaks }}
-                    <br>
-                    {{ error_message2|linebreaks }}
-                    <br>
-                    {{ error_message3|linebreaks }}
-                    <br>
 					<button name="sendformname" type="submit" class="add-resto-btn1 btn-link">Become a Partner</button>
+
 				</div>
 				<div class="col-lg-5 col-md-4 col-12">
 					<div class="new-heading">						
@@ -392,18 +475,19 @@
 					</div>
 					<div class="how-it-work-1">
 						<img src="/static/images/add-restaurant/icon-1.svg" alt="">
-						<h4>Fill Form</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet leo id enim mollis volutpat. Donec venenatis</p>
+						<h4>Fill the Form</h4>
+						<p>Fill the Restaurant Application Form with correct and up-to-date data. The form includes some information about you and your restaurant.</p>
 					</div>
 					<div class="how-it-work-1">
 						<img src="/static/images/add-restaurant/icon-2.svg" alt="">
-						<h4>Send Information</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet leo id enim mollis volutpat. Donec venenatis</p>
+						<h4>Send the Information</h4>
+						<p>Send the form to us. Our customer representatives will examine and verify it in a short time.</p>
 					</div>
 					<div class="how-it-work-1 m-bottom">
 						<img src="/static/images/add-restaurant/icon-3.svg" alt="">
-						<h4>Verified Listing & Start Working With Natto</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In laoreet leo id enim mollis volutpat. Donec venenatis</p>
+						<h4>Access to your Restaurant Account</h4>
+						<p>Once your application is accepted, you will receive an email about information of your restaurant account. If you requested a verification for your restaurant, our customer
+                        representatives with directly contact with you for further notifications. </p>
 					</div>
 				</div>
 			</div>							
@@ -423,4 +507,5 @@
 	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
 	<script src="/static/js/owlslider.js"></script>
 	<script src="/static/js/bootstrap-select.js"></script>
+
 {% endblock %}
