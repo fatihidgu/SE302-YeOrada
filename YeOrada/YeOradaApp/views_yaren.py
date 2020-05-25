@@ -236,11 +236,35 @@ def adminprofile(request):
                                             workingDays=formobj.workday_from + '-' + formobj.workday_to,
                                             category=formobj.category, is_verified=formobj.will_be_verified)
         client_user.save()
+
+        subject = 'Yeorada | Your restaurant application is accepted!'
+        html_message = render_to_string('yeoradamain/clientApplicationAccepted.html',
+                                        {'email': formobj.restaurant_email, 'password': pwd,
+                                         'owner_name': formobj.owner_name, 'admin_name': request.user.name, 'admin_surname': request.user.surname, })
+        plain_message = strip_tags(html_message)
+        from_email = 'From <noreply.yeorada@gmail.com>'
+        to = formobj.owner_email
+
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
         formset.delete()
         return redirect('adminprofile')
     elif 'declineClient' in request.POST:
-        print(request.POST.get('reasonClient'))
+        reason = request.POST.get('reasonClient')
         formset = ClientApplicationForm.objects.filter(id=request.POST.get('client-form-id'))
+        formobj = formset.first()
+
+        subject = 'Yeorada | Your restaurant application is declined'
+        html_message = render_to_string('yeoradamain/clientApplicationDeclined.html',
+                                        {'reason': reason, 'restaurant_name': formobj.restaurant_name, 'owner_surname': formobj.owner_surname,
+                                         'owner_name': formobj.owner_name, 'admin_name': request.user.name,
+                                         'admin_surname': request.user.surname, })
+        plain_message = strip_tags(html_message)
+        from_email = 'From <noreply.yeorada@gmail.com>'
+        to = formobj.owner_email
+
+        mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
+
         formset.delete()
         return redirect('adminprofile')
     commentList = Comment.objects.filter(is_Approved=False).order_by('-date')
