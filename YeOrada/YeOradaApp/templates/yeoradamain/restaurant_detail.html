@@ -26,6 +26,7 @@
 
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <style>
     .menu-update:hover {
@@ -33,9 +34,51 @@
     }
     </style>
 
+    {% if success_message != "" %}
+    <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#commentRequest').modal('show');
+            });
+    </script>
+    {% endif %}
+
+    <script type="text/javascript">
+            $(window).on('load', function () {
+                if(window.location.href.includes("reviews"))
+                {
+                    window.location.href = '#reviews';
+                }else if(window.location.href.includes("menu")){
+                    window.location.href = '#menu';
+                }
+            });
+    </script>
+
 {% endblock %}
 
 {% block content2 %}
+
+    <div class="modal fade" id="commentRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sent for Approval</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your review is sent for approval. Check your email for further notifications.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            style="background-color:#ffa803;">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--title-bar start-->
     <section class="title-bar">
         <div class="container">
@@ -231,12 +274,13 @@
                                 {% endif %}
                                 {% if user.isCustomer %}
                                     <li>
-									<span class="views"
+									<a href="#reviews" ><span class="views"
                                           data-placement="top"
                                           title="Add Review">
 										<i class="fas fa-pencil-alt"></i>
 										<ins id="myBtn">Add Review</ins>
 									</span>
+                                    </a>
                                     </li>
                                 {% endif %}
                             </ul>
@@ -498,7 +542,7 @@
                                                         </ul>
                                                         <ul class="view-dt-1">
                                                             <li>{{ clientObject.name }}</li>
-                                                            <li>{{ clientObject.phone }}</li>
+                                                            <li>+90 {{ clientObject.phone }}</li>
                                                             <li>{{ clientObject.userEmail }}</li>
                                                             <li>
                                                                 {% for cuisine in clientcuisines|filterCuisines:clientObject.userEmail %}
@@ -531,7 +575,9 @@
                                                             </li>
                                                             <li>{{ clientObject.city }}</li>
                                                             <li>{{ clientObject.state }}</li>
-                                                            <li>{{ clientObject.address1 }}</li>
+                                                            <li style="width: 220px;">
+                                                                {{ clientObject.address1 }}
+                                                            </li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -895,7 +941,7 @@
                                         </ul>
                                     </div>
                                     <div class="tab-content">
-                                        <div class="tab-pane active" id="breakfast">
+                                        <div class="tab-pane" id="breakfast">
                                             <div class="all-meals-tab">
                                                 <h6>Breakfast Meals</h6>
                                                 <div class="all-meal-dt">
@@ -2030,8 +2076,21 @@
                             </div>
 
                             <div class="tab-pane" id="reviews">
+                            {% if user.is_authenticated %}
                                 {% if user.isCustomer %}
                                     <form method="POST" enctype='multipart/form-data'>
+
+                                    {% for message in error_list %}
+                                        {% if message != "" %}
+                                    <div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 2%; margin-bottom: -2%;">
+                                                    <strong>Ops!</strong> {{ message }}
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                    </div>
+                                        {% endif %}
+                                    {% endfor %}
+
                                         <div class="comment-post">
                                             <div class="post-items">
                                                 <a href="my_dashboard.html">
@@ -2130,36 +2189,21 @@
                                                 <div class="publish">
                                                     {% csrf_token %}
                                                     <input class="rating-btn btn-link" name="publishReview"
-                                                           type="submit" data-toggle="modal" data-target="#commentRequest"
+                                                           type="submit"
                                                            value="Publish Review">
                                                 </div>
-
-                                                <div class="modal fade" id="commentRequest" role="dialog">
-    <div class="modal-dialog modal-dialog-centered">
-
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title">Sent for Approval</h5>
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body">
-          <p>Your comment is sent to approval. Check your email for further notifications.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
                                             </div>
                                         </div>
                                     </form>
                                 {% endif %}
+                            {% endif %}
 
                                 {% for comment in commentList %}
                                     {% if comment.is_Approved %}
                                     <div class="main-comments">
                                         <div class="rating-1">
+
                                             <div class="user-detail-heading">
                                                 <a href="user_profile_view.html"><img
                                                         src="{{ comment.customerEmail.image.url }}" alt=""></a>
@@ -2310,6 +2354,7 @@
                                                 <li>
 												<span class="views" data-toggle="tooltip" data-placement="top"
                                                       title="Likes">
+                                                {% if customerLikes != None %}
                                                     {% for customerlike in customerLikes|filterComments:comment.id %}
                                                         {% if customerlike %}
                                                             {% if customerlike.isLiked == True %}
@@ -2326,6 +2371,7 @@
                                                         {% endif %}
                                                     {% endfor %}
                                                     {% if not customerLikes|filterComments:comment.id %}
+
                                                         {% if user.isCustomer %}
                                                         <i id="{{ comment.id }}" class="fas fa-heart"
                                                            style="color: #847577"
@@ -2334,8 +2380,10 @@
                                                             <i id="{{ comment.id }}" class="fas fa-heart"
                                                            style="color: #847577"></i>
                                                             {% endif %}
+                                                            {% endif %}
                                                         <ins id="{{ comment.id }}a">{{ comment.likeNumber }}</ins>
                                                     {% endif %}
+
 
 												</span>
                                                 </li>

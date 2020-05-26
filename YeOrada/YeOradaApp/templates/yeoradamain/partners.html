@@ -415,7 +415,7 @@
                                         <p style ="color: #ffa803; margin-top: -1%;" >{{ client.category }}</p>
 										<a href="{% url 'clientprofile' client.userEmail.username %}"><h4>{{ client.name }} </h4></a>
 										<div class="country">{{ client.state }}, {{ client.city }}</div>
-										<p><span><i class="fas fa-map-marker-alt"></i></span>{{ client.address1 }}</p>
+										<p style="overflow: hidden; width: 300px;"><span><i class="fas fa-map-marker-alt"></i></span>{{ client.address1 }}</p>
 										<div class="bagde-dt">
                                             {% if client.is_verified %}
 											<div class="partner-badge">
@@ -466,9 +466,9 @@
 							</div>
 							<div class="partner-bottombar">
 								<ul class="bottom-partner-links">
-									<li><a href="{% url 'clientprofile' client.userEmail.username %}" data-toggle="tooltip" data-placement="top" title="Call Now"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
-									<li class="line-lr"><a href="#" data-toggle="tooltip" data-placement="top" title="Order Now"><i class="far fa-edit"></i></i>Add Review</a></li>
-									<li><a href="#" data-toggle="tooltip" data-placement="top" title="View Menu"><i class="fas fa-book"></i>View Menu</a></li>
+									<li><a href="{% url 'clientprofile' client.userEmail.username %}" data-toggle="tooltip" data-placement="top" title="Go Detail"><i class="far fa-file-alt"></i></i>Go Detail</a></li>
+									<li class="line-lr"><a href="{% url 'clientprofile' client.userEmail.username %}#reviews" data-toggle="tooltip" data-placement="top" title="Add Review"><i class="far fa-edit"></i></i>Add Review</a></li>
+									<li><a href="{% url 'clientprofile' client.userEmail.username %}#menu" data-toggle="tooltip" data-placement="top" title="View Menu"><i class="fas fa-book"></i>View Menu</a></li>
 								</ul>
 							</div>
 						</div>

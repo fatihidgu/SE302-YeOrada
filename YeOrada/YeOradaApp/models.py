@@ -79,6 +79,10 @@ class Client(models.Model):
     menu4 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
     menu5 = models.ImageField(default='defaultMenu.jpg', upload_to='client_menu_pics')
     is_verified = models.BooleanField(default=False)
+    workingHoursFrom = models.CharField(max_length=200, null=True, blank=True)
+    workingHoursTo = models.CharField(max_length=200, null=True, blank=True)
+    workingDaysFrom = models.CharField(max_length=200, null=True, blank=True)
+    workingDaysTo = models.CharField(max_length=200, null=True, blank=True)
 
 
 class Admin(models.Model):

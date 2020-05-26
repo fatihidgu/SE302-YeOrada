@@ -15,11 +15,17 @@ from django.utils.html import strip_tags
 
 
 def clientprofile(request, username):
+    error_list = list()
+    success_message = ""
     if 'publishReview' in request.POST:
         if request.user.is_authenticated:
             if request.user.isCustomer:
                 commentForm = CommentForm(request.POST)
-                if commentForm.is_valid():
+
+                if request.POST.get('rate') == "":
+                    error_list.append("Rate cannot be leave blank in reviews.")
+
+                if commentForm.is_valid() and error_list.__len__() == 0:
                     text = request.POST.get('text')
                     imgOne = None
                     imgTwo = None
@@ -77,7 +83,7 @@ def clientprofile(request, username):
 
                     # uploaded_image = request.POST.get('commentPhoto')
                     comment.save()
-                    return redirect('clientprofile', username)
+                    success_message = "Success"
         else:
             return redirect('signin')
 
@@ -193,8 +199,12 @@ def clientprofile(request, username):
     commentList = Comment.objects.filter(clientEmail=clientObject.userEmail.email).order_by('-date')
     answersList = CommentAnswer.objects.all()
 
-    customerr = Customer.objects.filter(userEmail=request.user).first()
-    customerLikes = CommentLike.objects.filter(customerEmail=customerr)
+    if request.user.is_authenticated:
+        customerr = Customer.objects.filter(userEmail=request.user).first()
+        customerLikes = CommentLike.objects.filter(customerEmail=customerr)
+    else:
+        customerr = None
+        customerLikes = CommentLike.objects.filter(customerEmail=None)
 
     registeredUser = RegisteredUser.objects.filter(username=username).first()
     clientcuisines = ClientCuisine.objects.all()
@@ -230,7 +240,7 @@ def clientprofile(request, username):
                    'commentAnswerForm': commentAnswerForm, 'answersList': answersList,
                    'customerLikes': customerLikes, 'registeredUser': registeredUser, 'clientObject': clientObject,
                    'clientcuisines': clientcuisines, 'customerr': customerr, 'clienty': clienty,
-                   'CountOfPhoto': CountOfPhoto, 'client_menu_count': client_menu_count, })
+                   'CountOfPhoto': CountOfPhoto, 'client_menu_count': client_menu_count, 'error_list': error_list, 'success_message': success_message, })
 
 
 def likeComment(request):
@@ -282,7 +292,7 @@ def forgotpassword(request):
             html_message = render_to_string('yeoradamain/forgotPasswordMail.html',
                                             {'code': code, 'customer_name': registeredUser.first().name, })
             plain_message = strip_tags(html_message)
-            from_email = 'From <noreply.yeorada@gmail.com>'
+            from_email = 'YeOrada <noreply.yeorada@gmail.com>'
             to = registeredUser.first().email
 
             mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)

@@ -110,7 +110,7 @@
 {% block content2 %}
     <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">Account Activation</h5>
@@ -208,7 +208,10 @@
                     <div class="owl-carousel browse-owl owl-theme">
                         <div class="item">
                             <div class="places">
-                                <a href="#">
+                                <form method="POST" action="clientsearch" id="cafe-form1" name="cafe-form1" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="filter_home" value="Near by">
+                                <a href="#" onclick="document.forms['cafe-form1'].submit(); return false;">
                                     <div class="b-icon">
                                         <img src="/static/images/homepage/browse_places/01.svg" alt="">
                                     </div>
@@ -216,11 +219,15 @@
                                         Near by
                                     </div>
                                 </a>
+                                </form>
                             </div>
                         </div>
                         <div class="item">
                             <div class="places">
-                                <a href="#">
+                                <form method="POST" action="clientsearch" id="cafe-form2" name="cafe-form2" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="filter_home" value="Cafes & Restaurants">
+                                <a href="#" onclick="document.forms['cafe-form2'].submit(); return false;">
                                     <div class="b-icon">
                                         <img src="/static/images/homepage/browse_places/02.svg" alt="">
                                     </div>
@@ -228,11 +235,15 @@
                                         Cafes & Restaurants
                                     </div>
                                 </a>
+                                </form>
                             </div>
                         </div>
                         <div class="item">
                             <div class="places">
-                                <a href="#">
+                                <form method="POST" action="clientsearch" id="cafe-form3" name="cafe-form3" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="filter_home" value="Bars & Pubs">
+                                <a href="#" onclick="document.forms['cafe-form3'].submit(); return false;">
                                     <div class="b-icon">
                                         <img src="/static/images/homepage/browse_places/03.svg" alt="">
                                     </div>
@@ -240,11 +251,15 @@
                                         Bars & Pubs
                                     </div>
                                 </a>
+                                </form>
                             </div>
                         </div>
                         <div class="item">
                             <div class="places">
-                                <a href="#">
+                                <form method="POST" action="clientsearch" id="cafe-form4" name="cafe-form4" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="filter_home" value="Desserts & Bakes">
+                                <a href="#" onclick="document.forms['cafe-form4'].submit(); return false;">
                                     <div class="b-icon">
                                         <img src="/static/images/homepage/browse_places/04.svg" alt="">
                                     </div>
@@ -252,11 +267,15 @@
                                         Desserts & Bakes
                                     </div>
                                 </a>
+                                </form>
                             </div>
                         </div>
                         <div class="item">
                             <div class="places">
-                                <a href="#">
+                                <form method="POST" action="clientsearch" id="cafe-form5" name="cafe-form5" >
+                                    {% csrf_token %}
+                                    <input type="hidden" name="filter_home" value="Newly Opened">
+                                <a href="#" onclick="document.forms['cafe-form5'].submit(); return false;">
                                     <div class="b-icon">
                                         <img src="/static/images/homepage/browse_places/06.svg" alt="">
                                     </div>
@@ -264,6 +283,7 @@
                                         Newly Opened
                                     </div>
                                 </a>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -301,11 +321,11 @@
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <div class="work-item">
                         <div class="work-img">
-                            <img src="/static/images/homepage/how-to-work/img_3.svg" alt="">
+                            <img src="/static/images/homepage/how-to-work/favorite2.png" alt="">
                         </div>
                         <div class="work-text">
                             <h4>Add to Favourites</h4>
-                            <p>Select your favourite restaurants and them to your favourites.</p>
+                            <p>Select your favourite restaurants and add them to your favourites.</p>
                         </div>
                     </div>
                 </div>
@@ -372,54 +392,80 @@
                             <div class="col-lg-10 col-md-8">
                                 <div class="owl-carousel searchs-owl owl-theme">
                                     <div class="item">
-                                        <a href="#">
-                                            <div class="meal-icon">
-                                                <img src="/static/images/homepage/quick-searches/meal-1.svg" alt="">
-                                            </div>
-                                            <div class="meal-title">
-                                                Breakfast
-                                            </div>
-                                        </a>
+                                        <form method="POST" action="clientsearch" id="cafe-form6" name="cafe-form6" >
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filter_home" value="filter-cuisine">
+                                            <input type="hidden" name="cuisine_name" value="Breakfast">
+                                            <a href="#" onclick="document.forms['cafe-form6'].submit(); return false;">
+                                                <div class="meal-icon">
+                                                    <img src="/static/images/homepage/quick-searches/meal-1.svg" alt="">
+                                                </div>
+                                                <div class="meal-title">
+                                                    Breakfast
+                                                </div>
+                                            </a>
+                                        </form>
                                     </div>
                                     <div class="item">
-                                        <a href="#">
-                                            <div class="meal-icon">
-                                                <img src="/static/images/homepage/quick-searches/meal-2.svg" alt="">
-                                            </div>
-                                            <div class="meal-title">
-                                                Lunch
-                                            </div>
-                                        </a>
+                                        <form method="POST" action="clientsearch" id="cafe-form7" name="cafe-form7" >
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filter_home" value="filter-cuisine">
+                                            <input type="hidden" name="cuisine_name" value="Lunch">
+                                            <a href="#" onclick="document.forms['cafe-form7'].submit(); return false;">
+                                                <div class="meal-icon">
+                                                    <img src="/static/images/homepage/quick-searches/meal-2.svg" alt="">
+                                                </div>
+                                                <div class="meal-title">
+                                                    Lunch
+                                                </div>
+                                            </a>
+                                        </form>
                                     </div>
                                     <div class="item">
-                                        <a href="#">
-                                            <div class="meal-icon">
-                                                <img src="/static/images/homepage/quick-searches/meal-3.svg" alt="">
-                                            </div>
-                                            <div class="meal-title">
-                                                Dinner
-                                            </div>
-                                        </a>
+                                        <form method="POST" action="clientsearch" id="cafe-form8" name="cafe-form8" >
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filter_home" value="filter-cuisine">
+                                            <input type="hidden" name="cuisine_name" value="Dinner">
+                                            <a href="#" onclick="document.forms['cafe-form8'].submit(); return false;">
+                                                <div class="meal-icon">
+                                                    <img src="/static/images/homepage/quick-searches/meal-3.svg" alt="">
+                                                </div>
+                                                <div class="meal-title">
+                                                    Dinner
+                                                </div>
+                                            </a>
+                                        </form>
                                     </div>
                                     <div class="item">
-                                        <a href="#">
-                                            <div class="meal-icon">
-                                                <img src="/static/images/homepage/quick-searches/meal-4.svg" alt="">
-                                            </div>
-                                            <div class="meal-title">
-                                                Cafe's
-                                            </div>
-                                        </a>
+                                        <form method="POST" action="clientsearch" id="cafe-form9" name="cafe-form9" >
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filter_home" value="filter-cuisine">
+                                            <input type="hidden" name="cuisine_name" value="Cafe & Restaurant">
+                                            <a href="#" onclick="document.forms['cafe-form9'].submit(); return false;">
+                                                <div class="meal-icon">
+                                                    <img src="/static/images/homepage/quick-searches/meal-4.svg" alt="">
+                                                </div>
+                                                <div class="meal-title">
+                                                    Cafe's
+                                                </div>
+                                            </a>
+                                        </form>
                                     </div>
                                     <div class="item">
-                                        <a href="#">
-                                            <div class="meal-icon">
-                                                <img src="/static/images/homepage/quick-searches/meal-5.svg" alt="">
-                                            </div>
-                                            <div class="meal-title">
-                                                Fast Food
-                                            </div>
-                                        </a>
+
+                                        <form method="POST" action="clientsearch" id="cafe-form10" name="cafe-form10" >
+                                            {% csrf_token %}
+                                            <input type="hidden" name="filter_home" value="filter-cuisine">
+                                            <input type="hidden" name="cuisine_name" value="Fast Food">
+                                            <a href="#" onclick="document.forms['cafe-form10'].submit(); return false;">
+                                                <div class="meal-icon">
+                                                    <img src="/static/images/homepage/quick-searches/meal-5.svg" alt="">
+                                                </div>
+                                                <div class="meal-title">
+                                                    Fast Food
+                                                </div>
+                                            </a>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -432,21 +478,34 @@
     <!--quick-searches end-->
 
     <!--order-food-online-in-your-area start-->
-    <section class="order-food-online">
+    <section class="order-food-online" style="margin-bottom: 7%;">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div class="new-heading">
                         <h1> Popular Restaurants In Your Area </h1>
                     </div>
-                    <div class="your-location">
-                        <span><i class="fas fa-map-marker-alt"></i>İstanbul</span>Change Location
+                    {% if user.is_authenticated %}
+                        {% if customer.city != None%}
+                            <div class="your-location">
+                                <span style="font-size:17px;"><i class="fas fa-map-marker-alt"></i>{{ customer.city }}, Turkey</span>
+                            </div>
+                        {% else %}
+                            <div class="your-location">
+                                <span style="font-size:17px;"><i class="fas fa-map-marker-alt"></i>İstanbul, Turkey</span>
+                            </div>
+                        {% endif %}
+
+                    {% else %}
+                        <div class="your-location">
+                        <span style="font-size:17px;"><i class="fas fa-map-marker-alt"></i>İstanbul, Turkey</span>
                     </div>
-                    <div class="all-items">
+                    {% endif %}
+
+                    <div class="all-items" hidden>
                         <div class="search col-lg-4 col-md-6 col-sm-12 col-xs-12">
-                            <form>
                                 <input class="search-location" name="search" type="search"
-                                       placeholder="Enter Your Location"/>
+                                       placeholder="Enter a city name"/>
                                 <div class="icon-btn">
                                     <div class="cross-icon">
                                         <i class="fas fa-crosshairs"></i>
@@ -455,7 +514,6 @@
                                         <button class="search-meal-btn btn-link">Search</button>
                                     </div>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -531,8 +589,8 @@
     </section>
     <!--order-food-online-in-your-area end-->
     <!--offer-banners start-->
-    <section class="offer-banners">
-        <div class="container" hidden>
+    <section class="offer-banners" hidden>
+        <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                     <div class="banner">
@@ -904,9 +962,9 @@
     </section>
     <!--explore-your-favorite-recipes end-->
     <!--download-link start-->
-    <section class="pocket-block-preview">
+    <section class="pocket-block-preview" hidden>
         <div class="pocket-cover-banner" style="background-image: url(/static/images/homepage/bottom-banner.jpg)"></div>
-        <div class="container" hidden>
+        <div class="container">
             <div class="row">
                 <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12">
                     <div class="pocket-items">

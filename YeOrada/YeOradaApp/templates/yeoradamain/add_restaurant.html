@@ -95,6 +95,14 @@
       });
     </script>
 
+    {% if succesfull_message != "" %}
+    <script type="text/javascript">
+            $(window).on('load', function () {
+                $('#form-successful').modal('show');
+            });
+    </script>
+    {% endif %}
+
 {% endblock %}
 
 
@@ -145,14 +153,27 @@
                     {% endif %}
                 {% endfor %}
 
-                {% if succesfull_message != "" %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Ops!</strong> {{ succesfull_message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <div class="modal fade" id="form-successful" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+         aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle1">Sent Successfully</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                {% endif %}
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Your restaurant application is sent successfully! Check your email for further notifications.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                            style="background-color:#ffa803;">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 					<div class="basic-info">
 						<h4>Basic Info</h4>
@@ -216,11 +237,11 @@
 						</div>
 						<div class="form-group">
 							<label for="telNumber1">Owner's Phone Number*</label>
-							<input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="888-888-8888" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+                            <input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
 						</div>
 						<div class="form-group">
 							<label for="telNumber2">Restaurant Phone Number*</label>
-							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="888-888-8888" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
 						</div>
 						<div class="form-group">
 							<label for="webSite">Restaurant Email Address*</label>

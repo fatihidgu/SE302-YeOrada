@@ -1,11 +1,43 @@
+from datetime import timedelta
+
 from django.shortcuts import render, redirect
 from decimal import *
 
-from YeOradaApp.models import Client, ClientCuisine
+from YeOradaApp.models import Client, ClientCuisine, Customer
+from django.db.models import Q
+from django.utils import timezone
 
 
 def clientsearch(request):
-    clients = Client.objects.filter(userEmail__is_active=True)
+    filter_home = request.POST.get('filter_home')
+    cuisine_name = request.POST.get('cuisine_name')
+
+    if filter_home is not None:
+        if filter_home == "Cafes & Restaurants":
+            clients = Client.objects.filter(Q(category='Restaurant') | Q(category='Cafe'), userEmail__is_active=True)
+        elif filter_home == "Bars & Pubs":
+            clients = Client.objects.filter(userEmail__is_active=True, category='Bar')
+        elif filter_home == "Desserts & Bakes":
+            clients = Client.objects.filter(userEmail__is_active=True, category='Restaurant')
+        elif filter_home == "Newly Opened":
+            one_month_ago = timezone.now() - timedelta(days=30)
+            clients = Client.objects.filter(userEmail__is_active=True, userEmail__date_joined__gte=one_month_ago)
+        elif filter_home == "Near by":
+            if request.user.is_authenticated:
+                if request.user.isCustomer:
+                    customerObject = Customer.objects.filter(userEmail=request.user).first()
+                    clients = Client.objects.filter(userEmail__is_active=True, city=customerObject.city, state=customerObject.state)
+            else:
+                clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul")
+        elif filter_home == "filter-cuisine" and cuisine_name is not None:
+            cuisine_list = ClientCuisine.objects.filter(cuisine=cuisine_name)
+            if cuisine_list.count() != 0:
+                clients = list()
+                for cuisine in cuisine_list:
+                    clients.append(cuisine.customerEmail)
+    else:
+        clients = Client.objects.filter(userEmail__is_active=True)
+
     clientcuisines = ClientCuisine.objects.all()
     city = ""
     state = ""

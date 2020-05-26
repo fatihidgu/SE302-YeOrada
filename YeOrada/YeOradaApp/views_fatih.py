@@ -42,6 +42,10 @@ def clientsettings(request):
         workingdays = request.POST.get('workingdays')
         info = request.POST.get('info')
         imageCheck = request.POST.get('client_avatar_check')
+        wdaysfrom = request.POST.get('wdaysfrom')
+        wdaysto = request.POST.get('wdaysto')
+        whoursfrom = request.POST.get('whoursfrom')
+        whoursto = request.POST.get('whoursto')
 
         if len(imageCheck.split()) != 0:
             image = request.FILES['client_avatar']
@@ -50,7 +54,7 @@ def clientsettings(request):
         emailCheck = RegisteredUser.objects.filter(email=email)
         usernameCheck = RegisteredUser.objects.filter(username=username)
         if usernameCheck.first() and username != request.user.username:
-            error_message1 = "*Username are already used"
+            error_message1 = "*Username is already used"
             user = request.user
             client = Customer.objects.filter(userEmail=user.email).first()
         else:
@@ -64,9 +68,14 @@ def clientsettings(request):
             clientObject.address1 = address1
             clientObject.address2 = address2
             clientObject.state = state
-            clientObject.workingHours = workinghours
-            clientObject.workingDays = workingdays
+            clientObject.workingHours = whoursfrom + '-' + whoursto
+            clientObject.workingDays = wdaysfrom + '-' + wdaysto
             clientObject.info = info
+
+            clientObject.workingDaysFrom = wdaysfrom
+            clientObject.workingDaysTo = wdaysto
+            clientObject.workingHoursFrom = whoursfrom
+            clientObject.workingHoursTo = whoursto
 
             for item in clientcuisines:
                 cuisin = request.POST.get(item)
@@ -99,7 +108,7 @@ def clientsettings(request):
             ruser.update(is_active=False)
             return redirect('home')
         else:
-            error_message2 = "You entered wrong mail"
+            error_message2 = "*You entered a wrong email"
 
     user = request.user
     client = Client.objects.filter(userEmail=user.email).first()
@@ -148,6 +157,9 @@ def newclient(request):
 
         if rname == "" or oname == "" or osname == "" or oemail == "" or ophone == "" or rphone == "" or remail == "" or address == "":
             client_error_messages.append("You must fill out all the fields in the form.")
+
+        if address.__len__() > 85:
+            client_error_messages.append("Entered restaurant address is too long.")
 
         if client_error_messages.__len__() == 0:
             # kayıt işlemi

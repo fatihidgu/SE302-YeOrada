@@ -36,7 +36,7 @@ def settings(request):
         usernameCheck = RegisteredUser.objects.filter(username=username)
         if (emailCheck.first() and email != request.user.email) or (
                 usernameCheck.first() and username != request.user.username):
-            error_message1 = "* Email or username are already used"
+            error_message1 = "*Username is already used"
             user = request.user
             customer = Customer.objects.filter(userEmail=user.email).first()
         else:
@@ -66,7 +66,7 @@ def settings(request):
             ruser.update(is_active=False)
             return redirect('home')
         else:
-            error_message2 = "You entered wrong mail"
+            error_message2 = "You entered a wrong email"
 
     user = request.user
 
@@ -124,8 +124,7 @@ def adminsettings(request):
         usernameCheck = RegisteredUser.objects.filter(username=username)
         if (emailCheck.first() and email != request.user.email) or (
                 usernameCheck.first() and username != request.user.username):
-            error_message1 = "* Email or username are already used"
-
+            error_message1 = "*Username is already used"
 
         else:
             userObject.name = name;
@@ -180,7 +179,7 @@ def adminprofile(request):
                                                   'review': review, 'restaurant': restaurant, 'date': date, 'admin_name': admin_name,
                                                   'admin_surname': admin_surname, })
                  plain_message = strip_tags(html_message)
-                 from_email = 'From <noreply.yeorada@gmail.com>'
+                 from_email = 'YeOrada <noreply.yeorada@gmail.com>'
                  to = commentObject.customerEmail.userEmail.email
 
                  mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
@@ -212,7 +211,7 @@ def adminprofile(request):
                                                                                 'review': review, 'restaurant': restaurant, 'date': date,
                                                                                 'reason': reason, 'admin_name': admin_name, 'admin_surname': admin_surname, })
              plain_message = strip_tags(html_message)
-             from_email = 'From <noreply.yeorada@gmail.com>'
+             from_email = 'YeOrada <noreply.yeorada@gmail.com>'
              to = commentObject.customerEmail.userEmail.email
 
              mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
@@ -234,15 +233,16 @@ def adminprofile(request):
                                             city=formobj.city, state=formobj.state, address1=formobj.restaurant_address,
                                             workingHours=formobj.workhour_from + '-' + formobj.workhour_to,
                                             workingDays=formobj.workday_from + '-' + formobj.workday_to,
-                                            category=formobj.category, is_verified=formobj.will_be_verified)
+                                            category=formobj.category, is_verified=formobj.will_be_verified, workingHoursFrom=formobj.workhour_from,
+                                            workingHoursTo=formobj.workhour_to, workingDaysFrom=formobj.workday_from, workingDaysTo=formobj.workday_to, )
         client_user.save()
 
-        subject = 'Yeorada | Your restaurant application is accepted!'
+        subject = 'YeOrada | Your restaurant application is accepted!'
         html_message = render_to_string('yeoradamain/clientApplicationAccepted.html',
                                         {'email': formobj.restaurant_email, 'password': pwd,
                                          'owner_name': formobj.owner_name, 'admin_name': request.user.name, 'admin_surname': request.user.surname, })
         plain_message = strip_tags(html_message)
-        from_email = 'From <noreply.yeorada@gmail.com>'
+        from_email = 'YeOrada <noreply.yeorada@gmail.com>'
         to = formobj.owner_email
 
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)
@@ -254,13 +254,13 @@ def adminprofile(request):
         formset = ClientApplicationForm.objects.filter(id=request.POST.get('client-form-id'))
         formobj = formset.first()
 
-        subject = 'Yeorada | Your restaurant application is declined'
+        subject = 'YeOrada | Your restaurant application is declined'
         html_message = render_to_string('yeoradamain/clientApplicationDeclined.html',
                                         {'reason': reason, 'restaurant_name': formobj.restaurant_name, 'owner_surname': formobj.owner_surname,
                                          'owner_name': formobj.owner_name, 'admin_name': request.user.name,
                                          'admin_surname': request.user.surname, })
         plain_message = strip_tags(html_message)
-        from_email = 'From <noreply.yeorada@gmail.com>'
+        from_email = 'YeOrada <noreply.yeorada@gmail.com>'
         to = formobj.owner_email
 
         mail.send_mail(subject, plain_message, from_email, [to], html_message=html_message)

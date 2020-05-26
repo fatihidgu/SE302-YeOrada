@@ -21,9 +21,21 @@
 
     <!-- Owl Carousel for this template-->
     <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript">
+            $(window).on('load', function () {
+                document.getElementById("wdaysfrom").value = "{{ client.workingDaysFrom }}";
+                document.getElementById("wdaysto").value = "{{ client.workingDaysTo }}";
+
+                document.getElementById("whoursfrom").value = "{{ client.workingHoursFrom }}";
+                document.getElementById("whoursto").value = "{{ client.workingHoursTo }}";
+            });
+    </script>
+
 {% endblock %}
 {% block content2 %}
     <!--title-bar start-->
@@ -127,34 +139,11 @@
                                             </div>
                                             <br>
                                         </div>
-                                        <div class="form-group"></div>
-
-                                        <div class="form-group" hidden>
-                                            <label for="nameUser">Owner Name*</label>
-                                            <input name="name" type="text" class="video-form" id="nameUser"
-                                                   value="{{ user.name }}">
-                                        </div>
-                                        <div class="form-group" hidden>
-                                            <label for="surnameUser">Owner Surname*</label>
-                                            <input name="surname" type="text" class="video-form" id="surnameUser"
-                                                   value="{{ user.surname }}">
-                                        </div>
-                                        <div class="form-group" hidden>
-                                            <label for="username">Username*</label>
-                                            <input name="username" type="text" class="video-form" id="username"
-                                                   value="{{ user.username }}">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="emailAddress" hidden>Email Address*</label>
-                                            <input name="email" type="text" class="video-form" id="emailAddress"
-                                                   value={{ user.email }} disabled hidden>
-                                        </div>
                                         <div class="form-group">
                                             <label for="phoneUser">Phone*</label>
                                             <div class="field-input">
-                                                <input name="phone" type="text" class="video-form" id="phoneUser"
-                                                       value="{{ client.phone }} ">
-
+                                                <input name="phone" type="text" class="video-form" id="phoneUser" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}"
+                                                       value="{{ client.phone }}" required>
                                             </div>
                                         </div>
 
@@ -162,7 +151,7 @@
                                             <label for="cityUser">City*</label>
                                             <div class="field-input">
                                                 <input name="city" type="text" class="video-form" id="cityUser"
-                                                       value="{{ client.city }} ">
+                                                       value="{{ client.city }}" required>
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
@@ -170,19 +159,19 @@
                                             <label for="stateUser">State*</label>
                                             <div class="field-input">
                                                 <input name="state" type="text" class="video-form" id="stateUser"
-                                                       value="{{ client.state }} ">
+                                                       value="{{ client.state }}" required>
                                                 <i class="fas fa-search"></i>
                                             </div>
                                         </div>
                                          <div class="form-group">
-                                            <label for="address1User">Address1</label>
+                                            <label for="address1User">Restaurant Address*</label>
                                             <div class="field-input">
                                                 <input name="address1" type="text" class="video-form" id="address1User"
-                                                       value="{{ client.address1 }} ">
+                                                       value="{{ client.address1 }}" required>
 
                                             </div>
                                         </div>
-                                         <div class="form-group">
+                                         <div class="form-group" hidden>
                                             <label for="address2User">Address2</label>
                                             <div class="field-input">
                                                 <input name="address2" type="text" class="video-form" id="address2User"
@@ -190,7 +179,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label for="workinghoursUser">Working Hours*</label>
                                             <div class="field-input">
                                                 <input name="workinghours" type="text" class="video-form" id="workinghoursUser"
@@ -198,7 +187,7 @@
 
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" hidden>
                                             <label for="workingdaysUser">Working Days*</label>
                                             <div class="field-input">
                                                 <input name="workingdays" type="text" class="video-form" id="workingdaysUser"
@@ -209,10 +198,102 @@
                                         <div class="form-group">
                                             <label for="infoUser">Info</label>
                                             <div class="field-input">
-                                                <textarea name="info" type="text" class="video-form" id="infoUser"
-                                                           >{{ client.info }} </textarea>
+                                                <textarea name="info" type="text" class="video-form" id="infoUser" rows="7"
+                                                           >{{ client.info }}</textarea>
                                             </div>
                                         </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                            <div class="col-md-2 col-12">
+								<div class="checkbox-title" style="margin-top: 25%;">Working Days:</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">From*</div>
+									<select id="wdaysfrom" name="wdaysfrom" class="selectpicker" tabindex="-98">
+										<option value="Monday" >Monday</option>
+										<option value="Tuesday">Tuesday</option>
+										<option value="Wednesday">Wednesday</option>
+										<option value="Thursday">Thursday</option>
+										<option value="Friday">Friday</option>
+										<option value="Saturday">Saturday</option>
+									</select>
+								</div>
+							</div>
+                                            <div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">To*</div>
+									<select id="wdaysto" name="wdaysto" class="selectpicker" tabindex="-98">
+										<option value="Tuesday">Tuesday</option>
+										<option value="Wednesday">Wednesday</option>
+										<option value="Thursday">Thursday</option>
+										<option value="Friday">Friday</option>
+										<option value="Saturday">Saturday</option>
+										<option value="Sunday">Sunday</option>
+									</select>
+								</div>
+							</div>
+                                    </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="row">
+                            <div class="col-md-2 col-12">
+								<div class="checkbox-title" style="margin-top: 25%;">Working Hours:</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">From*</div>
+									<select id="whoursfrom" name="whoursfrom" class="selectpicker" tabindex="-98" >
+										<option value="00.00">00.00</option>
+										<option value="01.00">01.00</option>
+										<option value="02.00">02.00</option>
+										<option value="03.00">03.00</option>
+										<option value="04.00">04.00</option>
+										<option value="05.00">05.00</option>
+										<option value="06.00">06.00</option>
+										<option value="07.00">07.00</option>
+										<option value="08.00">08.00</option>
+										<option value="09.00" >09.00</option>
+										<option value="10.00">10.00</option>
+										<option value="11.00">11.00</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-12">
+								<div class="form-group">
+									<div class="checkbox-title">To*</div>
+									<select id="whoursto" name="whoursto" class="selectpicker" tabindex="-98" >
+										<option value="12.00">12.00</option>
+										<option value="13.00">13.00</option>
+										<option value="14.00">14.00</option>
+										<option value="15.00">15.00</option>
+										<option value="16.00">16.00</option>
+										<option value="17.00">17.00</option>
+										<option value="18.00">18.00</option>
+										<option value="19.00">19.00</option>
+										<option value="20.00">20.00</option>
+										<option value="21.00">21.00</option>
+										<option value="22.00" >22.00</option>
+										<option value="23.00">23.00</option>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3 col-12" hidden>
+								<button class="add-time-btn">Add Time</button>
+							</div>
+							<div class="col-md-12">
+								<div class="selected-time" hidden>
+									<ul>
+										<li>Monday</li>
+										<li>9.00AM to 11.00PM</li>
+										<li><a href="#"><i class="far fa-window-close"></i></a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+                                    </div>
 
                                          <div class="form-group">
                                             <label style="margin-bottom: 3%;" for="cuisineUser">Cuisines </label>

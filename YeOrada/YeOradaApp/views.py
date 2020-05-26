@@ -14,18 +14,23 @@ from .views_yaren import *
 
 
 def index(request):
-    clients = Client.objects.filter(userEmail__is_active=True).order_by('-rateCount')[:12]
     customer = None
     control = False
 
     if request.user.is_authenticated:
         customer = Customer.objects.filter(userEmail=request.user).first()
+        if request.user.isCustomer:
+            clients = Client.objects.filter(userEmail__is_active=True, city=customer.city).order_by('-rateCount')[:12]
+        else:
+            clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul").order_by('-rateCount')[:12]
 
         if not request.user.is_active:
             registeredUser = RegisteredUser.objects.filter(email=request.user.email)
             registeredUser.is_active = True
             control = True
             registeredUser.save()
+    else:
+        clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul").order_by('-rateCount')[:12]
 
     return render(request, 'yeoradamain/index.html', {'clients':clients, 'customer': customer, 'control': control, })
 
