@@ -5,22 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-	
-	<!-- Favicon -->
-	<link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
+
+    <!-- Favicon -->
+    <link href="/static/images/fav.png" rel="shortcut icon" type="image/x-icon"/>
 
     <title>YeOrada | Become a Partner </title>
 
     <!-- Bootstrap core CSS-->
     <link href="/static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link href="/static/css/style.css" rel="stylesheet">
-	<link href="/static/css/responsive.css" rel="stylesheet">
-	<link href="/static/css/mega.menu.css" rel="stylesheet">
-	<link href="/static/css/bootstrap-select.css" rel="stylesheet">
-    
-	<!-- Owl Carousel for this template-->
-	<link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
-	
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <link href="/static/css/mega.menu.css" rel="stylesheet">
+    <link href="/static/css/bootstrap-select.css" rel="stylesheet">
+
+    <!-- Owl Carousel for this template-->
+    <link rel="stylesheet" href="/static/assets/owlcarousel/assets/owl.carousel.min.css">
+
     <!-- Fontawesome styles for this template-->
     <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
@@ -29,493 +29,514 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIVX6GlP0RDDM3vcFhgzYnugViFmxl0g&libraries=places"></script>
 
     <style>
-    #map {
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
+        #map {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
     </style>
 
     <script>
-      // This example adds a search box to a map, using the Google Place Autocomplete
-      // feature. People can enter geographical searches. The search box will return a
-      // pick list containing a mix of places and predicted search terms.
+        // This example adds a search box to a map, using the Google Place Autocomplete
+        // feature. People can enter geographical searches. The search box will return a
+        // pick list containing a mix of places and predicted search terms.
 
-      // This example requires the Places library. Include the libraries=places
-      // parameter when you first load the API. For example:
-      // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+        // This example requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-      $(document).ready(function () {
-          console.log("I am inside");
+        $(document).ready(function () {
+            console.log("I am inside");
 
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: {lat: 41.0082, lng: 28.9784},
-          zoom: 13,
-          mapTypeId: 'roadmap',
-            mapTypeControl: false,
-            streetViewControl: false
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: 41.0082, lng: 28.9784},
+                zoom: 13,
+                mapTypeId: 'roadmap',
+                mapTypeControl: false,
+                streetViewControl: false
+            });
+
+            var options = {
+                componentRestrictions: {country: 'tr'}
+            };
+
+            var input = document.getElementById('addressInput');
+
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            var autocomplete = new google.maps.places.Autocomplete(input, options);
+
+            var marker = new google.maps.Marker({
+                map: map,
+                anchorPoint: new google.maps.Point(0, -29)
+            });
+
+            autocomplete.addListener('place_changed', function () {
+                marker.setVisible(false);
+                var place = autocomplete.getPlace();
+                if (!place.geometry) {
+                    // User entered the name of a Place that was not suggested and
+                    // pressed the Enter key, or the Place Details request failed.
+                    window.alert("No details available for input: '" + place.name + "'");
+                    return;
+                }
+
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);  // Why 17? Because it looks good.
+                }
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+            });
+
         });
-
-        var options = {
-        componentRestrictions: {country: 'tr'}
-        };
-
-        var input = document.getElementById('addressInput');
-
-        map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-        var autocomplete = new google.maps.places.Autocomplete(input, options);
-
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
-
-        autocomplete.addListener('place_changed', function() {
-          marker.setVisible(false);
-          var place = autocomplete.getPlace();
-          if (!place.geometry) {
-            // User entered the name of a Place that was not suggested and
-            // pressed the Enter key, or the Place Details request failed.
-            window.alert("No details available for input: '" + place.name + "'");
-            return;
-          }
-
-          // If the place has a geometry, then present it on a map.
-          if (place.geometry.viewport) {
-            map.fitBounds(place.geometry.viewport);
-          } else {
-            map.setCenter(place.geometry.location);
-            map.setZoom(17);  // Why 17? Because it looks good.
-          }
-          marker.setPosition(place.geometry.location);
-          marker.setVisible(true);
-        });
-
-      });
     </script>
 
     {% if succesfull_message != "" %}
-    <script type="text/javascript">
+        <script type="text/javascript">
             $(window).on('load', function () {
                 $('#form-successful').modal('show');
             });
-    </script>
+        </script>
     {% endif %}
 
 {% endblock %}
 
 
 {% block content2 %}
-	<!--title-bar start-->
-	<section class="title-bar">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6">
-					<div class="left-title-text">
-					<ul>
-							<li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Become a Partner</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="right-title-text" hidden>
-						<ul>
-							<li class="breadcrumb-item"><a href="index.html">Home</a></li>
-							<li class="breadcrumb-item active" aria-current="page">Add Restaurant</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!--title-bar end-->	
-	<!--add-restaurant start-->
-	<section class="add-restaurant">			
-	<form method="POST">
-              {% csrf_token %}
-		<div class="container">					
-			<div class="row justify-content-between">
-				<div class="col-lg-6 col-md-8 col-12">
-					<div class="resto-heading">
-						<img src="/static/images/partner-with-us/icon-1.svg" alt="">
-						<h1>Restaurant Application Form</h1>
-					</div>
-                {% for message in client_error_messages %}
-                    {% if message != "" %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Ops!</strong> {{ message }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                        </button>
+    <!--title-bar start-->
+    <section class="title-bar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="left-title-text">
+                        <ul>
+                            <li class="breadcrumb-item"><a href="{% url 'home' %}">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Become a Partner</li>
+                        </ul>
                     </div>
-                    {% endif %}
-                {% endfor %}
-
-                <div class="modal fade" id="form-successful" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle1">Sent Successfully</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
-                <div class="modal-body">
-                    Your restaurant application is sent successfully! Check your email for further notifications.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal"
-                            style="background-color:#ffa803;">Close
-                    </button>
+                <div class="col-md-6">
+                    <div class="right-title-text" hidden>
+                        <ul>
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Add Restaurant</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+    <!--title-bar end-->
+    <!--add-restaurant start-->
+    <section class="add-restaurant">
+        <form method="POST">
+            {% csrf_token %}
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-lg-6 col-md-8 col-12">
+                        <div class="resto-heading">
+                            <img src="/static/images/partner-with-us/icon-1.svg" alt="">
+                            <h1>Restaurant Application Form</h1>
+                        </div>
+                        {% for message in client_error_messages %}
+                            {% if message != "" %}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <strong>Ops!</strong> {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
 
-					<div class="basic-info">
-						<h4>Basic Info</h4>
-						<div class="form-group">
-							<label for="nameRestaurant">Restaurant Name*</label>
-							<input name="rname" type="text" class="video-form" id="nameRestaurant" placeholder="Enter Restaurant Name" required>
-						</div>
-						<div class="form-group">
-							<label for="searchCity">City*</label>
-							<input name="rcity" type="Search" class="video-form" id="searchCity" placeholder="Search City" required>
-						</div>
-                        <div class="form-group">
-							<label for="searchCity">State*</label>
-							<input name="rstate" type="Search" class="video-form" id="searchCity" placeholder="Search State" required>
-						</div>
-                          <div class="row">
-                            <div class="col-md-2 col-12">
-								<div class="checkbox-title" style="margin-top: 25%;">Restaurant Category:</div>
-							</div>
-							<div class="col-md-3 col-12">
-								<div class="form-group">
-									<div class="checkbox-title"></div>
-									<select name="category" class="selectpicker" tabindex="-98" >
-										<option value="Restaurant">Restaurant</option>
-										<option value="Cafe">Cafe</option>
-										<option value="Bar">Bar</option>
-									</select>
-								</div>
-							</div>
-                          </div>
+                        <div class="modal fade" id="form-successful" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLongTitle"
+                             aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLongTitle1">Sent Successfully</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Your restaurant application is sent successfully! Check your email for further
+                                        notifications.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-primary" data-dismiss="modal"
+                                                style="background-color:#ffa803;">Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-						<div class="form-group" hidden>
-							<div class="checkbox-title">Are you the Owner or Manager of the Place?</div>
-							<div class="filter-radio">
-								<ul>
-									<li>
-									  <input type="radio" id="c1" name="cb1">
-									  <label for="c1">I’m the owner</label>
-									</li>
-									<li>
-									  <input type="radio" id="c2" name="cb1">
-									  <label for="c2">I’m the manager</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="basic-info">
-						<h4>Contact Info</h4>
-                        <div class="form-group">
-							<label for="emailAddress">Owner's Name*</label>
-							<input name="oname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Name" required>
-						</div>
-                        <div class="form-group">
-							<label for="emailAddress">Owner's Surname*</label>
-							<input name="osname" type="text" class="video-form" id="emailAddress" placeholder="Owner / Manager Surname" required>
-						</div>
-						<div class="form-group">
-							<label for="emailAddress">Owner's Email Address*</label>
-							<input name="oemail" type="email" class="video-form" id="emailAddress" placeholder="Owner / Manager Email Address" required>
-						</div>
-						<div class="form-group">
-							<label for="telNumber1">Owner's Phone Number*</label>
-                            <input name="ophone" type="tel" class="video-form" id="telNumber1" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
-						</div>
-						<div class="form-group">
-							<label for="telNumber2">Restaurant Phone Number*</label>
-							<input name="rphone" type="tel" class="video-form" id="telNumber2" placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
-						</div>
-						<div class="form-group">
-							<label for="webSite">Restaurant Email Address*</label>
-							<input name="remail" type="email" class="video-form" id="webSite" placeholder="Restaurant Email Address" required>
-						</div>
-						<div class="form-group" hidden>
-							<div class="checkbox-title">Open Status*</div>
-							<div class="filter-radio">
-								<ul>
-									<li>
-									  <input type="radio" id="c3" name="cb2">
-									  <label for="c3">This place already open</label>
-									</li>
-									<li>
-									  <input type="radio" id="c4" name="cb2">
-									  <label for="c4">This place is opening soon</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="basic-info">
-						<h4>Timing</h4>
-                        <div class="row">
-                            <div class="col-md-2 col-12">
-								<div class="checkbox-title" style="margin-top: 25%;">Working Days:</div>
-							</div>
-							<div class="col-md-3 col-12">
-								<div class="form-group">
-									<div class="checkbox-title">From*</div>
-									<select name="wdaysfrom" class="selectpicker" tabindex="-98" >
-										<option value="Monday" selected>Monday</option>
-										<option value="Tuesday">Tuesday</option>
-										<option value="Wednesday">Wednesday</option>
-										<option value="Thursday">Thursday</option>
-										<option value="Friday">Friday</option>
-										<option value="Saturday">Saturday</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3 col-12">
-								<div class="form-group">
-									<div class="checkbox-title">To*</div>
-									<select name="wdaysto" class="selectpicker" tabindex="-98" >
-										<option value="Tuesday">Tuesday</option>
-										<option value="Wednesday">Wednesday</option>
-										<option value="Thursday">Thursday</option>
-										<option value="Friday">Friday</option>
-										<option value="Saturday" selected>Saturday</option>
-										<option value="Sunday">Sunday</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3 col-12" hidden>
-								<button class="add-time-btn">Add Time</button>
-							</div>
-							<div class="col-md-12">
-								<div class="selected-time" hidden>
-									<ul>
-										<li>Monday</li>
-										<li>9.00AM to 11.00PM</li>
-										<li><a href="#"><i class="far fa-window-close"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-						<div class="row">
-                            <div class="col-md-2 col-12">
-								<div class="checkbox-title" style="margin-top: 25%;">Working Hours:</div>
-							</div>
-							<div class="col-md-3 col-12">	
-								<div class="form-group">
-									<div class="checkbox-title">From*</div>
-									<select name="whoursfrom" class="selectpicker" tabindex="-98" >
-										<option value="00.00">00.00</option>
-										<option value="01.00">01.00</option>
-										<option value="02.00">02.00</option>
-										<option value="03.00">03.00</option>
-										<option value="04.00">04.00</option>
-										<option value="05.00">05.00</option>
-										<option value="06.00">06.00</option>
-										<option value="07.00">07.00</option>
-										<option value="08.00">08.00</option>
-										<option value="09.00" selected>09.00</option>
-										<option value="10.00">10.00</option>
-										<option value="11.00">11.00</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3 col-12">	
-								<div class="form-group">
-									<div class="checkbox-title">To*</div>
-									<select name="whoursto" class="selectpicker" tabindex="-98" >
-										<option value="12.00">12.00</option>
-										<option value="13.00">13.00</option>
-										<option value="14.00">14.00</option>
-										<option value="15.00">15.00</option>
-										<option value="16.00">16.00</option>
-										<option value="17.00">17.00</option>
-										<option value="18.00">18.00</option>
-										<option value="19.00">19.00</option>
-										<option value="20.00">20.00</option>
-										<option value="21.00">21.00</option>
-										<option value="22.00" selected>22.00</option>
-										<option value="23.00">23.00</option>
-									</select>
-								</div>
-							</div>
-							<div class="col-md-3 col-12" hidden>
-								<button class="add-time-btn">Add Time</button>
-							</div>
-							<div class="col-md-12">
-								<div class="selected-time" hidden>
-									<ul>
-										<li>Monday</li>
-										<li>9.00AM to 11.00PM</li>
-										<li><a href="#"><i class="far fa-window-close"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="basic-info c-top">
-						<h4>Location</h4>
-						<div class="form-group">
-							<label for="addressInput" style="margin-right: 5px;">Restaurant Address*</label>
-                            <i class="fas fa-search" style="display: inline-block;"></i>
-							<div class="field-input">
-								<input name="address" type="text" class="video-form" placeholder="Enter the address" id="addressInput" style="width: 85%; margin-top: 2%; margin-left: 1%;" required>
-							</div>
-						</div>
-							<div class="container" id="map" style="height:300px; margin-top: -5%;"></div>
-					</div>
-					<div class="basic-info c-top" hidden>
-						<h4>Characteristics</h4>						
-						<div class="form-group">
-							<div class="checkbox-title">Services*</div>
-							<div class="filter-checkboxs">
-								<ul>
-									<li>
-									  <input type="checkbox" id="c28" name="cb">
-									  <label for="c28" title="Monday">Breakfast</label>
-									</li>
-									<li>
-									  <input type="checkbox" id="c29" name="cb">
-									  <label for="c29" title="Tuesday">Lunch</label>
-									</li>
-									<li>
-									  <input type="checkbox" id="c30" name="cb">
-									  <label for="c30" title="Wednesday">Dinner</label>
-									</li>
-									<li>
-									  <input type="checkbox" id="c31" name="cb">
-									  <label for="c31" title="Thursday">Cafe's</label>
-									</li>
-									<li>
-									  <input type="checkbox" id="c32" name="cb">
-									  <label for="c32" title="Friday">Nightlife</label>
-									</li>																		
-								</ul>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="checkbox-title">Alcohal*</div>
-							<div class="filter-radio">
-								<ul>
-									<li>
-									  <input type="radio" value="value1" id="c5" name="c3">
-									  <label for="c5"> Serve</label>
-									</li>
-									<li>
-									  <input type="radio" value="value2" id="c6" name="c3">
-									  <label for="c6"> Not Serve</label>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="checkbox-title">Seating*</div>
-							<div class="filter-radio">
-								<ul>
-									<li>
-									  <input type="radio" value="value3" id="c7" name="c4">
-									  <label for="c7">Available</label>
-									</li>
-									<li>
-									  <input type="radio" value="value4" id="c8" name="c4">
-									  <label for="c8">Not Available</label>
-									</li>
-								</ul>
-							</div>
-						</div>	
-						<div class="form-group">
-							<div class="checkbox-title">Cuisines*</div>
-							<select class="selectpicker" tabindex="-98">
-								<option value="0">Select Cuisines</option>
-								<option value="1">Pizza</option>
-								<option value="2">Cakes & Desserts</option>
-								<option value="3">Sushi</option>
-								<option value="4">Fast Food</option>
-								<option value="5">Fish</option>
-								<option value="6">Lunch</option>
-								<option value="7">Coffee Cafe’s</option>
-								<option value="8">Cheese Tika</option>
-								<option value="9">Samosa and Pakodas</option>
-								<option value="10">Chinese</option>
-								<option value="11">Drinks & Beer</option>																																							  														  
-							</select>
-						</div>
-						<div class="form-group">
-							<div class="checkbox-title">Tags*</div>
-							<select class="selectpicker" tabindex="-98">
-								<option value="0">Select Tags</option>
-								<option value="1">Lunch</option>
-								<option value="2">Dinner</option>
-								<option value="3">Breakfast</option>
-								<option value="4">Fast Food</option>
-								<option value="5">Non Veg</option>
-								<option value="6">Veg</option>
-								<option value="7">Pakodas & Samosas</option>
-								<option value="8">Beer bar</option>
-								<option value="9">Samosa and Pakodas</option>																																														  														  
-							</select>
-						</div>
-					</div>
-					<div class="basic-info c-top">
-						<h4>Verified Restaurant</h4>
-						<div class="form-group">
-							<div class="checkbox-title">Would you like to your restaurant to be approved ?</div>
-                            <p style="font-size: 11px;"> YeOrada will directly contact with you to explain the steps to verify your restaurant. </p>
-                            <br>
-							<div class="filter-radio">
-								<ul>
-									<li>
-									  <input type="radio" value="1" id="verifyRestaurant" name="verify" >
-									  <label for="verifyRestaurant">Yes</label>
-									</li>
-									<li>
-									  <input type="radio" value="0" id="verifyRestaurant1" name="verify" checked="checked">
-									  <label for="verifyRestaurant1">No</label>
-									</li>
-								</ul>
-							</div>
-						</div>																			
-					</div>
-					<button name="sendformname" type="submit" class="add-resto-btn1 btn-link">Become a Partner</button>
+                        <div class="basic-info">
+                            <h4>Basic Info</h4>
+                            <div class="form-group">
+                                <label for="nameRestaurant">Restaurant Name*</label>
+                                <input name="rname" type="text" class="video-form" id="nameRestaurant"
+                                       placeholder="Enter Restaurant Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city-select">City*</label>
+                                <select name="rcity" class="form-control form-control-lg" id="city-select" style="color: #847577;">
+                                    <option value="0">Select a city</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="state-select">State*</label>
+                                <select name="rstate" id="state-select" class="form-control form-control-lg" disabled="disabled" style="color: #847577;">
+                                    <option value="0">Please select a city</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-12">
+                                    <div class="checkbox-title" style="margin-top: 25%;">Restaurant Category:</div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <div class="checkbox-title"></div>
+                                        <select name="category" class="selectpicker" tabindex="-98">
+                                            <option value="Restaurant">Restaurant</option>
+                                            <option value="Cafe">Cafe</option>
+                                            <option value="Bar">Bar</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
 
-				</div>
-				<div class="col-lg-5 col-md-4 col-12">
-					<div class="new-heading">						
-						<h1>How It Works</h1>
-					</div>
-					<div class="how-it-work-1">
-						<img src="/static/images/add-restaurant/icon-1.svg" alt="">
-						<h4>Fill the Form</h4>
-						<p>Fill the Restaurant Application Form with correct and up-to-date data. The form includes some information about you and your restaurant.</p>
-					</div>
-					<div class="how-it-work-1">
-						<img src="/static/images/add-restaurant/icon-2.svg" alt="">
-						<h4>Send the Information</h4>
-						<p>Send the form to us. Our customer representatives will examine and verify it in a short time.</p>
-					</div>
-					<div class="how-it-work-1 m-bottom">
-						<img src="/static/images/add-restaurant/icon-3.svg" alt="">
-						<h4>Access to your Restaurant Account</h4>
-						<p>Once your application is accepted, you will receive an email about information of your restaurant account. If you requested a verification for your restaurant, our customer
-                        representatives with directly contact with you for further notifications. </p>
-					</div>
-				</div>
-			</div>							
-		</div>
-	</form>
-	</section>
-	<!--add-restaurant end-->
+                            <div class="form-group" hidden>
+                                <div class="checkbox-title">Are you the Owner or Manager of the Place?</div>
+                                <div class="filter-radio">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="c1" name="cb1">
+                                            <label for="c1">I’m the owner</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="c2" name="cb1">
+                                            <label for="c2">I’m the manager</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="basic-info">
+                            <h4>Contact Info</h4>
+                            <div class="form-group">
+                                <label for="emailAddress">Owner's Name*</label>
+                                <input name="oname" type="text" class="video-form" id="emailAddress"
+                                       placeholder="Owner / Manager Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddress">Owner's Surname*</label>
+                                <input name="osname" type="text" class="video-form" id="emailAddress"
+                                       placeholder="Owner / Manager Surname" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="emailAddress">Owner's Email Address*</label>
+                                <input name="oemail" type="email" class="video-form" id="emailAddress"
+                                       placeholder="Owner / Manager Email Address" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telNumber1">Owner's Phone Number*</label>
+                                <input name="ophone" type="tel" class="video-form" id="telNumber1"
+                                       placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="telNumber2">Restaurant Phone Number*</label>
+                                <input name="rphone" type="tel" class="video-form" id="telNumber2"
+                                       placeholder="888 888 8888" pattern="[0-9]{3} [0-9]{3} [0-9]{4}" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="webSite">Restaurant Email Address*</label>
+                                <input name="remail" type="email" class="video-form" id="webSite"
+                                       placeholder="Restaurant Email Address" required>
+                            </div>
+                            <div class="form-group" hidden>
+                                <div class="checkbox-title">Open Status*</div>
+                                <div class="filter-radio">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" id="c3" name="cb2">
+                                            <label for="c3">This place already open</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" id="c4" name="cb2">
+                                            <label for="c4">This place is opening soon</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="basic-info">
+                            <h4>Timing</h4>
+                            <div class="row">
+                                <div class="col-md-2 col-12">
+                                    <div class="checkbox-title" style="margin-top: 25%;">Working Days:</div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <div class="checkbox-title">From*</div>
+                                        <select name="wdaysfrom" class="selectpicker" tabindex="-98">
+                                            <option value="Monday" selected>Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <div class="checkbox-title">To*</div>
+                                        <select name="wdaysto" class="selectpicker" tabindex="-98">
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday" selected>Saturday</option>
+                                            <option value="Sunday">Sunday</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12" hidden>
+                                    <button class="add-time-btn">Add Time</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="selected-time" hidden>
+                                        <ul>
+                                            <li>Monday</li>
+                                            <li>9.00AM to 11.00PM</li>
+                                            <li><a href="#"><i class="far fa-window-close"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-2 col-12">
+                                    <div class="checkbox-title" style="margin-top: 25%;">Working Hours:</div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <div class="checkbox-title">From*</div>
+                                        <select name="whoursfrom" class="selectpicker" tabindex="-98">
+                                            <option value="00.00">00.00</option>
+                                            <option value="01.00">01.00</option>
+                                            <option value="02.00">02.00</option>
+                                            <option value="03.00">03.00</option>
+                                            <option value="04.00">04.00</option>
+                                            <option value="05.00">05.00</option>
+                                            <option value="06.00">06.00</option>
+                                            <option value="07.00">07.00</option>
+                                            <option value="08.00">08.00</option>
+                                            <option value="09.00" selected>09.00</option>
+                                            <option value="10.00">10.00</option>
+                                            <option value="11.00">11.00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12">
+                                    <div class="form-group">
+                                        <div class="checkbox-title">To*</div>
+                                        <select name="whoursto" class="selectpicker" tabindex="-98">
+                                            <option value="12.00">12.00</option>
+                                            <option value="13.00">13.00</option>
+                                            <option value="14.00">14.00</option>
+                                            <option value="15.00">15.00</option>
+                                            <option value="16.00">16.00</option>
+                                            <option value="17.00">17.00</option>
+                                            <option value="18.00">18.00</option>
+                                            <option value="19.00">19.00</option>
+                                            <option value="20.00">20.00</option>
+                                            <option value="21.00">21.00</option>
+                                            <option value="22.00" selected>22.00</option>
+                                            <option value="23.00">23.00</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-12" hidden>
+                                    <button class="add-time-btn">Add Time</button>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="selected-time" hidden>
+                                        <ul>
+                                            <li>Monday</li>
+                                            <li>9.00AM to 11.00PM</li>
+                                            <li><a href="#"><i class="far fa-window-close"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="basic-info c-top">
+                            <h4>Location</h4>
+                            <div class="form-group">
+                                <label for="addressInput" style="margin-right: 5px;">Restaurant Address*</label>
+                                <i class="fas fa-search" style="display: inline-block;"></i>
+                                <div class="field-input">
+                                    <input name="address" type="text" class="video-form" placeholder="Enter the address"
+                                           id="addressInput" style="width: 85%; margin-top: 2%; margin-left: 1%;"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="container" id="map" style="height:300px; margin-top: -5%;"></div>
+                        </div>
+                        <div class="basic-info c-top" hidden>
+                            <h4>Characteristics</h4>
+                            <div class="form-group">
+                                <div class="checkbox-title">Services*</div>
+                                <div class="filter-checkboxs">
+                                    <ul>
+                                        <li>
+                                            <input type="checkbox" id="c28" name="cb">
+                                            <label for="c28" title="Monday">Breakfast</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c29" name="cb">
+                                            <label for="c29" title="Tuesday">Lunch</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c30" name="cb">
+                                            <label for="c30" title="Wednesday">Dinner</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c31" name="cb">
+                                            <label for="c31" title="Thursday">Cafe's</label>
+                                        </li>
+                                        <li>
+                                            <input type="checkbox" id="c32" name="cb">
+                                            <label for="c32" title="Friday">Nightlife</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-title">Alcohal*</div>
+                                <div class="filter-radio">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="value1" id="c5" name="c3">
+                                            <label for="c5"> Serve</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="value2" id="c6" name="c3">
+                                            <label for="c6"> Not Serve</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-title">Seating*</div>
+                                <div class="filter-radio">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="value3" id="c7" name="c4">
+                                            <label for="c7">Available</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="value4" id="c8" name="c4">
+                                            <label for="c8">Not Available</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-title">Cuisines*</div>
+                                <select class="selectpicker" tabindex="-98">
+                                    <option value="0">Select Cuisines</option>
+                                    <option value="1">Pizza</option>
+                                    <option value="2">Cakes & Desserts</option>
+                                    <option value="3">Sushi</option>
+                                    <option value="4">Fast Food</option>
+                                    <option value="5">Fish</option>
+                                    <option value="6">Lunch</option>
+                                    <option value="7">Coffee Cafe’s</option>
+                                    <option value="8">Cheese Tika</option>
+                                    <option value="9">Samosa and Pakodas</option>
+                                    <option value="10">Chinese</option>
+                                    <option value="11">Drinks & Beer</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <div class="checkbox-title">Tags*</div>
+                                <select class="selectpicker" tabindex="-98">
+                                    <option value="0">Select Tags</option>
+                                    <option value="1">Lunch</option>
+                                    <option value="2">Dinner</option>
+                                    <option value="3">Breakfast</option>
+                                    <option value="4">Fast Food</option>
+                                    <option value="5">Non Veg</option>
+                                    <option value="6">Veg</option>
+                                    <option value="7">Pakodas & Samosas</option>
+                                    <option value="8">Beer bar</option>
+                                    <option value="9">Samosa and Pakodas</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="basic-info c-top">
+                            <h4>Verified Restaurant</h4>
+                            <div class="form-group">
+                                <div class="checkbox-title">Would you like to your restaurant to be approved ?</div>
+                                <p style="font-size: 11px;"> YeOrada will directly contact with you to explain the steps
+                                    to verify your restaurant. </p>
+                                <br>
+                                <div class="filter-radio">
+                                    <ul>
+                                        <li>
+                                            <input type="radio" value="1" id="verifyRestaurant" name="verify">
+                                            <label for="verifyRestaurant">Yes</label>
+                                        </li>
+                                        <li>
+                                            <input type="radio" value="0" id="verifyRestaurant1" name="verify"
+                                                   checked="checked">
+                                            <label for="verifyRestaurant1">No</label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <button name="sendformname" type="submit" class="add-resto-btn1 btn-link">Become a Partner
+                        </button>
+
+                    </div>
+                    <div class="col-lg-5 col-md-4 col-12">
+                        <div class="new-heading">
+                            <h1>How It Works</h1>
+                        </div>
+                        <div class="how-it-work-1">
+                            <img src="/static/images/add-restaurant/icon-1.svg" alt="">
+                            <h4>Fill the Form</h4>
+                            <p>Fill the Restaurant Application Form with correct and up-to-date data. The form includes
+                                some information about you and your restaurant.</p>
+                        </div>
+                        <div class="how-it-work-1">
+                            <img src="/static/images/add-restaurant/icon-2.svg" alt="">
+                            <h4>Send the Information</h4>
+                            <p>Send the form to us. Our customer representatives will examine and verify it in a short
+                                time.</p>
+                        </div>
+                        <div class="how-it-work-1 m-bottom">
+                            <img src="/static/images/add-restaurant/icon-3.svg" alt="">
+                            <h4>Access to your Restaurant Account</h4>
+                            <p>Once your application is accepted, you will receive an email about information of your
+                                restaurant account. If you requested a verification for your restaurant, our customer
+                                representatives with directly contact with you for further notifications. </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <!--add-restaurant end-->
 {% endblock %}
 
 {% block content3 %}
@@ -524,9 +545,1515 @@
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src=/static/vendor/jquery-easing/jquery.easing.min.js"></script>
-	<!-- Assect scripts for this page-->
-	<script src="/static/assets/owlcarousel/owl.carousel.js"></script>
-	<script src="/static/js/owlslider.js"></script>
-	<script src="/static/js/bootstrap-select.js"></script>
+    <!-- Assect scripts for this page-->
+    <script src="/static/assets/owlcarousel/owl.carousel.js"></script>
+    <script src="/static/js/owlslider.js"></script>
+    <script src="/static/js/bootstrap-select.js"></script>
+
+    <script>
+        var data = [
+            {
+                "il": "Adana",
+                "plaka": 1,
+                "ilceleri": [
+                    "Aladağ",
+                    "Ceyhan",
+                    "Çukurova",
+                    "Feke",
+                    "İmamoğlu",
+                    "Karaisalı",
+                    "Karataş",
+                    "Kozan",
+                    "Pozantı",
+                    "Saimbeyli",
+                    "Sarıçam",
+                    "Seyhan",
+                    "Tufanbeyli",
+                    "Yumurtalık",
+                    "Yüreğir"
+                ]
+            },
+            {
+                "il": "Adıyaman",
+                "plaka": 2,
+                "ilceleri": [
+                    "Besni",
+                    "Çelikhan",
+                    "Gerger",
+                    "Gölbaşı",
+                    "Kahta",
+                    "Merkez",
+                    "Samsat",
+                    "Sincik",
+                    "Tut"
+                ]
+            },
+            {
+                "il": "Afyonkarahisar",
+                "plaka": 3,
+                "ilceleri": [
+                    "Başmakçı",
+                    "Bayat",
+                    "Bolvadin",
+                    "Çay",
+                    "Çobanlar",
+                    "Dazkırı",
+                    "Dinar",
+                    "Emirdağ",
+                    "Evciler",
+                    "Hocalar",
+                    "İhsaniye",
+                    "İscehisar",
+                    "Kızılören",
+                    "Merkez",
+                    "Sandıklı",
+                    "Sinanpaşa",
+                    "Sultandağı",
+                    "Şuhut"
+                ]
+            },
+            {
+                "il": "Ağrı",
+                "plaka": 4,
+                "ilceleri": [
+                    "Diyadin",
+                    "Doğubayazıt",
+                    "Eleşkirt",
+                    "Hamur",
+                    "Merkez",
+                    "Patnos",
+                    "Taşlıçay",
+                    "Tutak"
+                ]
+            },
+            {
+                "il": "Amasya",
+                "plaka": 5,
+                "ilceleri": [
+                    "Göynücek",
+                    "Gümüşhacıköy",
+                    "Hamamözü",
+                    "Merkez",
+                    "Merzifon",
+                    "Suluova",
+                    "Taşova"
+                ]
+            },
+            {
+                "il": "Ankara",
+                "plaka": 6,
+                "ilceleri": [
+                    "Altındağ",
+                    "Ayaş",
+                    "Bala",
+                    "Beypazarı",
+                    "Çamlıdere",
+                    "Çankaya",
+                    "Çubuk",
+                    "Elmadağ",
+                    "Güdül",
+                    "Haymana",
+                    "Kalecik",
+                    "Kızılcahamam",
+                    "Nallıhan",
+                    "Polatlı",
+                    "Şereflikoçhisar",
+                    "Yenimahalle",
+                    "Gölbaşı",
+                    "Keçiören",
+                    "Mamak",
+                    "Sincan",
+                    "Kazan",
+                    "Akyurt",
+                    "Etimesgut",
+                    "Evren",
+                    "Pursaklar"
+                ]
+            },
+            {
+                "il": "Antalya",
+                "plaka": 7,
+                "ilceleri": [
+                    "Akseki",
+                    "Alanya",
+                    "Elmalı",
+                    "Finike",
+                    "Gazipaşa",
+                    "Gündoğmuş",
+                    "Kaş",
+                    "Korkuteli",
+                    "Kumluca",
+                    "Manavgat",
+                    "Serik",
+                    "Demre",
+                    "İbradı",
+                    "Kemer",
+                    "Aksu",
+                    "Döşemealtı",
+                    "Kepez",
+                    "Konyaaltı",
+                    "Muratpaşa"
+                ]
+            },
+            {
+                "il": "Artvin",
+                "plaka": 8,
+                "ilceleri": [
+                    "Ardanuç",
+                    "Arhavi",
+                    "Merkez",
+                    "Borçka",
+                    "Hopa",
+                    "Şavşat",
+                    "Yusufeli",
+                    "Murgul"
+                ]
+            },
+            {
+                "il": "Aydın",
+                "plaka": 9,
+                "ilceleri": [
+                    "Merkez",
+                    "Bozdoğan",
+                    "Efeler",
+                    "Çine",
+                    "Germencik",
+                    "Karacasu",
+                    "Koçarlı",
+                    "Kuşadası",
+                    "Kuyucak",
+                    "Nazilli",
+                    "Söke",
+                    "Sultanhisar",
+                    "Yenipazar",
+                    "Buharkent",
+                    "İncirliova",
+                    "Karpuzlu",
+                    "Köşk",
+                    "Didim"
+                ]
+            },
+            {
+                "il": "Balıkesir",
+                "plaka": 10,
+                "ilceleri": [
+                    "Altıeylül",
+                    "Ayvalık",
+                    "Merkez",
+                    "Balya",
+                    "Bandırma",
+                    "Bigadiç",
+                    "Burhaniye",
+                    "Dursunbey",
+                    "Edremit",
+                    "Erdek",
+                    "Gönen",
+                    "Havran",
+                    "İvrindi",
+                    "Karesi",
+                    "Kepsut",
+                    "Manyas",
+                    "Savaştepe",
+                    "Sındırgı",
+                    "Gömeç",
+                    "Susurluk",
+                    "Marmara"
+                ]
+            },
+            {
+                "il": "Bilecik",
+                "plaka": 11,
+                "ilceleri": [
+                    "Merkez",
+                    "Bozüyük",
+                    "Gölpazarı",
+                    "Osmaneli",
+                    "Pazaryeri",
+                    "Söğüt",
+                    "Yenipazar",
+                    "İnhisar"
+                ]
+            },
+            {
+                "il": "Bingöl",
+                "plaka": 12,
+                "ilceleri": [
+                    "Merkez",
+                    "Genç",
+                    "Karlıova",
+                    "Kiğı",
+                    "Solhan",
+                    "Adaklı",
+                    "Yayladere",
+                    "Yedisu"
+                ]
+            },
+            {
+                "il": "Bitlis",
+                "plaka": 13,
+                "ilceleri": [
+                    "Adilcevaz",
+                    "Ahlat",
+                    "Merkez",
+                    "Hizan",
+                    "Mutki",
+                    "Tatvan",
+                    "Güroymak"
+                ]
+            },
+            {
+                "il": "Bolu",
+                "plaka": 14,
+                "ilceleri": [
+                    "Merkez",
+                    "Gerede",
+                    "Göynük",
+                    "Kıbrıscık",
+                    "Mengen",
+                    "Mudurnu",
+                    "Seben",
+                    "Dörtdivan",
+                    "Yeniçağa"
+                ]
+            },
+            {
+                "il": "Burdur",
+                "plaka": 15,
+                "ilceleri": [
+                    "Ağlasun",
+                    "Bucak",
+                    "Merkez",
+                    "Gölhisar",
+                    "Tefenni",
+                    "Yeşilova",
+                    "Karamanlı",
+                    "Kemer",
+                    "Altınyayla",
+                    "Çavdır",
+                    "Çeltikçi"
+                ]
+            },
+            {
+                "il": "Bursa",
+                "plaka": 16,
+                "ilceleri": [
+                    "Gemlik",
+                    "İnegöl",
+                    "İznik",
+                    "Karacabey",
+                    "Keles",
+                    "Mudanya",
+                    "Mustafakemalpaşa",
+                    "Orhaneli",
+                    "Orhangazi",
+                    "Yenişehir",
+                    "Büyükorhan",
+                    "Harmancık",
+                    "Nilüfer",
+                    "Osmangazi",
+                    "Yıldırım",
+                    "Gürsu",
+                    "Kestel"
+                ]
+            },
+            {
+                "il": "Çanakkale",
+                "plaka": 17,
+                "ilceleri": [
+                    "Ayvacık",
+                    "Bayramiç",
+                    "Biga",
+                    "Bozcaada",
+                    "Çan",
+                    "Merkez",
+                    "Eceabat",
+                    "Ezine",
+                    "Gelibolu",
+                    "Gökçeada",
+                    "Lapseki",
+                    "Yenice"
+                ]
+            },
+            {
+                "il": "Çankırı",
+                "plaka": 18,
+                "ilceleri": [
+                    "Merkez",
+                    "Çerkeş",
+                    "Eldivan",
+                    "Ilgaz",
+                    "Kurşunlu",
+                    "Orta",
+                    "Şabanözü",
+                    "Yapraklı",
+                    "Atkaracalar",
+                    "Kızılırmak",
+                    "Bayramören",
+                    "Korgun"
+                ]
+            },
+            {
+                "il": "Çorum",
+                "plaka": 19,
+                "ilceleri": [
+                    "Alaca",
+                    "Bayat",
+                    "Merkez",
+                    "İskilip",
+                    "Kargı",
+                    "Mecitözü",
+                    "Ortaköy",
+                    "Osmancık",
+                    "Sungurlu",
+                    "Boğazkale",
+                    "Uğurludağ",
+                    "Dodurga",
+                    "Laçin",
+                    "Oğuzlar"
+                ]
+            },
+            {
+                "il": "Denizli",
+                "plaka": 20,
+                "ilceleri": [
+                    "Acıpayam",
+                    "Buldan",
+                    "Çal",
+                    "Çameli",
+                    "Çardak",
+                    "Çivril",
+                    "Merkez",
+                    "Merkezefendi",
+                    "Pamukkale",
+                    "Güney",
+                    "Kale",
+                    "Sarayköy",
+                    "Tavas",
+                    "Babadağ",
+                    "Bekilli",
+                    "Honaz",
+                    "Serinhisar",
+                    "Baklan",
+                    "Beyağaç",
+                    "Bozkurt"
+                ]
+            },
+            {
+                "il": "Diyarbakır",
+                "plaka": 21,
+                "ilceleri": [
+                    "Kocaköy",
+                    "Çermik",
+                    "Çınar",
+                    "Çüngüş",
+                    "Dicle",
+                    "Ergani",
+                    "Hani",
+                    "Hazro",
+                    "Kulp",
+                    "Lice",
+                    "Silvan",
+                    "Eğil",
+                    "Bağlar",
+                    "Kayapınar",
+                    "Sur",
+                    "Yenişehir",
+                    "Bismil"
+                ]
+            },
+            {
+                "il": "Edirne",
+                "plaka": 22,
+                "ilceleri": [
+                    "Merkez",
+                    "Enez",
+                    "Havsa",
+                    "İpsala",
+                    "Keşan",
+                    "Lalapaşa",
+                    "Meriç",
+                    "Uzunköprü",
+                    "Süloğlu"
+                ]
+            },
+            {
+                "il": "Elazığ",
+                "plaka": 23,
+                "ilceleri": [
+                    "Ağın",
+                    "Baskil",
+                    "Merkez",
+                    "Karakoçan",
+                    "Keban",
+                    "Maden",
+                    "Palu",
+                    "Sivrice",
+                    "Arıcak",
+                    "Kovancılar",
+                    "Alacakaya"
+                ]
+            },
+            {
+                "il": "Erzincan",
+                "plaka": 24,
+                "ilceleri": [
+                    "Çayırlı",
+                    "Merkez",
+                    "İliç",
+                    "Kemah",
+                    "Kemaliye",
+                    "Refahiye",
+                    "Tercan",
+                    "Üzümlü",
+                    "Otlukbeli"
+                ]
+            },
+            {
+                "il": "Erzurum",
+                "plaka": 25,
+                "ilceleri": [
+                    "Aşkale",
+                    "Çat",
+                    "Hınıs",
+                    "Horasan",
+                    "İspir",
+                    "Karayazı",
+                    "Narman",
+                    "Oltu",
+                    "Olur",
+                    "Pasinler",
+                    "Şenkaya",
+                    "Tekman",
+                    "Tortum",
+                    "Karaçoban",
+                    "Uzundere",
+                    "Pazaryolu",
+                    "Köprüköy",
+                    "Palandöken",
+                    "Yakutiye",
+                    "Aziziye"
+                ]
+            },
+            {
+                "il": "Eskişehir",
+                "plaka": 26,
+                "ilceleri": [
+                    "Çifteler",
+                    "Mahmudiye",
+                    "Mihalıççık",
+                    "Sarıcakaya",
+                    "Seyitgazi",
+                    "Sivrihisar",
+                    "Alpu",
+                    "Beylikova",
+                    "İnönü",
+                    "Günyüzü",
+                    "Han",
+                    "Mihalgazi",
+                    "Odunpazarı",
+                    "Tepebaşı"
+                ]
+            },
+            {
+                "il": "Gaziantep",
+                "plaka": 27,
+                "ilceleri": [
+                    "Araban",
+                    "İslahiye",
+                    "Nizip",
+                    "Oğuzeli",
+                    "Yavuzeli",
+                    "Şahinbey",
+                    "Şehitkamil",
+                    "Karkamış",
+                    "Nurdağı"
+                ]
+            },
+            {
+                "il": "Giresun",
+                "plaka": 28,
+                "ilceleri": [
+                    "Alucra",
+                    "Bulancak",
+                    "Dereli",
+                    "Espiye",
+                    "Eynesil",
+                    "Merkez",
+                    "Görele",
+                    "Keşap",
+                    "Şebinkarahisar",
+                    "Tirebolu",
+                    "Piraziz",
+                    "Yağlıdere",
+                    "Çamoluk",
+                    "Çanakçı",
+                    "Doğankent",
+                    "Güce"
+                ]
+            },
+            {
+                "il": "Gümüşhane",
+                "plaka": 29,
+                "ilceleri": [
+                    "Merkez",
+                    "Kelkit",
+                    "Şiran",
+                    "Torul",
+                    "Köse",
+                    "Kürtün"
+                ]
+            },
+            {
+                "il": "Hakkari",
+                "plaka": 30,
+                "ilceleri": [
+                    "Çukurca",
+                    "Merkez",
+                    "Şemdinli",
+                    "Yüksekova"
+                ]
+            },
+            {
+                "il": "Hatay",
+                "plaka": 31,
+                "ilceleri": [
+                    "Altınözü",
+                    "Arsuz",
+                    "Defne",
+                    "Dörtyol",
+                    "Hassa",
+                    "Antakya",
+                    "İskenderun",
+                    "Kırıkhan",
+                    "Payas",
+                    "Reyhanlı",
+                    "Samandağ",
+                    "Yayladağı",
+                    "Erzin",
+                    "Belen",
+                    "Kumlu"
+                ]
+            },
+            {
+                "il": "Isparta",
+                "plaka": 32,
+                "ilceleri": [
+                    "Atabey",
+                    "Eğirdir",
+                    "Gelendost",
+                    "Merkez",
+                    "Keçiborlu",
+                    "Senirkent",
+                    "Sütçüler",
+                    "Şarkikaraağaç",
+                    "Uluborlu",
+                    "Yalvaç",
+                    "Aksu",
+                    "Gönen",
+                    "Yenişarbademli"
+                ]
+            },
+            {
+                "il": "Mersin",
+                "plaka": 33,
+                "ilceleri": [
+                    "Anamur",
+                    "Erdemli",
+                    "Gülnar",
+                    "Mut",
+                    "Silifke",
+                    "Tarsus",
+                    "Aydıncık",
+                    "Bozyazı",
+                    "Çamlıyayla",
+                    "Akdeniz",
+                    "Mezitli",
+                    "Toroslar",
+                    "Yenişehir"
+                ]
+            },
+            {
+                "il": "İstanbul",
+                "plaka": 34,
+                "ilceleri": [
+                    "Adalar",
+                    "Bakırköy",
+                    "Beşiktaş",
+                    "Beykoz",
+                    "Beyoğlu",
+                    "Çatalca",
+                    "Eyüp",
+                    "Fatih",
+                    "Gaziosmanpaşa",
+                    "Kadıköy",
+                    "Kartal",
+                    "Sarıyer",
+                    "Silivri",
+                    "Şile",
+                    "Şişli",
+                    "Üsküdar",
+                    "Zeytinburnu",
+                    "Büyükçekmece",
+                    "Kağıthane",
+                    "Küçükçekmece",
+                    "Pendik",
+                    "Ümraniye",
+                    "Bayrampaşa",
+                    "Avcılar",
+                    "Bağcılar",
+                    "Bahçelievler",
+                    "Güngören",
+                    "Maltepe",
+                    "Sultanbeyli",
+                    "Tuzla",
+                    "Esenler",
+                    "Arnavutköy",
+                    "Ataşehir",
+                    "Başakşehir",
+                    "Beylikdüzü",
+                    "Çekmeköy",
+                    "Esenyurt",
+                    "Sancaktepe",
+                    "Sultangazi"
+                ]
+            },
+            {
+                "il": "İzmir",
+                "plaka": 35,
+                "ilceleri": [
+                    "Aliağa",
+                    "Bayındır",
+                    "Bergama",
+                    "Bornova",
+                    "Çeşme",
+                    "Dikili",
+                    "Foça",
+                    "Karaburun",
+                    "Karşıyaka",
+                    "Kemalpaşa",
+                    "Kınık",
+                    "Kiraz",
+                    "Menemen",
+                    "Ödemiş",
+                    "Seferihisar",
+                    "Selçuk",
+                    "Tire",
+                    "Torbalı",
+                    "Urla",
+                    "Beydağ",
+                    "Buca",
+                    "Konak",
+                    "Menderes",
+                    "Balçova",
+                    "Çiğli",
+                    "Gaziemir",
+                    "Narlıdere",
+                    "Güzelbahçe",
+                    "Bayraklı",
+                    "Karabağlar"
+                ]
+            },
+            {
+                "il": "Kars",
+                "plaka": 36,
+                "ilceleri": [
+                    "Arpaçay",
+                    "Digor",
+                    "Kağızman",
+                    "Merkez",
+                    "Sarıkamış",
+                    "Selim",
+                    "Susuz",
+                    "Akyaka"
+                ]
+            },
+            {
+                "il": "Kastamonu",
+                "plaka": 37,
+                "ilceleri": [
+                    "Abana",
+                    "Araç",
+                    "Azdavay",
+                    "Bozkurt",
+                    "Cide",
+                    "Çatalzeytin",
+                    "Daday",
+                    "Devrekani",
+                    "İnebolu",
+                    "Merkez",
+                    "Küre",
+                    "Taşköprü",
+                    "Tosya",
+                    "İhsangazi",
+                    "Pınarbaşı",
+                    "Şenpazar",
+                    "Ağlı",
+                    "Doğanyurt",
+                    "Hanönü",
+                    "Seydiler"
+                ]
+            },
+            {
+                "il": "Kayseri",
+                "plaka": 38,
+                "ilceleri": [
+                    "Bünyan",
+                    "Develi",
+                    "Felahiye",
+                    "İncesu",
+                    "Pınarbaşı",
+                    "Sarıoğlan",
+                    "Sarız",
+                    "Tomarza",
+                    "Yahyalı",
+                    "Yeşilhisar",
+                    "Akkışla",
+                    "Talas",
+                    "Kocasinan",
+                    "Melikgazi",
+                    "Hacılar",
+                    "Özvatan"
+                ]
+            },
+            {
+                "il": "Kırklareli",
+                "plaka": 39,
+                "ilceleri": [
+                    "Babaeski",
+                    "Demirköy",
+                    "Merkez",
+                    "Kofçaz",
+                    "Lüleburgaz",
+                    "Pehlivanköy",
+                    "Pınarhisar",
+                    "Vize"
+                ]
+            },
+            {
+                "il": "Kırşehir",
+                "plaka": 40,
+                "ilceleri": [
+                    "Çiçekdağı",
+                    "Kaman",
+                    "Merkez",
+                    "Mucur",
+                    "Akpınar",
+                    "Akçakent",
+                    "Boztepe"
+                ]
+            },
+            {
+                "il": "Kocaeli",
+                "plaka": 41,
+                "ilceleri": [
+                    "Gebze",
+                    "Gölcük",
+                    "Kandıra",
+                    "Karamürsel",
+                    "Körfez",
+                    "Derince",
+                    "Başiskele",
+                    "Çayırova",
+                    "Darıca",
+                    "Dilovası",
+                    "İzmit",
+                    "Kartepe"
+                ]
+            },
+            {
+                "il": "Konya",
+                "plaka": 42,
+                "ilceleri": [
+                    "Akşehir",
+                    "Beyşehir",
+                    "Bozkır",
+                    "Cihanbeyli",
+                    "Çumra",
+                    "Doğanhisar",
+                    "Ereğli",
+                    "Hadim",
+                    "Ilgın",
+                    "Kadınhanı",
+                    "Karapınar",
+                    "Kulu",
+                    "Sarayönü",
+                    "Seydişehir",
+                    "Yunak",
+                    "Akören",
+                    "Altınekin",
+                    "Derebucak",
+                    "Hüyük",
+                    "Karatay",
+                    "Meram",
+                    "Selçuklu",
+                    "Taşkent",
+                    "Ahırlı",
+                    "Çeltik",
+                    "Derbent",
+                    "Emirgazi",
+                    "Güneysınır",
+                    "Halkapınar",
+                    "Tuzlukçu",
+                    "Yalıhüyük"
+                ]
+            },
+            {
+                "il": "Kütahya",
+                "plaka": 43,
+                "ilceleri": [
+                    "Altıntaş",
+                    "Domaniç",
+                    "Emet",
+                    "Gediz",
+                    "Merkez",
+                    "Simav",
+                    "Tavşanlı",
+                    "Aslanapa",
+                    "Dumlupınar",
+                    "Hisarcık",
+                    "Şaphane",
+                    "Çavdarhisar",
+                    "Pazarlar"
+                ]
+            },
+            {
+                "il": "Malatya",
+                "plaka": 44,
+                "ilceleri": [
+                    "Akçadağ",
+                    "Arapgir",
+                    "Arguvan",
+                    "Darende",
+                    "Doğanşehir",
+                    "Hekimhan",
+                    "Merkez",
+                    "Pütürge",
+                    "Yeşilyurt",
+                    "Battalgazi",
+                    "Doğanyol",
+                    "Kale",
+                    "Kuluncak",
+                    "Yazıhan"
+                ]
+            },
+            {
+                "il": "Manisa",
+                "plaka": 45,
+                "ilceleri": [
+                    "Akhisar",
+                    "Alaşehir",
+                    "Demirci",
+                    "Gördes",
+                    "Kırkağaç",
+                    "Kula",
+                    "Merkez",
+                    "Salihli",
+                    "Sarıgöl",
+                    "Saruhanlı",
+                    "Selendi",
+                    "Soma",
+                    "Şehzadeler",
+                    "Yunusemre",
+                    "Turgutlu",
+                    "Ahmetli",
+                    "Gölmarmara",
+                    "Köprübaşı"
+                ]
+            },
+            {
+                "il": "Kahramanmaraş",
+                "plaka": 46,
+                "ilceleri": [
+                    "Afşin",
+                    "Andırın",
+                    "Dulkadiroğlu",
+                    "Onikişubat",
+                    "Elbistan",
+                    "Göksun",
+                    "Merkez",
+                    "Pazarcık",
+                    "Türkoğlu",
+                    "Çağlayancerit",
+                    "Ekinözü",
+                    "Nurhak"
+                ]
+            },
+            {
+                "il": "Mardin",
+                "plaka": 47,
+                "ilceleri": [
+                    "Derik",
+                    "Kızıltepe",
+                    "Artuklu",
+                    "Merkez",
+                    "Mazıdağı",
+                    "Midyat",
+                    "Nusaybin",
+                    "Ömerli",
+                    "Savur",
+                    "Dargeçit",
+                    "Yeşilli"
+                ]
+            },
+            {
+                "il": "Muğla",
+                "plaka": 48,
+                "ilceleri": [
+                    "Bodrum",
+                    "Datça",
+                    "Fethiye",
+                    "Köyceğiz",
+                    "Marmaris",
+                    "Menteşe",
+                    "Milas",
+                    "Ula",
+                    "Yatağan",
+                    "Dalaman",
+                    "Seydikemer",
+                    "Ortaca",
+                    "Kavaklıdere"
+                ]
+            },
+            {
+                "il": "Muş",
+                "plaka": 49,
+                "ilceleri": [
+                    "Bulanık",
+                    "Malazgirt",
+                    "Merkez",
+                    "Varto",
+                    "Hasköy",
+                    "Korkut"
+                ]
+            },
+            {
+                "il": "Nevşehir",
+                "plaka": 50,
+                "ilceleri": [
+                    "Avanos",
+                    "Derinkuyu",
+                    "Gülşehir",
+                    "Hacıbektaş",
+                    "Kozaklı",
+                    "Merkez",
+                    "Ürgüp",
+                    "Acıgöl"
+                ]
+            },
+            {
+                "il": "Niğde",
+                "plaka": 51,
+                "ilceleri": [
+                    "Bor",
+                    "Çamardı",
+                    "Merkez",
+                    "Ulukışla",
+                    "Altunhisar",
+                    "Çiftlik"
+                ]
+            },
+            {
+                "il": "Ordu",
+                "plaka": 52,
+                "ilceleri": [
+                    "Akkuş",
+                    "Altınordu",
+                    "Aybastı",
+                    "Fatsa",
+                    "Gölköy",
+                    "Korgan",
+                    "Kumru",
+                    "Mesudiye",
+                    "Perşembe",
+                    "Ulubey",
+                    "Ünye",
+                    "Gülyalı",
+                    "Gürgentepe",
+                    "Çamaş",
+                    "Çatalpınar",
+                    "Çaybaşı",
+                    "İkizce",
+                    "Kabadüz",
+                    "Kabataş"
+                ]
+            },
+            {
+                "il": "Rize",
+                "plaka": 53,
+                "ilceleri": [
+                    "Ardeşen",
+                    "Çamlıhemşin",
+                    "Çayeli",
+                    "Fındıklı",
+                    "İkizdere",
+                    "Kalkandere",
+                    "Pazar",
+                    "Merkez",
+                    "Güneysu",
+                    "Derepazarı",
+                    "Hemşin",
+                    "İyidere"
+                ]
+            },
+            {
+                "il": "Sakarya",
+                "plaka": 54,
+                "ilceleri": [
+                    "Akyazı",
+                    "Geyve",
+                    "Hendek",
+                    "Karasu",
+                    "Kaynarca",
+                    "Sapanca",
+                    "Kocaali",
+                    "Pamukova",
+                    "Taraklı",
+                    "Ferizli",
+                    "Karapürçek",
+                    "Söğütlü",
+                    "Adapazarı",
+                    "Arifiye",
+                    "Erenler",
+                    "Serdivan"
+                ]
+            },
+            {
+                "il": "Samsun",
+                "plaka": 55,
+                "ilceleri": [
+                    "Alaçam",
+                    "Bafra",
+                    "Çarşamba",
+                    "Havza",
+                    "Kavak",
+                    "Ladik",
+                    "Terme",
+                    "Vezirköprü",
+                    "Asarcık",
+                    "Ondokuzmayıs",
+                    "Salıpazarı",
+                    "Tekkeköy",
+                    "Ayvacık",
+                    "Yakakent",
+                    "Atakum",
+                    "Canik",
+                    "İlkadım"
+                ]
+            },
+            {
+                "il": "Siirt",
+                "plaka": 56,
+                "ilceleri": [
+                    "Baykan",
+                    "Eruh",
+                    "Kurtalan",
+                    "Pervari",
+                    "Merkez",
+                    "Şirvan",
+                    "Tillo"
+                ]
+            },
+            {
+                "il": "Sinop",
+                "plaka": 57,
+                "ilceleri": [
+                    "Ayancık",
+                    "Boyabat",
+                    "Durağan",
+                    "Erfelek",
+                    "Gerze",
+                    "Merkez",
+                    "Türkeli",
+                    "Dikmen",
+                    "Saraydüzü"
+                ]
+            },
+            {
+                "il": "Sivas",
+                "plaka": 58,
+                "ilceleri": [
+                    "Divriği",
+                    "Gemerek",
+                    "Gürün",
+                    "Hafik",
+                    "İmranlı",
+                    "Kangal",
+                    "Koyulhisar",
+                    "Merkez",
+                    "Suşehri",
+                    "Şarkışla",
+                    "Yıldızeli",
+                    "Zara",
+                    "Akıncılar",
+                    "Altınyayla",
+                    "Doğanşar",
+                    "Gölova",
+                    "Ulaş"
+                ]
+            },
+            {
+                "il": "Tekirdağ",
+                "plaka": 59,
+                "ilceleri": [
+                    "Çerkezköy",
+                    "Çorlu",
+                    "Ergene",
+                    "Hayrabolu",
+                    "Malkara",
+                    "Muratlı",
+                    "Saray",
+                    "Süleymanpaşa",
+                    "Kapaklı",
+                    "Şarköy",
+                    "Marmaraereğlisi"
+                ]
+            },
+            {
+                "il": "Tokat",
+                "plaka": 60,
+                "ilceleri": [
+                    "Almus",
+                    "Artova",
+                    "Erbaa",
+                    "Niksar",
+                    "Reşadiye",
+                    "Merkez",
+                    "Turhal",
+                    "Zile",
+                    "Pazar",
+                    "Yeşilyurt",
+                    "Başçiftlik",
+                    "Sulusaray"
+                ]
+            },
+            {
+                "il": "Trabzon",
+                "plaka": 61,
+                "ilceleri": [
+                    "Akçaabat",
+                    "Araklı",
+                    "Arsin",
+                    "Çaykara",
+                    "Maçka",
+                    "Of",
+                    "Ortahisar",
+                    "Sürmene",
+                    "Tonya",
+                    "Vakfıkebir",
+                    "Yomra",
+                    "Beşikdüzü",
+                    "Şalpazarı",
+                    "Çarşıbaşı",
+                    "Dernekpazarı",
+                    "Düzköy",
+                    "Hayrat",
+                    "Köprübaşı"
+                ]
+            },
+            {
+                "il": "Tunceli",
+                "plaka": 62,
+                "ilceleri": [
+                    "Çemişgezek",
+                    "Hozat",
+                    "Mazgirt",
+                    "Nazımiye",
+                    "Ovacık",
+                    "Pertek",
+                    "Pülümür",
+                    "Merkez"
+                ]
+            },
+            {
+                "il": "Şanlıurfa",
+                "plaka": 63,
+                "ilceleri": [
+                    "Akçakale",
+                    "Birecik",
+                    "Bozova",
+                    "Ceylanpınar",
+                    "Eyyübiye",
+                    "Halfeti",
+                    "Haliliye",
+                    "Hilvan",
+                    "Karaköprü",
+                    "Siverek",
+                    "Suruç",
+                    "Viranşehir",
+                    "Harran"
+                ]
+            },
+            {
+                "il": "Uşak",
+                "plaka": 64,
+                "ilceleri": [
+                    "Banaz",
+                    "Eşme",
+                    "Karahallı",
+                    "Sivaslı",
+                    "Ulubey",
+                    "Merkez"
+                ]
+            },
+            {
+                "il": "Van",
+                "plaka": 65,
+                "ilceleri": [
+                    "Başkale",
+                    "Çatak",
+                    "Erciş",
+                    "Gevaş",
+                    "Gürpınar",
+                    "İpekyolu",
+                    "Muradiye",
+                    "Özalp",
+                    "Tuşba",
+                    "Bahçesaray",
+                    "Çaldıran",
+                    "Edremit",
+                    "Saray"
+                ]
+            },
+            {
+                "il": "Yozgat",
+                "plaka": 66,
+                "ilceleri": [
+                    "Akdağmadeni",
+                    "Boğazlıyan",
+                    "Çayıralan",
+                    "Çekerek",
+                    "Sarıkaya",
+                    "Sorgun",
+                    "Şefaatli",
+                    "Yerköy",
+                    "Merkez",
+                    "Aydıncık",
+                    "Çandır",
+                    "Kadışehri",
+                    "Saraykent",
+                    "Yenifakılı"
+                ]
+            },
+            {
+                "il": "Zonguldak",
+                "plaka": 67,
+                "ilceleri": [
+                    "Çaycuma",
+                    "Devrek",
+                    "Ereğli",
+                    "Merkez",
+                    "Alaplı",
+                    "Gökçebey"
+                ]
+            },
+            {
+                "il": "Aksaray",
+                "plaka": 68,
+                "ilceleri": [
+                    "Ağaçören",
+                    "Eskil",
+                    "Gülağaç",
+                    "Güzelyurt",
+                    "Merkez",
+                    "Ortaköy",
+                    "Sarıyahşi"
+                ]
+            },
+            {
+                "il": "Bayburt",
+                "plaka": 69,
+                "ilceleri": [
+                    "Merkez",
+                    "Aydıntepe",
+                    "Demirözü"
+                ]
+            },
+            {
+                "il": "Karaman",
+                "plaka": 70,
+                "ilceleri": [
+                    "Ermenek",
+                    "Merkez",
+                    "Ayrancı",
+                    "Kazımkarabekir",
+                    "Başyayla",
+                    "Sarıveliler"
+                ]
+            },
+            {
+                "il": "Kırıkkale",
+                "plaka": 71,
+                "ilceleri": [
+                    "Delice",
+                    "Keskin",
+                    "Merkez",
+                    "Sulakyurt",
+                    "Bahşili",
+                    "Balışeyh",
+                    "Çelebi",
+                    "Karakeçili",
+                    "Yahşihan"
+                ]
+            },
+            {
+                "il": "Batman",
+                "plaka": 72,
+                "ilceleri": [
+                    "Merkez",
+                    "Beşiri",
+                    "Gercüş",
+                    "Kozluk",
+                    "Sason",
+                    "Hasankeyf"
+                ]
+            },
+            {
+                "il": "Şırnak",
+                "plaka": 73,
+                "ilceleri": [
+                    "Beytüşşebap",
+                    "Cizre",
+                    "İdil",
+                    "Silopi",
+                    "Merkez",
+                    "Uludere",
+                    "Güçlükonak"
+                ]
+            },
+            {
+                "il": "Bartın",
+                "plaka": 74,
+                "ilceleri": [
+                    "Merkez",
+                    "Kurucaşile",
+                    "Ulus",
+                    "Amasra"
+                ]
+            },
+            {
+                "il": "Ardahan",
+                "plaka": 75,
+                "ilceleri": [
+                    "Merkez",
+                    "Çıldır",
+                    "Göle",
+                    "Hanak",
+                    "Posof",
+                    "Damal"
+                ]
+            },
+            {
+                "il": "Iğdır",
+                "plaka": 76,
+                "ilceleri": [
+                    "Aralık",
+                    "Merkez",
+                    "Tuzluca",
+                    "Karakoyunlu"
+                ]
+            },
+            {
+                "il": "Yalova",
+                "plaka": 77,
+                "ilceleri": [
+                    "Merkez",
+                    "Altınova",
+                    "Armutlu",
+                    "Çınarcık",
+                    "Çiftlikköy",
+                    "Termal"
+                ]
+            },
+            {
+                "il": "Karabük",
+                "plaka": 78,
+                "ilceleri": [
+                    "Eflani",
+                    "Eskipazar",
+                    "Merkez",
+                    "Ovacık",
+                    "Safranbolu",
+                    "Yenice"
+                ]
+            },
+            {
+                "il": "Kilis",
+                "plaka": 79,
+                "ilceleri": [
+                    "Merkez",
+                    "Elbeyli",
+                    "Musabeyli",
+                    "Polateli"
+                ]
+            },
+            {
+                "il": "Osmaniye",
+                "plaka": 80,
+                "ilceleri": [
+                    "Bahçe",
+                    "Kadirli",
+                    "Merkez",
+                    "Düziçi",
+                    "Hasanbeyli",
+                    "Sumbas",
+                    "Toprakkale"
+                ]
+            },
+            {
+                "il": "Düzce",
+                "plaka": 81,
+                "ilceleri": [
+                    "Akçakoca",
+                    "Merkez",
+                    "Yığılca",
+                    "Cumayeri",
+                    "Gölyaka",
+                    "Çilimli",
+                    "Gümüşova",
+                    "Kaynaşlı"
+                ]
+            }
+        ]
+
+        function search(nameKey, myArray) {
+            for (var i = 0; i < myArray.length; i++) {
+                if (myArray[i].il == nameKey) {
+                    return myArray[i];
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            $.each(data, function (index, value) {
+                $('#city-select').append($('<option>', {
+                    value: value.il,
+                    text: value.il
+                }));
+            });
+            $("#city-select").change(function () {
+                var valueSelected = this.value;
+                console.log(valueSelected);
+                if ($('#city-select').val() != 0) {
+                    console.log($('#city-select').val());
+                    $('#state-select').html('');
+                    $('#state-select').append($('<option>', {
+                        value: 0,
+                        text: 'Please select a state'
+                    }));
+                    $('#state-select').prop("disabled", false);
+                    var resultObject = search($('#city-select').val(), data);
+                    $.each(resultObject.ilceleri, function (index, value) {
+                        $('#state-select').append($('<option>', {
+                            value: value,
+                            text: value
+                        }));
+                    });
+                    return false;
+                }
+                $('#state-select').prop("disabled", true);
+            });
+        });
+
+    </script>
 
 {% endblock %}
