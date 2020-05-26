@@ -59,14 +59,14 @@ def clientsettings(request):
             client = Customer.objects.filter(userEmail=user.email).first()
         else:
 
-            userObject.name = name;
-            userObject.surname = surname;
-            userObject.username = username;
+            #userObject.name = name;
+            #userObject.surname = surname;
+            #userObject.username = username;
 
             clientObject.phone = phone
             clientObject.city = city
             clientObject.address1 = address1
-            clientObject.address2 = address2
+            #clientObject.address2 = address2
             clientObject.state = state
             clientObject.workingHours = whoursfrom + '-' + whoursto
             clientObject.workingDays = wdaysfrom + '-' + wdaysto
@@ -92,7 +92,7 @@ def clientsettings(request):
             if len(imageCheck.split()) != 0:
                 clientObject.logo = image
 
-            userObject.save()
+            #userObject.save()
             clientObject.save()
             return redirect('clientsettings')
 

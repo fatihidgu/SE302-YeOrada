@@ -236,9 +236,6 @@ class DeactiveAccount(TestCase):
         user = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
                                         username='username', isCustomer=True)
         c.login(username='normal@user.com', password='foo')
-        url = reverse('home')
-        homeres = c.get(url)
-        print(homeres)
         response = c.post('/clientsettings',
                           {'Email': 'normal@user.com',
                            'yourEmail': 'True', }, encoding='utf-8', follow=True)
@@ -285,12 +282,116 @@ class AdminSettings(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
+class ClientSearch(TestCase):
+
+    def test_filter_restaurants(self):
+        User = get_user_model()
+        c = test.Client()
+        user_client = User.objects.create_user(email='normal@client.com', password='foo', surname="surname",
+                                               name='name',
+                                               username='username_client', isClient=True)
+        client_object = Client.objects.create(userEmail=user_client, name="User Restaurant-1", city="İstanbul",
+                                             state="Kadıköy", category="Restaurant")
+        cuisine1 = ClientCuisine.objects.create(customerEmail=client_object, cuisine="Kebap")
+        cuisine2 = ClientCuisine.objects.create(customerEmail=client_object, cuisine="Turkish")
+        cuisine1.save()
+        cuisine2.save()
+
+        response = c.post('/clientsearch',
+                          {'Restaurant': "on", 'Turkish': "on", 'Kebap': "on", 'city_input': "", 'state_input': "",
+                           'search': 'True', }, encoding='utf-8', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['clients'].__len__(), 1)
 
 
+class ClientSettings(TestCase):
+
+    def test_save_changes_client(self):
+        User = get_user_model()
+        c = test.Client()
+        user_client = User.objects.create_user(email='normal@client.com', password='foo', surname="surname",
+                                               name='name',
+                                               username='username_client', isClient=True)
+        client_object = Client.objects.create(userEmail=user_client, name="User Restaurant-1", city="İstanbul",
+                                              state="Kadıköy", category="Restaurant")
+        c.login(username='normal@client.com', password='foo')
+        response = c.post('/clientsettings',
+                          {'address1': "Test Address Test Address", 'wdaysfrom': "Monday", 'wdaysto': "Saturday", 'client_avatar_check': "",
+                           'whoursfrom': "09.00", 'whoursto': "22.00", 'phone': "531 874 5663", 'city': "İstanbul", 'state': "Bahçelievler",
+                           'saveChanges': 'True', }, encoding='utf-8', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['client'].address1, "Test Address Test Address")
+        self.assertEqual(response.context['client'].workingDaysFrom, "Monday")
+        self.assertEqual(response.context['client'].workingDaysTo, "Saturday")
+        self.assertEqual(response.context['client'].workingHoursFrom, "09.00")
+        self.assertEqual(response.context['client'].workingHoursTo, "22.00")
 
 
+class AdminProfile(TestCase):
+
+    def test_admin_profile_accept(self):
+        User = get_user_model()
+        c = test.Client()
+        user_admin = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
+                                        username='username', isAdmin=True)
+        admin_object = Admin.objects.create(userEmail=user_admin)
+        c.login(username='normal@user.com', password='foo')
+
+        user_client = User.objects.create_user(email='normal2@user.com', password='foo', surname="surname", name='name'
+                                              ,username='username2', isClient=True)
+        client_object = Client.objects.create(userEmail=user_client, name="User Restaurant-1", city="İstanbul", state="Kadıköy")
+
+        user = User.objects.create_user(email='semrakaraman123@hotmail.com', password='foo', surname="surname", name='name',
+                                        username='username3', isCustomer=True)
+        customer_object = Customer.objects.create(userEmail=user)
+
+        Comment.objects.create(customerEmail=customer_object, clientEmail=client_object, text="Test Text Test", rate=4)
+        comment = Comment.objects.filter(customerEmail=customer_object, clientEmail=client_object, text="Test Text Test", rate=4).first()
+
+        response = c.post('/adminprofile',
+                          {'commentId': comment.id,
+                           'accept': 'True', }, encoding='utf-8', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['commentList'].__len__(), 0)
+
+    def test_admin_profile_decline(self):
+        User = get_user_model()
+        c = test.Client()
+        user_admin = User.objects.create_user(email='normal@user.com', password='foo', surname="surname", name='name',
+                                        username='username', isAdmin=True)
+        admin_object = Admin.objects.create(userEmail=user_admin)
+        c.login(username='normal@user.com', password='foo')
+
+        user_client = User.objects.create_user(email='normal2@user.com', password='foo', surname="surname", name='name'
+                                              ,username='username2', isClient=True)
+        client_object = Client.objects.create(userEmail=user_client, name="User Restaurant-1", city="İstanbul", state="Kadıköy")
+
+        user = User.objects.create_user(email='semrakaraman123@hotmail.com', password='foo', surname="surname", name='name',
+                                        username='username3', isCustomer=True)
+        customer_object = Customer.objects.create(userEmail=user)
+
+        Comment.objects.create(customerEmail=customer_object, clientEmail=client_object, text="Test Text Test", rate=4)
+        comment = Comment.objects.filter(customerEmail=customer_object, clientEmail=client_object, text="Test Text Test", rate=4).first()
+
+        response = c.post('/adminprofile',
+                          {'commentId': comment.id, 'reason': "Test Reason Test",
+                           'decline': 'True', }, encoding='utf-8', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.context['commentList'].__len__(), 0)
 
 
+class ClientProfile(TestCase):
 
+    def test_save_client_photos(self):
+        User = get_user_model()
+        c = test.Client()
+        user_client = User.objects.create_user(email='normal2@user.com', password='foo', surname="surname", name='name'
+                                               , username='username2', isClient=True)
+        client_object = Client.objects.create(userEmail=user_client, name="User Restaurant-1", city="İstanbul",
+                                              state="Kadıköy")
+        c.login(username='normal2@user.com', password='foo')
 
-
+        with open('test.png', 'rb') as fp:
+            response = c.post('/clientprofile/username2', {'fileOneChecking': 'exist', 'clientPhotoOne': fp, 'Save': 'True', }, encoding='utf-8', follow=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.context['clientObject'].image1.url, "/media/defaultClient.jpg")

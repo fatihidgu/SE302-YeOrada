@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.utils.translation import gettext_lazy as _
 from django.utils import timezone
+from decimal import Decimal
 
 from .managers import CustomUserManager
 
@@ -61,8 +62,8 @@ class Client(models.Model):
     workingDays = models.CharField(max_length=200)
     info = models.TextField(blank=True, null=True)
     category = models.CharField(max_length=200, null=True, blank=True, choices=CATEGORIES)
-    rate = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1)
-    rateCount = models.IntegerField(null=True, blank=True)
+    rate = models.DecimalField(null=True, blank=True, max_digits=2, decimal_places=1, default=Decimal(0.0))
+    rateCount = models.IntegerField(null=True, blank=True, default=0)
     image1 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
     image2 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
     image3 = models.ImageField(default='defaultClient.jpg', upload_to='client_pics')
