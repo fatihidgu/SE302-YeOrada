@@ -17,9 +17,8 @@ def settings(request):
     if 'saveChanges' in request.POST:
         name = request.POST.get('name')
         surname = request.POST.get('surname')
-        email = request.POST.get('email')
         city = request.POST.get('city')
-        country = request.POST.get('country')
+        state = request.POST.get('state')
         username = request.POST.get('username')
         imageCheck = request.POST.get('customer_avatar_check')
 
@@ -32,10 +31,8 @@ def settings(request):
         # user = RegisteredUser(email=email, name=name, surname=surname, username=username)
         # customer = Customer(city=city, country=country, userEmail=userObject.first())
 
-        emailCheck = RegisteredUser.objects.filter(email=email)
         usernameCheck = RegisteredUser.objects.filter(username=username)
-        if (emailCheck.first() and email != request.user.email) or (
-                usernameCheck.first() and username != request.user.username):
+        if usernameCheck.first() and username != request.user.username:
             error_message1 = "*Username is already used"
             user = request.user
             customer = Customer.objects.filter(userEmail=user.email).first()
@@ -44,8 +41,15 @@ def settings(request):
             userObject.surname = surname;
             userObject.username = username;
 
-            customerObject.city = city;
-            customerObject.country = country;
+            if city == "":
+                customerObject.city = None
+            else:
+                customerObject.city = city;
+
+            if state == "":
+                customerObject.state = None
+            else:
+                customerObject.state = state;
 
             if len(imageCheck.split()) != 0:
                 customerObject.image = image

@@ -26,7 +26,10 @@ def clientsearch(request):
             if request.user.is_authenticated:
                 if request.user.isCustomer:
                     customerObject = Customer.objects.filter(userEmail=request.user).first()
-                    clients = Client.objects.filter(userEmail__is_active=True, city=customerObject.city, state=customerObject.state)
+                    if customerObject.city is not None:
+                        clients = Client.objects.filter(userEmail__is_active=True, city=customerObject.city, state=customerObject.state)
+                    else:
+                        clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul")
             else:
                 clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul")
         elif filter_home == "filter-cuisine" and cuisine_name is not None:

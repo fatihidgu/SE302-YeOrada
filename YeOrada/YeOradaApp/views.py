@@ -19,7 +19,7 @@ def index(request):
 
     if request.user.is_authenticated:
         customer = Customer.objects.filter(userEmail=request.user).first()
-        if request.user.isCustomer:
+        if request.user.isCustomer and customer.city is not None:
             clients = Client.objects.filter(userEmail__is_active=True, city=customer.city).order_by('-rateCount')[:12]
         else:
             clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul").order_by('-rateCount')[:12]
