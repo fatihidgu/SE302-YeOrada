@@ -1,9 +1,13 @@
-from django.contrib.auth import login
+from urllib.parse import urlencode
+
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 
 
 # Create your views here.
+from django.urls import reverse
+
 from YeOradaApp.forms import RegisteredUserCreationForm, CommentForm
 from YeOradaApp.models import Comment, Customer, Client
 
@@ -14,8 +18,10 @@ from .views_yaren import *
 
 
 def index(request):
+    control = request.GET.get('control')
     customer = None
-    control = False
+    if control is None:
+        control = False
 
     if request.user.is_authenticated:
         customer = Customer.objects.filter(userEmail=request.user).first()
@@ -24,11 +30,6 @@ def index(request):
         else:
             clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul").order_by('-rateCount')[:12]
 
-        if not request.user.is_active:
-            registeredUser = RegisteredUser.objects.filter(email=request.user.email)
-            registeredUser.is_active = True
-            control = True
-            registeredUser.save()
     else:
         clients = Client.objects.filter(userEmail__is_active=True, city="İstanbul").order_by('-rateCount')[:12]
 
@@ -37,14 +38,31 @@ def index(request):
 
 def signin(request):
     if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
+        form = AuthenticationForm(request, data=request.POST)
 
         if form.is_valid():
             user = form.get_user()
             login(request, user)
             return redirect('home')
         else:
-            error_message = "* Wrong Email or Password."
+            registeredUser = RegisteredUser.objects.filter(email=form.data['username']).first()
+
+            if registeredUser is not None and not registeredUser.is_active:
+                registeredUser.is_active = True
+                registeredUser.save()
+                if authenticate(request, email=form.data['username'], password=form.data['password']):
+                    print("valid")
+                    login(request, registeredUser, backend='django.contrib.auth.backends.ModelBackend')
+                    base_url = reverse('home')
+                    query_string = urlencode({'control': 'True'})
+                    url = '{}?{}'.format(base_url, query_string)
+                    return redirect(url)
+                else:
+                    error_message = "* Wrong Email or Password."
+                    registeredUser.is_active = False
+                    registeredUser.save()
+            else:
+                error_message = "* Wrong Email or Password."
     else:
         error_message = ""
         form = AuthenticationForm()
