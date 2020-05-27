@@ -158,6 +158,9 @@ def newclient(request):
         if rname == "" or oname == "" or osname == "" or oemail == "" or ophone == "" or rphone == "" or remail == "" or address == "":
             client_error_messages.append("You must fill out all the fields in the form.")
 
+        if rcity == "0" or rstate == "0":
+            client_error_messages.append("You must choose a city and state.")
+
         if address.__len__() > 85:
             client_error_messages.append("Entered restaurant address is too long.")
 
