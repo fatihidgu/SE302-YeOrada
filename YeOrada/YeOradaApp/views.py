@@ -95,3 +95,7 @@ def signup(request):
     else:
         form = RegisteredUserCreationForm()
     return render(request, 'yeoradamain/signup.html', {'form': form, 'error_message1': error_message1, 'error_message2': error_message2, })
+
+
+def home_redirect(request):
+    return redirect('home')

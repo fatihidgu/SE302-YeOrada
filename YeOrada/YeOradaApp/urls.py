@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 from YeOradaApp import views
 
 urlpatterns = [
+    path('', views.home_redirect, name='home_redirect'),
     path('home', views.index, name='home'),
     path('signin', views.signin, name='signin'),
     path('signup', views.signup, name='signup'),
