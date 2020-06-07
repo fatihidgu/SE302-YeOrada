@@ -27,7 +27,7 @@ SECRET_KEY = '9+++b&a@6ug!0dc8qr*f+#zl8$v5=fy0u8o)pufl=f-u91bg6h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.yeorada.com', 'localhost', '127.0.0.1', ]
 
 
 # Application definition
@@ -118,13 +118,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
-
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_USER = "noreply.yeorada@gmail.com"
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_PASSWORD = "oradaye123*"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "YeOradaApp", "static"),

@@ -85,6 +85,8 @@ def signup(request):
                 else:
                     form.save()
                     user = RegisteredUser.objects.filter(email=form.cleaned_data['email']).first()
+                    user.isCustomer = True
+                    user.save()
                     customer = Customer(userEmail=user)
                     customer.save()
                     return redirect('signin')
