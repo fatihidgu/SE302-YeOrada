@@ -132,7 +132,7 @@
 
     <!--banner start-->
     <section class="block-preview">
-        <div class="cover-banner" style="background-image: url('{% static 'images/homepage/banner.png' %}')"></div>
+        <div class="cover-banner banner-placeholder" style="background-image: url('{% static 'images/homepage/banner_placeholder.png' %}')" data-src="{% static 'images/homepage/banner.png' %}"></div>
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-md-6 col-sm-12">
@@ -1014,5 +1014,27 @@
     <!--Assect scripts for this page-->
     <script src="/static/vendor/OwlCarousel/owl.carousel.js"></script>
     <script src="/static/js/owlslider.js"></script>
+
+    <script>
+
+    (() => {
+  'use strict';
+  // Page is loaded
+  const objects = document.getElementsByClassName('banner-placeholder');
+  Array.from(objects).map((item) => {
+    // Start loading image
+    const img = new Image();
+    img.src = item.dataset.src;
+    // Once image is loaded replace the src of the HTML element
+    img.onload = () => {
+      item.classList.remove('banner-placeholder');
+      return item.nodeName === 'IMG' ?
+        item.src = item.dataset.src :
+        item.style.backgroundImage = `url(${item.dataset.src})`;
+    };
+  });
+})();
+
+    </script>
 {% endblock %}
 
