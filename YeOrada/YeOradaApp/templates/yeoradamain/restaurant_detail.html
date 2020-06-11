@@ -2126,7 +2126,7 @@
                                                 <!-- <input type="file" name="commentPhoto" id="file" onchange="commentWithPhoto(event)"> -->
                                                 <!-- <label for="file"><i class="far fa-image"></i> Add Photo</label> -->
                                                 <!-- </div> -->
-                                                <div class="images">
+                                                <div class="images" style="margin-top: 10px;">
                                                     <div class="select-images">
                                                         <ul>
 
@@ -2137,7 +2137,7 @@
                                                                     <input hidden id="file1checking"
                                                                            name="fileOneChecking"
                                                                            value="0">
-                                                                    <img id="photoForComment" name="image" style="width: 120px;"
+                                                                    <img id="photoForComment" name="image" style="width: 120px; margin-bottom: 10%;"
                                                                          src="/static/images/restaurant-detail/add-1.jpg"
                                                                          alt="">
                                                                 </label>
@@ -2155,7 +2155,7 @@
                                                                     <input hidden id="file2checking"
                                                                            name="fileTwoChecking"
                                                                            value="0">
-                                                                    <img id="photoForComment2" name="image2" style="width: 120px;"
+                                                                    <img id="photoForComment2" name="image2" style="width: 120px; margin-bottom: 10%;"
                                                                          src="/static/images/restaurant-detail/add-1.jpg"
                                                                          alt="">
                                                                 </label>
@@ -2173,7 +2173,7 @@
                                                                     <input hidden id="file3checking"
                                                                            name="fileThrChecking"
                                                                            value="0">
-                                                                    <img id="photoForComment3" name="image3" style="width: 120px;"
+                                                                    <img id="photoForComment3" name="image3" style="width: 120px; margin-bottom: 10%;"
                                                                          src="/static/images/restaurant-detail/add-1.jpg"
                                                                          alt="">
                                                                 </label>
@@ -2251,21 +2251,21 @@
                                                 <ul>
                                                     {% if comment.image.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoOne"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoOne"
                                                                  onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
                                                                  src={{ comment.image.url }} alt="">
                                                         </li>
                                                     {% endif %}
                                                     {% if comment.image2.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoTwo"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoTwo"
                                                                  onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
                                                                  src={{ comment.image2.url }} alt="">
                                                         </li>
                                                     {% endif %}
                                                     {% if comment.image3.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoThr"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoThr"
                                                                  onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
                                                                  src={{ comment.image3.url }} alt="">
                                                         </li>

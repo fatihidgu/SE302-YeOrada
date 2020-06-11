@@ -159,21 +159,21 @@
                                                 <ul>
                                                     {% if comment.image.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoOne"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoOne"
                                                                  onclick="viewPhoto('viewedPhotoOne', {{ comment.id }})"
                                                                  src={{ comment.image.url }} alt="">
                                                         </li>
                                                     {% endif %}
                                                     {% if comment.image2.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoTwo"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoTwo"
                                                                  onclick="viewPhoto('viewedPhotoTwo', {{ comment.id }})"
                                                                  src={{ comment.image2.url }} alt="">
                                                         </li>
                                                     {% endif %}
                                                     {% if comment.image3.url != "/media/defaultComment.jpg" %}
                                                         <li class="image-select">
-                                                            <img style="width: 200px;" id="viewedPhotoThr"
+                                                            <img style="width: 200px; margin-bottom: 5%;" id="viewedPhotoThr"
                                                                  onclick="viewPhoto('viewedPhotoThr', {{ comment.id }})"
                                                                  src={{ comment.image3.url }} alt="">
                                                         </li>
