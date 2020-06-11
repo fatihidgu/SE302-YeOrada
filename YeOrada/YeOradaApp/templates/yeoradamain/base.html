@@ -231,10 +231,10 @@
                                         </div>
                                     </div>
                                 </li>
-                                <li class="partner-btn">
+                                <li>
                                     {% if not user.is_authenticated %}
-                                    <a href="{% url 'signin' %}" class="b-btn btn-link">Log in</a>
-                                    <a href="{% url 'signup' %}" class="b-btn btn-link">Register</a>
+                                    <a href="{% url 'signin' %}" class="b-btn btn-link" style=" margin-left: -5%; margin-right: 4%; transition: color .05s ease-in-out,background-color .05s ease-in-out,border-color .05s ease-in-out,box-shadow .05s ease-in-out; ">Log in</a>
+                                    <a href="{% url 'signup' %}" class="b-btn btn-link" style="transition: color .05s ease-in-out,background-color .05s ease-in-out,border-color .05s ease-in-out,box-shadow .05s ease-in-out; ">Register</a>
                                     {% endif %}
                                 </li>
                             </ul>
