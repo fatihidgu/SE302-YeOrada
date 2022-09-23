@@ -13,7 +13,7 @@ Jinja2==2.11.2
 MarkupSafe==1.1.1
 packaging==20.3
 Pillow==7.1.1
-protobuf==3.6.1
+protobuf==3.18.3
 Pygments==2.6.1
 PyMySQL==0.9.3
 pyparsing==2.4.7
